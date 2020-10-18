@@ -1,0 +1,3 @@
+- Crear una base de datos en blanco ANTES de ejecutar los script
+- Boton derecho sobre la base de datos, click en la opcion "New Query"
+- Copiar el contenido del arhivo "Script creacion tablas.sql", y ejecutar (o abrir el archivo directamente con sql server management studio)
