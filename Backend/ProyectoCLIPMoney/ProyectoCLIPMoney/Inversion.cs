@@ -8,9 +8,10 @@ namespace ProyectoCLIPMoney
         private double monto;
         private DateTime fechaInicio;
         private DateTime fechaFin;
-        private string tipoInversion;
+        private TipoInversion tipoInversion;
 
-        public Inversion(int ID, Cuenta cuentaAsociada, double monto, string tipoInversion)
+
+        public Inversion(int ID, Cuenta cuentaAsociada, double monto, TipoInversion tipoInversion)
         {
             this.ID = ID;
             this.cuentaAsociada = cuentaAsociada;
@@ -18,9 +19,11 @@ namespace ProyectoCLIPMoney
             fechaInicio = DateTime.Now;
             this.tipoInversion = tipoInversion;
         }
+
         public void Invertir()
         {
         }
+
         public void IngersarFCI()
         {
         }

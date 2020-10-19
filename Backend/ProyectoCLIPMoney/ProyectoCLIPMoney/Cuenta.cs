@@ -11,6 +11,7 @@
         //Para Criptomoneda: Ethereum, Bitcoin, Litecoin.
         private TipoCuenta tipoCuenta;
         private Usuario usuario;
+
         public Cuenta(int CVU, double saldo, string divisa, TipoCuenta tipoCuenta, Usuario usuario)
         {
             this.CVU = CVU;

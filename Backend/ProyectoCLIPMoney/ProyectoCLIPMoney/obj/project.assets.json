@@ -688,23 +688,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\maxi_\\.nuget\\packages\\": {},
+    "C:\\Users\\Familia\\.nuget\\packages\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\maxi_\\Desktop\\C#\\ProyectoCLIPMoney\\ProyectoCLIPMoney\\ProyectoCLIPMoney.csproj",
+      "projectUniqueName": "E:\\Users\\Familia\\proyecto-clip-money-c-gr5c\\Backend\\ProyectoCLIPMoney\\ProyectoCLIPMoney\\ProyectoCLIPMoney.csproj",
       "projectName": "ProyectoCLIPMoney",
-      "projectPath": "C:\\Users\\maxi_\\Desktop\\C#\\ProyectoCLIPMoney\\ProyectoCLIPMoney\\ProyectoCLIPMoney.csproj",
-      "packagesPath": "C:\\Users\\maxi_\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\maxi_\\Desktop\\C#\\ProyectoCLIPMoney\\ProyectoCLIPMoney\\obj\\",
+      "projectPath": "E:\\Users\\Familia\\proyecto-clip-money-c-gr5c\\Backend\\ProyectoCLIPMoney\\ProyectoCLIPMoney\\ProyectoCLIPMoney.csproj",
+      "packagesPath": "C:\\Users\\Familia\\.nuget\\packages\\",
+      "outputPath": "E:\\Users\\Familia\\proyecto-clip-money-c-gr5c\\Backend\\ProyectoCLIPMoney\\ProyectoCLIPMoney\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\maxi_\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Familia\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
