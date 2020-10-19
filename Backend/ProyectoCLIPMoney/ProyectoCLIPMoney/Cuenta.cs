@@ -1,43 +1,43 @@
-﻿namespace ProyectoCLIPMoney
+﻿using System;
+
+namespace ProyectoCLIPMoney
 {
     public class Cuenta
     {
-        private int CVU;
-        private double saldo;
-        private string divisa;        
+  
         //Monedas válidas: 
         //Para Pesos: Peso argentino.
         //Para Moneda Extranjera: Dolar estadounidense, Euro.
         //Para Criptomoneda: Ethereum, Bitcoin, Litecoin.
+
+        private int cvu;
+        private double saldo;
+        private Divisa divisa;        
         private TipoCuenta tipoCuenta;
         private Usuario usuario;
 
-        public Cuenta(int CVU, double saldo, string divisa, TipoCuenta tipoCuenta, Usuario usuario)
+        public int CVU { get => CVU; }
+        public double Saldo { get => saldo; }
+        public Divisa Divisa { get => divisa; }
+        public TipoCuenta TipoCuenta { get => tipoCuenta;  }
+        public Usuario Usuario { get => usuario; }
+
+        public Cuenta(int cvu, double saldo, Divisa divisa, TipoCuenta tipoCuenta, Usuario usuario)
         {
-            this.CVU = CVU;
+            this.cvu = cvu;
             this.saldo = saldo;
             this.tipoCuenta = tipoCuenta;
             this.usuario = usuario;
         }
+           
+        /* esta la comento porque el saldo solo se deberia actualizar mediante 
+         * operaciones (por ej, transferencias, depositos, etc), nunca de una forma "manual"
+         
         public void ActualizarSaldo(double nuevoSaldo)
         {
             saldo = nuevoSaldo;
-        }
-        public double ConsultarSaldo()
-        {
-            return saldo;
-        }
-        public TipoCuenta TipoDeCuenta()
-        {
-            return tipoCuenta;
-        }
-        public string GetDivisa()
-        {
-            return divisa;
-        }
-        public Usuario GetUsuario()
-        {
-            return usuario;
-        }
+        }*/
+
+
     }
 }
