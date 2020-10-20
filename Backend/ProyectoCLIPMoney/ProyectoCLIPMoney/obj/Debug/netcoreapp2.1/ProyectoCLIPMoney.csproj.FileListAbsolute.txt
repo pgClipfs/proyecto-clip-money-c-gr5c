@@ -9,3 +9,9 @@ C:\Users\maxi_\Desktop\C#\ProyectoCLIPMoney\ProyectoCLIPMoney\obj\Debug\netcorea
 C:\Users\maxi_\Desktop\C#\ProyectoCLIPMoney\ProyectoCLIPMoney\obj\Debug\netcoreapp2.1\ProyectoCLIPMoney.AssemblyInfo.cs
 C:\Users\maxi_\Desktop\C#\ProyectoCLIPMoney\ProyectoCLIPMoney\obj\Debug\netcoreapp2.1\ProyectoCLIPMoney.dll
 C:\Users\maxi_\Desktop\C#\ProyectoCLIPMoney\ProyectoCLIPMoney\obj\Debug\netcoreapp2.1\ProyectoCLIPMoney.pdb
+C:\Users\juan_\Documents\JUAN\Clip\Proyecto\proyecto-clip-money-c-gr5c\Backend\ProyectoCLIPMoney\ProyectoCLIPMoney\obj\Debug\netcoreapp2.1\ProyectoCLIPMoney.csprojAssemblyReference.cache
+C:\Users\juan_\Documents\JUAN\Clip\Proyecto\proyecto-clip-money-c-gr5c\Backend\ProyectoCLIPMoney\ProyectoCLIPMoney\obj\Debug\netcoreapp2.1\ProyectoCLIPMoney.AssemblyInfoInputs.cache
+C:\Users\juan_\Documents\JUAN\Clip\Proyecto\proyecto-clip-money-c-gr5c\Backend\ProyectoCLIPMoney\ProyectoCLIPMoney\obj\Debug\netcoreapp2.1\ProyectoCLIPMoney.AssemblyInfo.cs
+C:\Users\juan_\Documents\JUAN\Clip\Proyecto\proyecto-clip-money-c-gr5c\Backend\ProyectoCLIPMoney\ProyectoCLIPMoney\obj\Debug\netcoreapp2.1\ProyectoCLIPMoney.csproj.CoreCompileInputs.cache
+C:\Users\juan_\Documents\JUAN\Clip\Proyecto\proyecto-clip-money-c-gr5c\Backend\ProyectoCLIPMoney\ProyectoCLIPMoney\obj\Debug\netcoreapp2.1\ProyectoCLIPMoney.dll
+C:\Users\juan_\Documents\JUAN\Clip\Proyecto\proyecto-clip-money-c-gr5c\Backend\ProyectoCLIPMoney\ProyectoCLIPMoney\obj\Debug\netcoreapp2.1\ProyectoCLIPMoney.pdb
