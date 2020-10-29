@@ -3,6 +3,29 @@ namespace ProyectoCLIPMoney
 {
     public class Movimiento
     {
+
+        //enum
+
+        public static TipoMovimiento Deposito { get => deposito; }
+        public static TipoMovimiento Extraccion { get => extracción; }
+
+        private static TipoMovimiento deposito = new TipoMovimiento("Depósito");
+        private static TipoMovimiento extracción = new TipoMovimiento("Extracción");
+
+        public class TipoMovimiento
+        {
+            private string nombre;
+            public string Nombre { get => nombre; }
+
+
+            public TipoMovimiento(string nombre)
+            {
+                this.nombre = nombre;
+            }
+
+            public override string ToString() { return nombre; }
+        }
+
         private static int ID = 0;
         private DateTime fecha; //fecha en la que se realizó el movimiento
         private char tipoMovimiento; //2 tipos de mov: I para Ingresar Dinero, R para Retirar Dinero
