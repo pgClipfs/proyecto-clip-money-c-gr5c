@@ -8,34 +8,39 @@ namespace ProyectoCLIPMoney
         //Para Pesos: Peso argentino.
         //Para Moneda Extranjera: Dolar estadounidense, Euro.
         //Para Criptomoneda: Ethereum, Bitcoin, Litecoin.
+        
+        #region propiedades
+        
+        //son todas de lectura porque ninguno de estos atributos se deberia modificar desde fuera de la clase
+        public int CVU { get => CVU; }
+        public double Saldo { get => saldo; }
+        public Divisa Divisa { get => divisa; }
+        public TipoCuenta TipoCuenta { get => tipoCuenta;  }
+        public Usuario Usuario { get => usuario; }
+        
+        #endregion
 
         private int cvu;
         private double saldo;
         private Divisa divisa;        
         private TipoCuenta tipoCuenta;
         private Usuario usuario;
-
-        public int CVU { get => CVU; }
-        public double Saldo { get => saldo; }
-        public Divisa Divisa { get => divisa; }
-        public TipoCuenta TipoCuenta { get => tipoCuenta;  }
-        public Usuario Usuario { get => usuario; }
-
-        public Cuenta(Divisa divisa, TipoCuenta tipoCuenta, Usuario usuario,int cvu)
+                       
+        public Cuenta(Divisa divisa, TipoCuenta tipoCuenta, Usuario usuario, int cvu = 0)
         {
-            this.cvu = cvu;
-            this.saldo = 0;
+            this.divisa = divisa;
             this.tipoCuenta = tipoCuenta;
             this.usuario = usuario;
-        }
 
-        //sobrecarga para generar el CVU automaticamente
-        public Cuenta(Divisa divisa, TipoCuenta tipoCuenta, Usuario usuario)
-        {
+            if (cvu==0)
+            {
             this.cvu = Cuenta.GenerarCVU();
+            }
+            else
+            {
+            this.cvu = cvu;
+            }
             this.saldo = 0;
-            this.tipoCuenta = tipoCuenta;
-            this.usuario = usuario;
         }
 
         private static int GenerarCVU()
@@ -49,15 +54,6 @@ namespace ProyectoCLIPMoney
         {
             //este metodo necesita acceder a la BD para borrar la cuenta
         }
-
-        /* esta la comento porque el saldo solo se deberia actualizar mediante 
-         * operaciones (por ej, transferencias, depositos, etc), nunca de una forma "manual"
-         
-        public void ActualizarSaldo(double nuevoSaldo)
-        {
-            saldo = nuevoSaldo;
-        }*/
-
-
+               
     }
 }

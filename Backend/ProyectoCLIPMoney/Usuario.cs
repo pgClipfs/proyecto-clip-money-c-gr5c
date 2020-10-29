@@ -1,74 +1,41 @@
 ﻿using System;
 using System.Collections.Generic;
+
 namespace ProyectoCLIPMoney
 {
     public class Usuario
     {
-        private int DNI;
-        private string nombre, apellido, contraseña;
+        private int dni;
+        private string nombre, apellido;
         private List<Cuenta> cuentas;
         private string sitCrediticia;
 
-        //internal List<Cuenta> Cuentas { get => cuentas; set => cuentas = value; }
+        public int DNI { get => dni;}
+        public string Nombre { get => nombre;}
+        public string Apellido { get => apellido;}
+        public List<Cuenta> Cuentas { get => cuentas;}
 
-        public Usuario(int DNI, string nombre, string apellido, string contraseña, string sitCrediticia)
+        //queda en duda si situacion crediticia es propiedad de solo lectura o si se puede escribir
+        public string SitCrediticia { get => sitCrediticia; set => sitCrediticia = value; }
+                
+        public Usuario(int DNI, string nombre, string apellido)
         {
-            this.DNI = DNI;
+            this.dni = DNI;
             this.nombre = nombre;
             this.apellido = apellido;
-            this.contraseña = contraseña;
-            this.sitCrediticia = sitCrediticia;
-            cuentas = new List<Cuenta>();
-
+            //la situacion crediticia inicial siempre es la misma (falta definir cual sera esa situacion "inicial")
+            //this.sitCrediticia = sitCrediticia;
+            
+            //parametros: divisa, tipo cuenta, usuario
             Cuenta cuenta = new Cuenta(null, null, this);
-
             cuentas.Add(cuenta);
 
+            this.cuentas.Add(cuenta);            
         }
-        public static Usuario CrearUsuario(int DNI, string nombre, string apellido, string contraseña, string sitCrediticia)
-        {
-            Usuario usuario = new Usuario(DNI, nombre, apellido, contraseña, sitCrediticia);
-            Random r = new Random();
-            Cuenta cuenta = new Cuenta(null /*debe ser "pesos argentinos"*/  , null, usuario);
-            usuario.AñadirCuenta(cuenta);
-            return usuario;
-        }
-        public void AñadirCuenta(Cuenta c)
-        {
-            cuentas.Add(c);
-        }
-        public int GetDNI()
-        {
-            return DNI;
-        }
-        public string GetNombre()
-        {
-            return nombre;
-        }
-        public string GetApellido()
-        {
-            return apellido;
-        }
-        public Cuenta GetUnaCuentaAsociada(int indice)
-        {
-            return cuentas[indice];
-        }
-        public List<Cuenta> GetListaDeCuentas()
-        {
-            return cuentas;
-        }
-
-        public string GetSitCrediticia()
-        {
-            return sitCrediticia;
-        }
-        public void CambiarSitCrediticia(string nuevaSitCrediticia)
-        {
-            sitCrediticia = nuevaSitCrediticia;
-        }
+               
         public override string ToString()
         {
-            return "Nombre: " + nombre + " Apellido: " + apellido + " DNI: " + DNI + " Situación crediticia: " + sitCrediticia;
+            return "Nombre: " + nombre + " Apellido: " + apellido + " DNI: " + dni + " Situación crediticia: " + sitCrediticia;
         }
     }
 }
