@@ -21,19 +21,19 @@ namespace ProyectoCLIPMoney
         public TipoCuenta TipoCuenta { get => tipoCuenta;  }
         public Usuario Usuario { get => usuario; }
 
-        public Cuenta(double saldo, Divisa divisa, TipoCuenta tipoCuenta, Usuario usuario,int cvu)
+        public Cuenta(Divisa divisa, TipoCuenta tipoCuenta, Usuario usuario,int cvu)
         {
             this.cvu = cvu;
-            this.saldo = saldo;
+            this.saldo = 0;
             this.tipoCuenta = tipoCuenta;
             this.usuario = usuario;
         }
 
         //sobrecarga para generar el CVU automaticamente
-        public Cuenta(double saldo, Divisa divisa, TipoCuenta tipoCuenta, Usuario usuario)
+        public Cuenta(Divisa divisa, TipoCuenta tipoCuenta, Usuario usuario)
         {
             this.cvu = Cuenta.GenerarCVU();
-            this.saldo = saldo;
+            this.saldo = 0;
             this.tipoCuenta = tipoCuenta;
             this.usuario = usuario;
         }

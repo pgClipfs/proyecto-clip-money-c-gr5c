@@ -19,12 +19,17 @@ namespace ProyectoCLIPMoney
             this.contraseña = contraseña;
             this.sitCrediticia = sitCrediticia;
             cuentas = new List<Cuenta>();
+
+            Cuenta cuenta = new Cuenta(null, null, this);
+
+            cuentas.Add(cuenta);
+
         }
         public static Usuario CrearUsuario(int DNI, string nombre, string apellido, string contraseña, string sitCrediticia)
         {
             Usuario usuario = new Usuario(DNI, nombre, apellido, contraseña, sitCrediticia);
             Random r = new Random();
-            Cuenta cuenta = new Cuenta(r.Next(999999, 9999999), 0, "Pesos argentinos", null, usuario);
+            Cuenta cuenta = new Cuenta(null /*debe ser "pesos argentinos"*/  , null, usuario);
             usuario.AñadirCuenta(cuenta);
             return usuario;
         }
