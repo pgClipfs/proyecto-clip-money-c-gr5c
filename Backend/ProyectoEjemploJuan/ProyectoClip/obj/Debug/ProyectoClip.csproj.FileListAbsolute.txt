@@ -1,0 +1,11 @@
+C:\Users\juan_\source\repos\ProyectoClip\bin\Debug\ProyectoClip.exe
+C:\Users\juan_\source\repos\ProyectoClip\bin\Debug\ProyectoClip.pdb
+C:\Users\juan_\source\repos\ProyectoClip\obj\Debug\ProyectoClip.csprojAssemblyReference.cache
+C:\Users\juan_\source\repos\ProyectoClip\obj\Debug\ProyectoClip.Form1.resources
+C:\Users\juan_\source\repos\ProyectoClip\obj\Debug\ProyectoClip.Properties.Resources.resources
+C:\Users\juan_\source\repos\ProyectoClip\obj\Debug\ProyectoClip.csproj.GenerateResource.cache
+C:\Users\juan_\source\repos\ProyectoClip\obj\Debug\ProyectoClip.csproj.CoreCompileInputs.cache
+C:\Users\juan_\source\repos\ProyectoClip\obj\Debug\ProyectoClip.exe
+C:\Users\juan_\source\repos\ProyectoClip\obj\Debug\ProyectoClip.pdb
+C:\Users\juan_\source\repos\ProyectoClip\obj\Debug\ProyectoClip.Menu.resources
+C:\Users\juan_\source\repos\ProyectoClip\obj\Debug\ProyectoClip.Transferencias.resources
