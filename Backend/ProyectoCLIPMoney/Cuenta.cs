@@ -50,10 +50,57 @@ namespace ProyectoCLIPMoney
             return random.Next();
         }
 
+        private void GuardarMovimiento()
+        {
+            /*no necesariamente tiene que tener este nombre o esos parametros, pero esta funcion lo que hace es guardar el movimiento que se acaba de realizar, en la BD*/
+        }
+
+        public void Depositar(float monto)
+        {
+            saldo += monto;
+
+            //y que se hace con este objeto "movimiento" que se genera? se guarda solo en la BD?
+            Movimiento movimiento = new Movimiento(Movimiento.Tipo.Depósito, monto, this);
+
+            //algun mensaje o devolucion???
+        }
+
+        public void Extraer(float monto) 
+        {            
+            if (monto>saldo)
+            {
+                Console.WriteLine("monto a extraer mayor que el saldo disponible");
+                throw new MontoMayorAlSaldo();
+            }
+            else
+            {
+                saldo += monto;
+                Movimiento movimiento = new Movimiento(Movimiento.Tipo.Extracción, monto, this);
+            }
+        }   
+
         public void EliminarCuenta()
         {
             //este metodo necesita acceder a la BD para borrar la cuenta
         }
+
+        public void GirarAlDescubierto()
+        {
+            /*hay que hacer una clase "cuenta" padre, y los tipos de cuenta que hereden de
+             esa, pero que tengan diferente comportamiento (como lo de girar al descubierto)
+             o se maneja todo en una misma clase??? */
+        }
                
+    }
+
+    [Serializable]
+    class MontoMayorAlSaldo : Exception
+    {
+        public MontoMayorAlSaldo()
+            : base(String.Format("El monto que intenta extraer es mayor al saldo disponible "))
+        {
+
+        }
+
     }
 }
