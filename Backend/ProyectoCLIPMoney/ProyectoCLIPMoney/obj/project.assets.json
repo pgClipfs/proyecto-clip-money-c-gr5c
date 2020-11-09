@@ -688,23 +688,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\seba-\\.nuget\\packages\\": {},
-    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
+    "C:\\Users\\juan_\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\Seba\\GITT\\Clip\\proyecto-clip-money-c-gr5c\\Backend\\ProyectoCLIPMoney\\ProyectoCLIPMoney\\ProyectoCLIPMoney.csproj",
+      "projectUniqueName": "C:\\Users\\juan_\\Documents\\JUAN\\Clip\\Proyecto\\proyecto-clip-money-c-gr5c\\Backend\\ProyectoCLIPMoney\\ProyectoCLIPMoney\\ProyectoCLIPMoney.csproj",
       "projectName": "ProyectoCLIPMoney",
-      "projectPath": "E:\\Seba\\GITT\\Clip\\proyecto-clip-money-c-gr5c\\Backend\\ProyectoCLIPMoney\\ProyectoCLIPMoney\\ProyectoCLIPMoney.csproj",
-      "packagesPath": "C:\\Users\\seba-\\.nuget\\packages\\",
-      "outputPath": "E:\\Seba\\GITT\\Clip\\proyecto-clip-money-c-gr5c\\Backend\\ProyectoCLIPMoney\\ProyectoCLIPMoney\\obj\\",
+      "projectPath": "C:\\Users\\juan_\\Documents\\JUAN\\Clip\\Proyecto\\proyecto-clip-money-c-gr5c\\Backend\\ProyectoCLIPMoney\\ProyectoCLIPMoney\\ProyectoCLIPMoney.csproj",
+      "packagesPath": "C:\\Users\\juan_\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\juan_\\Documents\\JUAN\\Clip\\Proyecto\\proyecto-clip-money-c-gr5c\\Backend\\ProyectoCLIPMoney\\ProyectoCLIPMoney\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-      ],
       "configFilePaths": [
-        "C:\\Users\\seba-\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\juan_\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -745,7 +741,7 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.402\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.301\\RuntimeIdentifierGraph.json"
       }
     }
   }
