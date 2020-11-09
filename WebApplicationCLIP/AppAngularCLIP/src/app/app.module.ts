@@ -3,6 +3,9 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { LoginBox} from './components/login-box/login.component';
+import { LoginService } from './services/login.service';
+
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -10,9 +13,10 @@ import { LoginBox} from './components/login-box/login.component';
     LoginBox
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    FormsModule
   ],
-  providers: [],
+  providers: [[LoginService]],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
