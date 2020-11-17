@@ -11,6 +11,9 @@ import { HomePageComponent } from './components/home-page/home-page.component';
 
 import { RouterModule } from '@angular/router';
 
+import { HttpClientModule } from '@angular/common/http';
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -20,9 +23,10 @@ import { RouterModule } from '@angular/router';
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     FormsModule,
     RouterModule.forRoot([
-      { path: 'home', component: HomePageComponent },
+      { path: '', component: HomePageComponent },
       { path: 'login', component: LoginBox }
     ])
   ],
