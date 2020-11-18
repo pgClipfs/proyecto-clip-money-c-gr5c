@@ -1,0 +1,33 @@
+.navbar-brand{
+    color: #72efdd;
+    font-family:'Roboto', sans-serif;
+    font-weight: 900;
+    font-size: 2rem;
+    
+}
+
+.btn-nav{
+    margin-left: 1rem;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    font-size: 1.3rem;
+    color:  grey ;
+}
+
+.btn-nav:hover{
+    color: rgb(161, 161, 161);
+    text-decoration: underline #72efdd;
+}
+
+.estilo-botones{
+    font-family: 'Roboto', sans-serif;
+    font-weight: 700;
+    color:  #64dfdf ;
+    margin-right: 1rem;
+}
+
+.estilo-botones:hover{
+    color: white;
+    background-color: #72efdd;
+}
+
