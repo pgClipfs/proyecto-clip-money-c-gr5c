@@ -4,14 +4,14 @@
     text-align: center;
 }
 
-.login-box{
+.login-box{    
     width: 300px;
     background-color:#f0e3da;
     padding: 30px;
     border-radius: 25px;
     margin-left:auto ;
     margin-right:auto ;
-    margin-top:auto ;
+    margin-top:10% ;
     margin-bottom:auto ;
 }
 

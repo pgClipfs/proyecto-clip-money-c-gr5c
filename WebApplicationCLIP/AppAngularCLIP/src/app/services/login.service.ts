@@ -1,5 +1,9 @@
 import { Injectable } from '@angular/core';
-//import {  HttpClient } from "@angular/common/http";
+import {  HttpClient } from "@angular/common/http";
+import { HttpClientModule } from '@angular/common/http';
+import { Observable } from 'rxjs';
+//import { Usuario } from '../modelos/usuario';
+import {Usuario } from '../modelos/usuario';
 
 @Injectable({
     providedIn: "root"
@@ -7,15 +11,14 @@ import { Injectable } from '@angular/core';
 
 export class LoginService {
 
-    constructor() {
-    }
+private regUrl = "url de registro";
+private logUrl = "url de logueo";
+private pruebaURL: string= "http://localhost:59642/api/Prueba02/7";
 
-    prueba(user: string, pasw: string) {
+ constructor(private http: HttpClient) { }
 
-        if (user == "pepe" && pasw == "123") {
-            return true;
-        }
-        return false
-    }
-
+    probar()  {
+        console.log(this.http.get(this.pruebaURL));        
+        return this.http.get(this.pruebaURL);        
+    }    
 }

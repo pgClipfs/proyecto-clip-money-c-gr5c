@@ -1,7 +1,11 @@
 import { Component } from '@angular/core';
 //import { AnyMxRecord } from 'dns';
 import { LoginService } from 'src/app/services/login.service';
+//import { HttpClient } from "@angular/common/http";
 
+
+//import { Usuario } from '../../modelos/usuario';
+import {Usuario } from '../../modelos/usuario';
 
 @Component({
     selector: 'login-box',
@@ -15,22 +19,22 @@ export class LoginBox {
     value_pasw: string;
     error: boolean = false;
 
+    user: Usuario;
+
     constructor(private loginService: LoginService) { }
 
+    ngOnInit(): void {
+        //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
+        //Add 'implements OnInit' to the class.
+        
+    }
+    
     login_click() {
-
-        if (this.loginService.prueba(this.value_user, this.value_pasw)) {
-            //significa que usuario y pass coinciden
-
-            console.log("login exitoso");
-            this.error = false;
-
-        } else {
-            console.log("usuario y/o contraseña incorrectos");
-            this.error = true;
-
-        }
-
+        
+        this.loginService.probar().subscribe((data: any) => {
+            this.user = data;
+            this.value_user = this.user.Nombre;
+        });
 
     }
 
