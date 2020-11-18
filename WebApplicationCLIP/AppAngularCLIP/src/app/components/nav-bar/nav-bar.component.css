@@ -24,6 +24,7 @@
     font-weight: 700;
     color:  #64dfdf ;
     margin-right: 1rem;
+    transition: all 0.3s;
 }
 
 .estilo-botones:hover{
