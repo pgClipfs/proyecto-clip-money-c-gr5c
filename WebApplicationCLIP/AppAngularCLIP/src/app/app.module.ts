@@ -12,6 +12,7 @@ import { HomePageComponent } from './components/home-page/home-page.component';
 import { RouterModule } from '@angular/router';
 
 import { HttpClientModule } from '@angular/common/http';
+import { PaginaPrincipalComponent } from './components/pagina-principal/pagina-principal.component';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { HttpClientModule } from '@angular/common/http';
     AppComponent,
     LoginBox,
     NavBarComponent,
-    HomePageComponent
+    HomePageComponent,
+    PaginaPrincipalComponent
   ],
   imports: [
     BrowserModule,
@@ -27,7 +29,8 @@ import { HttpClientModule } from '@angular/common/http';
     FormsModule,
     RouterModule.forRoot([
       { path: '', component: HomePageComponent },
-      { path: 'login', component: LoginBox }
+      { path: 'login', component: LoginBox },
+      { path: 'principal', component: PaginaPrincipalComponent}
     ])
   ],
   providers: [[LoginService]],
