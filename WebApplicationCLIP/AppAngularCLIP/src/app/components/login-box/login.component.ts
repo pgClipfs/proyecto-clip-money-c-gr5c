@@ -6,7 +6,7 @@ import { LoginService } from 'src/app/services/login.service';
 
 //import { Usuario } from '../../modelos/usuario';
 import {Usuario } from '../../modelos/usuario';
-
+import { ActivatedRoute, Router } from '@angular/router';
 @Component({
     selector: 'login-box',
     templateUrl: './login.component.html',
@@ -20,22 +20,33 @@ export class LoginBox {
     error: boolean = false;
 
     user: Usuario;
+    returnUrl: string;
 
-    constructor(private loginService: LoginService) { }
 
+    constructor(private route: ActivatedRoute, private router: Router, private loginService: LoginService) { }
     ngOnInit(): void {
-        //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
-        //Add 'implements OnInit' to the class.
-        
+        this.returnUrl = this.route.snapshot.queryParams.returnUrl || '/';
+        //(no se muy bien que hace esta linea...)
     }
     
-    login_click() {
-        
-        this.loginService.probar().subscribe((data: any) => {
-            this.user = data;
-            this.value_user = this.user.Nombre;
-        });
+    login_click() {       
+     
 
+        this.loginService.login(this.value_user, this.value_pasw)
+        .subscribe(
+            () => {
+                this.router.navigate([this.returnUrl]);
+            },
+            error => {
+                this.error = error;
+            }
+        );
+
+    /*
+            this.loginService.probar().subscribe((data: any) => {
+                this.user = data;
+                this.value_user = this.user.Nombre;            
+            });*/
     }
 
 }
