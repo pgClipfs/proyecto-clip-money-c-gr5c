@@ -7,7 +7,6 @@ using System.Net.Http;
 using System.Threading;
 using System.Web.Http;
 using WebApplicationCLIP.Models;
-
 using System.Security.Claims;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel;
@@ -32,23 +31,19 @@ namespace WebApplicationCLIP.Controllers
         }
 
         [HttpPost]
-        [EnableCors(origins: "*", headers: "*", methods: "*")]
+        //[EnableCors(origins: "*", headers: "*", methods: "*")]        
         [Route("authenticate")]
-
-//        [EnableCors(origins: "*", headers: "*", methods: "*")]
 
         public IHttpActionResult Authenticate(SolicitudLogin login)
         {
             if (login == null)
                 throw new HttpResponseException(HttpStatusCode.BadRequest);
-
-            //en la siguiente linea se deberia llamar a la BD y comprobar si esta bien la clave y usuario
-            bool isCredentialValid = (login.Contraseña == "123456");
-
-            if (isCredentialValid)
+                        
+            if (ValidarCredencial(login.NombreDeUsuario,login.Contraseña))
             {
-                var token = GenerarToken(login.NombreDeUsuario);
-                return Ok(new SolicitudLogin(login.NombreDeUsuario, token));
+                //var token = GenerarToken(login.NombreDeUsuario);
+                var token = "asd";
+                return Ok(new SesionDeUsuario(login.NombreDeUsuario, token));
             }
             else
             {
@@ -84,5 +79,15 @@ namespace WebApplicationCLIP.Controllers
             return jwtTokenString;
         }
 
+        private bool ValidarCredencial(string nombreUsuario, string contraseña)
+        {
+            //aca se tendria que llamar a la BD
+            if (nombreUsuario=="juan" && contraseña == "123")
+            {
+                return true;
+            }
+
+            return false;
+        }
     }
 }
