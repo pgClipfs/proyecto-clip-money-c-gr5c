@@ -8,8 +8,11 @@ namespace WebApplicationCLIP.BD
 {
     public class ConexionBD
     {
-
-        String cadena = "Data Source=localhost; Initial Catalog=ClipBD; Integrated Security=True";
+        //aca pone el nombre de tu base de datos: 
+        //Data Source= "nombre de tu conexion"
+        //Initial Catalog= "nombre de tu base de datos"
+        //String cadena = "Data Source=localhost; Initial Catalog=ClipBD; Integrated Security=True";
+        String cadena = "Data Source=DESKTOP-60F5ORQ\\SQLEXPRESS; Initial Catalog=ClipBank; Integrated Security=True";
         public SqlConnection conexionBD = new SqlConnection();
 
         public ConexionBD() 
