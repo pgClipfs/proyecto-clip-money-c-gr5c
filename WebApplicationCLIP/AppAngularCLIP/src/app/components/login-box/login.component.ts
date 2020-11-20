@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-//import { AnyMxRecord } from 'dns';
 import { LoginService } from 'src/app/services/login.service';
-
+import { Usuario } from '../../modelos/usuario';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
     selector: 'login-box',
@@ -15,23 +15,44 @@ export class LoginBox {
     value_pasw: string;
     error: boolean = false;
 
-    constructor(private loginService: LoginService) { }
+    user: Usuario;
+    returnUrl: string;
+
+    limpiar_mensaje_error() {
+        this.error = false;
+    }
 
     login_click() {
 
-        if (this.loginService.prueba(this.value_user, this.value_pasw)) {
-            //significa que usuario y pass coinciden
+        this.loginService.login(this.value_user, this.value_pasw)
+            .subscribe(
+                () => {
+                    this.router.navigate([this.returnUrl]);
+                    console.log("credenciales validas")
+                },
+                error => {
+                    this.error = true;
+                    console.log("credenciales invalidas")
 
-            console.log("login exitoso");
-            this.error = false;
+                    this.value_user = "";
+                    this.value_pasw = "";
+                }
+            );
+    }
 
-        } else {
-            console.log("usuario y/o contraseña incorrectos");
-            this.error = true;
+    constructor(private route: ActivatedRoute, private router: Router, private loginService: LoginService) { }
+
+
+    ngOnInit(): void {
+        this.returnUrl = this.route.snapshot.queryParams.returnUrl || '/';
+        if(this.loginService.usuarioLogueado){
+            this.router.navigate([this.returnUrl]);
+            console.log("el usuario ya esta logueado")
+            //intento de q no se pueda ver el login, si el usuario ya esta logueado
+
+            //los botones de iniciar sesion y todo eso tampoco se deberian mostrar, solo el de "cerrar Sesion"
 
         }
-
-
     }
 
 }

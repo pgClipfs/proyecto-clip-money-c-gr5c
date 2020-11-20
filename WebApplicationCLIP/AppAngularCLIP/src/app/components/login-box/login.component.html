@@ -1,18 +1,15 @@
-<div id="divBody"></div>
-
 <div class="login-box">
 
     <div class="login-title ">
-        Iniciar Sesión 
+        Iniciar Sesión
     </div>
 
     <div *ngIf="error" class="login-error">Nombre de usuario o contraseña incorrectos </div>
-    <input [(ngModel)]="value_user" class="login-input login-text" type="text" placeholder="Nombre de Usuario" required>
-    <input [(ngModel)]="value_pasw" class="login-input login-text" type="password" placeholder="Contraseña" required>
+    <input [(ngModel)]="value_user" (click)="limpiar_mensaje_error()" class="login-input login-text" type="text" placeholder="Nombre de Usuario" required>
+    <input [(ngModel)]="value_pasw" (click)="limpiar_mensaje_error()" class="login-input login-text" type="password" placeholder="Contraseña" required>
     <input type="submit" (click)="login_click()" class="login-input login-button" type="button" value="INGRESAR">
 
     <div class="login-forgot-password">
         Olvidé mi<a style="color: dodgerblue; text-decoration: none;" href=""> Contraseña </a>
     </div>
-
 </div>

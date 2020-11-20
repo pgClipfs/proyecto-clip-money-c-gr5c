@@ -28,6 +28,7 @@ import { PaginaPrincipalComponent } from './components/pagina-principal/pagina-p
     HttpClientModule,
     FormsModule,
     RouterModule.forRoot([
+      //{ path: 'signup', component: SignupPageComponent },
       { path: '', component: HomePageComponent },
       { path: 'login', component: LoginBox },
       { path: 'principal', component: PaginaPrincipalComponent}

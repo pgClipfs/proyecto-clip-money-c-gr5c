@@ -27,8 +27,9 @@
       </li>
     </ul>
     <form class="form-inline my-2 my-md-0">
-      <button class="btn btn-light" routerLink="/login">Iniciar Sesion</button>
-      <button class="btn ml-2 btn-light">Registrarse</button>
+      <button *ngIf="!usuarioLogueado" class="btn btn-light" routerLink="/login">Iniciar Sesion</button>
+      <button *ngIf="!usuarioLogueado" class="btn ml-2 btn-light">Registrarse</button>
+      <button *ngIf="usuarioLogueado" class="btn ml-2 btn-light" (click)="cerrar_sesion()" routerLink="/">Cerrar Sesion</button>
     </form>
   </div>
 </nav>
