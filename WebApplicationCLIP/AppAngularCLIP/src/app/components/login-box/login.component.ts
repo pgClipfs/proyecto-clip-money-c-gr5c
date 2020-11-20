@@ -41,8 +41,18 @@ export class LoginBox {
     }
 
     constructor(private route: ActivatedRoute, private router: Router, private loginService: LoginService) { }
+
+
     ngOnInit(): void {
         this.returnUrl = this.route.snapshot.queryParams.returnUrl || '/';
+        if(this.loginService.usuarioLogueado){
+            this.router.navigate([this.returnUrl]);
+            console.log("el usuario ya esta logueado")
+            //intento de q no se pueda ver el login, si el usuario ya esta logueado
+
+            //los botones de iniciar sesion y todo eso tampoco se deberian mostrar, solo el de "cerrar Sesion"
+
+        }
     }
 
 }

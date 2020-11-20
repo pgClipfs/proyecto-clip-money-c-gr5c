@@ -26,6 +26,7 @@ import { HttpClientModule } from '@angular/common/http';
     HttpClientModule,
     FormsModule,
     RouterModule.forRoot([
+      //{ path: 'signup', component: SignupPageComponent },
       { path: '', component: HomePageComponent },
       { path: 'login', component: LoginBox }
     ])

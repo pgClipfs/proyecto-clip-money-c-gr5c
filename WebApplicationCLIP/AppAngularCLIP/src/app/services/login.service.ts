@@ -20,37 +20,36 @@ export class LoginService {
         this.usuarioActualSubject = new BehaviorSubject<Usuario>(JSON.parse(localStorage.getItem
             ('usuarioActual')));
         this.usuarioActual = this.usuarioActualSubject.asObservable();
-        //el local storage puede tener el usuario guardado, pero tambien puede que no
-        //entonces en usuarioActual solo se carga el usuario si este ya estaba en el localstorage
     }
 
     public get usuarioLogueado(): Usuario {
         return this.usuarioActualSubject.value;
     }
 
+    public userLoggedIn():  boolean{
+        return this.usuarioLogueado!=null;
+    }
+
     public login(nombreDeUsuario: string, contraseña: string): Observable<any> {
+
+        this.logout();
+
         //en este punto se deberia encriptar la contraseña
 
-        //se hace un post al cliente http, en esa url, y se le pasa un "objeto usuario" como parametro
         return this.http.post<any>(this.urlApi + 'login/authenticate',
             { nombreDeUsuario, contraseña })
             .pipe(map(
                 user => {
                     localStorage.setItem('usuarioActual', JSON.stringify(user));
                     this.usuarioActualSubject.next(user);
-                    //this.usuarioActual = this.usuarioActualSubject.asObservable();      
+                    this.usuarioActual = this.usuarioActualSubject.asObservable();      
                     return user;
                 }));
-
-
-        //con "pipe" se toma lo que viene del servidor
-
     }
 
     public logout(): void {
         localStorage.removeItem('usuarioActual');
         this.usuarioActualSubject.next(null);
-
     }
 
 
