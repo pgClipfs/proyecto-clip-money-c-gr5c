@@ -12,6 +12,7 @@ import { HomePageComponent } from './components/home-page/home-page.component';
 import { RouterModule } from '@angular/router';
 
 import { HttpClientModule } from '@angular/common/http';
+import { SignupPageComponent } from './components/signup-page/signup-page.component';
 import { PaginaPrincipalComponent } from './components/pagina-principal/pagina-principal.component';
 
 
@@ -21,6 +22,7 @@ import { PaginaPrincipalComponent } from './components/pagina-principal/pagina-p
     LoginBox,
     NavBarComponent,
     HomePageComponent,
+    SignupPageComponent
     PaginaPrincipalComponent
   ],
   imports: [
@@ -28,7 +30,7 @@ import { PaginaPrincipalComponent } from './components/pagina-principal/pagina-p
     HttpClientModule,
     FormsModule,
     RouterModule.forRoot([
-      //{ path: 'signup', component: SignupPageComponent },
+      { path: 'signup', component: SignupPageComponent },
       { path: '', component: HomePageComponent },
       { path: 'login', component: LoginBox },
       { path: 'principal', component: PaginaPrincipalComponent}
