@@ -1,3 +1,4 @@
+import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { LoginService } from 'src/app/services/login.service';
 
@@ -10,15 +11,21 @@ export class NavBarComponent implements OnInit {
 
   usuarioLogueado:boolean;
 
-  constructor(private loginService: LoginService) { }
+  private returnUrl: string;
+
+  constructor(private route: ActivatedRoute, private router: Router, private loginService: LoginService) { }
 
   cerrar_sesion(){
     this.loginService.logout();
-    location.reload();
+    //location.reload();
+    
+    console.log("Sesion cerrada")
+    this.router.navigate([this.returnUrl]);
   }
   
   ngOnInit(): void {
     this.usuarioLogueado=this.loginService.userLoggedIn();
+      this.returnUrl = this.route.snapshot.queryParams.returnUrl || '/';
   }
 
 }

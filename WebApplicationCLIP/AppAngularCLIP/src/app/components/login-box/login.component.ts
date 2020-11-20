@@ -44,7 +44,7 @@ export class LoginBox {
 
 
     ngOnInit(): void {
-        this.returnUrl = this.route.snapshot.queryParams.returnUrl || '/';
+        this.returnUrl = this.route.snapshot.queryParams.returnUrl || '/principal';
         if(this.loginService.usuarioLogueado){
             this.router.navigate([this.returnUrl]);
             console.log("el usuario ya esta logueado")

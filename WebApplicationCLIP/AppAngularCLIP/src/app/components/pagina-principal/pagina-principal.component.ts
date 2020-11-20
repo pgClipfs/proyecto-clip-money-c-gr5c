@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { LoginService } from 'src/app/services/login.service';
 
 @Component({
   selector: 'app-pagina-principal',
@@ -7,9 +9,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PaginaPrincipalComponent implements OnInit {
 
-  constructor() { }
+  constructor(private route: ActivatedRoute, private router: Router, private loginService: LoginService) { }
+
+  private returnUrl: string; 
 
   ngOnInit(): void {
+    this.returnUrl = this.route.snapshot.queryParams.returnUrl || '/login';
+    if(!(this.loginService.usuarioLogueado)){
+      this.router.navigate([this.returnUrl]);
+      console.log("el usuario debe loguearse antes de ver la pagina principal")  
+  }
   }
 
 }
