@@ -155,10 +155,15 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="BD\ConexionBD.cs" />
+    <Compile Include="BD\CRUD.cs" />
+    <Compile Include="BD\UsuarioDAO.cs" />
+    <Compile Include="BD\UsuarioDAOImp.cs" />
     <Compile Include="Controllers\DefaultController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\Prueba02Controller.cs" />
+    <Compile Include="Gestores\GestorUsuario.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

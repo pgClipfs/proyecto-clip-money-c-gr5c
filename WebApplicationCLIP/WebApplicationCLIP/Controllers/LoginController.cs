@@ -11,6 +11,7 @@ using System.Security.Claims;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel;
 using System.Web.Http.Cors;
+using WebApplicationCLIP.Gestores;
 
 namespace WebApplicationCLIP.Controllers
 {
@@ -81,13 +82,22 @@ namespace WebApplicationCLIP.Controllers
 
         private bool ValidarCredencial(string nombreUsuario, string contraseña)
         {
-            //aca se tendria que llamar a la BD
+            /* Aqui va la consulta a la BD*/
+
+            GestorUsuario gestorUsuario = new GestorUsuario();
+            return gestorUsuario.consultarCredencialesUsuario("martinp", "martinin7");
+            
+            
+            /*
             if (nombreUsuario=="juan" && contraseña == "123")
             {
                 return true;
             }
 
             return false;
+            */
+
+
         }
     }
 }

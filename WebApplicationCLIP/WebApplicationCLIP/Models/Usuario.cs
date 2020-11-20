@@ -7,21 +7,52 @@ namespace WebApplicationCLIP.Models
 {
     public class Usuario
     {
-        public Usuario(string id, string nombre, string apellido, string dni, string nombreDeUsuario, string contraseña)
+        public Usuario(string dni, string nombre, string apellido, string sitCrediticia, string nombreDeUsuario, string email, string telefono, string contraseña)
         {
-            Id = id;
+            Dni = dni;
             Nombre = nombre;
             Apellido = apellido;
-            Dni = dni;
-            SitCrediticia = null;
+            SitCrediticia = sitCrediticia;
             NombreDeUsuario = nombreDeUsuario;
+            Email = email;
+            Telefono = telefono;
             Contraseña = contraseña;
         }
 
-        public string Id { get; set; }
+        public Usuario(List<string> ensamblador)
+        {
+            try
+            {
+                Dni = ensamblador[0];
+                Nombre = ensamblador[1];
+                Apellido = ensamblador[2];
+                SitCrediticia = ensamblador[3];
+                NombreDeUsuario = ensamblador[4];
+                Email = ensamblador[5];
+                Telefono = ensamblador[6];
+                Contraseña = ensamblador[7];
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Parametros invalidos para ensamblar el Usuario --> " + e.Message);
+            }
+        }
+
+        public Usuario(string nombreUsuario)
+        {
+            Dni = "";
+            Nombre = "";
+            Apellido = "";
+            SitCrediticia = "";
+            NombreDeUsuario = nombreUsuario;
+            Email = "";
+            Telefono = "";
+            Contraseña = "";
+        }
+
+        public string Dni { get; set; }
         public string Nombre { get; set; }
         public string Apellido { get; set; }
-        public string Dni { get; set; }
         public string SitCrediticia { get; set; }
         public string NombreDeUsuario { get; set; }
         public string Email { get; set; }
