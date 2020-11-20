@@ -22,7 +22,7 @@ import { PaginaPrincipalComponent } from './components/pagina-principal/pagina-p
     LoginBox,
     NavBarComponent,
     HomePageComponent,
-    SignupPageComponent
+    SignupPageComponent,
     PaginaPrincipalComponent
   ],
   imports: [
