@@ -31,7 +31,7 @@ namespace WebApplicationCLIP.Controllers
         }
 
         [HttpPost]
-        //[EnableCors(origins: "*", headers: "*", methods: "*")]        
+        [EnableCors(origins: "*", headers: "*", methods: "*")]        
         [Route("authenticate")]
 
         public IHttpActionResult Authenticate(SolicitudLogin login)
