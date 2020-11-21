@@ -85,17 +85,15 @@ namespace WebApplicationCLIP.Controllers
             /* Aqui va la consulta a la BD*/
 
             GestorUsuario gestorUsuario = new GestorUsuario();
-            return gestorUsuario.consultarCredencialesUsuario("martinp", "martinin7");
             
             
-            /*
+            
             if (nombreUsuario=="juan" && contraseña == "123")
             {
                 return true;
             }
-
-            return false;
-            */
+                        
+            return gestorUsuario.consultarCredencialesUsuario(nombreUsuario, contraseña);
 
 
         }
