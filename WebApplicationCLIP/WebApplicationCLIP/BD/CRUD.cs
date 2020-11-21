@@ -10,8 +10,8 @@ namespace WebApplicationCLIP.BD
     {
         List<T> listarTodos();
         T consultar(T t);
-        void registrar(T t);
-        void modificar(T t);
-        void eliminar(T t);
+        Enum registrar(T t);
+        Enum modificar(T t);
+        Enum eliminar(T t);
     }
 }

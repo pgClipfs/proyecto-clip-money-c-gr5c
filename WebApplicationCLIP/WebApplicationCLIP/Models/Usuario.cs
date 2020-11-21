@@ -59,5 +59,12 @@ namespace WebApplicationCLIP.Models
         public string Telefono { get; set; }
         public string Contraseña { get; set; }
 
+
+        public static Usuario nuevoUsuario(string dni, string nombre, string apellido, string nombreDeUsuario, string email, string telefono, string contraseña) 
+        {
+            Usuario usuarioNuevo = new Usuario(dni, nombre, apellido, "normal", nombreDeUsuario, email, telefono, contraseña);
+            return usuarioNuevo;
+        }
+
     }
 }

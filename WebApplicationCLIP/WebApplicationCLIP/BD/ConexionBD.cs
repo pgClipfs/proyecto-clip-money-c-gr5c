@@ -12,7 +12,7 @@ namespace WebApplicationCLIP.BD
         //Data Source= "nombre de tu conexion"
         //Initial Catalog= "nombre de tu base de datos"
         //String cadena = "Data Source=localhost; Initial Catalog=ClipBD; Integrated Security=True";
-        String cadena = "Data Source=DESKTOP-60F5ORQ\\SQLEXPRESS; Initial Catalog=ClipBank; Integrated Security=True";
+        String cadena = "Data Source=localhost; Initial Catalog=ClipBD; Integrated Security=True";
         public SqlConnection conexionBD = new SqlConnection();
 
         public ConexionBD() 
