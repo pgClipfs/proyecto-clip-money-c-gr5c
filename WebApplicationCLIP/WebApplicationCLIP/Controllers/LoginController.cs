@@ -50,7 +50,7 @@ namespace WebApplicationCLIP.Controllers
             }
             else
             {
-                return Content(HttpStatusCode.BadRequest,respuesta);
+                return Content(HttpStatusCode.Conflict,respuesta);
             }
 
         }
@@ -67,10 +67,21 @@ namespace WebApplicationCLIP.Controllers
 
             GestorUsuario gestor = new GestorUsuario();
 
-    
+            int respuesta = gestor.registrarUsuario(usuario);
 
-//            Enum respuesta =  gestor.registrarUsuario(usuario);
-                       
+            if (respuesta == 0)
+            {
+                return Ok();
+            }
+            else
+            {
+                return Content(HttpStatusCode.Conflict, respuesta);
+            }
+
+
+
+            //            Enum respuesta =  gestor.registrarUsuario(usuario);
+
             return Ok(true);
 
         }

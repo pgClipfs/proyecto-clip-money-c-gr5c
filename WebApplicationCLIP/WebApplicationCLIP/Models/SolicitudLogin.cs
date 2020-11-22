@@ -7,7 +7,7 @@ namespace WebApplicationCLIP.Models
 {
     public class SolicitudLogin
     {
-        public SolicitudLogin(string nombreDeUsuario, string contraseña)
+        public SolicitudLogin(string contraseña, string nombreDeUsuario)
         {
             NombreDeUsuario = nombreDeUsuario;
             Contraseña = contraseña;
@@ -16,4 +16,4 @@ namespace WebApplicationCLIP.Models
         public string NombreDeUsuario { get; set; }
         public string Contraseña { get; set; }
     }
-}
+} 

@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { LoginBox } from './components/login-box/login.component';
 import { LoginService } from './services/login.service';
+import { SignupService } from './services/signup.service';
 
 import { FormsModule } from '@angular/forms';
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
@@ -36,7 +37,7 @@ import { PaginaPrincipalComponent } from './components/pagina-principal/pagina-p
       { path: 'principal', component: PaginaPrincipalComponent}
     ])
   ],
-  providers: [[LoginService]],
+  providers: [[LoginService],[SignupService]],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
