@@ -5,7 +5,7 @@ import { AppComponent } from './app.component';
 import { LoginBox } from './components/login-box/login.component';
 import { LoginService } from './services/login.service';
 
-import { FormsModule } from '@angular/forms';
+import { FormsModule , ReactiveFormsModule} from '@angular/forms';
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 import { HomePageComponent } from './components/home-page/home-page.component';
 
@@ -27,6 +27,7 @@ import { SignupPageComponent } from './components/signup-page/signup-page.compon
     BrowserModule,
     HttpClientModule,
     FormsModule,
+    ReactiveFormsModule,
     RouterModule.forRoot([
       { path: 'signup', component: SignupPageComponent },
       { path: '', component: HomePageComponent },

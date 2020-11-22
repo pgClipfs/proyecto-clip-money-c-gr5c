@@ -10,51 +10,51 @@
                         <div class="text-center">
                             <h1 class="h4  mb-4">Crea una cuenta!</h1>
                         </div>
-                        <form class="user">
+                        <form [formGroup]="fgroup" class="user">
                             <div class="form-group">
-                                <input type="text" class="form-control form-control-user" id="exampleInputUsuario"
+                                <input type="text" formControlName="NombreUsuario" class="form-control form-control-user" id="exampleInputUsuario"
                                     placeholder="Usuario">
                             </div>
                             <div class="form-group row">
                                 <div class="col-sm-6 mb-3 mb-sm-0">
-                                    <input type="text" class="form-control form-control-user" id="exampleFirstName"
+                                    <input type="text" formControlName="Nombre" class="form-control form-control-user" id="exampleFirstName"
                                         placeholder="Nombre">
                                 </div>
                                 <div class="col-sm-6">
-                                    <input type="text" class="form-control form-control-user" id="exampleLastName"
+                                    <input type="text" formControlName="Apellido" class="form-control form-control-user" id="exampleLastName"
                                         placeholder="Apellido">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <input type="email" class="form-control form-control-user" id="exampleInputEmail"
+                                <input type="email" formControlName="Email" class="form-control form-control-user" id="exampleInputEmail"
                                     placeholder="Email">
                             </div>
                             <div class="form-group row">
                                 <div class="col-sm-6 mb-3 mb-sm-0">
-                                    <input type="text" class="form-control form-control-user"
+                                    <input type="text" formControlName="Dni" class="form-control form-control-user"
                                         id="exampleInputDni" placeholder="Ingrese su DNI">
                                 </div>
                                 <div class="col-sm-6">
-                                    <input type="text" class="form-control form-control-user"
+                                    <input type="text" formControlName="Telefono" class="form-control form-control-user"
                                         id="exampleRepeatTelefono" placeholder="Telefono">
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <div class="col-sm-6 mb-3 mb-sm-0">
-                                    <input type="password" class="form-control form-control-user"
+                                    <input type="password" formControlName="Contrasena" class="form-control form-control-user"
                                         id="exampleInputPassword" placeholder="Contraseña">
                                 </div>
                                 <div class="col-sm-6">
-                                    <input type="password" class="form-control form-control-user"
+                                    <input type="password" formControlName="ContrasenaRep" class="form-control form-control-user"
                                         id="exampleRepeatPassword" placeholder="Confirmar contraseña">
                                 </div>
                             </div>
-                            <a href="" class="btn btn-warning btn-user btn-block">
-                                Subir documentos
-                            </a>
-                            <a href="" class="btn btn-primary btn-user btn-block">
-                                Registrar Cuenta
-                            </a>
+                            <div class="form-group">
+                                <label for="exampleFormControlFile1">Cargar fotos del DNI</label>
+                                <input type="file" formControlName="image" class="btn-warning btn" id="exampleFormControlFile1">
+                              </div>
+                            <input type="button" class="btn btn-primary btn-user btn-block" (click)="grabar()" value=" Registrar Cuenta">                              
+                        
                             
                          
                             
