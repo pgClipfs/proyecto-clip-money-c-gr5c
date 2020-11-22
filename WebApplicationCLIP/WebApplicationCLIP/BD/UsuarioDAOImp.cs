@@ -11,9 +11,21 @@ namespace WebApplicationCLIP.BD
     {
         public enum EstadoRegisto {REGISTRADO , ERROR , EXISTENTE}
 
+        /*
+         codigo
+         0: no error
+         1: no se pudo conectar la BD
+         2: error en el insert  
 
+         3: dni repetido
+         4: nombre usuario repetido
+         5: email repetido
+         
+        */
+        
+                
 
-        public Usuario consultar(Usuario t)
+        public int consultar(Usuario t)
         {
             string script = "SELECT * FROM USUARIOS WHERE NOMBRE_USUARIO = " + "'" + t.NombreDeUsuario + "'";
 
@@ -35,31 +47,80 @@ namespace WebApplicationCLIP.BD
                 if (ensamblador.Count > 0)
                 {
                     conexion.cerrar();
-                    return new Usuario(ensamblador);
+                    Usuario.ensablarUsuario(ensamblador);
+                    return 0;
                 }
             }
             catch(Exception e)
             {
                 Console.WriteLine("Error al ejecutar la consulta --> " + e.Message);
+                return 1;
             }
             conexion.cerrar();
-            return null;
+            return 2;
         }
 
+        public int comprobarRepeticion(Usuario t)
+        {
+            string script = "SELECT * FROM USUARIOS WHERE NOMBRE_USUARIO = " + "'"  + t.NombreDeUsuario + "' or DNI ='"+t.Dni+"' or EMAIL = '"+t.Email+ "'";
 
-        public Enum registrar(Usuario t)
+            ConexionBD conexion = new ConexionBD();
+            conexion.abrir();
+
+            try
+            {
+                SqlCommand comando = new SqlCommand(script, conexion.conexionBD);
+                SqlDataReader lector = comando.ExecuteReader();
+                List<string> ensamblador = new List<string>();
+                while (lector.Read())
+                {
+                    for (int i = 0; i < lector.FieldCount; i++)
+                    {
+                        ensamblador.Add(lector.GetValue(i).ToString());
+                    }
+                }
+                if (ensamblador.Count > 0)
+                {
+                    conexion.cerrar();
+                    
+                    if(t.Dni == ensamblador[0])
+                    {
+                        return 3;
+                    }
+                    if(t.NombreDeUsuario == ensamblador[4])
+                    {
+                        return 4;
+                    }
+                    if (t.Email == ensamblador[5])
+                    {
+                        return 5;
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Error al ejecutar la consulta --> " + e.Message);
+                return 1;
+            }
+            conexion.cerrar();
+            return 0;
+        }
+
+        public int registrar(Usuario t)
         {
             string script = "INSERT INTO USUARIOS (DNI, NOMBRE, APELLIDO, NOMBRE_SITUACION_CREDITICIA, NOMBRE_USUARIO, EMAIL, TELEFONO, CONTRASEÑA)" +
                 "VALUES (@dni , @nombre , @apellido , @nombre_situacion_crediticia , @nombre_usuario , @email , @telefono , @contraseña)";
 
             /* Valido que el Usuario no exista previamente */
 
-            if (consultar(t) != null) 
-            {
-                Console.WriteLine("El usuario ya existe en la BD");
-                return EstadoRegisto.EXISTENTE;
-            }
+            int respuesta = comprobarRepeticion(t);
 
+            if (respuesta !=0)
+            {
+                Console.WriteLine("Error tipo "+respuesta);
+                return respuesta;
+            }
+            
             /* Si el usuario no esta repetido, procedo a insertarlo en la BD */
 
             ConexionBD conexion = new ConexionBD();
@@ -79,17 +140,17 @@ namespace WebApplicationCLIP.BD
                 comando.ExecuteNonQuery();
                 Console.WriteLine("Se realizo correctamente la inserción");
                 conexion.cerrar();
-                return EstadoRegisto.REGISTRADO;
+                return 0;
             }
             catch (Exception e) 
             {
                 Console.WriteLine("Error al realizar INSERT --> " + e.Message);
                 conexion.cerrar();
-                return EstadoRegisto.ERROR;
+                return 2;
             }
         }
 
-        public Enum eliminar(Usuario t)
+        public int eliminar(Usuario t)
         {
             throw new NotImplementedException();
         }
@@ -99,7 +160,7 @@ namespace WebApplicationCLIP.BD
             throw new NotImplementedException();
         }
 
-        public Enum modificar(Usuario t)
+        public int modificar(Usuario t)
         {
             throw new NotImplementedException();
         }

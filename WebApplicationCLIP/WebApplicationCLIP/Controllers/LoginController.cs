@@ -39,21 +39,45 @@ namespace WebApplicationCLIP.Controllers
         {
             if (login == null)
                 throw new HttpResponseException(HttpStatusCode.BadRequest);
-                        
-            if (ValidarCredencial(login.NombreDeUsuario,login.Contraseña))
+
+            int respuesta = ValidarCredencial(login.NombreDeUsuario, login.Contraseña);
+
+            if (respuesta==0)
             {
-                //var token = GenerarToken(login.NombreDeUsuario);
-                var token = "asd";
+                var token = GenerarToken(login.NombreDeUsuario);
+                //var token = "asd";
                 return Ok(new SesionDeUsuario(login.NombreDeUsuario, token));
             }
             else
             {
-                return Unauthorized();
+                return Content(HttpStatusCode.BadRequest, respuesta.ToString());                    
             }
+        }
+
+        [HttpPost]
+        [EnableCors(origins: "*", headers: "*", methods: "*")]
+        [Route("registerUser")]
+
+        public IHttpActionResult RegisterUser(Usuario usuario)
+        {
+
+            if (usuario == null)
+                throw new HttpResponseException(HttpStatusCode.BadRequest);
+
+            GestorUsuario gestor = new GestorUsuario();
+
+    
+
+//            Enum respuesta =  gestor.registrarUsuario(usuario);
+                       
+            return Ok(true);
+
         }
 
         public static string GenerarToken(string NombreDeUsuario)
         {
+
+
             // es un JSON Web Token
             var secretKey = ConfigurationManager.AppSettings["JWT_SECRET_KEY"];
             var audienceToken = ConfigurationManager.AppSettings["JWT_AUDIENCE_TOKEN"];
@@ -80,19 +104,12 @@ namespace WebApplicationCLIP.Controllers
             return jwtTokenString;
         }
 
-        private bool ValidarCredencial(string nombreUsuario, string contraseña)
+        private int ValidarCredencial(string nombreUsuario, string contraseña)
         {
             /* Aqui va la consulta a la BD*/
 
             GestorUsuario gestorUsuario = new GestorUsuario();
             
-            
-            
-            if (nombreUsuario=="juan" && contraseña == "123")
-            {
-                return true;
-            }
-                        
             return gestorUsuario.consultarCredencialesUsuario(nombreUsuario, contraseña);
 
 

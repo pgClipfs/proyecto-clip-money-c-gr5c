@@ -11,33 +11,48 @@ namespace WebApplicationCLIP.Gestores
     {
         /* Aqui deberia devolver un tipo de dato que muestre el estado de lo que sucede y no "bool"   */
 
-        public bool consultarCredencialesUsuario(string nombreUsuario, string contraseña)
-        {
-            Usuario temp = new Usuario(nombreUsuario);
-            UsuarioDAOImp usuarioDAO = new UsuarioDAOImp();
-            Usuario usuario = usuarioDAO.consultar(temp);
+            /*
+             codigos de error:
 
-            if (usuario == null)
+            0: sin error
+            1: error conexion a BD
+            2: error en credenciales
+             
+             */
+
+        public int consultarCredencialesUsuario(string nombreUsuario, string contraseña)
+        {
+            Usuario temp = Usuario.CrearUsuarioConNombreDeUsuario(nombreUsuario);
+            UsuarioDAOImp usuarioDAO = new UsuarioDAOImp();
+            int respuesta = usuarioDAO.consultar(temp);
+
+            if ( respuesta !=0)
             {
-                Console.WriteLine("No se encontro el usuario '" + nombreUsuario + "'");
-                return false;
+                return respuesta;
             }
-            if (usuario.Contraseña != contraseña)
+
+            if (temp.Contraseña != contraseña)
             {
-                Console.WriteLine("Contraseña invalida para el usuario '" + usuario.NombreDeUsuario + "'");
-                return false;
+                Console.WriteLine("Contraseña invalida para el usuario '" + temp.NombreDeUsuario + "'");
+                return 2;
             }
-            return true;
+            return 0;
         }
 
 
         /*El metodo registra un usuario (verificando que este no sea repetido)
-         * y devuelve un Enum con 3 Estados : REGISTRADO - ERROR - EXISTENTE  */
+         * y devuelve un int con 3 Estados : REGISTRADO - ERROR - EXISTENTE  */
 
         /* Para obtener el valor de un Enum se utiliza el metodo  --> ToString() <--   */
-        public Enum registrarUsuario(string dni, string nombre, string apellido, string nombreDeUsuario, string email, string telefono, string contraseña) 
+        public int registrarUsuario(string dni, string nombre, string apellido, string nombreDeUsuario, string email, string telefono, string contraseña) 
         {
             Usuario usuarioNuevo = Usuario.nuevoUsuario(dni, nombre, apellido, nombreDeUsuario, email, telefono, contraseña);
+            UsuarioDAOImp usuarioDAO = new UsuarioDAOImp();
+            return usuarioDAO.registrar(usuarioNuevo);
+        }
+
+        public int registrarUsuario(Usuario usuarioNuevo)
+        {
             UsuarioDAOImp usuarioDAO = new UsuarioDAOImp();
             return usuarioDAO.registrar(usuarioNuevo);
         }

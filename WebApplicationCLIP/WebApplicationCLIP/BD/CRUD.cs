@@ -9,9 +9,9 @@ namespace WebApplicationCLIP.BD
     public interface CRUD<T>
     {
         List<T> listarTodos();
-        T consultar(T t);
-        Enum registrar(T t);
-        Enum modificar(T t);
-        Enum eliminar(T t);
+        int consultar(T t);
+        int registrar(T t);
+        int modificar(T t);
+        int eliminar(T t);
     }
 }
