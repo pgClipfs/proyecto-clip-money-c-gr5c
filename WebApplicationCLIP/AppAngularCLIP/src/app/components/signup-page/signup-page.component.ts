@@ -17,11 +17,11 @@ export class SignupPageComponent implements OnInit {
     // de carga constituido por un objeto json que va a contener los campos.
     this.fgroup = this.fb.group({
       NombreUsuario: '',
-      Nombre: '',
+      Nombre: ['',[Validators.required,Validators.maxLength(55),Validators.pattern("^[a-zA-Z' ]+$")]],
       Apellido: '',
       Email: '',
-      Dni: 0,
-      Telefono: 0,
+      Dni: null,
+      Telefono: null,
       Contrasena: '',
       ContrasenaRep: '',
       image: ''
@@ -31,6 +31,18 @@ export class SignupPageComponent implements OnInit {
   }
 
   grabar(){
-    console.log(this.fgroup.value)
+    if(this.fgroup.valid ){
+      console.log(this.fgroup.value)
+    }
+    else{
+      console.log("Hay datos invalidos")
+    }
+    
+  }
+
+  
+
+  LimpiarForm(){
+    this.fgroup.reset();
   }
 }

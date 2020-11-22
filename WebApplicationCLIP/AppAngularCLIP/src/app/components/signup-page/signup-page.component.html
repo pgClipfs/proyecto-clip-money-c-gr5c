@@ -1,73 +1,110 @@
 <div class="container">
 
-    <div class="card o-hidden border-0 shadow-lg my-5">
-        <div class="card-body p-0">
-            <!-- Nested Row within Card Body -->
-            <div class="row">
-                <div class="col-lg-5 d-none d-lg-block bg-register-image"></div>
-                <div class="col-lg-7">
-                    <div class="p-5">
-                        <div class="text-center">
-                            <h1 class="h4  mb-4">Crea una cuenta!</h1>
-                        </div>
-                        <form [formGroup]="fgroup" class="user">
-                            <div class="form-group">
-                                <input type="text" formControlName="NombreUsuario" class="form-control form-control-user" id="exampleInputUsuario"
-                                    placeholder="Usuario">
-                            </div>
-                            <div class="form-group row">
-                                <div class="col-sm-6 mb-3 mb-sm-0">
-                                    <input type="text" formControlName="Nombre" class="form-control form-control-user" id="exampleFirstName"
-                                        placeholder="Nombre">
-                                </div>
-                                <div class="col-sm-6">
-                                    <input type="text" formControlName="Apellido" class="form-control form-control-user" id="exampleLastName"
-                                        placeholder="Apellido">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <input type="email" formControlName="Email" class="form-control form-control-user" id="exampleInputEmail"
-                                    placeholder="Email">
-                            </div>
-                            <div class="form-group row">
-                                <div class="col-sm-6 mb-3 mb-sm-0">
-                                    <input type="text" formControlName="Dni" class="form-control form-control-user"
-                                        id="exampleInputDni" placeholder="Ingrese su DNI">
-                                </div>
-                                <div class="col-sm-6">
-                                    <input type="text" formControlName="Telefono" class="form-control form-control-user"
-                                        id="exampleRepeatTelefono" placeholder="Telefono">
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <div class="col-sm-6 mb-3 mb-sm-0">
-                                    <input type="password" formControlName="Contrasena" class="form-control form-control-user"
-                                        id="exampleInputPassword" placeholder="Contraseña">
-                                </div>
-                                <div class="col-sm-6">
-                                    <input type="password" formControlName="ContrasenaRep" class="form-control form-control-user"
-                                        id="exampleRepeatPassword" placeholder="Confirmar contraseña">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="exampleFormControlFile1">Cargar fotos del DNI</label>
-                                <input type="file" formControlName="image" class="btn-warning btn" id="exampleFormControlFile1">
-                              </div>
-                            <input type="button" class="btn btn-primary btn-user btn-block" (click)="grabar()" value=" Registrar Cuenta">                              
-                        
-                            
-                         
-                            
-                        </form>
-                        <hr>
-                        
-                        <div class="text-center">
-                            <a class="small" routerLink="/login" href="login.html">Ya tienes una cuenta? Inicia Sesion!</a>
-                        </div>
-                    </div>
-                </div>
+  <div class="card o-hidden border-0 shadow-lg my-5">
+    <div class="card-body p-0">
+      <!-- Nested Row within Card Body -->
+      <div class="row">
+        <div class="col-lg-5 d-none d-lg-block bg-register-image"></div>
+        <div class="col-lg-7">
+          <div class="p-5">
+            <div class="text-center">
+              <h1 class="h4  mb-4">Crea una cuenta!</h1>
             </div>
+            <form [formGroup]="fgroup" class="user">
+              <div class="form-group">
+                <input type="text" formControlName="NombreUsuario" class="form-control form-control-user"
+                  id="exampleInputUsuario" placeholder="Usuario">
+                <small id="helpId"
+                  *ngIf="fgroup.controls.NombreUsuario.invalid && (fgroup.controls.NombreUsuario.dirty || fgroup.controls.NombreUsuario.touched)">
+                  Campo invalido
+                </small>
+              </div>
+              <div class="form-group row">
+                <div class="col-sm-6 mb-3 mb-sm-0">
+                  <input type="text" formControlName="Nombre" class="form-control form-control-user"
+                    id="exampleFirstName" placeholder="Nombre">
+                  <span class="text-danger" *ngIf="fgroup.controls.Nombre.touched
+                        && fgroup.controls.Nombre.errors?.required">
+                    Dato requerido.
+                  </span>
+                  <span class="text-danger" *ngIf="(fgroup.controls.Nombre.touched && fgroup.controls.Nombre.errors?.pattern)
+                       || fgroup.controls.Nombre.errors?.maxlength">
+                    Dato texto, de hasta 55 caracteres.
+                  </span>
+                </div>
+                <div class="col-sm-6">
+                  <input type="text" formControlName="Apellido" class="form-control form-control-user"
+                    id="exampleLastName" placeholder="Apellido">
+                  <small id="helpId"
+                    *ngIf="fgroup.controls.Apellido.invalid && (fgroup.controls.Apellido.dirty || fgroup.controls.Apellido.touched)">
+                    Campo invalido apellido
+                  </small>
+                </div>
+              </div>
+              <div class="form-group">
+                <input type="email" formControlName="Email" class="form-control form-control-user"
+                  id="exampleInputEmail" placeholder="Email">
+                <small id="helpId"
+                  *ngIf="fgroup.controls.Email.invalid && (fgroup.controls.Email.dirty || fgroup.controls.Email.touched)">
+                  Campo invalido nombre
+                </small>
+              </div>
+              <div class="form-group row">
+                <div class="col-sm-6 mb-3 mb-sm-0">
+                  <input type="text" formControlName="Dni" class="form-control form-control-user" id="exampleInputDni"
+                    placeholder="Ingrese su DNI">
+                  <small id="helpId"
+                    *ngIf="fgroup.controls.Dni.invalid && (fgroup.controls.Dni.dirty || fgroup.controls.Dni.touched)">
+                    Campo invalido nombre
+                  </small>
+                </div>
+                <div class="col-sm-6">
+                  <input type="text" formControlName="Telefono" class="form-control form-control-user"
+                    id="exampleRepeatTelefono" placeholder="Telefono">
+                  <small id="helpId"
+                    *ngIf="fgroup.controls.Telefono.invalid && (fgroup.controls.Telefono.dirty || fgroup.controls.Telefono.touched)">
+                    Campo invalido nombre
+                  </small>
+                </div>
+              </div>
+              <div class="form-group row">
+                <div class="col-sm-6 mb-3 mb-sm-0">
+                  <input type="password" formControlName="Contrasena" class="form-control form-control-user"
+                    id="exampleInputPassword" placeholder="Contraseña">
+                  <small id="helpId"
+                    *ngIf="fgroup.controls.Contrasena.invalid && (fgroup.controls.Contrasena.dirty || fgroup.controls.Contrasena.touched)">
+                    Campo invalido nombre
+                  </small>
+                </div>
+                <div class="col-sm-6">
+                  <input type="password" formControlName="ContrasenaRep" class="form-control form-control-user"
+                    id="exampleRepeatPassword" placeholder="Confirmar contraseña">
+                  <small id="helpId"
+                    *ngIf="fgroup.controls.ContrasenaRep.invalid && (fgroup.controls.ContrasenaRep.dirty || fgroup.controls.ContrasenaRep.touched)">
+                    Campo invalido nombre
+                  </small>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="exampleFormControlFile1">Cargar fotos del DNI</label>
+                <input type="file" formControlName="image" class="btn-warning btn" id="exampleFormControlFile1">
+              </div>
+              <input type="button" class="btn btn-primary btn-user btn-block" (click)="grabar()"
+                value=" Registrar Cuenta" [disabled]="!fgroup.valid?'disabled':''">
+
+
+
+
+            </form>
+            <hr>
+
+            <div class="text-center">
+              <a class="small" routerLink="/login" href="login.html">Ya tienes una cuenta? Inicia Sesion!</a>
+            </div>
+          </div>
         </div>
+      </div>
     </div>
+  </div>
 
 </div>
