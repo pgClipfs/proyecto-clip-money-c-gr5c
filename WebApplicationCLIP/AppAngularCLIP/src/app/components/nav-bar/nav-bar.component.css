@@ -1,0 +1,38 @@
+:host{
+    --color1: #a228c7;
+}
+
+.navbar-brand{
+    color: var(--color1);
+    font-family:'Roboto', sans-serif;
+    font-weight: 900;
+    font-size: 2rem;
+    
+}
+
+.btn-nav{
+    margin-left: 1rem;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    font-size: 1.3rem;
+    color:  grey ;
+}
+
+.btn-nav:hover{
+    color: rgb(161, 161, 161);
+    text-decoration: underline var(--color1);;
+}
+
+.estilo-botones{
+    font-family: 'Roboto', sans-serif;
+    font-weight: 700;
+    color:  var(--color1); ;
+    margin-right: 1rem;
+    transition: all 0.3s;
+}
+
+.estilo-botones:hover{
+    color: white;
+    background-color: var(--color1);;
+}
+

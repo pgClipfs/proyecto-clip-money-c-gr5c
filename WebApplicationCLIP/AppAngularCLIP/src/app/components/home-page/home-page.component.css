@@ -1,0 +1,46 @@
+.carousel-item {
+    height: 45rem;
+}
+
+.estilo-home{
+    top:10rem;   
+    color: grey;
+    width: 40%;
+}
+
+h5{
+    font-size: 3rem;
+    color: #5e60ce;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 700;
+}
+
+p{
+    font-family: 'Roboto', sans-serif;
+    font-weight: 200;
+    font-size: 1.5rem;
+}
+
+.btn-home{
+    background-color: #5e60ce;
+    color: white;
+    font-family:'Roboto', sans-serif;
+    font-weight: 700;
+    font-size: 1.5rem;
+}
+
+.featurette-heading{
+    font-size: 3rem;
+    color: #64dfdf;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 700;
+}
+.lead-style{
+    font-size: 1.5rem;
+    font-family: 'Roboto', sans-serif;
+    font-weight: lighter;
+}
+
+.span-style{
+    color: #5e60ce;
+}

@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { LoginBox } from './components/login-box/login.component';
 import { LoginService } from './services/login.service';
+import { SignupService } from './services/signup.service';
 
 import { FormsModule , ReactiveFormsModule} from '@angular/forms';
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
@@ -13,6 +14,7 @@ import { RouterModule } from '@angular/router';
 
 import { HttpClientModule } from '@angular/common/http';
 import { SignupPageComponent } from './components/signup-page/signup-page.component';
+import { PaginaPrincipalComponent } from './components/pagina-principal/pagina-principal.component';
 
 
 @NgModule({
@@ -21,7 +23,8 @@ import { SignupPageComponent } from './components/signup-page/signup-page.compon
     LoginBox,
     NavBarComponent,
     HomePageComponent,
-    SignupPageComponent
+    SignupPageComponent,
+    PaginaPrincipalComponent
   ],
   imports: [
     BrowserModule,
@@ -31,10 +34,11 @@ import { SignupPageComponent } from './components/signup-page/signup-page.compon
     RouterModule.forRoot([
       { path: 'signup', component: SignupPageComponent },
       { path: '', component: HomePageComponent },
-      { path: 'login', component: LoginBox }
+      { path: 'login', component: LoginBox },
+      { path: 'principal', component: PaginaPrincipalComponent}
     ])
   ],
-  providers: [[LoginService]],
+  providers: [[LoginService],[SignupService]],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

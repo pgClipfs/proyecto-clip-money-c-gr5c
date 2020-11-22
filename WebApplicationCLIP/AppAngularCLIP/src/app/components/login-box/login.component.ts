@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-//import { AnyMxRecord } from 'dns';
 import { LoginService } from 'src/app/services/login.service';
-
+import { Usuario } from '../../modelos/usuario';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
     selector: 'login-box',
@@ -11,27 +11,51 @@ import { LoginService } from 'src/app/services/login.service';
 
 export class LoginBox {
 
+    msg_error:string;
+
     value_user: string;
     value_pasw: string;
     error: boolean = false;
 
-    constructor(private loginService: LoginService) { }
+    user: Usuario;
+    returnUrl: string;
+
+    limpiar_mensaje_error() {
+        this.error = false;
+    }
 
     login_click() {
 
-        if (this.loginService.prueba(this.value_user, this.value_pasw)) {
-            //significa que usuario y pass coinciden
+        this.loginService.login(this.value_user, this.value_pasw)
+            .subscribe(
+                user => {
+                    this.router.navigate([this.returnUrl]);
+                    console.log("credenciales validas")
+                },
+                err => {
+                    this.error = true;
 
-            console.log("login exitoso");
-            this.error = false;
+                    this.msg_error=err;
 
-        } else {
-            console.log("usuario y/o contraseña incorrectos");
-            this.error = true;
+                    this.value_user = "";
+                    this.value_pasw = "";
+                }
+            );
+    }
+
+    constructor(private route: ActivatedRoute, private router: Router, private loginService: LoginService) { }
+
+
+    ngOnInit(): void {
+        this.returnUrl = this.route.snapshot.queryParams.returnUrl || '/principal';
+        if(this.loginService.usuarioLogueado){
+            this.router.navigate([this.returnUrl]);
+            console.log("el usuario ya esta logueado")
+            //intento de q no se pueda ver el login, si el usuario ya esta logueado
+
+            //los botones de iniciar sesion y todo eso tampoco se deberian mostrar, solo el de "cerrar Sesion"
 
         }
-
-
     }
 
 }

@@ -1,4 +1,6 @@
+import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
+import { LoginService } from 'src/app/services/login.service';
 
 @Component({
   selector: 'nav-bar',
@@ -7,9 +9,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavBarComponent implements OnInit {
 
-  constructor() { }
+  usuarioLogueado:boolean;
 
+  private returnUrl: string;
+
+  constructor(private route: ActivatedRoute, private router: Router, private loginService: LoginService) { }
+
+  cerrar_sesion(){
+    this.loginService.logout();
+    //location.reload();
+    
+    console.log("Sesion cerrada")
+    this.router.navigate([this.returnUrl]);
+  }
+  
   ngOnInit(): void {
+    this.usuarioLogueado=this.loginService.userLoggedIn();
+      this.returnUrl = this.route.snapshot.queryParams.returnUrl || '/';
   }
 
 }
