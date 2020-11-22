@@ -3,14 +3,13 @@ import { HttpClient } from "@angular/common/http";
 import { HttpClientModule } from '@angular/common/http';
 import { Usuario } from '../modelos/usuario';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map,retry,catchError } from 'rxjs/operators';
 
 @Injectable({
     providedIn: "root"
 })
 
 export class LoginService {
-
       //private urlApi = "api/"; //linea correcta 
     private urlApi =  "http://localhost:59642/api/"; //linea para hacer pruebas
     private usuarioActualSubject: BehaviorSubject<Usuario>;
@@ -33,18 +32,31 @@ export class LoginService {
     public login(nombreDeUsuario: string, contraseña: string): Observable<any> {
 
         this.logout();
-
         //en este punto se deberia encriptar la contraseña
 
         return this.http.post<any>(this.urlApi + 'login/authenticate',
-            { nombreDeUsuario, contraseña })
-            .pipe(map(
-                user => {
-                    localStorage.setItem('usuarioActual', JSON.stringify(user));
+            { contraseña,nombreDeUsuario })
+            .pipe(
+              retry(2), //esto es para decirle cuantas veces lo tiene que intentar antes de tirar error :o
+                   catchError(err => {
+                       if (err.error==2) {
+                     throw 'Nombre de usuario o contraseña incorrectos';
+                       }
+                       if (err.error==1) {
+                     throw 'problema al acceder a la BD desde el backend';
+                       }  
+                       if(err.statusText="Unknown Error")  {
+                     throw 'problema de conexion al backend (probablemente este caido)'      ;
+                       }
+                     throw 'error extraño';
+                   }), //esto es para procesar los errores que devuelva el backend
+             map(user => {                                         
+                    localStorage.setItem('usuarioActual', JSON.stringify(user));                            
                     this.usuarioActualSubject.next(user);
                     this.usuarioActual = this.usuarioActualSubject.asObservable();      
-                    return user;
-                }));
+                    return user;}
+                    )
+                );
     }
 
     public logout(): void {

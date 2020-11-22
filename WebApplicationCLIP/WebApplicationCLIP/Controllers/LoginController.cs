@@ -44,14 +44,15 @@ namespace WebApplicationCLIP.Controllers
 
             if (respuesta==0)
             {
-                var token = GenerarToken(login.NombreDeUsuario);
-                //var token = "asd";
+                //var token = GenerarToken(login.NombreDeUsuario);
+                var token = "asd";
                 return Ok(new SesionDeUsuario(login.NombreDeUsuario, token));
             }
             else
             {
-                return Content(HttpStatusCode.BadRequest, respuesta.ToString());                    
+                return Content(HttpStatusCode.BadRequest,respuesta);
             }
+
         }
 
         [HttpPost]

@@ -11,6 +11,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 export class LoginBox {
 
+    msg_error:string;
+
     value_user: string;
     value_pasw: string;
     error: boolean = false;
@@ -26,13 +28,14 @@ export class LoginBox {
 
         this.loginService.login(this.value_user, this.value_pasw)
             .subscribe(
-                () => {
+                user => {
                     this.router.navigate([this.returnUrl]);
                     console.log("credenciales validas")
                 },
-                error => {
+                err => {
                     this.error = true;
-                    console.log("credenciales invalidas")
+
+                    this.msg_error=err;
 
                     this.value_user = "";
                     this.value_pasw = "";
