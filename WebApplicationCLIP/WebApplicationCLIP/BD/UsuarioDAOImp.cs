@@ -47,7 +47,7 @@ namespace WebApplicationCLIP.BD
                 if (ensamblador.Count > 0)
                 {
                     conexion.cerrar();
-                    Usuario.ensablarUsuario(ensamblador);
+                    Usuario.ensablarUsuario(ensamblador, t);
                     return 0;
                 }
             }
