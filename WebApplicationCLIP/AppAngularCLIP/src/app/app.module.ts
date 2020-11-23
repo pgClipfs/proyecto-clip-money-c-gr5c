@@ -15,6 +15,7 @@ import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { SignupPageComponent } from './components/signup-page/signup-page.component';
 import { PaginaPrincipalComponent } from './components/pagina-principal/pagina-principal.component';
+import { RegistroExitosoComponent } from './components/registro-exitoso/registro-exitoso.component';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { PaginaPrincipalComponent } from './components/pagina-principal/pagina-p
     NavBarComponent,
     HomePageComponent,
     SignupPageComponent,
-    PaginaPrincipalComponent
+    PaginaPrincipalComponent,
+    RegistroExitosoComponent
   ],
   imports: [
     BrowserModule,
@@ -33,9 +35,10 @@ import { PaginaPrincipalComponent } from './components/pagina-principal/pagina-p
     ReactiveFormsModule,
     RouterModule.forRoot([
       { path: 'signup', component: SignupPageComponent },
+      { path: 'registroExitoso', component: RegistroExitosoComponent },
       { path: '', component: HomePageComponent },
       { path: 'login', component: LoginBox },
-      { path: 'principal', component: PaginaPrincipalComponent}
+      { path: 'principal', component: PaginaPrincipalComponent}      
     ])
   ],
   providers: [[LoginService],[SignupService]],
