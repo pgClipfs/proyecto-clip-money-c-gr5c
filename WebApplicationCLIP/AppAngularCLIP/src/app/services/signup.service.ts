@@ -38,7 +38,7 @@ export class SignupService {
         if (err.error == 5) {
           throw "email repetido"
         }
-        throw "error misterioso"
+        throw "error misterioso (backend caido?)"
       }),
         map(
           () => {
