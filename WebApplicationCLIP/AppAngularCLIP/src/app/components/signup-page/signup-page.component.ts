@@ -21,12 +21,12 @@ export class SignupPageComponent implements OnInit {
     //Se le indica al formGroup que vamos a crear con el FormBuilder un grupo de elementos
     // de carga constituido por un objeto json que va a contener los campos.
     this.fgroup = this.fb.group({
-      NombreUsuario: ['aaaaaaaa', [Validators.required, Validators.maxLength(30), Validators.minLength(8), Validators.pattern("^[a-zA-Z0-9_-]+$")]],
-      Nombre: ['asd', [Validators.required, Validators.maxLength(55), Validators.pattern("^[a-zA-Z' ]+$")]],
-      Apellido: ['asd', [Validators.required, Validators.maxLength(55), Validators.pattern("^[a-zA-Z' ]+$")]],
-      Email: ['ads@asd', [Validators.required, Validators.maxLength(55), Validators.email]],
-      Dni: ['12345678', [Validators.required, Validators.minLength(8), Validators.pattern("^[0-9]{1,8}$")]],
-      Telefono: ['126552', [Validators.pattern("^[0-9]{1,20}$")]],
+      NombreUsuario: ['', [Validators.required, Validators.maxLength(30), Validators.minLength(8), Validators.pattern("^[a-zA-Z0-9_-]+$")]],
+      Nombre: ['', [Validators.required, Validators.maxLength(55), Validators.pattern("^[a-zA-Z' ]+$")]],
+      Apellido: ['', [Validators.required, Validators.maxLength(55), Validators.pattern("^[a-zA-Z' ]+$")]],
+      Email: ['', [Validators.required, Validators.maxLength(55), Validators.email]],
+      Dni: ['', [Validators.required, Validators.minLength(8), Validators.pattern("^[0-9]{1,8}$")]],
+      Telefono: ['', [Validators.pattern("^[0-9]{1,20}$")]],
       Contrasena: ['', [Validators.required, Validators.maxLength(55)]],
       ContrasenaRep: ['', [Validators.required, Validators.maxLength(55)]],
       image: ['',]
@@ -64,20 +64,14 @@ export class SignupPageComponent implements OnInit {
       this.signupService.registerUser(usuario).subscribe(
         () => {
            console.log("Registro Exitoso"); 
+           var returnUrl = this.route.snapshot.queryParams.returnUrl || '/registroExitoso';   
+           this.router.navigate([returnUrl]);
           },
         err => {
           console.log("error en el registro");
           console.log(err);
         }
-      );
-  
-
-      var returnUrl = this.route.snapshot.queryParams.returnUrl || '/registroExitoso';
-      if (this.loginService.usuarioLogueado) {
-        this.router.navigate([returnUrl]);
-
-
-      }
+      );  
     }
     else {
       console.log("Hay datos invalidos")
