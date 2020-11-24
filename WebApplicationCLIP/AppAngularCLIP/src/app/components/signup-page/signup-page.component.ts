@@ -49,14 +49,14 @@ export class SignupPageComponent implements OnInit {
 
       var usuario = new Usuario();
 
-      usuario.apellido = this.fgroup.value.Apellido;
-      usuario.nombre = this.fgroup.value.Nombre;
-      usuario.nombreDeUsuario = this.fgroup.value.NombreUsuario;
-      usuario.dni = this.fgroup.value.Dni;
-      usuario.email = this.fgroup.value.Email;
-      usuario.telefono = this.fgroup.value.Telefono;
-      usuario.sitCrediticia = "normal";
-      usuario.contraseña = this.fgroup.value.Contrasena;
+      usuario.Apellido = this.fgroup.value.Apellido;
+      usuario.Nombre = this.fgroup.value.Nombre;
+      usuario.NombreDeUsuario = this.fgroup.value.NombreUsuario;
+      usuario.Dni = this.fgroup.value.Dni;
+      usuario.Email = this.fgroup.value.Email;
+      usuario.Telefono = this.fgroup.value.Telefono;
+      usuario.SitCrediticia = "normal";
+      usuario.Contraseña = this.fgroup.value.Contrasena;
 
       console.log(usuario);
 

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Usuario } from 'src/app/modelos/usuario';
+import { DatosUsuarioService } from 'src/app/services/datos-usuario.service';
 import { LoginService } from 'src/app/services/login.service';
 
 @Component({
@@ -9,6 +11,7 @@ import { LoginService } from 'src/app/services/login.service';
 })
 export class PaginaPrincipalComponent implements OnInit {
 
+  usuario:Usuario;
   nombreUsuario: string = "Usuario generico";
 
   cerrar_sesion(){
@@ -22,7 +25,7 @@ export class PaginaPrincipalComponent implements OnInit {
   }
   
 
-  constructor(private route: ActivatedRoute, private router: Router, private loginService: LoginService) { }
+  constructor(private route: ActivatedRoute, private router: Router, private loginService: LoginService, private datosUsuarioService: DatosUsuarioService) { }
 
   private returnUrl: string; 
 
@@ -32,7 +35,17 @@ export class PaginaPrincipalComponent implements OnInit {
       this.router.navigate([this.returnUrl]);
       console.log("el usuario debe loguearse antes de ver la pagina principal")  
   }
-  this.loginService.nombreUsuarioLogueado()  ;
+  this.datosUsuarioService.obtenerDatosUsuario().subscribe(
+    user => {
+     //parece que todo bien
+  //   console.log(user);
+     this.usuario=user;
+     this.nombreUsuario= this.usuario.Nombre + " " + this.usuario.Apellido;
+    },
+    err => {
+      console.log("no se encontro el usuario (?");        
+    }
+);
 
   }
 

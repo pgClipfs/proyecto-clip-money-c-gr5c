@@ -45,6 +45,7 @@ namespace WebApplicationCLIP.Controllers
             if (respuesta==0)
             {
                 //var token = GenerarToken(login.NombreDeUsuario);
+                Console.Write(login.NombreDeUsuario);
                 var token = "asd";
                 return Ok(new SesionDeUsuario(login.NombreDeUsuario, token));
             }
@@ -84,6 +85,12 @@ namespace WebApplicationCLIP.Controllers
 
             return Ok(true);
 
+        }
+
+        public static bool ValidarToken(string token)
+        {
+            //por ahora siempre true, para no tener problemas con esto. despues veremos
+            return true;
         }
 
         public static string GenerarToken(string NombreDeUsuario)

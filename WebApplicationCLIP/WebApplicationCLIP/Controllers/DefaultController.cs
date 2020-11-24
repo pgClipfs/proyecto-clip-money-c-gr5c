@@ -1,10 +1,51 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Net;
 using System.Web.Http;
+using System.Web.Http.Cors;
+using WebApplicationCLIP.BD;
+using WebApplicationCLIP.Gestores;
+using WebApplicationCLIP.Models;
 
 namespace WebApplicationCLIP.Controllers
 {
+
+    [AllowAnonymous]
+    [RoutePrefix("api/get")]
     public class DefaultController : ApiController
     {
+        [HttpPost]
+        [EnableCors(origins: "*", headers: "*", methods: "*")]
+        [Route("usuario")]
+
+        public IHttpActionResult GetDatosUsuario(SesionDeUsuario login)
+        {
+            if (login == null)
+                throw new HttpResponseException(HttpStatusCode.BadRequest);
+            
+            if (!LoginController.ValidarToken(login.Token)){
+                //token invalido
+                return Unauthorized();
+            }
+
+            string nombreUsuario = login.NombreDeUsuario;
+            Usuario usuario = Usuario.CrearUsuarioConNombreDeUsuario(nombreUsuario);            
+            UsuarioDAOImp usuarioDAO = new UsuarioDAOImp();
+
+            if (usuarioDAO.consultar(usuario)==0)
+            {
+                return Ok(usuario);
+            }
+            return Content(HttpStatusCode.Conflict, 1);
+            
+
+        }
+
+        private int ValidarCredencial(string nombreDeUsuario, object contraseña)
+        {
+            throw new NotImplementedException();
+        }
+
         // GET: api/Default
         public IEnumerable<string> Get()
         {

@@ -54,10 +54,11 @@ namespace WebApplicationCLIP.BD
             catch(Exception e)
             {
                 Console.WriteLine("Error al ejecutar la consulta --> " + e.Message);
+                //1: no se pudo conectar la BD
                 return 1;
             }
             conexion.cerrar();
-            return 2;
+            return 1;
         }
 
         public int comprobarRepeticion(Usuario t)

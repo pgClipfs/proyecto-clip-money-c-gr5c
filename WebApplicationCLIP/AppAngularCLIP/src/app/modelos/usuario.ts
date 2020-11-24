@@ -1,12 +1,12 @@
 export class Usuario {
-  nombre: string; // Contiene la frase
-  apellido: string;
-  dni : string ;
-  nombreDeUsuario : string ;
-  sitCrediticia : string ;
-  email : string ;
-  telefono : string ;
-  contraseña : string ;
+  Nombre: string; // Contiene la frase
+  Apellido: string;
+  Dni : string ;
+  NombreDeUsuario : string ;
+  SitCrediticia : string ;
+  Email : string ;
+  Telefono : string ;
+  Contraseña : string ;  
 /*
   Dni: string;
   Nombre: string;

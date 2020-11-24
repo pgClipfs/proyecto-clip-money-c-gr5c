@@ -6,6 +6,8 @@ using System.Web.Mvc;
 
 namespace WebApplicationCLIP.Controllers
 {
+
+
     public class HomeController : Controller
     {
         // GET: Home
