@@ -9,6 +9,19 @@ import { LoginService } from 'src/app/services/login.service';
 })
 export class PaginaPrincipalComponent implements OnInit {
 
+  nombreUsuario: string = "Usuario generico";
+
+  cerrar_sesion(){
+    this.loginService.logout();
+    //location.reload();
+    
+    var returnUrl= this.route.snapshot.queryParams.returnUrl || '/';
+
+    console.log("Sesion cerrada")
+    this.router.navigate([returnUrl]);
+  }
+  
+
   constructor(private route: ActivatedRoute, private router: Router, private loginService: LoginService) { }
 
   private returnUrl: string; 
@@ -19,6 +32,8 @@ export class PaginaPrincipalComponent implements OnInit {
       this.router.navigate([this.returnUrl]);
       console.log("el usuario debe loguearse antes de ver la pagina principal")  
   }
+  this.loginService.nombreUsuarioLogueado()  ;
+
   }
 
 }

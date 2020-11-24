@@ -9,11 +9,12 @@ namespace WebApplicationCLIP.Models
     {
         public SesionDeUsuario(string nombreDeUsuario, string token)
         {
-            this.NombreDeUsuario = NombreDeUsuario;
+            this.NombreDeUsuario = nombreDeUsuario;
             this.Token = token;
         }
 
         public string NombreDeUsuario { get; set; }
         public string Token { get; set; }
+        public object Contraseña { get; internal set; }
     }
 }

@@ -1,7 +1,3 @@
-<nav-bar>
-</nav-bar>
-
-
 <div class="d-flex" id="wrapper">
   <!-- Sidebar -->
   <div class="" id="sidebar-wrapper">
@@ -10,13 +6,16 @@
       class="d-flex container-fluid align-items-center mt-3 mb-3"
       id="usuario"
     >
+
+    <!-- 
       <img
-        src="user_male2-512.png"
-        alt="Foto Usuario"
-        id="usr-image"
-        class="img-fluid img-circle col-4"
+      src="user_male2-512.png"
+      alt="Foto Usuario"
+      id="usr-image"
+      class="img-fluid img-circle col-4"
       />
-      <span class="align-middle" id="nombre-usuario">Usuario XXXX</span>
+    -->
+      <span class="align-middle" id="nombre-usuario">{{nombreUsuario}}</span>
     </div>
     <div class="list-group list-group-flush">
       <a href="#" class="list-group-item list-group-item-action"
@@ -31,9 +30,13 @@
       <a href="#" class="list-group-item list-group-item-action"
         ><i class="fas fa-cogs"></i> Configuración</a
       >
-      <a href="#" class="list-group-item list-group-item-action"
-        ><i class="fas fa-door-open"></i> Salir</a
-      >
+
+      <button class="bg-dark" (click)="cerrar_sesion()">Salir</button>
+
+<!--   
+  <a  class="list-group-item list-group-item-action"
+  ><i   class="fas fa-door-open"></i> Salir</a>
+-->
     </div>
   </div>
   <!-- /#sidebar-wrapper -->
@@ -42,7 +45,7 @@
   <div id="page-content-wrapper">
     <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
       <button
-        class="btn btn-outline-secondary"
+        class="btn bg-dark btn-outline-secondary"
         data-toggle="collapse"
         data-target="sidebar-wrapper"
         id="menu-toggle"
