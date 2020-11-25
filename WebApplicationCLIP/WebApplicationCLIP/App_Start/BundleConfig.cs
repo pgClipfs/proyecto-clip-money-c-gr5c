@@ -6,7 +6,7 @@ namespace WebApplicationCLIP
     {
         public static void RegisterBundles(BundleCollection bundles)
         {
-         /*   
+            
            bundles.Add(new ScriptBundle("~/Script/Bundles").Include(
                 "~/bundles/inline.*",
                 "~/bundles/polyfills.*",
@@ -18,7 +18,7 @@ namespace WebApplicationCLIP
 
             bundles.Add(new StyleBundle("~/Content/Styles").Include(
                 "~/bundles/styles.*"));
-           */     
+              
         }
     }
 }

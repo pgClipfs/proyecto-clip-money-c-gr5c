@@ -110,6 +110,9 @@
                   <span class="text-danger"
                     *ngIf="fgroup.controls.Contrasena.errors?.required && fgroup.controls.Contrasena.touched">
                     Dato requerido.</span>
+                    <span class="text-danger"
+                  *ngIf="fgroup.controls.Contrasena.errors?.minlength && fgroup.controls.Contrasena.touched">
+                  La contraseña debe tener al menos 8 caracteres.</span>
                 </div>
                 <div class="col-sm-6">
 

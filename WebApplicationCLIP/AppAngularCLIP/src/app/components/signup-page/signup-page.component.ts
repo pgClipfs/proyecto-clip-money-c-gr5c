@@ -27,7 +27,7 @@ export class SignupPageComponent implements OnInit {
       Email: ['', [Validators.required, Validators.maxLength(55), Validators.email]],
       Dni: ['', [Validators.required, Validators.minLength(8), Validators.pattern("^[0-9]{1,8}$")]],
       Telefono: ['', [Validators.pattern("^[0-9]{1,20}$")]],
-      Contrasena: ['', [Validators.required, Validators.maxLength(55)]],
+      Contrasena: ['', [Validators.required, Validators.minLength(8),  Validators.maxLength(55)]],
       ContrasenaRep: ['', [Validators.required, Validators.maxLength(55)]],
       image: ['',]
 
