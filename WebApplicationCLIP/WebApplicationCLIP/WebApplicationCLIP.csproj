@@ -167,8 +167,11 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Cuenta.cs" />
+    <Compile Include="Models\Operacion.cs" />
     <Compile Include="Models\SesionDeUsuario.cs" />
     <Compile Include="Models\SolicitudLogin.cs" />
+    <Compile Include="Models\Transferencia.cs" />
     <Compile Include="Models\Usuario.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
