@@ -20,6 +20,8 @@ namespace WebApplicationCLIP.BD
          3: dni repetido
          4: nombre usuario repetido
          5: email repetido
+
+         6: parametros null en el usuario
          
         */
         
@@ -109,6 +111,11 @@ namespace WebApplicationCLIP.BD
 
         public int registrar(Usuario t)
         {
+            if (t.Dni == null || t.NombreDeUsuario==null ||t.Email==null)
+            {
+                return 6;
+            }
+
             string script = "INSERT INTO USUARIOS (DNI, NOMBRE, APELLIDO, NOMBRE_SITUACION_CREDITICIA, NOMBRE_USUARIO, EMAIL, TELEFONO, CONTRASEÑA)" +
                 "VALUES (@dni , @nombre , @apellido , @nombre_situacion_crediticia , @nombre_usuario , @email , @telefono , @contraseña)";
 

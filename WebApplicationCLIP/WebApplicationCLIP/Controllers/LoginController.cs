@@ -12,6 +12,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel;
 using System.Web.Http.Cors;
 using WebApplicationCLIP.Gestores;
+using Newtonsoft.Json.Linq;
 
 namespace WebApplicationCLIP.Controllers
 {
@@ -60,12 +61,13 @@ namespace WebApplicationCLIP.Controllers
         [EnableCors(origins: "*", headers: "*", methods: "*")]
         [Route("registerUser")]
 
-        public IHttpActionResult RegisterUser(Usuario usuario)
+        public IHttpActionResult RegisterUser(JObject usuarioJSON)
         {
 
-            if (usuario == null)
+            if (usuarioJSON == null)
                 throw new HttpResponseException(HttpStatusCode.BadRequest);
 
+            Usuario usuario = Usuario.CrearUsuarioConJObject(usuarioJSON);
             GestorUsuario gestor = new GestorUsuario();
 
             int respuesta = gestor.registrarUsuario(usuario);
@@ -78,13 +80,6 @@ namespace WebApplicationCLIP.Controllers
             {
                 return Content(HttpStatusCode.Conflict, respuesta);
             }
-
-
-
-            //            Enum respuesta =  gestor.registrarUsuario(usuario);
-
-            return Ok(true);
-
         }
 
         public static bool ValidarToken(string token)
