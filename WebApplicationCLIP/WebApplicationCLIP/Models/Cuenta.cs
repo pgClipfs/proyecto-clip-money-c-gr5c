@@ -16,6 +16,18 @@ namespace WebApplicationCLIP.Models
 
         public Cuenta(string cvu, Usuario usuario)
         {
+            if (cvu is null)
+            {
+                //excepcion de que uno de los argumentos es null
+                throw new ArgumentNullException("cvu", "El cvu de una cuenta no puede ser null");
+            }
+
+            if (usuario is null)
+            {
+                //excepcion de que uno de los argumentos es null
+                throw new ArgumentNullException("usuario", "El usuario de una cuenta no puede ser null");
+            }
+
             this.Cvu = cvu;
             this.Usuario = usuario;
             this.Saldo = 0;
@@ -28,7 +40,7 @@ namespace WebApplicationCLIP.Models
 
             Cuenta cuentaOrigen = this;
 
-            if (monto>this.Saldo || monto<=0)
+            if (monto> cuentaOrigen.Saldo || monto<=0)
             {
                 //no se puede hacer la operacion                
                 return;//se podria usar una excepcion personalizada
