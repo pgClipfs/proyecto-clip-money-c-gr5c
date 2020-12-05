@@ -9,28 +9,24 @@ namespace WebApplicationCLIP.Models
     {
         public enum ConceptoTransferencia { Varios, Alquiler, AportesDeCapital, Expensas, Factura, Haberes, Honorarios, Prestamo, Seguro, Cuota };
 
-        private string numeroTransferencia;
-        private Cuenta cuentaDestino;
-        private string referenciaDestino;
-        private ConceptoTransferencia concepto;
-
-        public string NumeroTransferencia { get => numeroTransferencia; }
-        public Cuenta CuentaDestino { get => cuentaDestino;  }
-        public string ReferenciaDestino { get => referenciaDestino; }
-        public ConceptoTransferencia Concepto { get => concepto;  }                          
+        public string NumeroTransferencia { get; protected set; }
+        public Cuenta CuentaDestino { get; protected set; }
+        public string ReferenciaDestino { get; protected set; }
+        public ConceptoTransferencia Concepto { get; protected set; }
 
         public Transferencia(Cuenta cuentaDestino, Cuenta cuentaOrigen, float monto, string referenciaDestino, ConceptoTransferencia concepto) 
         {
             //campos de la clase concreta transferencia
-            this.numeroTransferencia = GenerarNumeroTransferencia();
-            this.cuentaDestino = cuentaDestino;
-            this.referenciaDestino = referenciaDestino;
-            this.concepto = concepto;
+            this.NumeroTransferencia = GenerarNumeroTransferencia();
+            this.CuentaDestino = cuentaDestino;
+            this.ReferenciaDestino = referenciaDestino;
+            this.Concepto = concepto;
 
             //campos de la clase abstracta Operacion            
             this.TipoOperacion = Operacion.TipoDeOperacion.Transferencia;
             this.Fecha = DateTime.Now;
-
+            this.Monto = monto;
+            this.Cuenta = cuentaOrigen;
         }
 
         private string GenerarNumeroTransferencia()

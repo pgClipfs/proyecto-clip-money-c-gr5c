@@ -8,13 +8,7 @@ namespace WebApplicationCLIP.Models
     abstract public class Operacion 
     {
         public enum TipoDeOperacion { Transferencia, Deposito, Extracion, GiroAlDescubierto };
-
-        private TipoDeOperacion tipoOperacion;
-        private float monto;
-        private DateTime fecha;
-        private Cuenta cuenta;
-        private string idOperacion;
-
+                
         /*
          * poniendo "protected" adelante de los set, se logra que esas propiedades puedan ser modificadas por
          * las clases que la heredan (ej, transferencia), pero no pueden ser modificadas por otra clase. y la 
@@ -22,11 +16,11 @@ namespace WebApplicationCLIP.Models
          * pero solo las que heredan la pueden modificar 
          */
         
-        public TipoDeOperacion TipoOperacion { get => tipoOperacion; protected set => tipoOperacion = value; }
-        public float Monto { get => monto; protected set => monto = value; }
-        public DateTime Fecha { get => fecha; protected set => fecha = value; }
-        public Cuenta Cuenta { get => cuenta; protected set => cuenta = value; }
-        public string IdOperacion { get => idOperacion; protected set => idOperacion = value; }
+        public TipoDeOperacion TipoOperacion { get; protected set; }
+        public float Monto { get; protected set; }
+        public DateTime Fecha { get ; protected set ; }
+        public Cuenta Cuenta { get; protected set; }
+        public string IdOperacion { get; protected set; }
 
         public static string GenerarIdOperacion()
         {
