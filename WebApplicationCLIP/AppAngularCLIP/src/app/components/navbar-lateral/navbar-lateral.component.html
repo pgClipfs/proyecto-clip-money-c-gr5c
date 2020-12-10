@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark" aria-label="Fifth navbar example">
+<nav  class="navbar navbar-expand-lg navbar-dark bg-white shadow-sm" aria-label="Fifth navbar example">
     <div class="container-fluid">        
             <div class="menu-wrap" (click)= "abrirSideBar()">
                 <input type="checkbox" class="toggler">
@@ -19,15 +19,154 @@
         </ul>
     </ng-sidebar>
     <div ng-sidebar-content>
-        <div class="container">
-            <div class="jumbotron">
-                <h1 class="display-3">Jumbo heading</h1>
-                <p class="lead">Jumbo helper text</p>
-                <hr class="my-2">
-                <p>More info</p>
-                <p class="lead">
-                    <a class="btn btn-primary btn-lg" href="Jumbo action link" role="button">Jumbo action name</a>
-                </p>
+        <div class="container pt-3">        
+            <div class="row">
+                <div class="col-sm-3 pb-3">
+                    <div class="card card-saldo-pesos shadow-sm">                        
+                        <div class="card-body">
+                            <h4 class="card-title title-card">SALDO EN PESOS</h4>
+                            <p class="card-text text-card">$ {{saldoPesos}} </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-3 pb-3">
+                    <div class="card card-saldo-dolares shadow-sm">                        
+                        <div class="card-body">
+                            <h4 class="card-title title-card">SALDO EN DOLARES</h4>
+                            <p class="card-text text-card">U$D 2.540</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-3 pb-3">
+                    <div class="card card-saldo-pesos shadow-sm">                        
+                        <div class="card-body">
+                            <h4 class="card-title title-card">SALDO EN PESOS</h4>
+                            <p class="card-text text-card">$ {{saldoPesos}} </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-3 pb-3">
+                    <div class="card card-saldo-dolares shadow-sm">                        
+                        <div class="card-body">
+                            <h4 class="card-title title-card">SALDO EN DOLARES</h4>
+                            <p class="card-text text-card">U$D 2.540</p>
+                        </div>
+                    </div>
+                </div>
+            </div>            
+            <div class="row">
+                <div class="col-sm-9 pt-4">
+                    <div class="card shadow-sm">
+                        <div class="card-header">
+                            Ultimos 10 movimientos
+                          </div>                        
+                        <div class="card-body">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Operacion</th>
+                                        <th>Monto</th>
+                                        <th>Fecha</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td scope="row">Retiro dinero</td>
+                                        <td>-$500</td>
+                                        <td>22/10/20</td>
+                                    </tr>
+                                    <tr>
+                                        <td scope="row">Ingreso dinero</td>
+                                        <td>$1500</td>
+                                        <td>21/01/20</td>
+                                    </tr>
+                                    <tr>
+                                        <td scope="row">Ingreso dinero</td>
+                                        <td>$1500</td>
+                                        <td>21/01/20</td>
+                                    </tr>
+                                    <tr>
+                                        <td scope="row">Ingreso dinero</td>
+                                        <td>$1500</td>
+                                        <td>21/01/20</td>
+                                    </tr>
+                                    <tr>
+                                        <td scope="row">Ingreso dinero</td>
+                                        <td>$1500</td>
+                                        <td>21/01/20</td>
+                                    </tr>
+                                    <tr>
+                                        <td scope="row">Ingreso dinero</td>
+                                        <td>$1500</td>
+                                        <td>21/01/20</td>
+                                    </tr>
+                                    <tr>
+                                        <td scope="row">Ingreso dinero</td>
+                                        <td>$1500</td>
+                                        <td>21/01/20</td>
+                                    </tr>
+                                    <tr>
+                                        <td scope="row">Ingreso dinero</td>
+                                        <td>$1500</td>
+                                        <td>21/01/20</td>
+                                    </tr>
+                                    <tr>
+                                        <td scope="row">Ingreso dinero</td>
+                                        <td>$1500</td>
+                                        <td>21/01/20</td>
+                                    </tr>
+                                    <tr>
+                                        <td scope="row">Ingreso dinero</td>
+                                        <td>$1500</td>
+                                        <td>21/01/20</td>
+                                    </tr>                                    
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-3 pt-4">
+                    <div class="row">
+                        <div class="col mb-3">                            
+                            <div class="card  shadow-sm">
+                                <div class="card-header title-card">
+                                   DOLAR BLUE
+                                  </div>                         
+                                <div class="card-body">
+                                    <h4 class="card-title title-card">Compra / Venta</h4>
+                                    <p class="card-text text-card">$140 / $146</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col mb-3">                            
+                            <div class="card  shadow-sm">
+                                <div class="card-header title-card">
+                                   EURO
+                                  </div>                         
+                                <div class="card-body">
+                                    <h4 class="card-title title-card">Compra / Venta</h4>
+                                    <p class="card-text text-card">$140 / $146</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col mb-3">                            
+                            <div class="card  shadow-sm">
+                                <div class="card-header title-card">
+                                   REAL
+                                  </div>                         
+                                <div class="card-body">
+                                    <h4 class="card-title title-card">Compra / Venta</h4>
+                                    <p class="card-text text-card">$140 / $146</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
             </div>
         </div>        
         <router-outlet></router-outlet>
