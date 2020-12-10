@@ -1,0 +1,15 @@
+<ng-sidebar-container>
+    <ng-sidebar [opened]= "opened">
+        <!-- Sidebar -->
+        <button (click)= "abrirSideBar()">
+            cerrar sidebar
+        </button>
+        <p> sidebar Contents </p>
+    </ng-sidebar>
+    <div ng-sidebar-content>
+        <button (click)= "abrirSideBar()">
+            Abrir sidebar
+        </button>
+    </div>
+        
+</ng-sidebar-container>

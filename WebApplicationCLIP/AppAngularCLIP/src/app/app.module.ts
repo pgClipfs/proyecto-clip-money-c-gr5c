@@ -16,6 +16,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { SignupPageComponent } from './components/signup-page/signup-page.component';
 import { PaginaPrincipalComponent } from './components/pagina-principal/pagina-principal.component';
 import { RegistroExitosoComponent } from './components/registro-exitoso/registro-exitoso.component';
+import { NavbarLateralComponent } from './components/navbar-lateral/navbar-lateral.component';
+import { SidebarModule } from 'ng-sidebar';
 
 
 @NgModule({
@@ -26,11 +28,13 @@ import { RegistroExitosoComponent } from './components/registro-exitoso/registro
     HomePageComponent,
     SignupPageComponent,
     PaginaPrincipalComponent,
-    RegistroExitosoComponent
+    RegistroExitosoComponent,
+    NavbarLateralComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
+    SidebarModule,
     FormsModule,
     ReactiveFormsModule,
     RouterModule.forRoot([
