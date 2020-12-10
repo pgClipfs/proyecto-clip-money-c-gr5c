@@ -1,15 +1,36 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark" aria-label="Fifth navbar example">
+    <div class="container-fluid">        
+            <div class="menu-wrap" (click)= "abrirSideBar()">
+                <input type="checkbox" class="toggler">
+                <div class="hamburger"><div></div></div>
+            </div>
+            <div></div>
+      <a class="navbar-brand" href="#"> {{nombreUsuario}} </a>  
+    </div>
+  </nav>
 <ng-sidebar-container>
     <ng-sidebar [opened]= "opened">
         <!-- Sidebar -->
-        <button (click)= "abrirSideBar()">
-            cerrar sidebar
-        </button>
-        <p> sidebar Contents </p>
+        <ul class="menu">
+            <li><a routerLink='/registroExitoso'>Dashboard</a></li>
+            <li><a routerLink='/principal'>Posts</a></li>
+            <li><a href="">Contac</a></li>
+            <li><a href="">Transfers</a></li>
+        </ul>
     </ng-sidebar>
     <div ng-sidebar-content>
-        <button (click)= "abrirSideBar()">
-            Abrir sidebar
-        </button>
+        <div class="container">
+            <div class="jumbotron">
+                <h1 class="display-3">Jumbo heading</h1>
+                <p class="lead">Jumbo helper text</p>
+                <hr class="my-2">
+                <p>More info</p>
+                <p class="lead">
+                    <a class="btn btn-primary btn-lg" href="Jumbo action link" role="button">Jumbo action name</a>
+                </p>
+            </div>
+        </div>        
+        <router-outlet></router-outlet>
     </div>
-        
+    
 </ng-sidebar-container>

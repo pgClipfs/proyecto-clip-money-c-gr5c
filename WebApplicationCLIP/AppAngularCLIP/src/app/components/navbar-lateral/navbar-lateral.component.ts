@@ -9,6 +9,7 @@ export class NavbarLateralComponent implements OnInit {
 
   constructor() { }
 
+  nombreUsuario = 'juancuello98';
   opened = false;
   abrirSideBar(){
     this.opened = !this.opened;
