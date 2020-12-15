@@ -8,28 +8,17 @@ using WebApplicationCLIP.Models;
 namespace WebApplicationCLIP.BD
 {
     public class UsuarioDAOImp : UsuarioDAO
-    {
-        public enum EstadoRegisto {REGISTRADO , ERROR , EXISTENTE}
-
-        /*
-         codigo
-         0: no error
-         1: no se pudo conectar la BD
-         2: error en el insert  
-
-         3: dni repetido
-         4: nombre usuario repetido
-         5: email repetido
-
-         6: parametros null en el usuario
-         
-        */
-        
-                
+    {           
 
         public int consultar(Usuario t)
         {
-            string script = "SELECT * FROM USUARIOS WHERE NOMBRE_USUARIO = " + "'" + t.NombreDeUsuario + "'";
+            string script = "SELECT * FROM USUARIOS WHERE DNI = " + "'" + t.Dni + "'";
+
+            if(t.Dni is null)
+            {
+                script = "SELECT * FROM USUARIOS WHERE NOMBRE_USUARIO = " + "'" + t.NombreDeUsuario + "'";
+            }
+            
 
             ConexionBD conexion = new ConexionBD();
             conexion.abrir();

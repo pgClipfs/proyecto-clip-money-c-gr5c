@@ -65,13 +65,11 @@ namespace WebApplicationCLIP.Models
 
         public static Usuario ensablarUsuario(List<string> ensamblador)
         {
-//            Usuario usuario = new Usuario("", "", "", "", "", "", "", "");
             Usuario usuario = new Usuario();
-
 
             try
             {
-                usuario.Dni = ensamblador[0];
+              usuario.Dni = ensamblador[0];
               usuario.Nombre = ensamblador[1];
               usuario.Apellido = ensamblador[2];
               usuario.SitCrediticia = ensamblador[3];
@@ -93,7 +91,15 @@ namespace WebApplicationCLIP.Models
             Usuario usuario = new Usuario();
             usuario.NombreDeUsuario = nombreDeUsuario;
             return usuario;
-        }               
+        }       
+        
+
+        public static Usuario CrearUsuarioConDNI(string DNI) 
+        {
+            Usuario usuario = new Usuario();
+            usuario.Dni = DNI;
+            return usuario;
+        }
 
         public static Usuario nuevoUsuario(string dni, string nombre, string apellido, string nombreDeUsuario, string email, string telefono, string contraseña) 
         {

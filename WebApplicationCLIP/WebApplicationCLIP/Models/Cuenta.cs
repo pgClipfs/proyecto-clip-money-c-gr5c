@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Http;
+using WebApplicationCLIP.Gestores;
 
 namespace WebApplicationCLIP.Models
 {
@@ -13,6 +14,12 @@ namespace WebApplicationCLIP.Models
         public Usuario Usuario { get; private set; }
         public float Saldo { get; private set; }
         public List<Operacion> Operaciones { get; private set; }
+
+
+        public Cuenta() 
+        {
+            //Constructor vacio
+        }
 
         public Cuenta(string cvu, Usuario usuario)
         {
@@ -40,7 +47,7 @@ namespace WebApplicationCLIP.Models
 
             Cuenta cuentaOrigen = this;
 
-            if (monto> cuentaOrigen.Saldo || monto<=0)
+            if (monto > cuentaOrigen.Saldo || monto<=0)
             {
                 //no se puede hacer la operacion                
                 return;//se podria usar una excepcion personalizada
@@ -86,5 +93,39 @@ namespace WebApplicationCLIP.Models
         {
             //no se si tiene que devolver void
         }
+
+
+
+
+
+        public static Cuenta ensamblarCuenta(List<string> ensamblador, Cuenta cuenta ) 
+        {
+            cuenta.Cvu = ensamblador[0];
+            GestorUsuario gestorUsuario = new GestorUsuario();
+            cuenta.Usuario = gestorUsuario.consultarUsuarioPorDNI(ensamblador[1]);
+            cuenta.Saldo = float.Parse(ensamblador[2]);
+            // Todavia no se programo la obtencion de las operaciones
+            cuenta.Operaciones = null;
+
+            return cuenta;
+        }
+
+        public static Cuenta crearCuentaConDNI(string DNI) 
+        {
+            Cuenta cuenta = new Cuenta();
+            GestorUsuario gestorUsuario = new GestorUsuario();
+            cuenta.Usuario = gestorUsuario.consultarUsuarioPorDNI(DNI);
+            return cuenta;
+        }
+
+
+        public static Cuenta crearCuentaConCVU(string CVU)
+        {
+            Cuenta cuenta = new Cuenta();
+            cuenta.Cvu = CVU;
+            return cuenta;
+        }
+
+
     }
 }
