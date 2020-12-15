@@ -4,14 +4,13 @@
 
 
 ng-sidebar-container{
-    height: 100rem;
+    height: 70rem;
 
 }
 
 ::ng-deep .ng-sidebar {
-    background-color: #53eeba;
+    background-color: #fff;
     width: 300px;
-    padding: 2em 3em;
     box-shadow: 0 0 2.5em rgba(85,85,85,0.5 );
 }
 
@@ -29,7 +28,40 @@ ng-sidebar-container{
 .bg-white{
     background-color: white;
 }
+/*Estilo del menu desplegable de la izquierda*/
+li{
+  background-color: #fff;
+  position: relative;
+  width: 30rem;
+  padding: 1rem;
+}
 
+li:hover{
+  background-color:#87f2dd;
+  color: white;
+  cursor: pointer;
+}
+
+li a {
+  text-decoration: none;
+  color: #4e4e4e;
+  font-size: 1rem;
+}
+
+li a:hover {
+  color: white;
+}
+
+.btn-cerrarsesion {
+  background-color: #87f2dd;
+  transition: 0.2s;
+
+}
+
+.btn-cerrarsesion:hover{
+  background-color: #37ffd7;
+  color: white;
+}
 /* Menu hamburger ,*/
 .menu-wrap {
     top: 0;
@@ -122,19 +154,68 @@ ng-sidebar-container{
   }
 
   /* Estilos de las cards*/
+  /* card de informacion de cuenta*/
 
-  /* card saldo en pesos */
+  .text-title-info{
+    font-size: 1.2rem;
+    color: #6b6b6b;
 
-  .card-saldo-pesos{
-      border-left: 5px solid blue;
   }
 
-  .card-saldo-pesos .title-card {
+  .card-info-cuenta{
+    background-image: linear-gradient(to right, #22248b , #5e60ce);
+    border: none;
+
+  }
+
+  .card-info-cuenta .title-card {
+    color: rgb(255, 255, 255);
+  }
+
+  .card-info-cuenta .text-card {
+      color: #ffffff;
+      font-weight: 200;
+  }
+
+  .card-info-img{
+    position: relative;
+    top: 8rem;
+    left: -5rem;
+    font-size: 3rem;
+    opacity: 20%;
+    font-family: 'Roboto',sans-serif;
+    font-weight: 900;
+  }
+
+    /* card saldo en pesos */
+  .card-ingresar-pesos{
+    padding: 0.5rem;
+    transition: 0.20s;
+  }
+
+  
+  .card-ingresar-pesos .card-img{
+        position: relative;
+        top: 1rem;
+        left: 1rem;
+        height: 3rem;
+        width: 3rem;
+        
+  }
+
+  .card-ingresar-pesos .title-card {
       color: blue;
   }
 
-  .card-saldo-pesos .text-card {
-      color: #6d6b6b;
+  .card-ingresar-pesos .text-card {
+      font-size: 1rem;
+      font-weight: 400;
+      color: #4e4e4e;
+  }
+
+  .card-ingresar-pesos:hover {
+    background-color: #f0f0f0;
+    cursor: pointer;
   }
 
   /*Card saldo en dolares.*/
@@ -149,4 +230,20 @@ ng-sidebar-container{
 
 .card-saldo-dolares .text-card {
     color: #6d6b6b;
+}
+
+/*Estilo de la tabla*/
+th{
+  color: #22248b;
+}
+
+tr {
+  font-weight: 200;
+}
+
+/* Estilo de la parte de las cotizaciones */
+.text-title-cotizacion{
+    font-size: 1rem;
+    color: #6b6b6b;
+  
 }
