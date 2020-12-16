@@ -16,6 +16,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { SignupPageComponent } from './components/signup-page/signup-page.component';
 import { PaginaPrincipalComponent } from './components/pagina-principal/pagina-principal.component';
 import { RegistroExitosoComponent } from './components/registro-exitoso/registro-exitoso.component';
+import { NavbarLateralComponent } from './components/navbar-lateral/navbar-lateral.component';
+import { SidebarModule } from 'ng-sidebar';
+import { OperacionesComponent } from './components/operaciones/operaciones.component';
 
 
 @NgModule({
@@ -26,11 +29,14 @@ import { RegistroExitosoComponent } from './components/registro-exitoso/registro
     HomePageComponent,
     SignupPageComponent,
     PaginaPrincipalComponent,
-    RegistroExitosoComponent
+    RegistroExitosoComponent,
+    NavbarLateralComponent,
+    OperacionesComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
+    SidebarModule,
     FormsModule,
     ReactiveFormsModule,
     RouterModule.forRoot([
@@ -38,7 +44,8 @@ import { RegistroExitosoComponent } from './components/registro-exitoso/registro
       { path: 'registroExitoso', component: RegistroExitosoComponent },
       { path: '', component: HomePageComponent },
       { path: 'login', component: LoginBox },
-      { path: 'principal', component: PaginaPrincipalComponent}      
+      { path: 'principal', component: PaginaPrincipalComponent},
+      { path: 'operaciones', component: OperacionesComponent}     
     ])
   ],
   providers: [[LoginService],[SignupService]],

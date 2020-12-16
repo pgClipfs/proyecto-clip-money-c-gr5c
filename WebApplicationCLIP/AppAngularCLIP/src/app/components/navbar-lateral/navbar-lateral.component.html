@@ -1,0 +1,252 @@
+<nav  class="navbar navbar-expand-lg navbar-dark bg-white shadow-sm" aria-label="Fifth navbar example">
+    <div class="container-fluid">        
+            <div class="menu-wrap" (click)= "abrirSideBar()">
+                <input type="checkbox" class="toggler">
+                <div class="hamburger"><div></div></div>
+            </div>
+            <div></div>
+      <a class="navbar-brand" href="#"> {{nombreUsuario}} <span ><img class="rounded-circle" src="../../../assets/img/foto-login.jpg" alt="" width="40px"></span></a>  
+    </div>
+  </nav>
+<ng-sidebar-container>
+    <ng-sidebar [opened]= "opened">
+        <!-- Sidebar -->
+        <h2 class="title-card p-3">Bienvenido a ClipMoney</h2>
+        <ul class="menu navbar-nav">
+            <li class="nav-item"><a routerLink='/registroExitoso'>Inicio</a></li>
+            <li class="nav-item"><a routerLink='/principal'>Ingresar Dinero</a></li>
+            <li class="nav-item"><a routerLink='/operaciones'>Operaciones</a></li>
+            <li class="nav-item"><a href="">Transferir</a></li>
+            <li class="nav-item"><a href="">Giro al descubierto</a></li>
+            <li class="nav-item"><a href="">Mis datos</a></li>
+            <li class="nav-item"><a href="">Configuracion</a></li>
+            
+        </ul>
+        <a class="btn btn-cerrarsesion m-3" href="#" role="button">Cerrar sesion</a>
+    </ng-sidebar>
+    <div ng-sidebar-content>
+        <div class="container pt-3">
+            <div class="row">
+                <div class="col-sm-12">
+                    <h3 class="text-title-info mb-3">Informacion de la cuenta</h3>
+                    <div class="card card-info-cuenta shadow">
+                        <div class="row g-0">
+                            <div class="col-sm-9">
+                                <div class="card-body">
+                                    <h4 class="card-title title-card">TU DINERO</h4>
+                                    <p class="card-text text-card">CA $ {{saldoPesos}} </p>
+                                    <h4 class="card-title title-card">{{nombreApellido}}</h4>
+                                    <p class="card-text text-card">CVU - {{numeroCuenta}} </p>
+                                    <h4 class="card-title title-card">TU DINERO EN TU CUENTA EN DOLARES</h4>
+                                    <p class="card-text text-card"> U$D {{saldoPesos}} </p>                             
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <h2 class="card-info-img">ClipMoney</h2>
+                            </div>
+                        </div>                        
+                       
+                    </div>
+                </div>
+            </div>        
+            <div class="row mt-4">
+                <div class="col-sm-3 pb-3">
+                    <div class="card card-ingresar-pesos shadow" style="width: 100%">
+                        <div class="row g-0">
+                            <div class="col-sm-3 pl-4">
+                                <img src="../../../assets/img/1332873-e-commerce/1332873-e-commerce/png/001-add.png"  class="card-img" alt="...">
+                            </div>
+                            <div class="col-sm-9">
+                                <div class="card-body">
+                          <p class="pl-3 card-text text-card">INGRESAR DINERO</p>
+                        </div>
+                            </div>
+                        </div>                     
+                        
+                      </div>
+                </div>
+                <div class="col-sm-3 pb-3">
+                    <div class="card card-ingresar-pesos shadow" style="width: 100%">
+                        <div class="row g-0">
+                            <div class="col-sm-3 pl-4">
+                                <img src="../../../assets/img/1332873-e-commerce/1332873-e-commerce/png/019-cash.png"  class="card-img" alt="...">
+                            </div>
+                            <div class="col-sm-9">
+                                <div class="card-body">
+                          <p class="pl-3 card-text text-card">TRANSFERIR DINERO</p>
+                        </div>
+                            </div>
+                        </div>                     
+                        
+                      </div>
+                </div>
+                <div class="col-md-3 pb-3">
+                    <div class="card card-ingresar-pesos shadow" style="width: 100%">
+                        <div class="row g-0">
+                            <div class="col-md-3 pl-4">
+                                <img src="../../../assets/img/1332873-e-commerce/1332873-e-commerce/png/073-dollar-symbol-2.png"  class="card-img" alt="...">
+                            </div>
+                            <div class="col-md-9">
+                                <div class="card-body">
+                          <p class="pl-3 card-text text-card">GIRO AL DESCUBIERTO</p>
+                        </div>
+                            </div>
+                        </div>                     
+                        
+                      </div>
+                </div>
+                <div class="col-md-3 pb-3">
+                    <div class="card card-ingresar-pesos shadow" style="width: 100%">
+                        <div class="row g-0">
+                            <div class="col-md-3 pl-4">
+                                <img src="../../../assets/img/1332873-e-commerce/1332873-e-commerce/png/064-payment-method.png"  class="card-img" alt="...">
+                            </div>
+                            <div class="col-md-9">
+                                <div class="card-body">
+                          <p class="pl-3 card-text text-card">PAGAR SERVICIOS</p>
+                        </div>
+                            </div>
+                        </div>                     
+                        
+                      </div>
+                </div>
+            </div>            
+            <div class="row">
+                <div class="col-sm-9 pt-4">                    
+                    <h3 class="text-title-info mb-3">Actividad Reciente</h3> 
+                    <table class="table shadow table-inverse">
+                        <thead class="thead-inverse">
+                            <tr>
+                                <th>Fecha</th>
+                                <th>Descripcion</th>
+                                <th>Monto</th>
+                                <th>Tipo</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>{{Fecha}}</td>
+                                    <td>{{Descripcion}}</td>
+                                    <td>{{Monto}}</td>
+                                    <td>{{tipoOperacion}}</td>
+                                </tr>
+                                <tr>
+                                    <td>{{Fecha}}</td>
+                                    <td>{{Descripcion}}</td>
+                                    <td>{{Monto}}</td>
+                                    <td>{{tipoOperacion}}</td>
+                                </tr>
+                                <tr>
+                                    <td>{{Fecha}}</td>
+                                    <td>{{Descripcion}}</td>
+                                    <td>{{Monto}}</td>
+                                    <td>{{tipoOperacion}}</td>
+                                </tr>
+                                <tr>
+                                    <td>{{Fecha}}</td>
+                                    <td>{{Descripcion}}</td>
+                                    <td>{{Monto}}</td>
+                                    <td>{{tipoOperacion}}</td>
+                                </tr>
+                                <tr>
+                                    <td>{{Fecha}}</td>
+                                    <td>{{Descripcion}}</td>
+                                    <td>{{Monto}}</td>
+                                    <td>{{tipoOperacion}}</td>
+                                </tr>
+                                <tr>
+                                    <td>{{Fecha}}</td>
+                                    <td>{{Descripcion}}</td>
+                                    <td>{{Monto}}</td>
+                                    <td>{{tipoOperacion}}</td>
+                                </tr>
+                                <tr>
+                                    <td>{{Fecha}}</td>
+                                    <td>{{Descripcion}}</td>
+                                    <td>{{Monto}}</td>
+                                    <td>{{tipoOperacion}}</td>
+                                </tr>
+                                <tr>
+                                    <td>{{Fecha}}</td>
+                                    <td>{{Descripcion}}</td>
+                                    <td>{{Monto}}</td>
+                                    <td>{{tipoOperacion}}</td>
+                                </tr>
+                                <tr>
+                                    <td>{{Fecha}}</td>
+                                    <td>{{Descripcion}}</td>
+                                    <td>{{Monto}}</td>
+                                    <td>{{tipoOperacion}}</td>
+                                </tr>
+                                <tr>
+                                    <td>{{Fecha}}</td>
+                                    <td>{{Descripcion}}</td>
+                                    <td>{{Monto}}</td>
+                                    <td>{{tipoOperacion}}</td>
+                                </tr>
+                            </tbody>
+                    </table>
+                </div>
+                <div class="col-sm-3 pt-4">
+                    <h3 class="text-title-info mb-3">Cotizaciones</h3> 
+                    <h3 class="text-title-cotizacion mb-3">Monedas Extranjeras</h3> 
+                    <table class="table shadow table-inverse">
+                        <thead class="thead-inverse">
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Compra</th>
+                                <th>Venta</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Dolar</td>
+                                    <td>140</td>
+                                    <td>148</td>
+                                </tr>
+                                <tr>
+                                    <td>Dolar</td>
+                                    <td>140</td>
+                                    <td>148</td>
+                                </tr>
+                                <tr>
+                                    <td>Dolar</td>
+                                    <td>140</td>
+                                    <td>148</td>
+                                </tr>
+                            </tbody>
+                    </table>
+                    <h3 class="text-title-cotizacion mb-3 pt-3">Criptomonedas</h3> 
+                    <table class="table shadow table-inverse">
+                        <thead class="thead-inverse">
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Compra</th>
+                                <th>Venta</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Dolar</td>
+                                    <td>140</td>
+                                    <td>148</td>
+                                </tr>
+                                <tr>
+                                    <td>Dolar</td>
+                                    <td>140</td>
+                                    <td>148</td>
+                                </tr>
+                                <tr>
+                                    <td>Dolar</td>
+                                    <td>140</td>
+                                    <td>148</td>
+                                </tr>
+                            </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>        
+        <router-outlet></router-outlet>
+    </div>
+    
+</ng-sidebar-container>

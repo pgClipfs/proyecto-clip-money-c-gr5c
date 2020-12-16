@@ -13,6 +13,7 @@ namespace WebApplicationCLIP.BD
         //Initial Catalog= "nombre de tu base de datos"
         String cadena = "Data Source=DESKTOP-KL6ISEF;Initial Catalog=ClipBank;Integrated Security=True";
 
+
         public SqlConnection conexionBD = new SqlConnection();
 
         public ConexionBD() 
