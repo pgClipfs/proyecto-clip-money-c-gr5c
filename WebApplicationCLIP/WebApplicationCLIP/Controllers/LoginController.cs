@@ -54,7 +54,7 @@ namespace WebApplicationCLIP.Controllers
             }
             else
             {
-                return Content(HttpStatusCode.Conflict,respuesta);
+                return Content(HttpStatusCode.Unauthorized,respuesta);
             }
 
         }
@@ -92,54 +92,54 @@ namespace WebApplicationCLIP.Controllers
 
         public static string GenerarToken(string NombreDeUsuario)
         {
+            // var audienceToken = ConfigurationManager.AppSettings["JWT_AUDIENCE_TOKEN"];
+            // var issuerToken = ConfigurationManager.AppSettings["JWT_ISSUER_TOKEN"];
 
-            // es un JSON Web Token
+            var tokenHandler = new JwtSecurityTokenHandler();
+
             var secretKey = ConfigurationManager.AppSettings["JWT_SECRET_KEY"];
-            var audienceToken = ConfigurationManager.AppSettings["JWT_AUDIENCE_TOKEN"];
-            var issuerToken = ConfigurationManager.AppSettings["JWT_ISSUER_TOKEN"];
             var expireTime = ConfigurationManager.AppSettings["JWT_EXPIRE_MINUTES"];
 
-            var securityKey = new SymmetricSecurityKey(System.Text.Encoding.Default.GetBytes(secretKey));
+            var securityKey = new SymmetricSecurityKey(Encoding.Default.GetBytes(secretKey));
             var signingCredentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256Signature);
 
-            // create a claimsIdentity
             ClaimsIdentity claimsIdentity = new ClaimsIdentity(new[] { new Claim(ClaimTypes.Name, NombreDeUsuario) });
 
-            // create token to the user
-            var tokenHandler = new System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler();
+
             var jwtSecurityToken = tokenHandler.CreateJwtSecurityToken(
-                audience: audienceToken,
-                issuer: issuerToken,
+                //audience: audienceToken,
+                //issuer: issuerToken,
                 subject: claimsIdentity,
                 notBefore: DateTime.UtcNow,
                 expires: DateTime.UtcNow.AddMinutes(Convert.ToInt32(expireTime)),
                 signingCredentials: signingCredentials);
 
             var jwtTokenString = tokenHandler.WriteToken(jwtSecurityToken);
-            return jwtTokenString;
 
-            /* generacion nueva
+            return jwtTokenString;       
+              
+        }
+
+        public static bool ValidarToken(SesionDeUsuario sesion)
+        {
+            //aca hay que validar el token y verificar que corresponda al usuario
+
             var tokenHandler = new JwtSecurityTokenHandler();
-            var key = Encoding.ASCII.GetBytes(_appSettings.Secret);
-            var tokenDescriptor = new SecurityTokenDescriptor
-            {
-                Subject = new ClaimsIdentity(new[] { new Claim("id", user.Id.ToString()) }),
-                Expires = DateTime.UtcNow.AddDays(7),
-                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
-            };
-            var token = tokenHandler.CreateToken(tokenDescriptor);
-            return tokenHandler.WriteToken(token);                        */      
+
+            string nombre = sesion.NombreDeUsuario;
+            string stringToken = sesion.Token;
+
+            SecurityToken token = tokenHandler.ReadToken(stringToken);
+            
+            return true;
         }
 
         private int ValidarCredencial(string nombreUsuario, string contraseña)
         {
-            /* Aqui va la consulta a la BD*/
+            /* aca va la consulta a la BD*/
 
-            GestorUsuario gestorUsuario = new GestorUsuario();
-            
+            GestorUsuario gestorUsuario = new GestorUsuario();            
             return gestorUsuario.consultarCredencialesUsuario(nombreUsuario, contraseña);
-
-
         }
     }
 }
