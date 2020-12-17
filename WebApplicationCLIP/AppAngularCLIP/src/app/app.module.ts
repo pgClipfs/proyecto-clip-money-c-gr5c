@@ -42,7 +42,8 @@ import { SidebarModule } from 'ng-sidebar';
       { path: 'registroExitoso', component: RegistroExitosoComponent },
       { path: '', component: HomePageComponent },
       { path: 'login', component: LoginBox },
-      { path: 'principal', component: PaginaPrincipalComponent}      
+      { path: 'principal', component: NavbarLateralComponent}, //hay que cambiar esto y volver a poner el principal     
+      { path: 'principalHome', component: PaginaPrincipalComponent}
     ])
   ],
   providers: [[LoginService],[SignupService]],

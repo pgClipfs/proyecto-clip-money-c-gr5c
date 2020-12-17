@@ -13,6 +13,18 @@ export class PaginaPrincipalComponent implements OnInit {
 
   usuario:Usuario;
   nombreUsuario: string = "Usuario generico";
+  
+  
+  saldoPesos = 2555;
+  opened = false;
+  numeroCuenta = 201241535212312;
+  numeroCuentaDol = 20124134534512;
+  nombreApellido = 'JUAN CRUZ CUELLO';
+  Fecha = '14/12/2020';
+  Descripcion = 'Ingreso de dinero';
+  Monto= '$2500';
+  tipoOperacion = 'Ingr.';
+  
 
   cerrar_sesion(){
     this.loginService.logout();

@@ -19,6 +19,8 @@ export class NavbarLateralComponent implements OnInit {
   Descripcion = 'Ingreso de dinero';
   Monto= '$2500';
   tipoOperacion = 'Ingr.';
+
+  
   
   abrirSideBar(){
     this.opened = !this.opened;
