@@ -8,14 +8,26 @@ import { OperacionesService } from "../../services/operaciones.service"
   styleUrls: ['./operaciones.component.css']
 })
 export class OperacionesComponent implements OnInit {
-  operacionesService: any;
 
-  constructor(public service: OperacionesService) { }
+  constructor() { }
 
-  ngOnInit() {
-    this.operacionesService.getOperaciones().suscribe(data => {
-      this.operacionesService = data;
-    });
+  nombreUsuario = 'juancuello98';
+  saldoPesos = 2555;
+  opened = false;
+  numeroCuenta = 201241535212312;
+  numeroCuentaDol = 20124134534512;
+  nombreApellido = 'JUAN CRUZ CUELLO';
+  Fecha = '14/12/2020';
+  Descripcion = 'Ingreso de dinero';
+  Monto= '$2500';
+  tipoOperacion = 'Ingr.';
+  
+  abrirSideBar(){
+    this.opened = !this.opened;
+  }
+
+
+  ngOnInit(): void {
   }
 
 }
