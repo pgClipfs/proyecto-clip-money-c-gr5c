@@ -13,6 +13,8 @@ using System.IdentityModel;
 using System.Web.Http.Cors;
 using WebApplicationCLIP.Gestores;
 using Newtonsoft.Json.Linq;
+using System.IdentityModel.Tokens.Jwt;
+using System.Text;
 
 namespace WebApplicationCLIP.Controllers
 {
@@ -47,7 +49,7 @@ namespace WebApplicationCLIP.Controllers
             {
                 //var token = GenerarToken(login.NombreDeUsuario);
                 Console.Write(login.NombreDeUsuario);
-                var token = "asd";
+                var token = GenerarToken(login.NombreDeUsuario);
                 return Ok(new SesionDeUsuario(login.NombreDeUsuario, token));
             }
             else
@@ -91,7 +93,6 @@ namespace WebApplicationCLIP.Controllers
         public static string GenerarToken(string NombreDeUsuario)
         {
 
-
             // es un JSON Web Token
             var secretKey = ConfigurationManager.AppSettings["JWT_SECRET_KEY"];
             var audienceToken = ConfigurationManager.AppSettings["JWT_AUDIENCE_TOKEN"];
@@ -116,6 +117,18 @@ namespace WebApplicationCLIP.Controllers
 
             var jwtTokenString = tokenHandler.WriteToken(jwtSecurityToken);
             return jwtTokenString;
+
+            /* generacion nueva
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var key = Encoding.ASCII.GetBytes(_appSettings.Secret);
+            var tokenDescriptor = new SecurityTokenDescriptor
+            {
+                Subject = new ClaimsIdentity(new[] { new Claim("id", user.Id.ToString()) }),
+                Expires = DateTime.UtcNow.AddDays(7),
+                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
+            };
+            var token = tokenHandler.CreateToken(tokenDescriptor);
+            return tokenHandler.WriteToken(token);                        */      
         }
 
         private int ValidarCredencial(string nombreUsuario, string contraseña)

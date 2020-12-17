@@ -157,12 +157,17 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="BD\ConexionBD.cs" />
     <Compile Include="BD\CRUD.cs" />
+    <Compile Include="BD\CuentaDAO.cs" />
+    <Compile Include="BD\CuentaDAOImp.cs" />
     <Compile Include="BD\UsuarioDAO.cs" />
     <Compile Include="BD\UsuarioDAOImp.cs" />
     <Compile Include="Controllers\DefaultController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\Prueba02Controller.cs" />
+    <Compile Include="Gestores\GestorCuenta.cs" />
+    <Compile Include="Gestores\GestorOperacion.cs" />
+    <Compile Include="Gestores\GestorTransferencia.cs" />
     <Compile Include="Gestores\GestorUsuario.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -176,7 +181,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\web.config" />
+    <Content Include="Views\web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <None Include="packages.config" />
     <Content Include="Views\Home\Index.cshtml" />
     <None Include="Web.Debug.config">
