@@ -15,6 +15,7 @@ using WebApplicationCLIP.Gestores;
 using Newtonsoft.Json.Linq;
 using System.IdentityModel.Tokens.Jwt;
 using System.Text;
+using System.Security.Cryptography;
 
 namespace WebApplicationCLIP.Controllers
 {
@@ -84,17 +85,26 @@ namespace WebApplicationCLIP.Controllers
             }
         }
 
-        public static bool ValidarToken(string token)
-        {
-            //por ahora siempre true, para no tener problemas con esto. despues veremos
-            return true;
+        public static string Encriptar(string texto) {
+            SHA1 sha1 = SHA1CryptoServiceProvider.Create();
+            Byte[] textOriginal = ASCIIEncoding.Default.GetBytes(texto);
+            Byte[] hash = sha1.ComputeHash(textOriginal);
+            StringBuilder cadena = new StringBuilder();
+            foreach (byte i in hash)
+            {
+                cadena.AppendFormat("{0:x2}", i);
+            }
+            return cadena.ToString();
         }
 
         public static string GenerarToken(string NombreDeUsuario)
         {
+            NombreDeUsuario = NombreDeUsuario.ToLower();
+            return Encriptar(NombreDeUsuario);
+
+            /*
             // var audienceToken = ConfigurationManager.AppSettings["JWT_AUDIENCE_TOKEN"];
             // var issuerToken = ConfigurationManager.AppSettings["JWT_ISSUER_TOKEN"];
-
             var tokenHandler = new JwtSecurityTokenHandler();
 
             var secretKey = ConfigurationManager.AppSettings["JWT_SECRET_KEY"];
@@ -116,22 +126,22 @@ namespace WebApplicationCLIP.Controllers
 
             var jwtTokenString = tokenHandler.WriteToken(jwtSecurityToken);
 
-            return jwtTokenString;       
+            return jwtTokenString;       */
               
         }
 
         public static bool ValidarToken(SesionDeUsuario sesion)
         {
             //aca hay que validar el token y verificar que corresponda al usuario
+                        
+            string nombre = sesion.NombreDeUsuario.ToLower();
+            string token = sesion.Token;
 
-            var tokenHandler = new JwtSecurityTokenHandler();
-
-            string nombre = sesion.NombreDeUsuario;
-            string stringToken = sesion.Token;
-
-            SecurityToken token = tokenHandler.ReadToken(stringToken);
-            
-            return true;
+            if (Encriptar(nombre) == token)
+            {
+                return true;
+            }
+            else return false;
         }
 
         private int ValidarCredencial(string nombreUsuario, string contraseña)

@@ -15,6 +15,5 @@ namespace WebApplicationCLIP.Models
 
         public string NombreDeUsuario { get; set; }
         public string Token { get; set; }
-        public object Contraseña { get; internal set; }
     }
 }

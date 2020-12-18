@@ -21,11 +21,12 @@ namespace WebApplicationCLIP.Controllers
         public IHttpActionResult GetDatosUsuario(SesionDeUsuario login)
         {
             if (login == null)
-                throw new HttpResponseException(HttpStatusCode.BadRequest);
+                return Content(HttpStatusCode.BadRequest,"sesion de usuario expirada");
+                //throw new HttpResponseException(HttpStatusCode.BadRequest);
             
-            if (!LoginController.ValidarToken(login.Token)){
+            if (!LoginController.ValidarToken(login)){
                 //token invalido
-                return Unauthorized();
+                return Content(HttpStatusCode.Unauthorized, "token de usuario invalido");                
             }
 
             string nombreUsuario = login.NombreDeUsuario;

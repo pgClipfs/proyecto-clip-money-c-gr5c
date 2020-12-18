@@ -23,17 +23,8 @@ export class DatosUsuarioService {
       .pipe(
         retry(2), //esto es para decirle cuantas veces lo tiene que intentar antes de tirar error :o
         catchError(err => {
-          if (err.error == 2) {
-            throw 'Nombre de usuario o contraseña incorrectos';
-          }
-          if (err.error == 1) {
-            throw 'problema al acceder a la BD desde el backend';
-          }
-          if (err.statusText = "Unknown Error") {
-            throw 'problema de conexion al backend (probablemente este caido)';
-          }
-          throw 'error extraño';
-        }), //esto es para procesar los errores que devuelva el backend
+         throw err.error;
+        }), 
         map(user => { 
        //   console.log("Usuario Encontrado:");
          // console.log(user);
