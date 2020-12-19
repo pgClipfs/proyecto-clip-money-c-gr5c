@@ -55,7 +55,7 @@ namespace WebApplicationCLIP.Controllers
             }
             else
             {
-                return Content(HttpStatusCode.Unauthorized,respuesta);
+                return Content(HttpStatusCode.Unauthorized,"el usuario o la contraseña no son validos");
             }
 
         }
@@ -100,7 +100,7 @@ namespace WebApplicationCLIP.Controllers
         public static string GenerarToken(string NombreDeUsuario)
         {
             NombreDeUsuario = NombreDeUsuario.ToLower();
-            return Encriptar(NombreDeUsuario);
+            return Encriptar(NombreDeUsuario+"aaa");
 
             /*
             // var audienceToken = ConfigurationManager.AppSettings["JWT_AUDIENCE_TOKEN"];
@@ -137,7 +137,7 @@ namespace WebApplicationCLIP.Controllers
             string nombre = sesion.NombreDeUsuario.ToLower();
             string token = sesion.Token;
 
-            if (Encriptar(nombre) == token)
+            if (GenerarToken(nombre) == token)
             {
                 return true;
             }
