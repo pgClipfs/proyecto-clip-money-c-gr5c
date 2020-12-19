@@ -1,20 +1,154 @@
-import { HttpClient } from "@angular/common/http";
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { retry ,catchError,map} from 'rxjs/operators';
-import { Sesion } from '../modelos/sesion';
-import { Usuario } from '../modelos/usuario';
-import { LoginService } from './login.service';
+
 
 @Injectable({
-  providedIn: "root"
+  providedIn: 'root'
 })
 export class OperacionesService {
+  operaciones:any[] = [
+  {
+    nombreUsuario: 'juancuello98',
+    saldoPesos: 2555,
+    opened : false,
+    numeroCuenta: 201241535212312,
+    numeroCuentaDol: 20124134534512,
+    nombreApellido: 'JUAN CRUZ CUELLO',
+    Fecha: '14/12/2020',
+    Descripcion: 'Ingreso de dinero',
+    Monto: '$2500',
+    tipoOperacion: 'Ingr.',
+  },
+  {
+    nombreUsuario: 'juancuello98',
+    saldoPesos: 2555,
+    opened : false,
+    numeroCuenta: 201241535212312,
+    numeroCuentaDol: 20124134534512,
+    nombreApellido: 'JUAN CRUZ CUELLO',
+    Fecha: '14/12/2020',
+    Descripcion: 'Ingreso de dinero',
+    Monto: '$2500',
+    tipoOperacion: 'Ingr.',
+  },
+  {
+    nombreUsuario: 'juancuello98',
+    saldoPesos: 2555,
+    opened : false,
+    numeroCuenta: 201241535212312,
+    numeroCuentaDol: 20124134534512,
+    nombreApellido: 'JUAN CRUZ CUELLO',
+    Fecha: '14/12/2020',
+    Descripcion: 'Ingreso de dinero',
+    Monto: '$2500',
+    tipoOperacion: 'Ingr.',
+  },
+  {
+    nombreUsuario: 'juancuello98',
+    saldoPesos: 2555,
+    opened : false,
+    numeroCuenta: 201241535212312,
+    numeroCuentaDol: 20124134534512,
+    nombreApellido: 'JUAN CRUZ CUELLO',
+    Fecha: '14/12/2020',
+    Descripcion: 'Ingreso de dinero',
+    Monto: '$2500',
+    tipoOperacion: 'Ingr.',
+  },
+  {
+    nombreUsuario: 'juancuello98',
+    saldoPesos: 2555,
+    opened : false,
+    numeroCuenta: 201241535212312,
+    numeroCuentaDol: 20124134534512,
+    nombreApellido: 'JUAN CRUZ CUELLO',
+    Fecha: '14/12/2020',
+    Descripcion: 'Ingreso de dinero',
+    Monto: '$2500',
+    tipoOperacion: 'Ingr.',
+  },
+  {
+    nombreUsuario: 'juancuello98',
+    saldoPesos: 2555,
+    opened : false,
+    numeroCuenta: 201241535212312,
+    numeroCuentaDol: 20124134534512,
+    nombreApellido: 'JUAN CRUZ CUELLO',
+    Fecha: '14/12/2020',
+    Descripcion: 'Ingreso de dinero',
+    Monto: '$2500',
+    tipoOperacion: 'Ingr.',
+  },
+  {
+    nombreUsuario: 'juancuello98',
+    saldoPesos: 2555,
+    opened : false,
+    numeroCuenta: 201241535212312,
+    numeroCuentaDol: 20124134534512,
+    nombreApellido: 'JUAN CRUZ CUELLO',
+    Fecha: '14/12/2020',
+    Descripcion: 'Ingreso de dinero',
+    Monto: '$2500',
+    tipoOperacion: 'Ingr.',
+  },
+  {
+    nombreUsuario: 'juancuello98',
+    saldoPesos: 2555,
+    opened : false,
+    numeroCuenta: 201241535212312,
+    numeroCuentaDol: 20124134534512,
+    nombreApellido: 'JUAN CRUZ CUELLO',
+    Fecha: '14/12/2020',
+    Descripcion: 'Ingreso de dinero',
+    Monto: '$2500',
+    tipoOperacion: 'Ingr.',
+  },
+  {
+    nombreUsuario: 'juancuello98',
+    saldoPesos: 2555,
+    opened : false,
+    numeroCuenta: 201241535212312,
+    numeroCuentaDol: 20124134534512,
+    nombreApellido: 'JUAN CRUZ CUELLO',
+    Fecha: '14/12/2020',
+    Descripcion: 'Ingreso de dinero',
+    Monto: '$2500',
+    tipoOperacion: 'Ingr.',
+  },
+  {
+    nombreUsuario: 'juancuello98',
+    saldoPesos: 2555,
+    opened : false,
+    numeroCuenta: 201241535212312,
+    numeroCuentaDol: 20124134534512,
+    nombreApellido: 'JUAN CRUZ CUELLO',
+    Fecha: '14/12/2020',
+    Descripcion: 'Ingreso de dinero',
+    Monto: '$2500',
+    tipoOperacion: 'Ingr.',
+  },
 
-    private urlApi = "http://localhost:59642/api/"; //linea para hacer pruebas
-    constructor(private http: HttpClient, private loginService: LoginService) {}
+  {
+    nombreUsuario: 'juancuello98',
+    saldoPesos: 2555,
+    opened : false,
+    numeroCuenta: 201241535212312,
+    numeroCuentaDol: 20124134534512,
+    nombreApellido: 'JUAN CRUZ CUELLO',
+    Fecha: '14/12/2020',
+    Descripcion: 'Ingreso de dinero',
+    Monto: '$2500',
+    tipoOperacion: 'Ingr.',
+  }
+  
+  ]
 
-    getOperaciones(): Observable<any>{
-        return this.http.get('http://localhost:59642/api/');
-      }
-    }
+  constructor() { 
+    console.log('Funcionando servicio')
+  }
+
+  obtenerOperaciones(){
+    return this.operaciones
+  }
+
+  
+}

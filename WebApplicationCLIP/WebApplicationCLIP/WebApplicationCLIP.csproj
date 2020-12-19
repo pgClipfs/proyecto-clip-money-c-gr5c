@@ -148,6 +148,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="BD\Operaciones.html" />
     <Content Include="Global.asax" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -157,6 +158,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="BD\ConexionBD.cs" />
     <Compile Include="BD\CRUD.cs" />
+    <Compile Include="BD\Operaciones.cs" />
     <Compile Include="BD\UsuarioDAO.cs" />
     <Compile Include="BD\UsuarioDAOImp.cs" />
     <Compile Include="Controllers\DefaultController.cs" />

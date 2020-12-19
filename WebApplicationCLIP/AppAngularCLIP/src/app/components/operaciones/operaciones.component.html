@@ -59,7 +59,7 @@
                             <div class="col-sm-9">
                                 <div class="card-body">
                           <p class="pl-3 card-text text-card">DESDE</p>
-                          <input type='Date' [ngModel]='fecha | date:"yyyy-MM-dd" ' (ngModelChange)='fecha=$event' >
+                          <!--<input type='Date' [ngModel]='fecha | date:"yyyy-MM-dd" ' (ngModelChange)='fecha=$event' >-->
                         </div>
                             </div>
                         </div>                     
@@ -72,7 +72,7 @@
                             <div class="col-sm-9">
                                 <div class="card-body">
                           <p class="pl-3 card-text text-card">HASTA</p>
-                          <input type='Date' [ngModel]='fecha | date:"yyyy-MM-dd" ' (ngModelChange)='fecha=$event' >
+                          <!--<input type='Date' [ngModel]='fecha | date:"yyyy-MM-dd" ' (ngModelChange)='fecha=$event' >-->
                         </div>
                             </div>
                         </div>                     
@@ -87,7 +87,7 @@
                 <div class="col-md-12 pt-4">                    
                     <h3 class="text-title-info mb-3">Actividad Reciente</h3> 
                     <table class="table shadow table-inverse">
-                        <thead class="thead-inverse">
+                        <thead class="thead-inverse" >
                             <tr>
                                 <th>Fecha</th>
                                 <th>Descripcion</th>
@@ -95,66 +95,12 @@
                                 <th>Tipo</th>
                             </tr>
                             </thead>
-                            <tbody>
-                                <tr>
-                                    <td>{{Fecha}}</td>
-                                    <td>{{Descripcion}}</td>
-                                    <td>{{Monto}}</td>
-                                    <td>{{tipoOperacion}}</td>
-                                </tr>
-                                <tr>
-                                    <td>{{Fecha}}</td>
-                                    <td>{{Descripcion}}</td>
-                                    <td>{{Monto}}</td>
-                                    <td>{{tipoOperacion}}</td>
-                                </tr>
-                                <tr>
-                                    <td>{{Fecha}}</td>
-                                    <td>{{Descripcion}}</td>
-                                    <td>{{Monto}}</td>
-                                    <td>{{tipoOperacion}}</td>
-                                </tr>
-                                <tr>
-                                    <td>{{Fecha}}</td>
-                                    <td>{{Descripcion}}</td>
-                                    <td>{{Monto}}</td>
-                                    <td>{{tipoOperacion}}</td>
-                                </tr>
-                                <tr>
-                                    <td>{{Fecha}}</td>
-                                    <td>{{Descripcion}}</td>
-                                    <td>{{Monto}}</td>
-                                    <td>{{tipoOperacion}}</td>
-                                </tr>
-                                <tr>
-                                    <td>{{Fecha}}</td>
-                                    <td>{{Descripcion}}</td>
-                                    <td>{{Monto}}</td>
-                                    <td>{{tipoOperacion}}</td>
-                                </tr>
-                                <tr>
-                                    <td>{{Fecha}}</td>
-                                    <td>{{Descripcion}}</td>
-                                    <td>{{Monto}}</td>
-                                    <td>{{tipoOperacion}}</td>
-                                </tr>
-                                <tr>
-                                    <td>{{Fecha}}</td>
-                                    <td>{{Descripcion}}</td>
-                                    <td>{{Monto}}</td>
-                                    <td>{{tipoOperacion}}</td>
-                                </tr>
-                                <tr>
-                                    <td>{{Fecha}}</td>
-                                    <td>{{Descripcion}}</td>
-                                    <td>{{Monto}}</td>
-                                    <td>{{tipoOperacion}}</td>
-                                </tr>
-                                <tr>
-                                    <td>{{Fecha}}</td>
-                                    <td>{{Descripcion}}</td>
-                                    <td>{{Monto}}</td>
-                                    <td>{{tipoOperacion}}</td>
+                            <tbody >
+                                <tr *ngFor = "let ope of operaciones">
+                                    <td>{{ope.Fecha}}</td>
+                                    <td>{{ope.Descripcion}}</td>
+                                    <td>{{ope.Monto}}</td>
+                                    <td>{{ope.tipoOperacion}}</td>
                                 </tr>
                             </tbody>
                     </table>

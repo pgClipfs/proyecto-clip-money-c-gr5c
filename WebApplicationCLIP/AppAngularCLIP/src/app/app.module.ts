@@ -20,6 +20,8 @@ import { NavbarLateralComponent } from './components/navbar-lateral/navbar-later
 import { SidebarModule } from 'ng-sidebar';
 import { OperacionesComponent } from './components/operaciones/operaciones.component';
 
+import { OperacionesService } from './services/operaciones.service'
+
 
 @NgModule({
   declarations: [
@@ -48,7 +50,8 @@ import { OperacionesComponent } from './components/operaciones/operaciones.compo
       { path: 'operaciones', component: OperacionesComponent}     
     ])
   ],
-  providers: [[LoginService],[SignupService]],
+  providers: [[LoginService],[SignupService],
+[OperacionesService]],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

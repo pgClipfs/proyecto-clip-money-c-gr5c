@@ -9,7 +9,12 @@ import { OperacionesService } from "../../services/operaciones.service"
 })
 export class OperacionesComponent implements OnInit {
 
-  constructor() { }
+  operaciones:any[] = [];
+
+  constructor(private _servicio: OperacionesService) { 
+    
+    this.operaciones = _servicio.obtenerOperaciones();
+  }
 
   nombreUsuario = 'juancuello98';
   saldoPesos = 2555;
@@ -25,6 +30,7 @@ export class OperacionesComponent implements OnInit {
   abrirSideBar(){
     this.opened = !this.opened;
   }
+
 
 
   ngOnInit(): void {
