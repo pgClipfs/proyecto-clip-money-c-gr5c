@@ -8,26 +8,17 @@ using WebApplicationCLIP.Models;
 namespace WebApplicationCLIP.BD
 {
     public class UsuarioDAOImp : UsuarioDAO
-    {
-        public enum EstadoRegisto {REGISTRADO , ERROR , EXISTENTE}
-
-        /*
-         codigo
-         0: no error
-         1: no se pudo conectar la BD
-         2: error en el insert  
-
-         3: dni repetido
-         4: nombre usuario repetido
-         5: email repetido
-         
-        */
-        
-                
+    {           
 
         public int consultar(Usuario t)
         {
-            string script = "SELECT * FROM USUARIOS WHERE NOMBRE_USUARIO = " + "'" + t.NombreDeUsuario + "'";
+            string script = "SELECT * FROM USUARIOS WHERE DNI = " + "'" + t.Dni + "'";
+
+            if(t.Dni is null)
+            {
+                script = "SELECT * FROM USUARIOS WHERE NOMBRE_USUARIO = " + "'" + t.NombreDeUsuario + "'";
+            }
+            
 
             ConexionBD conexion = new ConexionBD();
             conexion.abrir();
@@ -109,6 +100,11 @@ namespace WebApplicationCLIP.BD
 
         public int registrar(Usuario t)
         {
+            if (t.Dni == null || t.NombreDeUsuario==null ||t.Email==null)
+            {
+                return 6;
+            }
+
             string script = "INSERT INTO USUARIOS (DNI, NOMBRE, APELLIDO, NOMBRE_SITUACION_CREDITICIA, NOMBRE_USUARIO, EMAIL, TELEFONO, CONTRASEÑA)" +
                 "VALUES (@dni , @nombre , @apellido , @nombre_situacion_crediticia , @nombre_usuario , @email , @telefono , @contraseña)";
 

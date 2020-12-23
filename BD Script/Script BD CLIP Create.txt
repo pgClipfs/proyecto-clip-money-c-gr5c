@@ -126,3 +126,9 @@ VALUES ('12345678', 'hector', 'prueba', 'normal', 'hectorp', 'hectorprueba@gmail
 
 INSERT INTO USUARIOS (DNI, NOMBRE, APELLIDO, NOMBRE_SITUACION_CREDITICIA, NOMBRE_USUARIO, EMAIL, TELEFONO, CONTRASEÑA)
 VALUES ('13243546', 'martin', 'prueba', 'normal', 'martinp', 'martinprueba@gmail.com', '3516984311', 'martinin77')
+
+
+/* INSERTS Tabla Cuenta*/
+
+INSERT INTO CUENTAS (CVU, DNI_USUARIO, SALDO, DIVISA, TIPO_CUENTA)
+VALUES ('1000000000000000000000', '12345678', '0', 'pesos', 'debito')

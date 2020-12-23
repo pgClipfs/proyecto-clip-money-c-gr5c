@@ -12,6 +12,10 @@ using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel;
 using System.Web.Http.Cors;
 using WebApplicationCLIP.Gestores;
+using Newtonsoft.Json.Linq;
+using System.IdentityModel.Tokens.Jwt;
+using System.Text;
+using System.Security.Cryptography;
 
 namespace WebApplicationCLIP.Controllers
 {
@@ -46,12 +50,12 @@ namespace WebApplicationCLIP.Controllers
             {
                 //var token = GenerarToken(login.NombreDeUsuario);
                 Console.Write(login.NombreDeUsuario);
-                var token = "asd";
+                var token = GenerarToken(login.NombreDeUsuario);
                 return Ok(new SesionDeUsuario(login.NombreDeUsuario, token));
             }
             else
             {
-                return Content(HttpStatusCode.Conflict,respuesta);
+                return Content(HttpStatusCode.Unauthorized,"el usuario o la contraseña no son validos");
             }
 
         }
@@ -60,12 +64,13 @@ namespace WebApplicationCLIP.Controllers
         [EnableCors(origins: "*", headers: "*", methods: "*")]
         [Route("registerUser")]
 
-        public IHttpActionResult RegisterUser(Usuario usuario)
+        public IHttpActionResult RegisterUser(JObject usuarioJSON)
         {
 
-            if (usuario == null)
+            if (usuarioJSON == null)
                 throw new HttpResponseException(HttpStatusCode.BadRequest);
 
+            Usuario usuario = Usuario.CrearUsuarioConJObject(usuarioJSON);
             GestorUsuario gestor = new GestorUsuario();
 
             int respuesta = gestor.registrarUsuario(usuario);
@@ -78,60 +83,73 @@ namespace WebApplicationCLIP.Controllers
             {
                 return Content(HttpStatusCode.Conflict, respuesta);
             }
-
-
-
-            //            Enum respuesta =  gestor.registrarUsuario(usuario);
-
-            return Ok(true);
-
         }
 
-        public static bool ValidarToken(string token)
-        {
-            //por ahora siempre true, para no tener problemas con esto. despues veremos
-            return true;
+        public static string Encriptar(string texto) {
+            SHA1 sha1 = SHA1CryptoServiceProvider.Create();
+            Byte[] textOriginal = ASCIIEncoding.Default.GetBytes(texto);
+            Byte[] hash = sha1.ComputeHash(textOriginal);
+            StringBuilder cadena = new StringBuilder();
+            foreach (byte i in hash)
+            {
+                cadena.AppendFormat("{0:x2}", i);
+            }
+            return cadena.ToString();
         }
 
         public static string GenerarToken(string NombreDeUsuario)
         {
+            NombreDeUsuario = NombreDeUsuario.ToLower();
+            return Encriptar(NombreDeUsuario+"aaa");
 
+            /*
+            // var audienceToken = ConfigurationManager.AppSettings["JWT_AUDIENCE_TOKEN"];
+            // var issuerToken = ConfigurationManager.AppSettings["JWT_ISSUER_TOKEN"];
+            var tokenHandler = new JwtSecurityTokenHandler();
 
-            // es un JSON Web Token
             var secretKey = ConfigurationManager.AppSettings["JWT_SECRET_KEY"];
-            var audienceToken = ConfigurationManager.AppSettings["JWT_AUDIENCE_TOKEN"];
-            var issuerToken = ConfigurationManager.AppSettings["JWT_ISSUER_TOKEN"];
             var expireTime = ConfigurationManager.AppSettings["JWT_EXPIRE_MINUTES"];
 
-            var securityKey = new SymmetricSecurityKey(System.Text.Encoding.Default.GetBytes(secretKey));
+            var securityKey = new SymmetricSecurityKey(Encoding.Default.GetBytes(secretKey));
             var signingCredentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256Signature);
 
-            // create a claimsIdentity
             ClaimsIdentity claimsIdentity = new ClaimsIdentity(new[] { new Claim(ClaimTypes.Name, NombreDeUsuario) });
 
-            // create token to the user
-            var tokenHandler = new System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler();
+
             var jwtSecurityToken = tokenHandler.CreateJwtSecurityToken(
-                audience: audienceToken,
-                issuer: issuerToken,
+                //audience: audienceToken,
+                //issuer: issuerToken,
                 subject: claimsIdentity,
                 notBefore: DateTime.UtcNow,
                 expires: DateTime.UtcNow.AddMinutes(Convert.ToInt32(expireTime)),
                 signingCredentials: signingCredentials);
 
             var jwtTokenString = tokenHandler.WriteToken(jwtSecurityToken);
-            return jwtTokenString;
+
+            return jwtTokenString;       */
+              
+        }
+
+        public static bool ValidarToken(SesionDeUsuario sesion)
+        {
+            //aca hay que validar el token y verificar que corresponda al usuario
+                        
+            string nombre = sesion.NombreDeUsuario.ToLower();
+            string token = sesion.Token;
+
+            if (GenerarToken(nombre) == token)
+            {
+                return true;
+            }
+            else return false;
         }
 
         private int ValidarCredencial(string nombreUsuario, string contraseña)
         {
-            /* Aqui va la consulta a la BD*/
+            /* aca va la consulta a la BD*/
 
-            GestorUsuario gestorUsuario = new GestorUsuario();
-            
+            GestorUsuario gestorUsuario = new GestorUsuario();            
             return gestorUsuario.consultarCredencialesUsuario(nombreUsuario, contraseña);
-
-
         }
     }
 }

@@ -40,10 +40,6 @@ namespace WebApplicationCLIP.Gestores
         }
 
 
-        /*El metodo registra un usuario (verificando que este no sea repetido)
-         * y devuelve un int con 3 Estados : REGISTRADO - ERROR - EXISTENTE  */
-
-        /* Para obtener el valor de un Enum se utiliza el metodo  --> ToString() <--   */
         public int registrarUsuario(string dni, string nombre, string apellido, string nombreDeUsuario, string email, string telefono, string contraseña) 
         {
             Usuario usuarioNuevo = Usuario.nuevoUsuario(dni, nombre, apellido, nombreDeUsuario, email, telefono, contraseña);
@@ -56,6 +52,18 @@ namespace WebApplicationCLIP.Gestores
             UsuarioDAOImp usuarioDAO = new UsuarioDAOImp();
             return usuarioDAO.registrar(usuarioNuevo);
         }
+
+
+        public Usuario consultarUsuarioPorDNI(string DNI) 
+        {
+            Usuario temp = Usuario.CrearUsuarioConDNI(DNI);
+            UsuarioDAOImp usuarioDAO = new UsuarioDAOImp();
+            int respuesta = usuarioDAO.consultar(temp);
+
+            return temp;
+
+        }
+
 
     }
 }
