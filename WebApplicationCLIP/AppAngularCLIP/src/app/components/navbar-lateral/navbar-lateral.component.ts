@@ -19,9 +19,22 @@ export class NavbarLateralComponent implements OnInit {
   Descripcion = 'Ingreso de dinero';
   Monto= '$2500';
   tipoOperacion = 'Ingr.';
+  sidebarPrincipal : boolean = true;
+  sidebarTransferencia : boolean = false;
+  sidebarIngreso : boolean = false;
 
-  
-  
+  habilitarPrincipal(){
+    this.sidebarPrincipal = true;
+    this.sidebarTransferencia = false;
+    this.sidebarIngreso = false;
+  }
+
+  habilitarTransferir(){
+    this.sidebarPrincipal = false;
+    this.sidebarTransferencia = true;
+    this.sidebarIngreso = false;
+  }
+
   abrirSideBar(){
     this.opened = !this.opened;
   }
