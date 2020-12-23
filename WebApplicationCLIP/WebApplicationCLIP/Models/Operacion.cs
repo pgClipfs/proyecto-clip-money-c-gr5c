@@ -5,8 +5,41 @@ using System.Web;
 
 namespace WebApplicationCLIP.Models
 {
-    abstract public class Operacion 
+     public class Operacion 
     {
+        public static List<Operacion> ObtenerOperacionesDePrueba()
+        {
+            List<Operacion> lista = new List<Operacion>();
+
+            Operacion op1 = new Operacion()
+            {
+                Monto = 1000,
+                IdOperacion = "001",
+                Fecha = DateTime.Now,
+                TipoOperacion = TipoDeOperacion.Deposito
+            };
+            Operacion op2 = new Operacion()
+            {
+                Monto = 2000,
+                IdOperacion = "020",
+                Fecha = DateTime.Now,
+                TipoOperacion = TipoDeOperacion.Extracion
+            };
+            Operacion op3 = new Operacion()
+            {
+                Monto = 3000,
+                IdOperacion = "300",
+                Fecha = DateTime.Now,
+                TipoOperacion = TipoDeOperacion.Transferencia
+            };
+
+            lista.Add(op1);
+            lista.Add(op2);
+            lista.Add(op3);
+            return lista;
+        }
+
+
         public enum TipoDeOperacion { Transferencia, Deposito, Extracion, GiroAlDescubierto };
                 
         /*

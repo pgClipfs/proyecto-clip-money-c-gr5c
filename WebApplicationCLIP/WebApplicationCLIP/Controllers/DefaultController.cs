@@ -25,8 +25,8 @@ namespace WebApplicationCLIP.Controllers
 
             //por ahora no se valida la sesion ni nada, simplemente se devuelven las operaciones del usuario
             //if (!LoginController.ValidarToken(sesion))return Unauthorized();
-
-            return null;
+            
+            return Ok(Operacion.ObtenerOperacionesDePrueba());
         }
 
         [HttpPost]
@@ -59,6 +59,7 @@ namespace WebApplicationCLIP.Controllers
 
         private int ValidarCredencial(string nombreDeUsuario, object contraseña)
         {
+            
             throw new NotImplementedException();
         }
 
