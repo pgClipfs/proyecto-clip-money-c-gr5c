@@ -18,6 +18,21 @@ namespace WebApplicationCLIP.Controllers
         [EnableCors(origins: "*", headers: "*", methods: "*")]
         [Route("usuario")]
 
+        public IHttpActionResult GetOperacionesUsuario(SesionDeUsuario sesion, int cantidadDeOperaciones)
+        {
+            if (sesion== null)
+                throw new HttpResponseException(HttpStatusCode.BadRequest);
+
+            //por ahora no se valida la sesion ni nada, simplemente se devuelven las operaciones del usuario
+            //if (!LoginController.ValidarToken(sesion))return Unauthorized();
+
+            return null;
+        }
+
+        [HttpPost]
+        [EnableCors(origins: "*", headers: "*", methods: "*")]
+        [Route("usuario")]
+
         public IHttpActionResult GetDatosUsuario(SesionDeUsuario login)
         {
             if (login == null)
