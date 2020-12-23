@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Web.Http;
@@ -16,12 +17,13 @@ namespace WebApplicationCLIP.Controllers
     {
         [HttpPost]
         [EnableCors(origins: "*", headers: "*", methods: "*")]
-        [Route("usuario")]
-
-        public IHttpActionResult GetOperacionesUsuario(SesionDeUsuario sesion, int cantidadDeOperaciones)
+        [Route("operaciones")]
+        public IHttpActionResult GetOperacionesUsuario([FromBody]JObject data)            
         {
-            if (sesion== null)
-                throw new HttpResponseException(HttpStatusCode.BadRequest);
+            SesionDeUsuario sesion = data["SesionDeUsuario"].ToObject<SesionDeUsuario>();
+            int cantidad = data["cantidad"].ToObject<int>();
+
+            if (sesion== null) throw new HttpResponseException(HttpStatusCode.BadRequest);
 
             //por ahora no se valida la sesion ni nada, simplemente se devuelven las operaciones del usuario
             //if (!LoginController.ValidarToken(sesion))return Unauthorized();
@@ -32,7 +34,6 @@ namespace WebApplicationCLIP.Controllers
         [HttpPost]
         [EnableCors(origins: "*", headers: "*", methods: "*")]
         [Route("usuario")]
-
         public IHttpActionResult GetDatosUsuario(SesionDeUsuario login)
         {
             if (login == null)
