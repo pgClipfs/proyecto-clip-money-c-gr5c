@@ -9,58 +9,72 @@ namespace WebApplicationCLIP.Gestores
 {
     public class GestorUsuario
     {
-        /* Aqui deberia devolver un tipo de dato que muestre el estado de lo que sucede y no "bool"   */
 
-            /*
-             codigos de error:
-
-            0: sin error
-            1: error conexion a BD
-            2: error en credenciales
-             
-             */
-
-        public int consultarCredencialesUsuario(string nombreUsuario, string contraseña)
+        public bool consultarCredencialesUsuario(string nombreUsuario, string contraseña)
         {
-            Usuario temp = Usuario.CrearUsuarioConNombreDeUsuario(nombreUsuario);
-            UsuarioDAOImp usuarioDAO = new UsuarioDAOImp();
-            int respuesta = usuarioDAO.consultar(temp);
+            Usuario usu = Usuario.CrearUsuarioConNombreDeUsuario(nombreUsuario);
+            Usuario temp;
+            UsuarioDAO usuarioDAO = new UsuarioDAO();
 
-            if ( respuesta !=0)
+            try
             {
-                return respuesta;
+                temp = usuarioDAO.consultar(usu);
+            }
+            catch (Exception e)
+            {
+                throw e;
             }
 
             if (temp.Contraseña != contraseña)
             {
                 Console.WriteLine("Contraseña invalida para el usuario '" + temp.NombreDeUsuario + "'");
-                return 2;
+                return false;
             }
-            return 0;
+            return true;
         }
 
 
-        public int registrarUsuario(string dni, string nombre, string apellido, string nombreDeUsuario, string email, string telefono, string contraseña) 
+        public void registrarUsuario(string dni, string nombre, string apellido, string nombreDeUsuario, string email, string telefono, string contraseña)
         {
-            Usuario usuarioNuevo = Usuario.nuevoUsuario(dni, nombre, apellido, nombreDeUsuario, email, telefono, contraseña);
-            UsuarioDAOImp usuarioDAO = new UsuarioDAOImp();
-            return usuarioDAO.registrar(usuarioNuevo);
+            try
+            {
+                Usuario usuarioNuevo = Usuario.nuevoUsuario(dni, nombre, apellido, nombreDeUsuario, email, telefono, contraseña);
+                UsuarioDAO usuarioDAO = new UsuarioDAO();
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
         }
 
-        public int registrarUsuario(Usuario usuarioNuevo)
+        public void registrarUsuario(Usuario usuarioNuevo)
         {
-            UsuarioDAOImp usuarioDAO = new UsuarioDAOImp();
-            return usuarioDAO.registrar(usuarioNuevo);
+            try
+            {
+                UsuarioDAO usuarioDAO = new UsuarioDAO();
+                usuarioDAO.registrar(usuarioNuevo);
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
         }
 
-
-        public Usuario consultarUsuarioPorDNI(string DNI) 
+        public Usuario consultarUsuarioPorDNI(string DNI)
         {
             Usuario temp = Usuario.CrearUsuarioConDNI(DNI);
-            UsuarioDAOImp usuarioDAO = new UsuarioDAOImp();
-            int respuesta = usuarioDAO.consultar(temp);
+            UsuarioDAO usuarioDAO = new UsuarioDAO();
 
-            return temp;
+            try
+            {
+                Usuario usu = usuarioDAO.consultar(temp);
+                return usu;
+
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
 
         }
 

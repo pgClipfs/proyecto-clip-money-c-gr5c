@@ -30,23 +30,24 @@ namespace WebApplicationCLIP.Controllers
 
         [HttpGet]
         [Route("echouser")]
-        public IHttpActionResult EchoUsuario() {
+        public IHttpActionResult EchoUsuario()
+        {
             var identity = Thread.CurrentPrincipal.Identity;
             return Ok($" IPrincipal-user: {identity.Name} - IsAuthenticated: {identity.IsAuthenticated}");
         }
 
         [HttpPost]
-        [EnableCors(origins: "*", headers: "*", methods: "*")]        
+        [EnableCors(origins: "*", headers: "*", methods: "*")]
         [Route("authenticate")]
 
         public IHttpActionResult Authenticate(SolicitudLogin login)
         {
             if (login == null)
-                throw new HttpResponseException(HttpStatusCode.BadRequest);
+                return BadRequest("asd");
+            //return Content(HttpStatusCode.BadRequest, "bad request");
 
-            int respuesta = ValidarCredencial(login.NombreDeUsuario, login.Contraseña);
 
-            if (respuesta==0)
+            if (ValidarCredencial(login.NombreDeUsuario, login.Contraseña))
             {
                 //var token = GenerarToken(login.NombreDeUsuario);
                 Console.Write(login.NombreDeUsuario);
@@ -55,7 +56,7 @@ namespace WebApplicationCLIP.Controllers
             }
             else
             {
-                return Content(HttpStatusCode.Unauthorized,"el usuario o la contraseña no son validos");
+                return Content(HttpStatusCode.Unauthorized, "el usuario o la contraseña no son validos");
             }
 
         }
@@ -66,26 +67,25 @@ namespace WebApplicationCLIP.Controllers
 
         public IHttpActionResult RegisterUser(JObject usuarioJSON)
         {
-
             if (usuarioJSON == null)
-                throw new HttpResponseException(HttpStatusCode.BadRequest);
+                return BadRequest();
 
             Usuario usuario = Usuario.CrearUsuarioConJObject(usuarioJSON);
             GestorUsuario gestor = new GestorUsuario();
 
-            int respuesta = gestor.registrarUsuario(usuario);
-
-            if (respuesta == 0)
+            try
             {
-                return Ok();
+                gestor.registrarUsuario(usuario);
+                return Ok("El usuario se registro exitosamente");
             }
-            else
+            catch (Exception e)
             {
-                return Content(HttpStatusCode.Conflict, respuesta);
+                return Content(HttpStatusCode.BadRequest, e.Message);
             }
         }
 
-        public static string Encriptar(string texto) {
+        public static string Encriptar(string texto)
+        {
             SHA1 sha1 = SHA1CryptoServiceProvider.Create();
             Byte[] textOriginal = ASCIIEncoding.Default.GetBytes(texto);
             Byte[] hash = sha1.ComputeHash(textOriginal);
@@ -100,7 +100,7 @@ namespace WebApplicationCLIP.Controllers
         public static string GenerarToken(string NombreDeUsuario)
         {
             NombreDeUsuario = NombreDeUsuario.ToLower();
-            return Encriptar(NombreDeUsuario+"aaa");
+            return Encriptar(NombreDeUsuario + "aaa");
 
             /*
             // var audienceToken = ConfigurationManager.AppSettings["JWT_AUDIENCE_TOKEN"];
@@ -127,13 +127,13 @@ namespace WebApplicationCLIP.Controllers
             var jwtTokenString = tokenHandler.WriteToken(jwtSecurityToken);
 
             return jwtTokenString;       */
-              
+
         }
 
         public static bool ValidarToken(SesionDeUsuario sesion)
         {
             //aca hay que validar el token y verificar que corresponda al usuario
-                        
+
             string nombre = sesion.NombreDeUsuario.ToLower();
             string token = sesion.Token;
 
@@ -144,11 +144,11 @@ namespace WebApplicationCLIP.Controllers
             else return false;
         }
 
-        private int ValidarCredencial(string nombreUsuario, string contraseña)
+        private bool ValidarCredencial(string nombreUsuario, string contraseña)
         {
             /* aca va la consulta a la BD*/
 
-            GestorUsuario gestorUsuario = new GestorUsuario();            
+            GestorUsuario gestorUsuario = new GestorUsuario();
             return gestorUsuario.consultarCredencialesUsuario(nombreUsuario, contraseña);
         }
     }

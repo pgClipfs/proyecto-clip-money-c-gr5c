@@ -32,33 +32,19 @@ namespace WebApplicationCLIP.Models
 
         private Usuario() { }
 
-        public static Usuario ensablarUsuario(List<string> ensamblador, Usuario usuario)
-        {
-            usuario.Dni = ensamblador[0];
-            usuario.Nombre = ensamblador[1];
-            usuario.Apellido = ensamblador[2];
-            usuario.SitCrediticia = ensamblador[3];
-            usuario.NombreDeUsuario = ensamblador[4];
-            usuario.Email = ensamblador[5].ToLower();
-            usuario.Telefono = ensamblador[6];
-            usuario.Contraseña = ensamblador[7];
-
-            return usuario;
-        }
-
+      
         public static Usuario CrearUsuarioConJObject(JObject usuarioJSON)
-        {
+        {            
             Usuario usuario = new Usuario()
             {
-                Nombre = (string)usuarioJSON["Nombre"],
+                NombreDeUsuario = (string)usuarioJSON["NombreDeUsuario"],
                 Apellido = (string)usuarioJSON["Apellido"],
                 Dni = (string)usuarioJSON["Dni"],
-                NombreDeUsuario = (string)usuarioJSON["NombreDeUsuario"],
                 Email = (string)usuarioJSON["Email"],
+                Nombre = (string)usuarioJSON["Nombre"],
                 SitCrediticia = (string)usuarioJSON["SitCrediticia"],
                 Telefono = (string)usuarioJSON["Telefono"],
                 Contraseña = (string)usuarioJSON["Contraseña"],
-
             };
             return usuario;
         }
@@ -80,7 +66,7 @@ namespace WebApplicationCLIP.Models
             }
             catch (Exception e)
             {
-                Console.WriteLine("Parametros invalidos para ensamblar el Usuario --> " + e.Message);
+                Console.WriteLine("Parametros invalidos para ensamblar el Usuario --> " + e.Message);                
            }
             return usuario;
         }

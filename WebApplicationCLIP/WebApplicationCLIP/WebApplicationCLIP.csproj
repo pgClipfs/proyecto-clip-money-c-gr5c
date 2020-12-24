@@ -158,7 +158,6 @@
     <Compile Include="BD\ConexionBD.cs" />
     <Compile Include="BD\CRUD.cs" />
     <Compile Include="BD\UsuarioDAO.cs" />
-    <Compile Include="BD\UsuarioDAOImp.cs" />
     <Compile Include="Controllers\DefaultController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />

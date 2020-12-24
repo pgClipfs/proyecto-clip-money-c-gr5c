@@ -3,15 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.Http;
+
 
 namespace WebApplicationCLIP.BD
 {
     public interface CRUD<T>
     {
         List<T> listarTodos();
-        int consultar(T t);
-        int registrar(T t);
-        int modificar(T t);
-        int eliminar(T t);
+        T consultar(T t);
+        void registrar(T t);
+        void modificar(T t);
+        void eliminar(T t);
     }
 }

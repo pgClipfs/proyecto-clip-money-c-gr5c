@@ -47,15 +47,17 @@ namespace WebApplicationCLIP.Controllers
 
             string nombreUsuario = login.NombreDeUsuario;
             Usuario usuario = Usuario.CrearUsuarioConNombreDeUsuario(nombreUsuario);            
-            UsuarioDAOImp usuarioDAO = new UsuarioDAOImp();
+            UsuarioDAO usuarioDAO = new UsuarioDAO();
 
-            if (usuarioDAO.consultar(usuario)==0)
+            try
             {
-                return Ok(usuario);
+                return Ok(usuarioDAO.consultar(usuario));
             }
-            return Content(HttpStatusCode.Conflict, 1);
-            
-
+            catch (Exception e)
+            {
+                return Content(HttpStatusCode.BadRequest, e.Message);
+            }
+                                   
         }
 
         private int ValidarCredencial(string nombreDeUsuario, object contraseña)
