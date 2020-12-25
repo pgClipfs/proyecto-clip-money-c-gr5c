@@ -20,6 +20,14 @@ namespace WebApplicationCLIP.Models
         {
             //Constructor vacio
         }
+        public static Cuenta ObtenerCuenta()
+        {
+            Cuenta c = new Cuenta()
+            {
+                Cvu = "12345"
+            };
+            return c;
+        }
 
         public Cuenta(string cvu, Usuario usuario)
         {

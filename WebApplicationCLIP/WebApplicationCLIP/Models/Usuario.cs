@@ -17,6 +17,13 @@ namespace WebApplicationCLIP.Models
         public string Email { get; private set; }
         public string Telefono { get; private set; }
         public string Contraseña { get; private set; }
+        public static Usuario prueba()
+        {
+            return new Usuario()
+            {
+                Dni = "12345678"
+            };
+        }
                
          private Usuario(string dni, string nombre, string apellido, string sitCrediticia, string nombreDeUsuario, string email, string telefono, string contraseña)
          {
