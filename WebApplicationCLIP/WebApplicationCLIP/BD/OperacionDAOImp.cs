@@ -7,7 +7,7 @@ using System.Data.SqlClient;
 
 namespace WebApplicationCLIP.BD
 {
-    public class CuentaDAOImp : CuentaDAO
+    public class OperacionDAOImp : OperacionDAO
     {
         public int consultar(Cuenta t)
         {
@@ -32,7 +32,7 @@ namespace WebApplicationCLIP.BD
                         }
                         ensamblador.Add(lector.GetValue(i).ToString());
                     }
-                    
+
                 }
                 if (ensamblador.Count > 0)
                 {
@@ -77,7 +77,7 @@ namespace WebApplicationCLIP.BD
 
 
 
-        public string obtenerUltimoCVU() 
+        public string obtenerUltimoCVU()
         {
             string script = "SELECT TOP 1 * FROM CUENTAS ORDER BY CVU DESC";
             string ultimoCVU;

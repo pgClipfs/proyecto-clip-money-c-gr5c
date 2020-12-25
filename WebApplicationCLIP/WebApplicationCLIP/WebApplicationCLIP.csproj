@@ -157,6 +157,10 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="BD\ConexionBD.cs" />
     <Compile Include="BD\CRUD.cs" />
+    <Compile Include="BD\CuentaDAO.cs" />
+    <Compile Include="BD\CuentaDAOImp.cs" />
+    <Compile Include="BD\OperacionDAO.cs" />
+    <Compile Include="BD\OperacionDAOImp.cs" />
     <Compile Include="BD\UsuarioDAO.cs" />
     <Compile Include="BD\UsuarioDAOImp.cs" />
     <Compile Include="Controllers\DefaultController.cs" />

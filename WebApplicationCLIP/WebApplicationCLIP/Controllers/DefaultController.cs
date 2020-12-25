@@ -31,6 +31,31 @@ namespace WebApplicationCLIP.Controllers
             return Ok(Operacion.ObtenerOperacionesDePrueba());
         }
 
+        [HttpGet]
+        [EnableCors(origins: "*", headers: "*", methods: "*")]
+        [Route("prueba")]
+        public IHttpActionResult GetDatosUsuario()
+        {
+            CuentaDAOImp cuenta = new CuentaDAOImp();
+
+            Cuenta c = Cuenta.ObtenerCuenta();
+            int num = cuenta.consultar(c);
+            return Ok(c);
+        }
+
+        /*[HttpGet]
+        [EnableCors(origins: "*", headers: "*", methods: "*")]
+        [Route("pruebaUsuario")]
+        public IHttpActionResult pruebaUsuario()
+        {
+
+            UsuarioDAOImp usuario = new UsuarioDAOImp();
+
+            Usuario u = Usuario.prueba();
+            int num = u.consultar(c);
+            return Ok(c);
+        }*/
+
         [HttpPost]
         [EnableCors(origins: "*", headers: "*", methods: "*")]
         [Route("usuario")]
