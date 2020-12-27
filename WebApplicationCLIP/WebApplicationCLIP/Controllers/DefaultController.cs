@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Net;
+using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Cors;
 using WebApplicationCLIP.BD;
@@ -27,7 +28,7 @@ namespace WebApplicationCLIP.Controllers
             }
             catch (Exception e)
             {
-                return Content(HttpStatusCode.Conflict,e.Message);
+                return Content(HttpStatusCode.Conflict, e.Message);
             }
             //por ahora no se valida la sesion ni nada, simplemente se devuelven las operaciones del usuario
             //if (!LoginController.ValidarToken(sesion))return Unauthorized();
@@ -45,43 +46,32 @@ namespace WebApplicationCLIP.Controllers
             return Ok(c);
         }
 
-        /*[HttpGet]
-        [EnableCors(origins: "*", headers: "*", methods: "*")]
-        [Route("pruebaUsuario")]
-        public IHttpActionResult pruebaUsuario()
-        {
-            UsuarioDAOImp usuario = new UsuarioDAOImp();
-            Usuario u = Usuario.prueba();
-            int num = u.consultar(c);
-            return Ok(c);
-        }*/
-
         [HttpPost]
         [EnableCors(origins: "*", headers: "*", methods: "*")]
         [Route("usuario")]
         public IHttpActionResult GetDatosUsuario(SesionDeUsuario login)
         {
-            if (login == null)
-                return Content(HttpStatusCode.BadRequest, "sesion de usuario expirada");
-            //throw new HttpResponseException(HttpStatusCode.BadRequest);
-
-            if (!LoginController.ValidarToken(login))
-            {
-                //token invalido
-                return Content(HttpStatusCode.Unauthorized, "token de usuario invalido");
-            }
-
-            string nombreUsuario = login.NombreDeUsuario;
-            Usuario usuario = Usuario.CrearUsuarioConNombreDeUsuario(nombreUsuario);
-            UsuarioDAO usuarioDAO = new UsuarioDAO();
-
             try
             {
+                LoginController.ValidarSesion(login);
+
+                string nombreUsuario = login.NombreDeUsuario;
+                Usuario usuario = Usuario.CrearUsuarioConNombreDeUsuario(nombreUsuario);
+                UsuarioDAO usuarioDAO = new UsuarioDAO();
+
                 return Ok(usuarioDAO.consultar(usuario));
+            }
+            catch (UnauthorizedAccessException e)
+            {
+                return Content(HttpStatusCode.Unauthorized, e.Message);
+            }
+            catch (HttpRequestException e)
+            {
+                return BadRequest();
             }
             catch (Exception e)
             {
-                return Content(HttpStatusCode.BadRequest, e.Message);
+                return Content(HttpStatusCode.Conflict, e.Message);
             }
 
         }

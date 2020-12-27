@@ -24,22 +24,9 @@ namespace WebApplicationCLIP.Controllers
     [RoutePrefix("api/login")]
     public class LoginController : ApiController
     {
-        [HttpGet]
-        [Route("echoping")]
-        public IHttpActionResult EchoPing() { return Ok(true); }
-
-        [HttpGet]
-        [Route("echouser")]
-        public IHttpActionResult EchoUsuario()
-        {
-            var identity = Thread.CurrentPrincipal.Identity;
-            return Ok($" IPrincipal-user: {identity.Name} - IsAuthenticated: {identity.IsAuthenticated}");
-        }
-
         [HttpPost]
         [EnableCors(origins: "*", headers: "*", methods: "*")]
         [Route("authenticate")]
-
         public IHttpActionResult Authenticate(SolicitudLogin login)
         {
             if (login == null)
@@ -64,7 +51,6 @@ namespace WebApplicationCLIP.Controllers
         [HttpPost]
         [EnableCors(origins: "*", headers: "*", methods: "*")]
         [Route("registerUser")]
-
         public IHttpActionResult RegisterUser(JObject usuarioJSON)
         {
             if (usuarioJSON == null)
@@ -84,7 +70,20 @@ namespace WebApplicationCLIP.Controllers
             }
         }
 
-        public static string Encriptar(string texto)
+        public static void ValidarSesion(SesionDeUsuario login)
+        {
+            if (login == null)
+            {
+                throw new HttpRequestException();
+            }
+
+            if (!LoginController.ValidarToken(login))
+            {
+                throw new UnauthorizedAccessException("sesion de usuario expirada");
+            }
+        }
+
+        private static string Encriptar(string texto)
         {
             SHA1 sha1 = SHA1CryptoServiceProvider.Create();
             Byte[] textOriginal = ASCIIEncoding.Default.GetBytes(texto);
@@ -97,7 +96,7 @@ namespace WebApplicationCLIP.Controllers
             return cadena.ToString();
         }
 
-        public static string GenerarToken(string NombreDeUsuario)
+        private static string GenerarToken(string NombreDeUsuario)
         {
             NombreDeUsuario = NombreDeUsuario.ToLower();
             return Encriptar(NombreDeUsuario + "aaa");
@@ -130,7 +129,7 @@ namespace WebApplicationCLIP.Controllers
 
         }
 
-        public static bool ValidarToken(SesionDeUsuario sesion)
+        private static bool ValidarToken(SesionDeUsuario sesion)
         {
             //aca hay que validar el token y verificar que corresponda al usuario
 
