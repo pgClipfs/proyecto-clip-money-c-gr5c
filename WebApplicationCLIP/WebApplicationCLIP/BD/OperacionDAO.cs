@@ -10,13 +10,10 @@ namespace WebApplicationCLIP.BD
 {
     public class OperacionDAO : CRUD<Operacion>
     {
-
-        public Operacion consultar(Cuenta t)
+        public List<Operacion> consultarOperacionesPorCVU(string cvu)
         {
-            string script = "SELECT * FROM CUENTAS WHERE CVU = " + "'" + t.Cvu + "'";
-
-            Operacion operacionResultado=null;
-
+            string script = "SELECT * FROM OPERACIONES WHERE CVU = " + "'" + cvu + "'";
+            List<Operacion> temp = null;
             ConexionBD conexion = new ConexionBD();
             conexion.abrir();
 
@@ -24,24 +21,26 @@ namespace WebApplicationCLIP.BD
             {
                 SqlCommand comando = new SqlCommand(script, conexion.conexionBD);
                 SqlDataReader lector = comando.ExecuteReader();
-                List<string> ensamblador = new List<string>();
+                List<List<string>> operaciones = new List<List<string>>();
+                int j = 0;
                 while (lector.Read())
                 {
+                    operaciones.Add(new List<string>());
                     for (int i = 0; i < lector.FieldCount; i++)
                     {
-                        if (i == 1)
-                        {
-                            string dni = lector.GetValue(1).ToString();
-                            i++;
-                        }
-                        ensamblador.Add(lector.GetValue(i).ToString());
+                        operaciones[j].Add(lector.GetValue(i).ToString());
                     }
+                    j++;
 
                 }
-                if (ensamblador.Count > 0)
+                if (operaciones.Count > 0)
                 {
+                    temp = new List<Operacion>();
+                    for (int i = 0; i < operaciones.Count; i++)
+                    {
+                        temp.Add(Operacion.ensamblarOperacion(operaciones[i]));
+                    }
                     conexion.cerrar();
-                    t = Cuenta.ensamblarCuenta(ensamblador, t);
 
                     //aca hay que "ensamblar" el objeto operacion resultado
                     //operacionResultado = algo
@@ -53,7 +52,13 @@ namespace WebApplicationCLIP.BD
             }
 
             conexion.cerrar();
-            return operacionResultado;
+
+            return temp;
+        }
+
+        public Operacion consultar(string cvu)
+        {
+            return null;
         }
 
         public Operacion consultar(Operacion t)
@@ -83,7 +88,6 @@ namespace WebApplicationCLIP.BD
 
             ConexionBD conexion = new ConexionBD();
             conexion.abrir();
-
 
             try
             {

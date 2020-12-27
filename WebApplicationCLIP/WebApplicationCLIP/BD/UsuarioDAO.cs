@@ -9,7 +9,6 @@ namespace WebApplicationCLIP.BD
 {
     public class UsuarioDAO : CRUD<Usuario>
     {
-
         public Usuario consultar(Usuario t)
         {
             string script = "SELECT * FROM USUARIOS WHERE DNI = " + "'" + t.Dni + "'";

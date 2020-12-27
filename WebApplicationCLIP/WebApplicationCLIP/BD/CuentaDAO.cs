@@ -9,13 +9,13 @@ namespace WebApplicationCLIP.BD
 {
     public class CuentaDAO : CRUD<Cuenta>
     {
-        public Cuenta consultar(Cuenta t)
+        public Cuenta consultarOperaciones(Cuenta t)
         {
             string script = "SELECT * FROM CUENTAS WHERE CVU = " + "'" + t.Cvu + "'";
 
             ConexionBD conexion = new ConexionBD();
             conexion.abrir();
-                List<string> ensamblador = new List<string>();
+            List<string> ensamblador = new List<string>();
 
             try
             {
@@ -98,6 +98,11 @@ namespace WebApplicationCLIP.BD
             }
             conexion.cerrar();
             return "ERROR";
+        }
+
+        public Cuenta consultar(Cuenta t)
+        {
+            throw new NotImplementedException();
         }
     }
 }

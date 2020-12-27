@@ -25,28 +25,19 @@ namespace WebApplicationCLIP.Gestores
         }
 
 
-        public int consultarCuenta(string CVU) 
-        {
-            Cuenta cuenta = Cuenta.crearCuentaConCVU(CVU);
-            CuentaDAOImp cuentaDAO = new CuentaDAOImp();
-            int respuesta = cuentaDAO.consultar(cuenta);
-            return respuesta;
-        }
-
-
         public Cuenta TraerCuenta(string CVU)
         {
             Cuenta cuenta = Cuenta.crearCuentaConCVU(CVU);
-            CuentaDAOImp cuentaDAO = new CuentaDAOImp();
+            CuentaDAO cuentaDAO = new CuentaDAO();
             cuentaDAO.consultar(cuenta);
             return cuenta;
         }
 
 
 
-        private string obtenerUltimoCVU() 
+        private string obtenerUltimoCVU()
         {
-            CuentaDAOImp CuentaDAO = new CuentaDAOImp();
+            CuentaDAO CuentaDAO = new CuentaDAO();
             return CuentaDAO.obtenerUltimoCVU();
         }
 

@@ -18,17 +18,19 @@ namespace WebApplicationCLIP.Controllers
         [HttpPost]
         [EnableCors(origins: "*", headers: "*", methods: "*")]
         [Route("operaciones")]
-        public IHttpActionResult GetOperacionesUsuario([FromBody]JObject data)            
+        public IHttpActionResult GetOperacionesCuenta(string cvu)
         {
-            SesionDeUsuario sesion = data["SesionDeUsuario"].ToObject<SesionDeUsuario>();
-            int cantidad = data["cantidad"].ToObject<int>();
-
-            if (sesion== null) throw new HttpResponseException(HttpStatusCode.BadRequest);
-
+            try
+            {
+                GestorOperacion gestorOperacion = new GestorOperacion();
+                return Ok(gestorOperacion.ObtenerOperacionesPorCVU(cvu));
+            }
+            catch (Exception e)
+            {
+                return Content(HttpStatusCode.Conflict,e.Message);
+            }
             //por ahora no se valida la sesion ni nada, simplemente se devuelven las operaciones del usuario
             //if (!LoginController.ValidarToken(sesion))return Unauthorized();
-            
-            return Ok(Operacion.ObtenerOperacionesDePrueba());
         }
 
         [HttpGet]
@@ -36,10 +38,10 @@ namespace WebApplicationCLIP.Controllers
         [Route("prueba")]
         public IHttpActionResult GetDatosUsuario()
         {
-            CuentaDAOImp cuenta = new CuentaDAOImp();
+            //CuentaDAO cuenta = new CuentaDAO();
 
             Cuenta c = Cuenta.ObtenerCuenta();
-            int num = cuenta.consultar(c);
+            //int num = cuenta.consultar(c);
             return Ok(c);
         }
 
@@ -48,9 +50,7 @@ namespace WebApplicationCLIP.Controllers
         [Route("pruebaUsuario")]
         public IHttpActionResult pruebaUsuario()
         {
-
             UsuarioDAOImp usuario = new UsuarioDAOImp();
-
             Usuario u = Usuario.prueba();
             int num = u.consultar(c);
             return Ok(c);
@@ -62,16 +62,17 @@ namespace WebApplicationCLIP.Controllers
         public IHttpActionResult GetDatosUsuario(SesionDeUsuario login)
         {
             if (login == null)
-                return Content(HttpStatusCode.BadRequest,"sesion de usuario expirada");
-                //throw new HttpResponseException(HttpStatusCode.BadRequest);
-            
-            if (!LoginController.ValidarToken(login)){
+                return Content(HttpStatusCode.BadRequest, "sesion de usuario expirada");
+            //throw new HttpResponseException(HttpStatusCode.BadRequest);
+
+            if (!LoginController.ValidarToken(login))
+            {
                 //token invalido
-                return Content(HttpStatusCode.Unauthorized, "token de usuario invalido");                
+                return Content(HttpStatusCode.Unauthorized, "token de usuario invalido");
             }
 
             string nombreUsuario = login.NombreDeUsuario;
-            Usuario usuario = Usuario.CrearUsuarioConNombreDeUsuario(nombreUsuario);            
+            Usuario usuario = Usuario.CrearUsuarioConNombreDeUsuario(nombreUsuario);
             UsuarioDAO usuarioDAO = new UsuarioDAO();
 
             try
@@ -82,12 +83,12 @@ namespace WebApplicationCLIP.Controllers
             {
                 return Content(HttpStatusCode.BadRequest, e.Message);
             }
-                                   
+
         }
 
         private int ValidarCredencial(string nombreDeUsuario, object contraseña)
         {
-            
+
             throw new NotImplementedException();
         }
 

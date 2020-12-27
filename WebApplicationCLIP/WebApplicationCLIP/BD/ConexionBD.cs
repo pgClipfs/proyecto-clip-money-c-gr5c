@@ -16,25 +16,25 @@ namespace WebApplicationCLIP.BD
 
         public SqlConnection conexionBD = new SqlConnection();
 
-        public ConexionBD() 
+        public ConexionBD()
         {
             conexionBD.ConnectionString = cadena;
         }
 
-        public void abrir() 
+        public void abrir()
         {
-            try 
+            try
             {
                 conexionBD.Open();
                 Console.WriteLine("Conexion abierta");
             }
-            catch (Exception e) 
+            catch (Exception e)
             {
                 Console.WriteLine("Error al abrir BD : " + e.Message);
             }
         }
 
-        public void cerrar() 
+        public void cerrar()
         {
             conexionBD.Close();
             Console.WriteLine("Conexion cerrada");
