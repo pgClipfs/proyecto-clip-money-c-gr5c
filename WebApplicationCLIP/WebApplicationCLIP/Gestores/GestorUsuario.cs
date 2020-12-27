@@ -34,7 +34,7 @@ namespace WebApplicationCLIP.Gestores
         }
 
 
-        public void registrarUsuario(string dni, string nombre, string apellido, string nombreDeUsuario, string email, string telefono, string contraseña)
+      /*  public void registrarUsuario(string dni, string nombre, string apellido, string nombreDeUsuario, string email, string telefono, string contraseña)
         {
             try
             {
@@ -45,7 +45,7 @@ namespace WebApplicationCLIP.Gestores
             {
                 throw e;
             }
-        }
+        }*/
 
         public void registrarUsuario(Usuario usuarioNuevo)
         {

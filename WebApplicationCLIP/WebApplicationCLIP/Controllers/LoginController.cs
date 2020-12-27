@@ -29,23 +29,30 @@ namespace WebApplicationCLIP.Controllers
         [Route("authenticate")]
         public IHttpActionResult Authenticate(SolicitudLogin login)
         {
-            if (login == null)
-                return BadRequest("asd");
-            //return Content(HttpStatusCode.BadRequest, "bad request");
-
-
-            if (ValidarCredencial(login.NombreDeUsuario, login.Contraseña))
+            try
             {
-                //var token = GenerarToken(login.NombreDeUsuario);
-                Console.Write(login.NombreDeUsuario);
-                var token = GenerarToken(login.NombreDeUsuario);
-                return Ok(new SesionDeUsuario(login.NombreDeUsuario, token));
-            }
-            else
-            {
-                return Content(HttpStatusCode.Unauthorized, "el usuario o la contraseña no son validos");
-            }
+                if (login == null) throw new HttpRequestException();
 
+                if (ValidarCredencial(login.NombreDeUsuario, login.Contraseña))
+                {
+                    //var token = GenerarToken(login.NombreDeUsuario);
+                    Console.Write(login.NombreDeUsuario);
+                    var token = GenerarToken(login.NombreDeUsuario);
+                    return Ok(new SesionDeUsuario(login.NombreDeUsuario, token));
+                }
+                else
+                {
+                    return Content(HttpStatusCode.Unauthorized, "el usuario o la contraseña no son validos");
+                }
+            }
+            catch (HttpRequestException e)
+            {
+                return BadRequest();
+            }
+            catch (Exception e)
+            {
+                return Content(HttpStatusCode.Conflict, e.Message);
+            }            
         }
 
         [HttpPost]
@@ -56,7 +63,7 @@ namespace WebApplicationCLIP.Controllers
             if (usuarioJSON == null)
                 return BadRequest();
 
-            Usuario usuario = Usuario.CrearUsuarioConJObject(usuarioJSON);
+            Usuario usuario = new Usuario(usuarioJSON);
             GestorUsuario gestor = new GestorUsuario();
 
             try

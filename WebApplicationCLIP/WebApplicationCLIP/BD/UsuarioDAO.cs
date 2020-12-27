@@ -44,7 +44,7 @@ namespace WebApplicationCLIP.BD
             {
                 throw new Exception("Error al ejecutar la consulta --> " + e.Message);
             }
-            return Usuario.ensablarUsuario(ensamblador);
+            return Usuario.ensamblarUsuario(ensamblador);
 
         }
 
