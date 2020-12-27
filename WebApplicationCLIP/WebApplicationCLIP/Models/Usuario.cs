@@ -45,6 +45,10 @@ namespace WebApplicationCLIP.Models
             {
                 throw new ArgumentNullException("parametros de usuario invalidos");
             }
+        /*    if (u.Dni == "" || u.Email == "" || u.Apellido == "" || u.Nombre == "" || u.NombreDeUsuario == "")
+            {
+                throw new ArgumentNullException("parametros de usuario invalidos");
+            }*/
         }
 
         public Usuario(JObject usuarioJSON)
@@ -67,27 +71,25 @@ namespace WebApplicationCLIP.Models
             }
         }
 
-        public static Usuario ensamblarUsuario(List<string> ensamblador)
-        {
-            Usuario usuario = new Usuario();
-
+        public Usuario(List<string> ensamblador)
+        {            
             try
             {
-                usuario.Dni = ensamblador[0];
-                usuario.Nombre = ensamblador[1];
-                usuario.Apellido = ensamblador[2];
-                usuario.SitCrediticia = ensamblador[3];
-                usuario.NombreDeUsuario = ensamblador[4];
-                usuario.Email = ensamblador[5].ToLower();
-                usuario.Telefono = ensamblador[6];
-                usuario.Contraseña = ensamblador[7]; //por seguridad, que la contraseña no este en memoria
-                comprobarIntegridadDeParametros(usuario);
+                this.Dni = ensamblador[0];
+                this.Nombre = ensamblador[1];
+                this.Apellido = ensamblador[2];
+                this.SitCrediticia = ensamblador[3];
+                this.NombreDeUsuario = ensamblador[4];
+                this.Email = ensamblador[5].ToLower();
+                this.Telefono = ensamblador[6];
+                this.Contraseña = ensamblador[7]; //por seguridad, que la contraseña no este en memoria
+                comprobarIntegridadDeParametros(this);
             }
             catch (Exception e)
             {
                 Console.WriteLine("Parametros invalidos para ensamblar el Usuario --> " + e.Message);
+                throw e;
             }
-            return usuario;
         }
 
 
@@ -106,7 +108,7 @@ namespace WebApplicationCLIP.Models
             return usuario;
         }
 
-        public static Usuario nuevoUsuario(string dni, string nombre, string apellido, string nombreDeUsuario, string email, string telefono, string contraseña)
+      /*  public static Usuario nuevoUsuario(string dni, string nombre, string apellido, string nombreDeUsuario, string email, string telefono, string contraseña)
         {
             //    Usuario usuarioNuevo = new Usuario(dni, nombre, apellido, "normal", nombreDeUsuario, email.ToLower(), telefono, contraseña);
 
@@ -131,7 +133,7 @@ namespace WebApplicationCLIP.Models
             }
             
             return usuarioNuevo;
-        }
+        }*/
 
     }
 }

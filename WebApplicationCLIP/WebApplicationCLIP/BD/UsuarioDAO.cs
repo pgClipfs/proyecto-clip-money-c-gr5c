@@ -21,6 +21,7 @@ namespace WebApplicationCLIP.BD
             ConexionBD conexion = new ConexionBD();
             conexion.abrir();
             List<string> ensamblador = new List<string>();
+            Usuario usuario_resultado;
 
             try
             {
@@ -33,19 +34,14 @@ namespace WebApplicationCLIP.BD
                         ensamblador.Add(lector.GetValue(i).ToString());
                     }
                 }
-                if (ensamblador.Count > 0)
-                {
-                    conexion.cerrar();
-
-                    conexion.cerrar();
-                }
+                usuario_resultado =new Usuario(ensamblador);
             }
             catch (Exception e)
             {
                 throw new Exception("Error al ejecutar la consulta --> " + e.Message);
             }
-            return Usuario.ensamblarUsuario(ensamblador);
-
+            conexion.cerrar();
+            return usuario_resultado;
         }
 
         public void comprobarRepeticion(Usuario t)
