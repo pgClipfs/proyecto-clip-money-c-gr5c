@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpParams } from "@angular/common/http";
 import { HttpClientModule } from '@angular/common/http';
 import { Usuario } from '../modelos/usuario';
 import { BehaviorSubject, Observable } from 'rxjs';
@@ -16,15 +16,12 @@ export class OperacionService {
 
   constructor(private http: HttpClient, private loginService: LoginService) { }
 
-
   public getOperacionesCvu(cvu: string): Observable<any> {
 
-    // this.loginService.usuarioLogueado
-
-    return this.http.post<any>(this.urlApi + 'get/operaciones',
-      cvu)
+    //no es lo ideal pasar los parametros asi, pero no logre que funcione de otra forma
+    return this.http.post<any>(this.urlApi + 'get/operaciones?cvu='+cvu, { })
       .pipe(
-        retry(2), //esto es para decirle cuantas veces lo tiene que intentar antes de tirar error :o
+        //retry(2), //esto es para decirle cuantas veces lo tiene que intentar antes de tirar error :o
         catchError(err => {
           return err;
         }),
