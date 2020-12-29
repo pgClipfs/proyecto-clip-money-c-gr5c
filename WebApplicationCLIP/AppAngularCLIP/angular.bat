@@ -1,0 +1,1 @@
+start /min cmd /c "code . && echo iniciando proyecto angular en navegador && ng serve -o"
