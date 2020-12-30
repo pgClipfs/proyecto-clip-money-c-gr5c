@@ -37,9 +37,14 @@ namespace WebApplicationCLIP.Controllers
         [HttpPost]
         [EnableCors(origins: "*", headers: "*", methods: "*")]
         [Route("operaciones/deposito")]
-        public IHttpActionResult DepositarMonto(SesionDeUsuario login, float monto, string cvu)
+        public IHttpActionResult DepositarMonto(JObject obj)
+        //public IHttpActionResult DepositarMonto(float monto, string cvu, [FromBody] SesionDeUsuario login)
         {
+            float monto = (float)obj["Monto"];
+            string cvu = (string)obj["Cvu"];
+            SesionDeUsuario login = obj["SesionDeUsuario"].ToObject<SesionDeUsuario>();            
             Cuenta cuenta;
+            
             try
             {
                 CuentaDAO cuentaDAO = new CuentaDAO();
@@ -47,17 +52,19 @@ namespace WebApplicationCLIP.Controllers
             }
             catch (Exception e)
             {
-                return Content(HttpStatusCode.ExpectationFailed, "No se encontró una cuenta con ese CVU \n" + e.Message);
+                return Content(HttpStatusCode.ExpectationFailed, "No se encontró una cuenta con ese CVU " + e.Message);
             }
+
             try
             {
                 LoginController.ValidarSesion(login);
+                Usuario usuario = GestorUsuario.consultarUsuarioPorNombreDeUsuario(login.NombreDeUsuario);
 
-                string nombreUsuario = login.NombreDeUsuario;
-                Usuario usuario = Usuario.CrearUsuarioConNombreDeUsuario(nombreUsuario);
-                UsuarioDAO usuarioDAO = new UsuarioDAO();
+                if (!(cuenta.Usuario.ToString()==usuario.ToString()))
+                {
+                    return Content(HttpStatusCode.Forbidden, "esa cuenta no pertenece al usuario");
+                }
 
-                //return Ok(usuarioDAO.consultar(usuario));
             }
             catch (UnauthorizedAccessException e)
             {
@@ -65,12 +72,13 @@ namespace WebApplicationCLIP.Controllers
             }
             catch (HttpRequestException e)
             {
-                return BadRequest();
+                return BadRequest("sesion de usuario null");
             }
             catch (Exception e)
             {
                 return Content(HttpStatusCode.Conflict, e.Message);
             }
+
             try
             {
                 cuenta.Depositar(monto);

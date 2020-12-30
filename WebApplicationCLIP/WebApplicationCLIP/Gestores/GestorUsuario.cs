@@ -78,6 +78,23 @@ namespace WebApplicationCLIP.Gestores
 
         }
 
+        public static Usuario consultarUsuarioPorNombreDeUsuario(string nombre)
+        {
+            Usuario temp = Usuario.CrearUsuarioConNombreDeUsuario(nombre);
+            UsuarioDAO usuarioDAO = new UsuarioDAO();
+
+            try
+            {
+                Usuario usu = usuarioDAO.consultar(temp);
+                return usu;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+        }
+
 
     }
 }
