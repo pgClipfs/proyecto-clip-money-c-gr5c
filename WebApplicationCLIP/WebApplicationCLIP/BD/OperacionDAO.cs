@@ -66,7 +66,6 @@ namespace WebApplicationCLIP.BD
             
             ConexionBD conexion = new ConexionBD();
             conexion.abrir();
-            bool registroExitoso = false;
 
             string ultimoID = "";
             string temp = "";
@@ -92,18 +91,14 @@ namespace WebApplicationCLIP.BD
                 {
                     ultimoID = lectorID.GetValue(0).ToString();
                 }
-                registroExitoso = true;
                 lectorID.Close();
-
-
             }
             catch (Exception e)
             {
                 Console.WriteLine("Error al registrar la operación depósito: " + e);
-                conexion.cerrar();
-                
+                throw e;
             }
-            if (registroExitoso)
+            /*if (registroExitoso)
             {
                 float resultado = montoActual + o.Monto;
                 string depositar = "UPDATE CUENTAS SET SALDO = " + "'" + resultado.ToString() + "'" + " WHERE CVU = " + "'" + cvu + "'";
@@ -118,74 +113,8 @@ namespace WebApplicationCLIP.BD
                     Console.WriteLine("Se revirtió el registro de la operación" + e);
                     conexion.cerrar(); 
                 }
-            }
+            }*/
             conexion.cerrar();
-        }
-
-        public Operacion extraer(string cvu, float monto)
-        {
-            Operacion o = Operacion.crearOperacionExtraccion(null, monto);
-            string registrarExtraccion = "INSERT INTO OPERACIONES VALUES ('" + o.Monto + "', '" + o.Fecha.Date.ToString("yyyy-MM-dd") + "', '" + cvu + "', '" + o.TipoOperacion + "')";
-            string idOperacion = "SELECT TOP 1 ID_OPERACION FROM OPERACIONES ORDER BY ID_OPERACION DESC";
-            string montoCuenta = "SELECT SALDO FROM CUENTAS WHERE CVU = " + "'" + cvu + "'";
-            float montoActual = 0;
-
-            ConexionBD conexion = new ConexionBD();
-            conexion.abrir();
-            bool registroExitoso = false;
-
-            string ultimoID = "";
-            string temp = "";
-
-            //Registro de operación extracción
-            try
-            {
-                SqlCommand comando = new SqlCommand(registrarExtraccion, conexion.conexionBD);
-                comando.ExecuteNonQuery();
-
-                SqlCommand comandoSaldo = new SqlCommand(montoCuenta, conexion.conexionBD);
-                SqlDataReader lectorSaldo = comandoSaldo.ExecuteReader();
-                while (lectorSaldo.Read())
-                {
-                    temp = lectorSaldo.GetValue(0).ToString();
-                }
-                montoActual = float.Parse(temp);
-                lectorSaldo.Close();
-
-                SqlCommand comandoID = new SqlCommand(idOperacion, conexion.conexionBD);
-                SqlDataReader lectorID = comandoID.ExecuteReader();
-                while (lectorID.Read())
-                {
-                    ultimoID = lectorID.GetValue(0).ToString();
-                }
-                registroExitoso = true;
-                lectorID.Close();
-
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine("Error al registrar la operación extracción: " + e);
-                conexion.cerrar();
-            }
-            if (registroExitoso)
-            {
-                float resultado = montoActual - monto;
-                string extraer = "UPDATE CUENTAS SET SALDO = " + "'" + resultado.ToString() + "'" + " WHERE CVU = " + "'" + cvu + "'";
-                try
-                {
-                    SqlCommand comando = new SqlCommand(extraer, conexion.conexionBD);
-                    comando.ExecuteNonQuery();
-                }
-                catch (Exception e)
-                {
-                    string delete = "DELETE FROM OPERACIONES WHERE ID_OPERACION =" + ultimoID;
-                    Console.WriteLine("Se revirtió el registro de la operación" + e);
-                    conexion.cerrar();
-
-                }
-            }
-            conexion.cerrar();
-            return o;
         }
 
         public Operacion consultar(string cvu)

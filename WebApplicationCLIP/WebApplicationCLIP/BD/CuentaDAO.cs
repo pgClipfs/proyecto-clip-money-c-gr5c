@@ -31,7 +31,7 @@ namespace WebApplicationCLIP.BD
                 if (ensamblador.Count > 0)
                 {
                     conexion.cerrar();
-                    
+
                 }
             }
             catch (Exception e)
@@ -56,15 +56,27 @@ namespace WebApplicationCLIP.BD
 
         public void modificar(Cuenta t)
         {
-            throw new NotImplementedException();
+            ConexionBD conexion = new ConexionBD();
+            conexion.abrir();
+            string actualizar = "UPDATE CUENTAS SET SALDO = " + "'" + t.Saldo.ToString() + "'" + " WHERE CVU = " + "'" + t.Cvu + "'";
+            try
+            {
+                SqlCommand comando = new SqlCommand(actualizar, conexion.conexionBD);
+                comando.ExecuteNonQuery();
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            conexion.cerrar();
         }
 
         public void registrar(Cuenta t)
         {
             throw new NotImplementedException(); //CONTINUAR AQUI
         }
-                     
-        public string obtenerUltimoCVU() 
+
+        public string obtenerUltimoCVU()
         {
             string script = "SELECT TOP 1 * FROM CUENTAS ORDER BY CVU DESC";
             string ultimoCVU;

@@ -37,7 +37,7 @@ namespace WebApplicationCLIP.Controllers
         [HttpPost]
         [EnableCors(origins: "*", headers: "*", methods: "*")]
         [Route("operaciones/deposito")]
-        public IHttpActionResult DepositarMonto(SesionDeUsuario sesion, float monto, string cvu)
+        public IHttpActionResult DepositarMonto(SesionDeUsuario login, float monto, string cvu)
         {
             Cuenta cuenta;
             try
@@ -48,6 +48,28 @@ namespace WebApplicationCLIP.Controllers
             catch (Exception e)
             {
                 return Content(HttpStatusCode.ExpectationFailed, "No se encontró una cuenta con ese CVU \n" + e.Message);
+            }
+            try
+            {
+                LoginController.ValidarSesion(login);
+
+                string nombreUsuario = login.NombreDeUsuario;
+                Usuario usuario = Usuario.CrearUsuarioConNombreDeUsuario(nombreUsuario);
+                UsuarioDAO usuarioDAO = new UsuarioDAO();
+
+                //return Ok(usuarioDAO.consultar(usuario));
+            }
+            catch (UnauthorizedAccessException e)
+            {
+                return Content(HttpStatusCode.Unauthorized, e.Message);
+            }
+            catch (HttpRequestException e)
+            {
+                return BadRequest();
+            }
+            catch (Exception e)
+            {
+                return Content(HttpStatusCode.Conflict, e.Message);
             }
             try
             {

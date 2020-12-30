@@ -94,22 +94,32 @@ namespace WebApplicationCLIP.Models
 
         public void Depositar(float monto)
         {
+            if (monto <= 0)
+            {
+                throw new Exception("No se puede depositar un monto negativo.");
+            }
             Saldo += monto;
             Operacion o = Operacion.crearOperacionDeposito(this, monto);
             GestorOperacion gestorOperacion = new GestorOperacion();
+            GestorCuenta.actualizar(this);
             gestorOperacion.registrar(o);
         }
 
         public void Extraer(float monto)
         {
+            if (monto <= 0)
+            {
+                throw new Exception("No se puede extraer un monto negativo.");
+            }
             if (Saldo < monto)
             {
-                throw new Exception("el saldo a extraer es mayor al disponible en la cuenta.");
+                throw new Exception("El saldo a extraer es mayor al disponible en la cuenta.");
             }
             Saldo -= monto;
             Operacion o = Operacion.crearOperacionExtraccion(this, monto);
-            
-            //no se si tiene que devolver void
+            GestorOperacion gestorOperacion = new GestorOperacion();
+            GestorCuenta.actualizar(this);
+            gestorOperacion.registrar(o);
         }
 
 

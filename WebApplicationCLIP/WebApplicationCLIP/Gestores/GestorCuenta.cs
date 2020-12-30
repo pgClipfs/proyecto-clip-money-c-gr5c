@@ -33,13 +33,16 @@ namespace WebApplicationCLIP.Gestores
             return cuenta;
         }
 
-
-
         private string obtenerUltimoCVU()
         {
             CuentaDAO CuentaDAO = new CuentaDAO();
             return CuentaDAO.obtenerUltimoCVU();
         }
 
+        public static void actualizar(Cuenta c)
+        {
+            CuentaDAO cuentaDAO = new CuentaDAO();
+            cuentaDAO.modificar(c);
+        }
     }
 }
