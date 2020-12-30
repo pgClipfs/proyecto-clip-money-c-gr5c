@@ -34,6 +34,56 @@ namespace WebApplicationCLIP.Controllers
             //if (!LoginController.ValidarToken(sesion))return Unauthorized();
         }
 
+        [HttpPost]
+        [EnableCors(origins: "*", headers: "*", methods: "*")]
+        [Route("operaciones/deposito")]
+        public IHttpActionResult DepositarMonto(string cvu, float monto)
+        {
+            try
+            {
+                GestorOperacion gestorOperacion = new GestorOperacion();
+                if (gestorOperacion.depositar(cvu, monto))
+                {
+                    return Ok();
+                }
+                else
+                {
+                    return Content(HttpStatusCode.Conflict, "Error en el depósito");
+                }
+            }
+            catch (Exception e)
+            {
+                return Content(HttpStatusCode.Conflict, e.Message);
+            }
+            //por ahora no se valida la sesion ni nada, simplemente se devuelven las operaciones del usuario
+            //if (!LoginController.ValidarToken(sesion))return Unauthorized();
+        }
+
+        [HttpPost]
+        [EnableCors(origins: "*", headers: "*", methods: "*")]
+        [Route("operaciones/extraccion")]
+        public IHttpActionResult ExtraerMonto(string cvu, float monto)
+        {
+            try
+            {
+                GestorOperacion gestorOperacion = new GestorOperacion();
+                if (gestorOperacion.extraer(cvu, monto))
+                {
+                    return Ok();
+                }
+                else
+                {
+                    return Content(HttpStatusCode.Conflict, "Error en la extracción");
+                }
+            }
+            catch (Exception e)
+            {
+                return Content(HttpStatusCode.Conflict, e.Message);
+            }
+            //por ahora no se valida la sesion ni nada, simplemente se devuelven las operaciones del usuario
+            //if (!LoginController.ValidarToken(sesion))return Unauthorized();
+        }
+
         [HttpGet]
         [EnableCors(origins: "*", headers: "*", methods: "*")]
         [Route("prueba")]
