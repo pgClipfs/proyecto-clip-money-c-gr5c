@@ -92,23 +92,30 @@ namespace WebApplicationCLIP.Models
         public Cuenta Cuenta { get; protected set; }
         public string IdOperacion { get; protected set; }
 
-        public static Operacion crearOperacionDeposito(float monto)
+        public static Operacion crearOperacionDeposito(Cuenta c, float monto)
         {
             Operacion o = new Operacion();
             o.Monto = monto;
             o.Fecha = DateTime.Now;
+            o.Cuenta = c;
             o.TipoOperacion = TipoDeOperacion.Deposito;
+
             return o;
         }
-        public static Operacion crearOperacionExtraccion(float monto)
+        public static Operacion crearOperacionExtraccion(Cuenta c, float monto)
         {
             Operacion o = new Operacion();
             o.Monto = monto;
             o.Fecha = DateTime.Now;
+            o.Cuenta = c;
             o.TipoOperacion = TipoDeOperacion.Extraccion;
             return o;
         }
+        protected Operacion(Cuenta c, float monto, TipoDeOperacion tipo)
+        {
 
+        }
+        protected Operacion() { }
        /* public static string GenerarIdOperacion()
         {
             //aca algoritmo para generar el siguiente numero de operacion (es necesario consultar la BD)

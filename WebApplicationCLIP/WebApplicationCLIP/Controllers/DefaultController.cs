@@ -37,12 +37,15 @@ namespace WebApplicationCLIP.Controllers
         [HttpPost]
         [EnableCors(origins: "*", headers: "*", methods: "*")]
         [Route("operaciones/deposito")]
-        public IHttpActionResult DepositarMonto(string cvu, float monto)
+        public IHttpActionResult DepositarMonto(SesionDeUsuario sesion, float monto, string cvu)
         {
             try
             {
+                //CuentaDAO cuentaDAO = new CuentaDAO();
+                Operacion o = Operacion.crearOperacionExtraccion(null, monto);
                 GestorOperacion gestorOperacion = new GestorOperacion();
-                return Ok(gestorOperacion.depositar(cvu, monto));
+                gestorOperacion.registrar(o);
+                return Ok();
             }
             catch (Exception e)
             {
@@ -60,7 +63,8 @@ namespace WebApplicationCLIP.Controllers
             try
             {
                 GestorOperacion gestorOperacion = new GestorOperacion();
-                return Ok(gestorOperacion.extraer(cvu, monto));
+                //return Ok(gestorOperacion.extraer(cvu, monto));
+                return Ok();
             }
             catch (Exception e)
             {

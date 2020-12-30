@@ -9,14 +9,14 @@ using WebApplicationCLIP.Gestores;
 namespace WebApplicationCLIP.Models
 {
     public class Cuenta
-    {        
-        public string Cvu { get ; private set ; }
+    {
+        public string Cvu { get; private set; }
         public Usuario Usuario { get; private set; }
         public float Saldo { get; private set; }
         public List<Operacion> Operaciones { get; private set; }
 
 
-        public Cuenta() 
+        public Cuenta()
         {
             //Constructor vacio
         }
@@ -55,7 +55,7 @@ namespace WebApplicationCLIP.Models
 
             Cuenta cuentaOrigen = this;
 
-            if (monto > cuentaOrigen.Saldo || monto<=0)
+            if (monto > cuentaOrigen.Saldo || monto <= 0)
             {
                 //no se puede hacer la operacion                
                 return;//se podria usar una excepcion personalizada
@@ -99,6 +99,13 @@ namespace WebApplicationCLIP.Models
 
         public void Extraer(float monto)
         {
+            if (Saldo < monto)
+            {
+                throw new Exception("el saldo a extraer es mayor al disponible en la cuenta.");
+            }
+            Saldo -= monto;
+            Operacion o = Operacion.crearOperacionExtraccion(this, monto);
+            
             //no se si tiene que devolver void
         }
 
@@ -106,7 +113,7 @@ namespace WebApplicationCLIP.Models
 
 
 
-        public static Cuenta ensamblarCuenta(List<string> ensamblador, Cuenta cuenta ) 
+        public static Cuenta ensamblarCuenta(List<string> ensamblador, Cuenta cuenta)
         {
             cuenta.Cvu = ensamblador[0];
             GestorUsuario gestorUsuario = new GestorUsuario();
@@ -118,7 +125,7 @@ namespace WebApplicationCLIP.Models
             return cuenta;
         }
 
-        public static Cuenta crearCuentaConDNI(string DNI) 
+        public static Cuenta crearCuentaConDNI(string DNI)
         {
             Cuenta cuenta = new Cuenta();
             GestorUsuario gestorUsuario = new GestorUsuario();

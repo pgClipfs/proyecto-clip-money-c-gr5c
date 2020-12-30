@@ -14,15 +14,10 @@ namespace WebApplicationCLIP.Gestores
             OperacionDAO operacionDAO = new OperacionDAO();
             return operacionDAO.consultarOperacionesPorCVU(cvu);
         }
-        public Operacion depositar(string cvu, float monto)
-        {
-            OperacionDAO operacionDAO = new OperacionDAO();
-            return operacionDAO.depositar(cvu, monto);
-        }
-        public Operacion extraer(string cvu, float monto)
+        public void registrar(Operacion o)
         {
              OperacionDAO operacionDAO = new OperacionDAO();
-             return operacionDAO.extraer(cvu, monto);
+             operacionDAO.registrar(o);
         }
     }
 }

@@ -56,9 +56,10 @@ namespace WebApplicationCLIP.BD
             return temp;
         }
 
-        public Operacion depositar(string cvu, float monto)
+        public void registrar(Operacion o)
         {
-            Operacion o = Operacion.crearOperacionDeposito(monto);
+            //string cvu = o.Cuenta.Cvu;
+            string cvu = "00001111";
             string registrarDeposito = "INSERT INTO OPERACIONES VALUES ('" + o.Monto + "', '" + o.Fecha.Date.ToString("yyyy-MM-dd") + "', '" + cvu + "', '" + o.TipoOperacion + "')";
             string idOperacion = "SELECT TOP 1 ID_OPERACION FROM OPERACIONES ORDER BY ID_OPERACION DESC";
             string montoCuenta = "SELECT SALDO FROM CUENTAS WHERE CVU = " + "'" + cvu + "'";
@@ -94,6 +95,8 @@ namespace WebApplicationCLIP.BD
                 }
                 registroExitoso = true;
                 lectorID.Close();
+
+
             }
             catch (Exception e)
             {
@@ -103,7 +106,7 @@ namespace WebApplicationCLIP.BD
             }
             if (registroExitoso)
             {
-                float resultado = montoActual + monto;
+                float resultado = montoActual + o.Monto;
                 string depositar = "UPDATE CUENTAS SET SALDO = " + "'" + resultado.ToString() + "'" + " WHERE CVU = " + "'" + cvu + "'";
                 try
                 {   
@@ -114,17 +117,15 @@ namespace WebApplicationCLIP.BD
                 {
                     string delete = "DELETE FROM OPERACIONES WHERE ID_OPERACION ="+ultimoID;
                     Console.WriteLine("Se revirtió el registro de la operación" + e);
-                    conexion.cerrar();
-                    
+                    conexion.cerrar(); 
                 }
             }
             conexion.cerrar();
-            return o;
         }
 
         public Operacion extraer(string cvu, float monto)
         {
-            Operacion o = Operacion.crearOperacionExtraccion(monto);
+            Operacion o = Operacion.crearOperacionExtraccion(null, monto);
             string registrarExtraccion = "INSERT INTO OPERACIONES VALUES ('" + o.Monto + "', '" + o.Fecha.Date.ToString("yyyy-MM-dd") + "', '" + cvu + "', '" + o.TipoOperacion + "')";
             string idOperacion = "SELECT TOP 1 ID_OPERACION FROM OPERACIONES ORDER BY ID_OPERACION DESC";
             string montoCuenta = "SELECT SALDO FROM CUENTAS WHERE CVU = " + "'" + cvu + "'";
@@ -160,12 +161,6 @@ namespace WebApplicationCLIP.BD
                 }
                 registroExitoso = true;
                 lectorID.Close();
-                
-                /*VALIDACIONES
-                if (montoActual < monto)
-                {
-                  throw new Exception("el saldo a extraer es mayor al disponible en la cuenta.");
-                }*/
 
             }
             catch (Exception e)
@@ -252,11 +247,6 @@ namespace WebApplicationCLIP.BD
             }
             conexion.cerrar();
             return "ERROR";
-        }
-
-        public void registrar(Operacion t)
-        {
-            throw new NotImplementedException();
         }
     }
 }
