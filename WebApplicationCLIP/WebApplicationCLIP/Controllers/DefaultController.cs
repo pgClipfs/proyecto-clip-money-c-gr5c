@@ -42,18 +42,11 @@ namespace WebApplicationCLIP.Controllers
             try
             {
                 GestorOperacion gestorOperacion = new GestorOperacion();
-                if (gestorOperacion.depositar(cvu, monto))
-                {
-                    return Ok();
-                }
-                else
-                {
-                    return Content(HttpStatusCode.Conflict, "Error en el depósito");
-                }
+                return Ok(gestorOperacion.depositar(cvu, monto));
             }
             catch (Exception e)
             {
-                return Content(HttpStatusCode.Conflict, e.Message);
+                return Content(HttpStatusCode.Conflict, "Error en la operación deposito.");
             }
             //por ahora no se valida la sesion ni nada, simplemente se devuelven las operaciones del usuario
             //if (!LoginController.ValidarToken(sesion))return Unauthorized();
@@ -67,18 +60,11 @@ namespace WebApplicationCLIP.Controllers
             try
             {
                 GestorOperacion gestorOperacion = new GestorOperacion();
-                if (gestorOperacion.extraer(cvu, monto))
-                {
-                    return Ok();
-                }
-                else
-                {
-                    return Content(HttpStatusCode.Conflict, "Error en la extracción");
-                }
+                return Ok(gestorOperacion.extraer(cvu, monto));
             }
             catch (Exception e)
             {
-                return Content(HttpStatusCode.Conflict, e.Message);
+                return Content(HttpStatusCode.Conflict, e);
             }
             //por ahora no se valida la sesion ni nada, simplemente se devuelven las operaciones del usuario
             //if (!LoginController.ValidarToken(sesion))return Unauthorized();

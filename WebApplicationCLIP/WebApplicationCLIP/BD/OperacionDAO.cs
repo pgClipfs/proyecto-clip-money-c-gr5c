@@ -56,43 +56,57 @@ namespace WebApplicationCLIP.BD
             return temp;
         }
 
-        public bool depositar(string cvu, float monto)
+        public Operacion depositar(string cvu, float monto)
         {
             Operacion o = Operacion.crearOperacionDeposito(monto);
-            string registrarDeposito = "INSERT INTO OPERACIONES VALUES ('" + o.Monto.ToString() + "', '" + o.Fecha + "', '" + cvu + "', '" + o.TipoOperacion + "')";
-            string idOperacion = "SELECT TOP 1 ID_OPERACION ORDER BY ID_OPERACION DESC";
-
-            float montoActual = float.Parse("SELECT SALDO FROM CUENTAS WHERE CVU = " + "'" + cvu + "'");
-            float resultado = montoActual + monto;
-            string depositar = "UPDATE CUENTAS SET SALDO = " + "'" + resultado.ToString() + "'" + " WHERE CVU = " + "'" + cvu + "'";
+            string registrarDeposito = "INSERT INTO OPERACIONES VALUES ('" + o.Monto + "', '" + o.Fecha.Date.ToString("yyyy-MM-dd") + "', '" + cvu + "', '" + o.TipoOperacion + "')";
+            string idOperacion = "SELECT TOP 1 ID_OPERACION FROM OPERACIONES ORDER BY ID_OPERACION DESC";
+            string montoCuenta = "SELECT SALDO FROM CUENTAS WHERE CVU = " + "'" + cvu + "'";
+            float montoActual = 0;
             
             ConexionBD conexion = new ConexionBD();
             conexion.abrir();
             bool registroExitoso = false;
 
             string ultimoID = "";
+            string temp = "";
 
             //Registro de operación deposito
             try
             {
                 SqlCommand comando = new SqlCommand(registrarDeposito, conexion.conexionBD);
                 comando.ExecuteNonQuery();
+
+                SqlCommand comandoSaldo = new SqlCommand(montoCuenta, conexion.conexionBD);
+                SqlDataReader lectorSaldo = comandoSaldo.ExecuteReader();
+                while (lectorSaldo.Read())
+                {
+                  temp =  lectorSaldo.GetValue(0).ToString();
+                }
+                montoActual = float.Parse(temp);
+                lectorSaldo.Close();
+
                 SqlCommand comandoID = new SqlCommand(idOperacion, conexion.conexionBD);
-                SqlDataReader lector = comandoID.ExecuteReader();
-                lector.Read();
-                ultimoID = lector.GetValue(0).ToString();
+                SqlDataReader lectorID = comandoID.ExecuteReader();
+                while (lectorID.Read())
+                {
+                    ultimoID = lectorID.GetValue(0).ToString();
+                }
                 registroExitoso = true;
+                lectorID.Close();
             }
             catch (Exception e)
             {
                 Console.WriteLine("Error al registrar la operación depósito: " + e);
                 conexion.cerrar();
-                return false;
+                
             }
             if (registroExitoso)
             {
+                float resultado = montoActual + monto;
+                string depositar = "UPDATE CUENTAS SET SALDO = " + "'" + resultado.ToString() + "'" + " WHERE CVU = " + "'" + cvu + "'";
                 try
-                {
+                {   
                     SqlCommand comando = new SqlCommand(depositar, conexion.conexionBD);
                     comando.ExecuteNonQuery();
                 }
@@ -101,51 +115,71 @@ namespace WebApplicationCLIP.BD
                     string delete = "DELETE FROM OPERACIONES WHERE ID_OPERACION ="+ultimoID;
                     Console.WriteLine("Se revirtió el registro de la operación" + e);
                     conexion.cerrar();
-                    return false;
+                    
                 }
             }
             conexion.cerrar();
-            return true;
+            return o;
         }
 
-        public bool extraer(string cvu, float monto)
+        public Operacion extraer(string cvu, float monto)
         {
             Operacion o = Operacion.crearOperacionExtraccion(monto);
-            string registrarDeposito = "INSERT INTO OPERACIONES VALUES ('" + o.Monto.ToString() + "', '" + o.Fecha + "', '" + cvu + "', '" + o.TipoOperacion + "')";
-            string idOperacion = "SELECT TOP 1 ID_OPERACION ORDER BY ID_OPERACION DESC";
-
-            float montoActual = float.Parse("SELECT SALDO FROM CUENTAS WHERE CVU = " + "'" + cvu + "'");
-            float resultado = montoActual - monto;
-            string depositar = "UPDATE CUENTAS SET SALDO = " + "'" + resultado.ToString() + "'" + " WHERE CVU = " + "'" + cvu + "'";
+            string registrarExtraccion = "INSERT INTO OPERACIONES VALUES ('" + o.Monto + "', '" + o.Fecha.Date.ToString("yyyy-MM-dd") + "', '" + cvu + "', '" + o.TipoOperacion + "')";
+            string idOperacion = "SELECT TOP 1 ID_OPERACION FROM OPERACIONES ORDER BY ID_OPERACION DESC";
+            string montoCuenta = "SELECT SALDO FROM CUENTAS WHERE CVU = " + "'" + cvu + "'";
+            float montoActual = 0;
 
             ConexionBD conexion = new ConexionBD();
             conexion.abrir();
             bool registroExitoso = false;
 
             string ultimoID = "";
+            string temp = "";
 
-            //Registro de operación deposito
+            //Registro de operación extracción
             try
             {
-                SqlCommand comando = new SqlCommand(registrarDeposito, conexion.conexionBD);
+                SqlCommand comando = new SqlCommand(registrarExtraccion, conexion.conexionBD);
                 comando.ExecuteNonQuery();
+
+                SqlCommand comandoSaldo = new SqlCommand(montoCuenta, conexion.conexionBD);
+                SqlDataReader lectorSaldo = comandoSaldo.ExecuteReader();
+                while (lectorSaldo.Read())
+                {
+                    temp = lectorSaldo.GetValue(0).ToString();
+                }
+                montoActual = float.Parse(temp);
+                lectorSaldo.Close();
+
                 SqlCommand comandoID = new SqlCommand(idOperacion, conexion.conexionBD);
-                SqlDataReader lector = comandoID.ExecuteReader();
-                lector.Read();
-                ultimoID = lector.GetValue(0).ToString();
+                SqlDataReader lectorID = comandoID.ExecuteReader();
+                while (lectorID.Read())
+                {
+                    ultimoID = lectorID.GetValue(0).ToString();
+                }
                 registroExitoso = true;
+                lectorID.Close();
+                
+                /*VALIDACIONES
+                if (montoActual < monto)
+                {
+                  throw new Exception("el saldo a extraer es mayor al disponible en la cuenta.");
+                }*/
+
             }
             catch (Exception e)
             {
-                Console.WriteLine("Error al registrar la operación depósito: " + e);
+                Console.WriteLine("Error al registrar la operación extracción: " + e);
                 conexion.cerrar();
-                return false;
             }
             if (registroExitoso)
             {
+                float resultado = montoActual - monto;
+                string extraer = "UPDATE CUENTAS SET SALDO = " + "'" + resultado.ToString() + "'" + " WHERE CVU = " + "'" + cvu + "'";
                 try
                 {
-                    SqlCommand comando = new SqlCommand(depositar, conexion.conexionBD);
+                    SqlCommand comando = new SqlCommand(extraer, conexion.conexionBD);
                     comando.ExecuteNonQuery();
                 }
                 catch (Exception e)
@@ -153,11 +187,11 @@ namespace WebApplicationCLIP.BD
                     string delete = "DELETE FROM OPERACIONES WHERE ID_OPERACION =" + ultimoID;
                     Console.WriteLine("Se revirtió el registro de la operación" + e);
                     conexion.cerrar();
-                    return false;
+
                 }
             }
             conexion.cerrar();
-            return true;
+            return o;
         }
 
         public Operacion consultar(string cvu)

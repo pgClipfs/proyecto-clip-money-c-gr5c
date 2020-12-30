@@ -109,11 +109,11 @@ namespace WebApplicationCLIP.Models
             return o;
         }
 
-        public static string GenerarIdOperacion()
+       /* public static string GenerarIdOperacion()
         {
             //aca algoritmo para generar el siguiente numero de operacion (es necesario consultar la BD)
             Random rnd = new Random();
             return rnd.Next(1, 10000).ToString();
-        }
+        }*/
     }
 }
