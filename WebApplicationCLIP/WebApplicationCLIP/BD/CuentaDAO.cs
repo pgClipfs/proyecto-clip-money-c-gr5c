@@ -9,9 +9,9 @@ namespace WebApplicationCLIP.BD
 {
     public class CuentaDAO : CRUD<Cuenta>
     {
-        public Cuenta consultarOperaciones(Cuenta t)
+        public Cuenta consultar(string cvu)
         {
-            string script = "SELECT * FROM CUENTAS WHERE CVU = " + "'" + t.Cvu + "'";
+            string script = "SELECT * FROM CUENTAS WHERE CVU = " + "'" + cvu + "'";
 
             ConexionBD conexion = new ConexionBD();
             conexion.abrir();
@@ -39,7 +39,7 @@ namespace WebApplicationCLIP.BD
                 throw new Exception("Error al ejecutar la consulta --> " + e.Message);
             }
             conexion.cerrar();
-            return Cuenta.ensamblarCuenta(ensamblador, t);
+            return Cuenta.ensamblarCuenta(ensamblador);
         }
 
 

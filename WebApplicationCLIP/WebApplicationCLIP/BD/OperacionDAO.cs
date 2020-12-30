@@ -58,8 +58,7 @@ namespace WebApplicationCLIP.BD
 
         public void registrar(Operacion o)
         {
-            //string cvu = o.Cuenta.Cvu;
-            string cvu = "00001111";
+            string cvu = o.Cuenta.Cvu;
             string registrarDeposito = "INSERT INTO OPERACIONES VALUES ('" + o.Monto + "', '" + o.Fecha.Date.ToString("yyyy-MM-dd") + "', '" + cvu + "', '" + o.TipoOperacion + "')";
             string idOperacion = "SELECT TOP 1 ID_OPERACION FROM OPERACIONES ORDER BY ID_OPERACION DESC";
             string montoCuenta = "SELECT SALDO FROM CUENTAS WHERE CVU = " + "'" + cvu + "'";

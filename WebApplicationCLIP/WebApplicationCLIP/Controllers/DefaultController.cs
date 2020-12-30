@@ -39,17 +39,25 @@ namespace WebApplicationCLIP.Controllers
         [Route("operaciones/deposito")]
         public IHttpActionResult DepositarMonto(SesionDeUsuario sesion, float monto, string cvu)
         {
+            Cuenta cuenta;
             try
             {
-                //CuentaDAO cuentaDAO = new CuentaDAO();
-                Operacion o = Operacion.crearOperacionExtraccion(null, monto);
-                GestorOperacion gestorOperacion = new GestorOperacion();
-                gestorOperacion.registrar(o);
+                CuentaDAO cuentaDAO = new CuentaDAO();
+                cuenta = cuentaDAO.consultar(cvu);
+            }
+            catch (Exception e)
+            {
+                return Content(HttpStatusCode.ExpectationFailed, "No se encontró una cuenta con ese CVU \n" + e.Message);
+            }
+            try
+            {
+                cuenta.Depositar(monto);
+                //Operacion o = Operacion.crearOperacionExtraccion(null, monto);
                 return Ok();
             }
             catch (Exception e)
             {
-                return Content(HttpStatusCode.Conflict, "Error en la operación deposito.");
+                return Content(HttpStatusCode.Conflict, "No se pudó registrar la operación deposito " + e.Message);
             }
             //por ahora no se valida la sesion ni nada, simplemente se devuelven las operaciones del usuario
             //if (!LoginController.ValidarToken(sesion))return Unauthorized();

@@ -94,7 +94,10 @@ namespace WebApplicationCLIP.Models
 
         public void Depositar(float monto)
         {
-            //no se si tiene que devolver void
+            Saldo += monto;
+            Operacion o = Operacion.crearOperacionDeposito(this, monto);
+            GestorOperacion gestorOperacion = new GestorOperacion();
+            gestorOperacion.registrar(o);
         }
 
         public void Extraer(float monto)
@@ -110,8 +113,11 @@ namespace WebApplicationCLIP.Models
         }
 
 
-
-
+        public static Cuenta ensamblarCuenta(List<string> ensamblador)
+        {
+            Cuenta c = new Cuenta();
+            return ensamblarCuenta(ensamblador, c);
+        }
 
         public static Cuenta ensamblarCuenta(List<string> ensamblador, Cuenta cuenta)
         {

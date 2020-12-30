@@ -99,7 +99,6 @@ namespace WebApplicationCLIP.Models
             o.Fecha = DateTime.Now;
             o.Cuenta = c;
             o.TipoOperacion = TipoDeOperacion.Deposito;
-
             return o;
         }
         public static Operacion crearOperacionExtraccion(Cuenta c, float monto)
