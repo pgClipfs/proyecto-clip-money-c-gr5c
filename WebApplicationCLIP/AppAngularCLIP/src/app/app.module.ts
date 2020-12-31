@@ -18,6 +18,8 @@ import { PaginaPrincipalComponent } from './components/pagina-principal/pagina-p
 import { RegistroExitosoComponent } from './components/registro-exitoso/registro-exitoso.component';
 import { NavbarLateralComponent } from './components/navbar-lateral/navbar-lateral.component';
 import { SidebarModule } from 'ng-sidebar';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { PantallaIngresoEgresoDineroComponent } from './components/pantalla-ingreso-egreso-dinero/pantalla-ingreso-egreso-dinero.component';
 
 
 @NgModule({
@@ -29,7 +31,8 @@ import { SidebarModule } from 'ng-sidebar';
     SignupPageComponent,
     PaginaPrincipalComponent,
     RegistroExitosoComponent,
-    NavbarLateralComponent
+    NavbarLateralComponent,
+    PantallaIngresoEgresoDineroComponent
   ],
   imports: [
     BrowserModule,
@@ -44,7 +47,8 @@ import { SidebarModule } from 'ng-sidebar';
       { path: 'login', component: LoginBox },
       { path: 'principal', component: NavbarLateralComponent}, //hay que cambiar esto y volver a poner el principal     
       { path: 'principalHome', component: PaginaPrincipalComponent}
-    ])
+    ]),
+    NgbModule
   ],
   providers: [[LoginService],[SignupService]],
   bootstrap: [AppComponent]

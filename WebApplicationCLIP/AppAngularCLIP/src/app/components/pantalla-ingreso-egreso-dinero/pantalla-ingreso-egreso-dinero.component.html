@@ -1,0 +1,21 @@
+<form [formGroup]="formDinero">
+  $
+  <input type="number" formControlName="Monto" class=" form-control-monto" id="exampleInputUsuario" placeholder="Monto" />
+    <span class="text-danger" *ngIf="
+        formDinero.controls.Monto.errors?.required &&
+        formDinero.controls.Monto.touched
+      ">
+      Dato requerido.</span>
+  <div class="input-group mb-3 mt-3">
+    <label for="inputGroupSelect01">Depositar en: </label>
+    <select formControlName="origenDeposito" class="form-select">
+      <option value="">Seleccione una cuenta</option>
+      <option *ngFor="let origenes of origenDepositos" [ngValue]="origenes" (change)="changeCuenta($event)">
+        {{ origenes }}
+      </option>
+    </select>
+  </div>
+  <button type="button" class="btn btn-danger btn-lg btn-block" (click)="onSubmit()">
+    Submit
+  </button>
+</form>
