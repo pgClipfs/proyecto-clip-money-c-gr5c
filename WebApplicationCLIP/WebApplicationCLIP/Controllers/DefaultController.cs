@@ -42,9 +42,9 @@ namespace WebApplicationCLIP.Controllers
         {
             float monto = (float)obj["Monto"];
             string cvu = (string)obj["Cvu"];
-            SesionDeUsuario login = obj["SesionDeUsuario"].ToObject<SesionDeUsuario>();            
+            SesionDeUsuario login = obj["SesionDeUsuario"].ToObject<SesionDeUsuario>();
             Cuenta cuenta;
-            
+
             try
             {
                 CuentaDAO cuentaDAO = new CuentaDAO();
@@ -62,7 +62,7 @@ namespace WebApplicationCLIP.Controllers
 
                 if (!(cuenta.Usuario.NombreDeUsuario.ToString() == usuario.NombreDeUsuario.ToString()))
                 {
-                    return Content(HttpStatusCode.Forbidden, "esa cuenta no pertenece al usuario");
+                    return Content(HttpStatusCode.Forbidden, "Esta cuenta no pertenece al usuario correspondiente");
                 }
             }
             catch (UnauthorizedAccessException e)
@@ -119,7 +119,7 @@ namespace WebApplicationCLIP.Controllers
 
                 if (!(cuenta.Usuario.NombreDeUsuario.ToString() == usuario.NombreDeUsuario.ToString()))
                 {
-                    return Content(HttpStatusCode.Forbidden, "esa cuenta no pertenece al usuario");
+                    return Content(HttpStatusCode.Forbidden, "Esta cuenta no pertenece al usuario correspondiente");
                 }
 
             }
