@@ -144,7 +144,7 @@ namespace WebApplicationCLIP.Controllers
             }
             catch (Exception e)
             {
-                return Content(HttpStatusCode.Conflict, "No se pudó registrar la operación deposito " + e.Message);
+                return Content(HttpStatusCode.Conflict, "No se pudó registrar la operación extracción " + e.Message);
             }
             //por ahora no se valida la sesion ni nada, simplemente se devuelven las operaciones del usuario
             //if (!LoginController.ValidarToken(sesion))return Unauthorized();
