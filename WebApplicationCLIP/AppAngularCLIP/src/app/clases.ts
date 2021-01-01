@@ -4,3 +4,8 @@ export class Operacion {
   Fecha: Date;  
   Tipo: string;
   }
+
+  export class Sesion {
+    NombreUsuario: string; // Contiene la frase
+    Token: string;
+  }
