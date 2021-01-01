@@ -33,10 +33,11 @@ export class PaginaPrincipalComponent implements OnInit {
 
   ngOnInit(): void {
     this.returnUrl = this.route.snapshot.queryParams.returnUrl || '/login';
-    if (!(this.loginService.sesionEstaAbierta)) {
+    
+    /*if (!(this.loginService.sesionEstaAbierta)) {
       this.router.navigate([this.returnUrl]);
       console.log("el usuario debe loguearse antes de ver la pagina principal")
-    }
+    }*/
     this.datosUsuarioService.obtenerDatosUsuario().subscribe(
       user => {
         //parece que todo bien

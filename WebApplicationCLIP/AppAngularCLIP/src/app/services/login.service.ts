@@ -4,6 +4,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { Sesion } from '../clases';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map, retry, catchError } from 'rxjs/operators';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Injectable({
   providedIn: "root"
@@ -14,8 +15,8 @@ export class LoginService {
   private urlApi = "http://localhost:59642/api/"; //linea para hacer pruebas
   private sesionActualSubject: BehaviorSubject<Sesion>;
   private sesionActual: Observable<Sesion>;
-  
-  constructor(private http: HttpClient) {
+
+  constructor(private route: ActivatedRoute, private router: Router,private http: HttpClient) {
     this.sesionActualSubject = new BehaviorSubject<Sesion>(JSON.parse(localStorage.getItem
       ('sesionActual')));
     this.sesionActual = this.sesionActualSubject.asObservable();
@@ -23,8 +24,10 @@ export class LoginService {
 
   public get obtenerSesionActual(): Sesion {
 
-   if(!this.sesionEstaAbierta){ 
-     //redirigir al login (?)
+    if (!(this.sesionEstaAbierta)) {
+      //en este if se comprueba si el usuario tiene la sesion abierta, y si no es asi, se lo manda al login 
+      var returnUrl = this.route.snapshot.queryParams.returnUrl || '/login';
+      this.router.navigate([returnUrl]);      
     }
     return this.sesionActualSubject.value;
   }
