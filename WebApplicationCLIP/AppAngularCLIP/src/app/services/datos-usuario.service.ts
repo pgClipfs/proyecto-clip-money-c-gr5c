@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { retry ,catchError,map} from 'rxjs/operators';
-import { Sesion } from '../modelos/sesion';
+import { Sesion } from '../clases';
 import { Usuario } from '../modelos/usuario';
 import { LoginService } from './login.service';
 
@@ -16,7 +16,7 @@ export class DatosUsuarioService {
 
   public obtenerDatosUsuario(): Observable<Usuario> {
 
-  var sesion= this.loginService.usuarioLogueado;
+  var sesion= this.loginService.obtenerSesionActual;
   
     return this.http.post<any>(this.urlApi + 'get/usuario',
       sesion)

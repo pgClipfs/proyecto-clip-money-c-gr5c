@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 import { HttpClientModule } from '@angular/common/http';
-import { Usuario } from '../modelos/usuario';
+import { Sesion } from '../clases';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map, retry, catchError } from 'rxjs/operators';
 
@@ -12,21 +12,25 @@ import { map, retry, catchError } from 'rxjs/operators';
 export class LoginService {
   //private urlApi = "api/"; //linea correcta 
   private urlApi = "http://localhost:59642/api/"; //linea para hacer pruebas
-  private usuarioActualSubject: BehaviorSubject<Usuario>;
-  private usuarioActual: Observable<Usuario>;
-
+  private sesionActualSubject: BehaviorSubject<Sesion>;
+  private sesionActual: Observable<Sesion>;
+  
   constructor(private http: HttpClient) {
-    this.usuarioActualSubject = new BehaviorSubject<Usuario>(JSON.parse(localStorage.getItem
-      ('usuarioActual')));
-    this.usuarioActual = this.usuarioActualSubject.asObservable();
+    this.sesionActualSubject = new BehaviorSubject<Sesion>(JSON.parse(localStorage.getItem
+      ('sesionActual')));
+    this.sesionActual = this.sesionActualSubject.asObservable();
   }
 
-  public get usuarioLogueado(): Usuario {
-    return this.usuarioActualSubject.value;
+  public get obtenerSesionActual(): Sesion {
+
+   if(!this.sesionEstaAbierta){ 
+     //redirigir al login (?)
+    }
+    return this.sesionActualSubject.value;
   }
 
-  public userLoggedIn(): boolean {
-    return this.usuarioLogueado != null;
+  public sesionEstaAbierta(): boolean {
+    return this.sesionActualSubject.value != null;
   }
 
   public login(nombreDeUsuario: string, contraseña: string): Observable<any> {
@@ -50,19 +54,19 @@ export class LoginService {
           }
           throw 'error extraño';
         }), //esto es para procesar los errores que devuelva el backend
-        map(user => {
-          localStorage.setItem('usuarioActual', JSON.stringify(user));
-          this.usuarioActualSubject.next(user);
-          this.usuarioActual = this.usuarioActualSubject.asObservable();
-          return user;
+        map(sesion => {
+          localStorage.setItem('sesionActual', JSON.stringify(sesion));
+          this.sesionActualSubject.next(sesion);
+          this.sesionActual = this.sesionActualSubject.asObservable();
+          return sesion;
         }
         )
       );
   }
 
   public logout(): void {
-    localStorage.removeItem('usuarioActual');
-    this.usuarioActualSubject.next(null);
+    localStorage.removeItem('sesionActual');
+    this.sesionActualSubject.next(null);
   }
 
 

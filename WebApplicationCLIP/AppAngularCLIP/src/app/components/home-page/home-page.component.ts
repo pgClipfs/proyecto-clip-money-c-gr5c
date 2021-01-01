@@ -16,7 +16,7 @@ export class HomePageComponent implements OnInit {
 
   ngOnInit(): void {
     this.returnUrl = this.route.snapshot.queryParams.returnUrl || '/principal';
-    if(this.loginService.usuarioLogueado){
+    if(this.loginService.sesionEstaAbierta){
         this.router.navigate([this.returnUrl]);
         console.log("el usuario ya esta logueado");
   }}

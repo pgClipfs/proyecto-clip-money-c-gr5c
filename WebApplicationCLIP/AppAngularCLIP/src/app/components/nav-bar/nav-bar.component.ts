@@ -24,7 +24,7 @@ export class NavBarComponent implements OnInit {
   }
   
   ngOnInit(): void {
-    this.usuarioLogueado=this.loginService.userLoggedIn();
+    this.usuarioLogueado=this.loginService.sesionEstaAbierta();
       this.returnUrl = this.route.snapshot.queryParams.returnUrl || '/';
   }
 
