@@ -13,12 +13,12 @@ namespace WebApplicationCLIP.Controllers
 {
 
     [AllowAnonymous]
-    [RoutePrefix("api/get")]
+    [RoutePrefix("api")]
     public class DefaultController : ApiController
     {
         [HttpPost]
         [EnableCors(origins: "*", headers: "*", methods: "*")]
-        [Route("operaciones")]
+        [Route("get/operaciones")]
         public IHttpActionResult GetOperacionesCuenta(string cvu)
         {
             try
@@ -36,7 +36,7 @@ namespace WebApplicationCLIP.Controllers
 
         [HttpPost]
         [EnableCors(origins: "*", headers: "*", methods: "*")]
-        [Route("operaciones/deposito")]
+        [Route("post/deposito")]
         public IHttpActionResult DepositarMonto(JObject obj)
         //public IHttpActionResult DepositarMonto(float monto, string cvu, [FromBody] SesionDeUsuario login)
         {
@@ -94,7 +94,7 @@ namespace WebApplicationCLIP.Controllers
 
         [HttpPost]
         [EnableCors(origins: "*", headers: "*", methods: "*")]
-        [Route("operaciones/extraccion")]
+        [Route("post/extraccion")]
         public IHttpActionResult ExtraerMonto(JObject obj)
         //public IHttpActionResult DepositarMonto(float monto, string cvu, [FromBody] SesionDeUsuario login)
         {
@@ -164,7 +164,7 @@ namespace WebApplicationCLIP.Controllers
 
         [HttpPost]
         [EnableCors(origins: "*", headers: "*", methods: "*")]
-        [Route("usuario")]
+        [Route("get/usuario")]
         public IHttpActionResult GetDatosUsuario(SesionDeUsuario login)
         {
             try
