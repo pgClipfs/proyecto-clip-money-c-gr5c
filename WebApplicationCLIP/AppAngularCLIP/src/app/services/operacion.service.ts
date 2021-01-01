@@ -6,6 +6,7 @@ import { Operacion } from '../clases';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map, retry, catchError } from 'rxjs/operators';
 import { LoginService } from './login.service';
+import { Sesion } from '../clases';
 
 @Injectable({
   providedIn: 'root'
@@ -17,32 +18,59 @@ export class OperacionService {
 
   constructor(private http: HttpClient, private loginService: LoginService) { }
 
+  public realizarExtraccion(cvu: string, monto: number): Observable<any> {
+    var dir = "post/extraccion";
+    return this.postOperacion(cvu, monto, dir)
+  }
+
+  public realizarDeposito(cvu: string, monto: number): Observable<any> {
+    var dir = "post/deposito";
+    return this.postOperacion(cvu, monto, dir)
+  }
+
+  private postOperacion(Cvu: string, Monto: number, dir: string): Observable<any> {
+
+    var SesionDeUsuario = this.loginService.obtenerSesionActual
+
+    return this.http.post<any>(this.urlApi + dir, { Cvu, Monto, SesionDeUsuario })
+      .pipe(
+        catchError(err => {
+          throw err;
+          //para leer el mensaje del error, hacer err.error
+          })
+          ,map( asd => {
+             return asd;
+             })//no se si es necesario el map, porque no se devuelve nada
+      );
+  }
+
   public getOperacionesCvu(cvu: string): Observable<Operacion[]> {
 
     //no es lo ideal pasar los parametros asi, pero no logre que funcione de otra forma
-    return this.http.post<any>(this.urlApi + 'get/operaciones?cvu='+cvu, { })
+    return this.http.post<any>(this.urlApi + 'get/operaciones?cvu=' + cvu, {})
       .pipe(
         //retry(2), //esto es para decirle cuantas veces lo tiene que intentar antes de tirar error :o
         catchError(err => {
-          return err;
+          console.log("err"+err)
+          throw err;
         }),
         map(ops => {
           ops.forEach(op => {
-            switch(op.TipoOperacion){
-              case 1:{
-                op.Tipo="Transferencia";
+            switch (op.TipoOperacion) {
+              case 1: {
+                op.Tipo = "Transferencia";
                 break;
               }
-              case 2:{
-                op.Tipo="Depósito";
+              case 2: {
+                op.Tipo = "Depósito";
                 break;
               }
-              case 3:{
-                op.Tipo="Extracción";
+              case 3: {
+                op.Tipo = "Extracción";
                 break;
               }
-              case 4:{
-                op.Tipo="Giro al Descubierto";
+              case 4: {
+                op.Tipo = "Giro al Descubierto";
                 break;
               }
             }
