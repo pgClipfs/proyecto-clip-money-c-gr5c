@@ -20,6 +20,7 @@ import { NavbarLateralComponent } from './components/navbar-lateral/navbar-later
 import { SidebarModule } from 'ng-sidebar';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { PantallaIngresoEgresoDineroComponent } from './components/pantalla-ingreso-egreso-dinero/pantalla-ingreso-egreso-dinero.component';
+import { PantallaTransferenciaComponent } from './components/pantalla-transferencia/pantalla-transferencia.component';
 
 
 @NgModule({
@@ -32,7 +33,8 @@ import { PantallaIngresoEgresoDineroComponent } from './components/pantalla-ingr
     PaginaPrincipalComponent,
     RegistroExitosoComponent,
     NavbarLateralComponent,
-    PantallaIngresoEgresoDineroComponent
+    PantallaIngresoEgresoDineroComponent,
+    PantallaTransferenciaComponent
   ],
   imports: [
     BrowserModule,
