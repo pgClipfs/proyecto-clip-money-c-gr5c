@@ -23,7 +23,7 @@ export class PaginaPrincipalComponent implements OnInit {
 
   saldoPesos = 2555;
   opened = false;
-  numeroCuenta = 201241535212312;
+  numeroCuenta = "201241535212312";
   numeroCuentaDol = 20124134534512;
   nombreApellido = 'JUAN CRUZ CUELLO';
   Fecha = '14/12/2020';
@@ -67,6 +67,9 @@ export class PaginaPrincipalComponent implements OnInit {
         console.log(err)
       },
       () => {
+
+        this.saldoPesos=this.cuentaUsuario.Saldo
+        this.numeroCuenta=this.cuentaUsuario.Cvu
         //console.log(this.cuentaUsuario.Cvu)
         this.operacionesService.getOperacionesCvu(this.cuentaUsuario.Cvu).subscribe(
           ops => {
