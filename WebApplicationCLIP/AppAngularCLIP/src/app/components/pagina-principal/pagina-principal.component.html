@@ -48,7 +48,7 @@
                   <h4 class="card-title title-card">{{ nombreApellido }}</h4>
                   <p class="card-text text-card">CVU - {{ numeroCuenta }}</p>
                   <h4 class="card-title title-card">
-                    TU DINERO EN TU CUENTA EN DOLARES
+                    Tu dinero en cuenta en dolares
                   </h4>
                   <p class="card-text text-card">U$D {{ saldoPesos }}</p>
                 </div>
@@ -60,7 +60,7 @@
           </div>
         </div>
       </div>
-      <div class="row mt-4">
+      <div class="row mt-4" id="inputsTarjetas">
         <div class="col-sm-3 pb-3">
           <div class="card card-ingresar-pesos shadow " (click)="openLg(contentIngresarDinero)" style="width: 100%">
             <div class="row g-0">
@@ -73,7 +73,7 @@
               </div>
               <div class="col-sm-9">
                 <div class="card-body" >
-                  <p class="pl-3 card-text text-card">DEPOSITO/ EXTRACCION</p>
+                  <p class="pl-3 card-text text-card">Deposito y Extraccion</p>
                 </div>
               </div>
             </div>
@@ -91,13 +91,13 @@
               </div>
               <div class="col-sm-9">
                 <div class="card-body">
-                  <p class="pl-3 card-text text-card">TRANSFERIR DINERO</p>
+                  <p class="pl-3 card-text text-card">Transferir Dinero</p>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <div class="col-md-3 pb-3">
+        <div class="col-sm-3 pb-3">
           <div class="card card-ingresar-pesos shadow" style="width: 100%">
             <div class="row g-0">
               <div class="col-md-3 pl-4">
@@ -107,15 +107,15 @@
                   alt="..."
                 />
               </div>
-              <div class="col-md-9">
+              <div class="col-sm-9">
                 <div class="card-body">
-                  <p class="pl-3 card-text text-card">GIRO AL DESCUBIERTO</p>
+                  <p class="pl-3 card-text text-card">Giro al Descubierto</p>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <div class="col-md-3 pb-3">
+        <div class="col-sm-3 pb-3">
           <div class="card card-ingresar-pesos shadow" style="width: 100%">
             <div class="row g-0">
               <div class="col-md-3 pl-4">
@@ -125,9 +125,9 @@
                   alt="..."
                 />
               </div>
-              <div class="col-md-9">
+              <div class="col-sm-9">
                 <div class="card-body">
-                  <p class="pl-3 card-text text-card">PAGAR SERVICIOS</p>
+                  <p class="pl-3 card-text text-card">Pagar Servicios</p>
                 </div>
               </div>
             </div>
@@ -272,12 +272,11 @@
   </div>
 
   <ng-template #contentIngresarDinero let-modal>
-    <div class="modal-header mb-3">
-      <div class="card shadow-sm" style="width: 100%;">
-        <div class="card-body">
-          <h4 class="modal-title card-title">DEPOSITOS Y EXTRACCIONES</h4>
-        </div>
+    <div class="">
+      <div class="modal-header">
+        <p class="modal-title-default ">Depositos y Extracciones</p>
       </div>
+
 
       <!--<button
         type="button"
@@ -289,12 +288,7 @@
       </button>-->
     </div>
     <div class="modal-body">
-      <div class="card shadow" style="width: 100%;">
-        <div class="card-body">
-          <app-pantalla-ingreso-egreso-dinero></app-pantalla-ingreso-egreso-dinero>
-        </div>
-      </div>
-
+      <app-pantalla-ingreso-egreso-dinero></app-pantalla-ingreso-egreso-dinero>
     </div>
   </ng-template>
 </ng-sidebar-container>

@@ -67,7 +67,7 @@ li a:hover {
     top: 0;
     left: 0;
   }
-  
+
   .menu-wrap .toggler {
     position: absolute;
     top: 0;
@@ -105,7 +105,7 @@ li a:hover {
     justify-content: center;
     transition: all 0.4s ease;
   }
-  
+
   /* Hamburger Lines - Top & Bottom */
   .menu-wrap .hamburger > div::before,
   .menu-wrap .hamburger > div::after {
@@ -117,24 +117,24 @@ li a:hover {
     height: 4px;
     background: inherit;
   }
-  
+
   /* Moves Line Down */
   .menu-wrap .hamburger > div::after {
     top: 10px;
   }
-  
+
   /* Toggler Animation */
   .menu-wrap .toggler:checked + .hamburger > div {
     transform: rotate(135deg);
   }
-  
+
   /* Turns Lines Into X */
   .menu-wrap .toggler:checked + .hamburger > div:before,
   .menu-wrap .toggler:checked + .hamburger > div:after {
     top: 0;
     transform: rotate(90deg);
   }
-  
+
   /* Rotate On Hover When Checked */
   .menu-wrap .toggler:checked:hover + .hamburger > div {
     transform: rotate(225deg);
@@ -193,14 +193,14 @@ li a:hover {
     transition: 0.20s;
   }
 
-  
+
   .card-ingresar-pesos .card-img{
         position: relative;
         top: 1rem;
         left: 1rem;
         height: 3rem;
         width: 3rem;
-        
+
   }
 
   .card-ingresar-pesos .title-card {
@@ -245,5 +245,5 @@ tr {
 .text-title-cotizacion{
     font-size: 1rem;
     color: #6b6b6b;
-  
+
 }

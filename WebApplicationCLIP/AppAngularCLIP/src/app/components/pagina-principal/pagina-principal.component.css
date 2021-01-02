@@ -17,6 +17,8 @@
   .text-title-info{
     font-size: 1.2rem;
     color: #6b6b6b;
+    font-family: 'Poppins',sans-serif;
+    font-weight: 600;
 
   }
 
@@ -28,11 +30,13 @@
 
   .card-info-cuenta .title-card {
     color: rgb(255, 255, 255);
+    font-family: 'Poppins',sans-serif;
   }
 
   .card-info-cuenta .text-card {
+    font-family: 'Poppins',sans-serif;
       color: #ffffff;
-      font-weight: 200;
+      font-weight: 100;
   }
 
   .card-info-img{
@@ -41,8 +45,8 @@
     left: -5rem;
     font-size: 3rem;
     opacity: 20%;
-    font-family: 'Roboto',sans-serif;
-    font-weight: 900;
+    font-family: 'Poppins',sans-serif;
+    font-weight: 800;
   }
 
     /* card saldo en pesos */
@@ -126,8 +130,9 @@ ng-sidebar-container{
 /*navbar superior*/
 
 .navbar-brand {
+  font-family: 'Poppins',sans-serif;
   color: black;
-  font-weight: 200;
+  font-weight: 300;
 }
 
 .navbar-brand:hover {
@@ -260,6 +265,7 @@ justify-content: center;
 .text-card{
   font-size: 2rem;
   font-weight: 200;
+  font-family: 'Poppins',sans-serif;
 }
 
 /* Estilos de las cards*/
@@ -272,7 +278,7 @@ justify-content: center;
 }
 
 .card-info-cuenta{
-  background-image: linear-gradient(to right, #22248b , #5e60ce);
+  background-image: linear-gradient(to right, #5390D9, #7400B8);
   border: none;
 
 }
@@ -347,7 +353,7 @@ color: #22248b;
 }
 
 tr {
-font-weight: 200;
+font-weight: 300;
 }
 
 /* Estilo de la parte de las cotizaciones */
@@ -360,14 +366,52 @@ font-weight: 200;
 .modal-header{
   height: 5rem;
   border:0;
+  background-color: white;
 }
 
-.modal-title{
+.modal-title-default{
 
-  padding-top: 1rem;
-  padding-left: 1rem;
-  color:rgb(182, 182, 182);
+  color:#383838;
+  font-size: 20px;
+  font-family: 'Poppins',sans-serif;
+  font-weight: 600;
+  position: relative;
+  left:15rem;
+  top:1rem;
+  padding: 10px 15px 10px 15px;
+
+
+
 }
+
+.modal-body{
+  background-color:white;
+}
+
+
+
+
+@media (max-width:  576px) {
+  .modal-title-default{
+    left: 3rem;
+  }
+
+  #inputsTarjetas .col-sm-3 .pl-4{
+    height: 1rem;
+  }
+
+  #inputsTarjetas .col-sm-9 {
+    position: relative;
+    left: 4rem;
+    top:-10px;
+  }
+
+  #inputsTarjetas .col-sm-9 .text-card
+  {
+    font-size: 20px;
+  }
+ }
+
 
 .form-control-monto{
   border-top: none;
