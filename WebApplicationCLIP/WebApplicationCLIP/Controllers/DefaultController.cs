@@ -127,6 +127,11 @@ namespace WebApplicationCLIP.Controllers
         [Route("get/cuentasusuario")]
         public IHttpActionResult GetCuentasUsuario(SesionDeUsuario login)
         {
+            if (login==null || login.NombreDeUsuario==null)
+            {
+                return BadRequest("bad request :o");
+            }
+
             try
             {
                 LoginController.ValidarSesion(login);

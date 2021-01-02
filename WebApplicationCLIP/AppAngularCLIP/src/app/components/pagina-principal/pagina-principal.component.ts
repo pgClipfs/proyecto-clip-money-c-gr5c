@@ -7,6 +7,8 @@ import { LoginService } from 'src/app/services/login.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { RedireccionService } from 'src/app/services/redireccion.service';
 import { OperacionService } from 'src/app/services/operacion.service';
+import { Cuenta, Operacion } from 'src/app/clases';
+import { CuentaService } from 'src/app/services/cuenta.service';
 
 
 @Component({
@@ -18,6 +20,7 @@ export class PaginaPrincipalComponent implements OnInit {
 
   usuario: Usuario;
   nombreUsuario: string = "Usuario generico";
+
 
 
   saldoPesos = 2555;
@@ -45,24 +48,39 @@ export class PaginaPrincipalComponent implements OnInit {
   }
 
 
-  constructor(private operacionesService: OperacionService, private modalService: NgbModal, private redireccionar: RedireccionService, private loginService: LoginService, private datosUsuarioService: DatosUsuarioService) { }
+  constructor(private cuentasService: CuentaService, private operacionesService: OperacionService, private modalService: NgbModal, private redireccionar: RedireccionService, private loginService: LoginService, private datosUsuarioService: DatosUsuarioService) { }
 
   private returnUrl: string;
 
+  operaciones: Operacion[]
+  cuentas: Cuenta[]
+  cvu: string;
 
   ngOnInit(): void {
 
-    /*
-    //ejemplo de consumo del servicio de operaciones ;)
-    this.operacionesService.getOperacionesCvu("00002222").subscribe(
+    /*ejemplo consulta cuentas y operaciones
+    //lo que se hace es obtener todas las cuentas del usuario, y se usa el cvu de alguna para obtener las operaciones
+    //pero no se obtienen todas las operaciones de todas las cuentas
+    this.cuentasService.obtenerCuentasUsuario().subscribe(
+      cuentas=>{
+        this.cuentas=cuentas;
+      }
+      ,err=>{console.log(err.error)}
+    )
+
+    this.cuentas.forEach(cuenta => {
+      this.cvu=cuenta.Cvu
+    });
+    
+    this.operacionesService.getOperacionesCvu(this.cvu).subscribe(
       ops => {
-        console.log(ops)
+        this.operaciones=ops;
       },
       err => {
         console.log(err.error)
       }
     );
-*/
+    */
 
     if (!(this.loginService.sesionEstaAbierta())) {
       this.redireccionar.login()
