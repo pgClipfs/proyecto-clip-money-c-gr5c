@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { LoginService } from 'src/app/services/login.service';
 import { Usuario } from '../../modelos/usuario';
 import { ActivatedRoute, Router } from '@angular/router';
+import { RedireccionService } from 'src/app/services/redireccion.service';
 
 @Component({
   selector: 'app-home-page',
@@ -10,15 +11,14 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class HomePageComponent implements OnInit {
 
-  constructor(private route: ActivatedRoute, private router: Router, private loginService: LoginService) { }
+  constructor(private redireccionar:RedireccionService , private loginService: LoginService) { }
   
   returnUrl: string;
 
   ngOnInit(): void {
-    this.returnUrl = this.route.snapshot.queryParams.returnUrl || '/principal';
-    if(this.loginService.sesionEstaAbierta){
-        this.router.navigate([this.returnUrl]);
-        console.log("el usuario ya esta logueado");
+
+    if(this.loginService.sesionEstaAbierta()){
+        this.redireccionar.home()
   }}
 
 }

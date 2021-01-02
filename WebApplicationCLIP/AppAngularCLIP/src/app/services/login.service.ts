@@ -32,7 +32,8 @@ export class LoginService {
     return this.sesionActualSubject.value;
   }
 
-  public sesionEstaAbierta(): boolean {
+  public sesionEstaAbierta(){   
+
     return this.sesionActualSubject.value != null;
   }
 
