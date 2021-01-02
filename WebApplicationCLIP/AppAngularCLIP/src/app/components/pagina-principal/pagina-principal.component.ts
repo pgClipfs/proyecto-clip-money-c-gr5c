@@ -6,6 +6,7 @@ import { LoginService } from 'src/app/services/login.service';
 
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { RedireccionService } from 'src/app/services/redireccion.service';
+import { OperacionService } from 'src/app/services/operacion.service';
 
 
 @Component({
@@ -15,7 +16,7 @@ import { RedireccionService } from 'src/app/services/redireccion.service';
 })
 export class PaginaPrincipalComponent implements OnInit {
 
-  usuario:Usuario;
+  usuario: Usuario;
   nombreUsuario: string = "Usuario generico";
 
 
@@ -26,7 +27,7 @@ export class PaginaPrincipalComponent implements OnInit {
   nombreApellido = 'JUAN CRUZ CUELLO';
   Fecha = '14/12/2020';
   Descripcion = 'Ingreso de dinero';
-  Monto= '$2500';
+  Monto = '$2500';
   tipoOperacion = 'Ingr.';
 
 
@@ -34,37 +35,48 @@ export class PaginaPrincipalComponent implements OnInit {
     this.modalService.open(contentIngresarDinero, { size: 'lg' });
   }
 
-  abrirSideBar(){
+  abrirSideBar() {
     this.opened = !this.opened;
   }
 
-  cerrar_sesion(){
-    console.log("serrando sesion")
+  cerrar_sesion() {
     this.loginService.logout();
     this.redireccionar.landingPage();
   }
 
 
-  constructor(private modalService: NgbModal, private redireccionar: RedireccionService , private loginService: LoginService, private datosUsuarioService: DatosUsuarioService) { }
+  constructor(private operacionesService: OperacionService, private modalService: NgbModal, private redireccionar: RedireccionService, private loginService: LoginService, private datosUsuarioService: DatosUsuarioService) { }
 
   private returnUrl: string;
 
+
   ngOnInit(): void {
-    if(!(this.loginService.sesionEstaAbierta())){
+
+    /*
+    //ejemplo de consumo del servicio de operaciones ;)
+    this.operacionesService.getOperacionesCvu("00002222").subscribe(
+      ops => {
+        console.log(ops)
+      },
+      err => {
+        console.log(err.error)
+      }
+    );
+*/
+
+    if (!(this.loginService.sesionEstaAbierta())) {
       this.redireccionar.login()
       console.log("el usuario debe loguearse antes de ver la pagina principal")
-  }
-  this.datosUsuarioService.obtenerDatosUsuario().subscribe(
-    user => {
-     //parece que todo bien
-  //   console.log(user);
-     this.usuario=user;
-     this.nombreUsuario= this.usuario.Nombre + " " + this.usuario.Apellido;
-    },
-    err => {
-      console.log("no se encontro el usuario (?");
     }
-);
+    this.datosUsuarioService.obtenerDatosUsuario().subscribe(
+      user => {
+        this.usuario = user;
+        this.nombreUsuario = this.usuario.Nombre + " " + this.usuario.Apellido;
+      },
+      err => {
+        console.log("no se encontro el usuario (?");
+      }
+    );
 
   }
 

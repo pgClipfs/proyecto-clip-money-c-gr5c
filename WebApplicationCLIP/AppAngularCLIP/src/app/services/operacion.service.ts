@@ -40,14 +40,17 @@ export class OperacionService {
           })
           ,map( asd => {
              return asd;
-             })//no se si es necesario el map, porque no se devuelve nada
+             //se podria devolver la fecha e id de la operacion, y mostrarla en una pantalla de confirmacion
+             })
       );
   }
 
-  public getOperacionesCvu(cvu: string): Observable<Operacion[]> {
+  public getOperacionesCvu(Cvu: string): Observable<Operacion[]> {
+
+    var SesionDeUsuario= this.loginService.obtenerSesionActual;
 
     //no es lo ideal pasar los parametros asi, pero no logre que funcione de otra forma
-    return this.http.post<any>(this.urlApi + 'get/operaciones?cvu=' + cvu, {})
+    return this.http.post<any>(this.urlApi + 'get/operaciones', {Cvu,SesionDeUsuario})
       .pipe(
         //retry(2), //esto es para decirle cuantas veces lo tiene que intentar antes de tirar error :o
         catchError(err => {

@@ -5,6 +5,7 @@ import { Sesion } from '../clases';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map, retry, catchError } from 'rxjs/operators';
 import { ActivatedRoute, Router } from '@angular/router';
+import { RedireccionService } from './redireccion.service';
 
 @Injectable({
   providedIn: "root"
@@ -16,7 +17,7 @@ export class LoginService {
   private sesionActualSubject: BehaviorSubject<Sesion>;
   private sesionActual: Observable<Sesion>;
 
-  constructor(private route: ActivatedRoute, private router: Router, private http: HttpClient) {
+  constructor(private http: HttpClient, private redireccionar: RedireccionService) {
     this.sesionActualSubject = new BehaviorSubject<Sesion>(JSON.parse(localStorage.getItem
       ('sesionActual')));
     this.sesionActual = this.sesionActualSubject.asObservable();
@@ -26,8 +27,7 @@ export class LoginService {
 
     if (!(this.sesionEstaAbierta)) {
       //en este if se comprueba si el usuario tiene la sesion abierta, y si no es asi, se lo manda al login 
-      var returnUrl = this.route.snapshot.queryParams.returnUrl || '/login';
-      this.router.navigate([returnUrl]);
+      //this.redireccionar.login()
     }
     return this.sesionActualSubject.value;
   }
@@ -62,8 +62,7 @@ export class LoginService {
   public logout(): void {
     localStorage.removeItem('sesionActual');
     this.sesionActualSubject.next(null);
-    var returnUrl = this.route.snapshot.queryParams.returnUrl || '/';
-    this.router.navigate([returnUrl]);
+    //this.redireccionar.landingPage()
   }
 
 
