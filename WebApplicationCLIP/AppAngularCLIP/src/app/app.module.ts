@@ -18,6 +18,9 @@ import { PaginaPrincipalComponent } from './components/pagina-principal/pagina-p
 import { RegistroExitosoComponent } from './components/registro-exitoso/registro-exitoso.component';
 import { NavbarLateralComponent } from './components/navbar-lateral/navbar-lateral.component';
 import { SidebarModule } from 'ng-sidebar';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { PantallaIngresoEgresoDineroComponent } from './components/pantalla-ingreso-egreso-dinero/pantalla-ingreso-egreso-dinero.component';
+import { PantallaTransferenciaComponent } from './components/pantalla-transferencia/pantalla-transferencia.component';
 import { OperacionesComponent } from './components/operaciones/operaciones.component';
 
 import { OperacionesService } from './services/operaciones.service'
@@ -33,6 +36,8 @@ import { OperacionesService } from './services/operaciones.service'
     PaginaPrincipalComponent,
     RegistroExitosoComponent,
     NavbarLateralComponent,
+    PantallaIngresoEgresoDineroComponent,
+    PantallaTransferenciaComponent,
     OperacionesComponent
   ],
   imports: [
@@ -46,9 +51,10 @@ import { OperacionesService } from './services/operaciones.service'
       { path: 'registroExitoso', component: RegistroExitosoComponent },
       { path: '', component: HomePageComponent },
       { path: 'login', component: LoginBox },
-      { path: 'principal', component: PaginaPrincipalComponent},
-      { path: 'operaciones', component: OperacionesComponent}     
-    ])
+      { path: 'principal', component: NavbarLateralComponent}, //hay que cambiar esto y volver a poner el principal     
+      { path: 'principalHome', component: PaginaPrincipalComponent}
+    ]),
+    NgbModule
   ],
   providers: [[LoginService],[SignupService],
 [OperacionesService]],

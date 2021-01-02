@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit ,ViewEncapsulation} from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-navbar-lateral',
@@ -7,7 +8,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavbarLateralComponent implements OnInit {
 
-  constructor() { }
+  closeResult: string;
+
+  constructor(private modalService: NgbModal) { }
 
   nombreUsuario = 'juancuello98';
   saldoPesos = 2555;
@@ -19,7 +22,11 @@ export class NavbarLateralComponent implements OnInit {
   Descripcion = 'Ingreso de dinero';
   Monto= '$2500';
   tipoOperacion = 'Ingr.';
-  
+
+  openLg(content) {
+    this.modalService.open(content, { size: 'lg' });
+  }
+
   abrirSideBar(){
     this.opened = !this.opened;
   }

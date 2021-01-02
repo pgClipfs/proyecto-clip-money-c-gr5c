@@ -1,0 +1,131 @@
+<form [formGroup]="formDinero">
+  <div class="container">
+    <!-- Combobox del tipo de operacion -->
+    <div class="row">
+      <div class="col-12">
+        <div class="input-group mb-3 mt-3">
+          <label for="selectorTipoOperacion" class="mr-2"
+            >Tipo de operacion</label
+          >
+          <select formControlName="selectorTipoOperacion" class="form-select">
+            <option value="">Seleccione la operacion</option>
+            <option
+              *ngFor="let item of tiposOperaciones"
+              [ngValue]="item"
+              (change)="changeCuenta($event)"
+            >
+              {{ item }}
+            </option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <!-- Campo del monto -->
+
+    <div class="row">
+      <div class="col-12">
+        <label for="inputMonto">$</label>
+        <input
+          type="text"
+          formControlName="Monto"
+          class="form-control-monto ml-1"
+          id="inputMonto"
+          placeholder="Monto"
+        />
+
+        <span
+          class="text-danger text-subtitle"
+          *ngIf="
+            formDinero.controls.Monto.errors?.required &&
+            formDinero.controls.Monto.touched
+          "
+        >
+          Dato requerido.</span
+        >
+      </div>
+    </div>
+
+    <!-- Campo del CVU -->
+
+    <div class="row">
+      <div class="col-12">
+        <label for="inputCVU"></label>
+        <input
+          type="text"
+          formControlName="inputCVU"
+          class="form-control-monto"
+          id="inputCVU"
+          placeholder="CVU"
+        />
+
+        <span
+          class="text-danger row-cols-1 ml-3 mt-3 text-subtitle"
+          *ngIf="
+            formDinero.controls.inputCVU.errors?.required &&
+            formDinero.controls.inputCVU.touched
+          "
+        >
+          Dato requerido.</span
+        >
+        <span class="text-danger"
+        *ngIf="
+        formDinero.controls.inputCVU.errors?.minlength && formDinero.controls.inputCVU.touched
+        ">
+        El CVU no puede tener menos de 22 digitos.</span>
+        <span class="text-danger"
+        *ngIf="formDinero.controls.inputCVU.errors?.maxlength && formDinero.controls.inputCVU.touched">
+        El CVU no puede tener mas de 22 digitos.</span>
+      </div>
+    </div>
+
+    <!-- Boton para ver los datos de la cuenta -->
+    <div class="row">
+      <div class="col-12 mt-3">
+        <button
+          type="button"
+          name=""
+          id=""
+          class="btn btn-primary"
+          (click)="verCuenta()"
+        >
+          {{ labelBotonCuenta }}
+        </button>
+      </div>
+    </div>
+
+    <!-- Datos de la cuenta en la que se va a hacer la operacion -->
+
+    <div class="row">
+      <div class="col-12">
+        <div class="container" *ngIf="verDatosCuenta">
+          <div class="card mt-3">
+            <div class="card-body">
+              <h4 class="card-title">Datos de la cuenta</h4>
+              <p class="card-text">
+                Esta cuenta pertenece a {{ usuarioCuenta }}
+              </p>
+              <p class="card-text">Saldo de la cuenta: $ {{ saldoCuenta }}</p>
+              <p class="card-text">CVU de la cuenta: {{ cvuCuenta }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Boton para confirmar la operacion -->
+
+    <div class="row">
+      <div class="col-12">
+        <button
+          type="button"
+          name=""
+          id=""
+          class="mt-3 ml-3 btn btn-primary btn-block"
+        >
+          Realizar operacion
+        </button>
+      </div>
+    </div>
+  </div>
+</form>
