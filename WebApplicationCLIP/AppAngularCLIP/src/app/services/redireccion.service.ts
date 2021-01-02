@@ -8,8 +8,9 @@ export class RedireccionService {
 
   constructor(private route: ActivatedRoute, private router: Router) { }
   
-  public redireccionar(direccion: string){
-
+  public a(direccion: string){
+    var returnUrl = this.route.snapshot.queryParams.returnUrl || '/'+direccion;
+    this.router.navigate([returnUrl]);   
   }
 
   public login(){
@@ -22,7 +23,7 @@ export class RedireccionService {
     this.router.navigate([returnUrl]);       
   }
   
-  public home(){
+  public principal(){
     var returnUrl = this.route.snapshot.queryParams.returnUrl || '/principal';
     this.router.navigate([returnUrl]);       
 

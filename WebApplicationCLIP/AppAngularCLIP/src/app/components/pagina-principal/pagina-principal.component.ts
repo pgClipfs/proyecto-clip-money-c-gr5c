@@ -5,6 +5,7 @@ import { DatosUsuarioService } from 'src/app/services/datos-usuario.service';
 import { LoginService } from 'src/app/services/login.service';
 
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { RedireccionService } from 'src/app/services/redireccion.service';
 
 
 @Component({
@@ -38,24 +39,19 @@ export class PaginaPrincipalComponent implements OnInit {
   }
 
   cerrar_sesion(){
+    console.log("serrando sesion")
     this.loginService.logout();
-    //location.reload();
-
-    var returnUrl= this.route.snapshot.queryParams.returnUrl || '/';
-
-    console.log("Sesion cerrada")
-    this.router.navigate([returnUrl]);
+    this.redireccionar.landingPage();
   }
 
 
-  constructor(private modalService: NgbModal, private route: ActivatedRoute, private router: Router, private loginService: LoginService, private datosUsuarioService: DatosUsuarioService) { }
+  constructor(private modalService: NgbModal, private redireccionar: RedireccionService , private loginService: LoginService, private datosUsuarioService: DatosUsuarioService) { }
 
   private returnUrl: string;
 
   ngOnInit(): void {
-    this.returnUrl = this.route.snapshot.queryParams.returnUrl || '/login';
-    if(!(this.loginService.sesionEstaAbierta)){
-      this.router.navigate([this.returnUrl]);
+    if(!(this.loginService.sesionEstaAbierta())){
+      this.redireccionar.login()
       console.log("el usuario debe loguearse antes de ver la pagina principal")
   }
   this.datosUsuarioService.obtenerDatosUsuario().subscribe(
