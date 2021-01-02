@@ -208,7 +208,7 @@ namespace WebApplicationCLIP.Controllers
             }
             catch (Exception e)
             {
-                return Content(HttpStatusCode.ExpectationFailed, "No se encontró una cuenta con ese CVU " + e.Message);
+                return Content(HttpStatusCode.ExpectationFailed, "No se encontró una cuenta con ese CVU --> " + e.Message);
             }
 
             try
@@ -242,7 +242,7 @@ namespace WebApplicationCLIP.Controllers
             }
             catch (Exception e)
             {
-                return Content(HttpStatusCode.Conflict, "No se pudó registrar la operación deposito " + e.Message);
+                return Content(HttpStatusCode.Conflict, "No se pudo registrar la operación deposito --> " + e.Message);
             }
             //por ahora no se valida la sesion ni nada, simplemente se devuelven las operaciones del usuario
             //if (!LoginController.ValidarToken(sesion))return Unauthorized();
@@ -300,7 +300,7 @@ namespace WebApplicationCLIP.Controllers
             }
             catch (Exception e)
             {
-                return Content(HttpStatusCode.Conflict, "No se pudó registrar la operación extracción " + e.Message);
+                return Content(HttpStatusCode.Conflict, "No se pudó registrar la operación extracción --> " + e.Message);
             }
             //por ahora no se valida la sesion ni nada, simplemente se devuelven las operaciones del usuario
             //if (!LoginController.ValidarToken(sesion))return Unauthorized();
