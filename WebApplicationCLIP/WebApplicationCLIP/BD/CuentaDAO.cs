@@ -173,6 +173,8 @@ namespace WebApplicationCLIP.BD
 
         public void registrar(Cuenta t)
         {
+            //insert into cuentas
+            
             throw new NotImplementedException(); //CONTINUAR AQUI
         }
 

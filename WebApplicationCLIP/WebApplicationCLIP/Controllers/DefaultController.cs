@@ -16,6 +16,31 @@ namespace WebApplicationCLIP.Controllers
     [RoutePrefix("api")]
     public class DefaultController : ApiController
     {
+
+        [HttpGet]
+        [EnableCors(origins: "*", headers: "*", methods: "*")]
+        [Route("prueba1")]
+        public IHttpActionResult prueba()
+        {
+
+            Cuenta cuenta = new Cuenta();
+
+            CuentaDAO c = new CuentaDAO();
+
+            try
+            {
+                c.registrar(cuenta);
+
+            }
+            catch (Exception e)
+            {
+                return Content(HttpStatusCode.Conflict, e);
+            }
+
+            return Ok();
+        }
+
+
         [HttpPost]
         [EnableCors(origins: "*", headers: "*", methods: "*")]
         [Route("get/operaciones")]
@@ -181,7 +206,7 @@ namespace WebApplicationCLIP.Controllers
             }
             try
             {
-                GestorCuenta gestorCuenta = new GestorCuenta(); 
+                GestorCuenta gestorCuenta = new GestorCuenta();
                 return Ok(gestorCuenta.ObtenerCuentasDelUsuario(login));
             }
             catch (Exception e)
