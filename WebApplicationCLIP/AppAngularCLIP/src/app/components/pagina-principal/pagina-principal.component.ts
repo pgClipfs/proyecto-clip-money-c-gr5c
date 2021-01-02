@@ -9,7 +9,7 @@ import { RedireccionService } from 'src/app/services/redireccion.service';
 import { OperacionService } from 'src/app/services/operacion.service';
 import { Cuenta, Operacion } from 'src/app/clases';
 import { CuentaService } from 'src/app/services/cuenta.service';
-
+import { flatMap, retry } from 'rxjs/operators';
 
 @Component({
   selector: 'app-pagina-principal',
@@ -20,8 +20,6 @@ export class PaginaPrincipalComponent implements OnInit {
 
   usuario: Usuario;
   nombreUsuario: string = "Usuario generico";
-
-
 
   saldoPesos = 2555;
   opened = false;
@@ -52,40 +50,45 @@ export class PaginaPrincipalComponent implements OnInit {
 
   private returnUrl: string;
 
-  operaciones: Operacion[]
-  cuentas: Cuenta[]
-  cvu: string;
+  operaciones: Operacion[] = [];
+  cuentas: Cuenta[];
+  cuentaUsuario: Cuenta
 
   ngOnInit(): void {
 
-    /*ejemplo consulta cuentas y operaciones
-    //lo que se hace es obtener todas las cuentas del usuario, y se usa el cvu de alguna para obtener las operaciones
-    //pero no se obtienen todas las operaciones de todas las cuentas
-    this.cuentasService.obtenerCuentasUsuario().subscribe(
-      cuentas=>{
-        this.cuentas=cuentas;
-      }
-      ,err=>{console.log(err.error)}
-    )
+    //#region cuentas y operaciones
 
-    this.cuentas.forEach(cuenta => {
-      this.cvu=cuenta.Cvu
-    });
-    
-    this.operacionesService.getOperacionesCvu(this.cvu).subscribe(
-      ops => {
-        this.operaciones=ops;
+    this.cuentasService.obtenerCuentasUsuario().subscribe(
+      val => {
+        this.cuentaUsuario = val[0]
+        //console.log(this.cuentaUsuario)
       },
       err => {
-        console.log(err.error)
+        console.log(err)
+      },
+      () => {
+        //console.log(this.cuentaUsuario.Cvu)
+        this.operacionesService.getOperacionesCvu(this.cuentaUsuario.Cvu).subscribe(
+          ops => {
+            this.operaciones = ops;
+            console.log(ops)
+          },
+          err => {
+            console.log(err)
+          }
+        );
       }
     );
-    */
+
+    //#endregion 
+
+    //#region datos usuario
 
     if (!(this.loginService.sesionEstaAbierta())) {
       this.redireccionar.login()
       console.log("el usuario debe loguearse antes de ver la pagina principal")
     }
+
     this.datosUsuarioService.obtenerDatosUsuario().subscribe(
       user => {
         this.usuario = user;
@@ -96,6 +99,7 @@ export class PaginaPrincipalComponent implements OnInit {
       }
     );
 
+    //#endregion
   }
 
 }

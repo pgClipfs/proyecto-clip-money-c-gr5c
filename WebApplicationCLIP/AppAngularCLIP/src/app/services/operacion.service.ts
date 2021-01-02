@@ -2,11 +2,12 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from "@angular/common/http";
 import { HttpClientModule } from '@angular/common/http';
 import { Usuario } from '../modelos/usuario';
-import { Operacion } from '../clases';
+import { Cuenta, Operacion } from '../clases';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map, retry, catchError } from 'rxjs/operators';
 import { LoginService } from './login.service';
 import { Sesion } from '../clases';
+import { CuentaService } from './cuenta.service';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +17,7 @@ export class OperacionService {
   private urlApi = "http://localhost:59642/api/"; //linea para hacer pruebas
 
 
-  constructor(private http: HttpClient, private loginService: LoginService) { }
+  constructor(private cuentasService: CuentaService, private http: HttpClient, private loginService: LoginService) { }
 
   public realizarExtraccion(cvu: string, monto: number): Observable<any> {
     var dir = "post/extraccion";
@@ -37,24 +38,24 @@ export class OperacionService {
         catchError(err => {
           throw err;
           //para leer el mensaje del error, hacer err.error
-          })
-          ,map( asd => {
-             return asd;
-             //se podria devolver la fecha e id de la operacion, y mostrarla en una pantalla de confirmacion
-             })
+        })
+        , map(asd => {
+          return asd;
+          //se podria devolver la fecha e id de la operacion, y mostrarla en una pantalla de confirmacion
+        })
       );
   }
 
   public getOperacionesCvu(Cvu: string): Observable<Operacion[]> {
 
-    var SesionDeUsuario= this.loginService.obtenerSesionActual;
+    var SesionDeUsuario = this.loginService.obtenerSesionActual;
 
     //no es lo ideal pasar los parametros asi, pero no logre que funcione de otra forma
-    return this.http.post<any>(this.urlApi + 'get/operaciones', {Cvu,SesionDeUsuario})
+    return this.http.post<any>(this.urlApi + 'get/operaciones', { Cvu, SesionDeUsuario })
       .pipe(
         //retry(2), //esto es para decirle cuantas veces lo tiene que intentar antes de tirar error :o
         catchError(err => {
-          console.log("err"+err)
+          console.log("err" + err)
           throw err;
         }),
         map(ops => {
