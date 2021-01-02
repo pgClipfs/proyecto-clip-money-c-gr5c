@@ -31,7 +31,7 @@ namespace WebApplicationCLIP.Controllers
             }
             catch (Exception e)
             {
-                return Content(HttpStatusCode.ExpectationFailed, "No se encontró una cuenta con ese CVU " + e.Message);
+                return Content(HttpStatusCode.ExpectationFailed, "No se encontró una cuenta con ese CVU --> " + e.Message);
             }
             try
             {
@@ -40,7 +40,7 @@ namespace WebApplicationCLIP.Controllers
 
                 if (!(cuenta.Usuario.NombreDeUsuario.ToString() == usuario.NombreDeUsuario.ToString()))
                 {
-                    return Content(HttpStatusCode.Forbidden, "Esta cuenta no pertenece al usuario correspondiente");
+                    return Content(HttpStatusCode.Forbidden, "Esta cuenta no pertenece al usuario correspondiente.");
                 }
             }
             catch (UnauthorizedAccessException e)
@@ -83,7 +83,7 @@ namespace WebApplicationCLIP.Controllers
             }
             catch (Exception e)
             {
-                return Content(HttpStatusCode.ExpectationFailed, "No se encontró una cuenta con ese CVU " + e.Message);
+                return Content(HttpStatusCode.ExpectationFailed, "No se encontró una cuenta con ese CVU --> " + e.Message);
             }
             try
             {
@@ -92,7 +92,7 @@ namespace WebApplicationCLIP.Controllers
 
                 if (!(cuenta.Usuario.NombreDeUsuario.ToString() == usuario.NombreDeUsuario.ToString()))
                 {
-                    return Content(HttpStatusCode.Forbidden, "Esta cuenta no pertenece al usuario correspondiente");
+                    return Content(HttpStatusCode.Forbidden, "Esta cuenta no pertenece al usuario correspondiente.");
                 }
             }
             catch (UnauthorizedAccessException e)
@@ -160,7 +160,7 @@ namespace WebApplicationCLIP.Controllers
             }
             catch (Exception e)
             {
-                return Content(HttpStatusCode.ExpectationFailed, "No se encontró una cuenta con ese CVU " + e.Message);
+                return Content(HttpStatusCode.ExpectationFailed, "No se encontró una cuenta con ese CVU --> " + e.Message);
             }
             try
             {
@@ -169,7 +169,7 @@ namespace WebApplicationCLIP.Controllers
 
                 if (!(usuario.NombreDeUsuario.ToString() == usuario.NombreDeUsuario.ToString()))
                 {
-                    return Content(HttpStatusCode.Forbidden, "Esta cuenta no pertenece al usuario correspondiente");
+                    return Content(HttpStatusCode.Forbidden, "Esta cuenta no pertenece al usuario correspondiente.");
                 }
             }
             catch (UnauthorizedAccessException e)
@@ -213,7 +213,7 @@ namespace WebApplicationCLIP.Controllers
             }
             catch (Exception e)
             {
-                return Content(HttpStatusCode.ExpectationFailed, "No se encontró una cuenta con ese CVU " + e.Message);
+                return Content(HttpStatusCode.ExpectationFailed, "No se encontró una cuenta con ese CVU --> " + e.Message);
             }
 
             try
@@ -223,7 +223,7 @@ namespace WebApplicationCLIP.Controllers
 
                 if (!(cuenta.Usuario.NombreDeUsuario.ToString() == usuario.NombreDeUsuario.ToString()))
                 {
-                    return Content(HttpStatusCode.Forbidden, "Esta cuenta no pertenece al usuario correspondiente");
+                    return Content(HttpStatusCode.Forbidden, "Esta cuenta no pertenece al usuario correspondiente.");
                 }
             }
             catch (UnauthorizedAccessException e)
@@ -247,7 +247,7 @@ namespace WebApplicationCLIP.Controllers
             }
             catch (Exception e)
             {
-                return Content(HttpStatusCode.Conflict, "No se pudó registrar la operación deposito " + e.Message);
+                return Content(HttpStatusCode.Conflict, "No se pudo registrar la operación deposito --> " + e.Message);
             }
             //por ahora no se valida la sesion ni nada, simplemente se devuelven las operaciones del usuario
             //if (!LoginController.ValidarToken(sesion))return Unauthorized();
@@ -271,7 +271,7 @@ namespace WebApplicationCLIP.Controllers
             }
             catch (Exception e)
             {
-                return Content(HttpStatusCode.ExpectationFailed, "No se encontró una cuenta con ese CVU " + e.Message);
+                return Content(HttpStatusCode.ExpectationFailed, "No se encontró una cuenta con ese CVU --> " + e.Message);
             }
             try
             {
@@ -280,7 +280,7 @@ namespace WebApplicationCLIP.Controllers
 
                 if (!(cuenta.Usuario.NombreDeUsuario.ToString() == usuario.NombreDeUsuario.ToString()))
                 {
-                    return Content(HttpStatusCode.Forbidden, "Esta cuenta no pertenece al usuario correspondiente");
+                    return Content(HttpStatusCode.Forbidden, "Esta cuenta no pertenece al usuario correspondiente.");
                 }
 
             }
@@ -305,7 +305,7 @@ namespace WebApplicationCLIP.Controllers
             }
             catch (Exception e)
             {
-                return Content(HttpStatusCode.Conflict, "No se pudó registrar la operación extracción " + e.Message);
+                return Content(HttpStatusCode.Conflict, "No se pudó registrar la operación extracción --> " + e.Message);
             }
             //por ahora no se valida la sesion ni nada, simplemente se devuelven las operaciones del usuario
             //if (!LoginController.ValidarToken(sesion))return Unauthorized();
