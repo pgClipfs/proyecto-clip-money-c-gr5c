@@ -9,6 +9,73 @@ namespace WebApplicationCLIP.BD
 {
     public class UsuarioDAO : CRUD<Usuario>
     {
+        public Usuario consultarDNI(Usuario t)
+        {
+            string script = "SELECT DNI FROM USUARIOS WHERE DNI = " + "'" + t.Dni + "'";
+            if (t.Dni is null)
+            {
+                script = "SELECT * FROM USUARIOS WHERE NOMBRE_USUARIO = " + "'" + t.NombreDeUsuario + "'";
+            }
+
+            ConexionBD conexion = new ConexionBD();
+            conexion.abrir();
+            List<string> ensamblador = new List<string>();
+            Usuario usuario_resultado;
+
+            try
+            {
+                SqlCommand comando = new SqlCommand(script, conexion.conexionBD);
+                SqlDataReader lector = comando.ExecuteReader();
+                while (lector.Read())
+                {
+                    for (int i = 0; i < lector.FieldCount; i++)
+                    {
+                        ensamblador.Add(lector.GetValue(i).ToString());
+                    }
+                }
+                usuario_resultado = new Usuario(ensamblador);
+            }
+            catch (Exception e)
+            {
+                throw new Exception("Error al ejecutar la consulta --> " + e.Message);
+            }
+            conexion.cerrar();
+            return usuario_resultado;
+        }
+        public Usuario consultarConCvu(string cvu)
+        {
+            string script = "SELECT * FROM CUENTAS WHERE DNI = " + "'" + cvu + "'";
+
+            if (cvu is null)
+            {
+                throw new ArgumentNullException("El CVU es null");
+            }
+
+            ConexionBD conexion = new ConexionBD();
+            conexion.abrir();
+            List<string> ensamblador = new List<string>();
+            Usuario usuario_resultado;
+
+            try
+            {
+                SqlCommand comando = new SqlCommand(script, conexion.conexionBD);
+                SqlDataReader lector = comando.ExecuteReader();
+                while (lector.Read())
+                {
+                    for (int i = 0; i < lector.FieldCount; i++)
+                    {
+                        ensamblador.Add(lector.GetValue(i).ToString());
+                    }
+                }
+                usuario_resultado = new Usuario(ensamblador);
+            }
+            catch (Exception e)
+            {
+                throw new Exception("Error al ejecutar la consulta --> " + e.Message);
+            }
+            conexion.cerrar();
+            return usuario_resultado;
+        }
         public Usuario consultar(Usuario t)
         {
             string script = "SELECT * FROM USUARIOS WHERE DNI = " + "'" + t.Dni + "'";
@@ -34,7 +101,7 @@ namespace WebApplicationCLIP.BD
                         ensamblador.Add(lector.GetValue(i).ToString());
                     }
                 }
-                usuario_resultado =new Usuario(ensamblador);
+                usuario_resultado = new Usuario(ensamblador);
             }
             catch (Exception e)
             {

@@ -10,6 +10,11 @@ namespace WebApplicationCLIP.Gestores
 {
     public class GestorCuenta
     {
+        public List<Cuenta> ObtenerCuentasDelUsuario(SesionDeUsuario login)
+        {
+            CuentaDAO cuentaDAO = new CuentaDAO();
+            return cuentaDAO.consultarCuentasDelUsuario(login);
+        }
 
         public int crearCuenta(string DNI)
         {
@@ -24,12 +29,11 @@ namespace WebApplicationCLIP.Gestores
             return 0;
         }
 
-
         public Cuenta TraerCuenta(string CVU)
         {
             Cuenta cuenta = Cuenta.crearCuentaConCVU(CVU);
             CuentaDAO cuentaDAO = new CuentaDAO();
-            cuentaDAO.consultar(cuenta);
+            cuenta = cuentaDAO.consultar(CVU);
             return cuenta;
         }
 

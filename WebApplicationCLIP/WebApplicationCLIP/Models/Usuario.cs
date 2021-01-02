@@ -108,32 +108,33 @@ namespace WebApplicationCLIP.Models
             return usuario;
         }
 
-      /*  public static Usuario nuevoUsuario(string dni, string nombre, string apellido, string nombreDeUsuario, string email, string telefono, string contraseña)
-        {
-            //    Usuario usuarioNuevo = new Usuario(dni, nombre, apellido, "normal", nombreDeUsuario, email.ToLower(), telefono, contraseña);
 
-            Usuario usuarioNuevo = new Usuario()
-            {
-                Dni = dni,
-                Nombre = nombre,
-                Apellido = apellido,
-                NombreDeUsuario = nombreDeUsuario,
-                Email = email,
-                Telefono = telefono,
-                Contraseña = contraseña
-            };
+        /*  public static Usuario nuevoUsuario(string dni, string nombre, string apellido, string nombreDeUsuario, string email, string telefono, string contraseña)
+          {
+              //    Usuario usuarioNuevo = new Usuario(dni, nombre, apellido, "normal", nombreDeUsuario, email.ToLower(), telefono, contraseña);
 
-            try
-            {
-                comprobarIntegridadDeParametros(usuarioNuevo);   
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }
-            
-            return usuarioNuevo;
-        }*/
+              Usuario usuarioNuevo = new Usuario()
+              {
+                  Dni = dni,
+                  Nombre = nombre,
+                  Apellido = apellido,
+                  NombreDeUsuario = nombreDeUsuario,
+                  Email = email,
+                  Telefono = telefono,
+                  Contraseña = contraseña
+              };
+
+              try
+              {
+                  comprobarIntegridadDeParametros(usuarioNuevo);   
+              }
+              catch (Exception e)
+              {
+                  throw e;
+              }
+
+              return usuarioNuevo;
+          }*/
 
     }
 }

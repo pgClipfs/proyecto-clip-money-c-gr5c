@@ -78,6 +78,7 @@ namespace WebApplicationCLIP.Gestores
 
         }
 
+
         public static Usuario consultarUsuarioPorNombreDeUsuario(string nombre)
         {
             Usuario temp = Usuario.CrearUsuarioConNombreDeUsuario(nombre);
@@ -85,7 +86,7 @@ namespace WebApplicationCLIP.Gestores
 
             try
             {
-                Usuario usu = usuarioDAO.consultar(temp);
+                Usuario usu = usuarioDAO.consultar(temp); //aca da el problema
                 return usu;
             }
             catch (Exception e)

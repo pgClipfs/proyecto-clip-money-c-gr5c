@@ -127,6 +127,7 @@ namespace WebApplicationCLIP.Models
         {
             Cuenta c = new Cuenta();
             return ensamblarCuenta(ensamblador, c);
+
         }
 
         public static Cuenta ensamblarCuenta(List<string> ensamblador, Cuenta cuenta)
@@ -137,8 +138,12 @@ namespace WebApplicationCLIP.Models
             cuenta.Saldo = float.Parse(ensamblador[2]);
             // Todavia no se programo la obtencion de las operaciones
             cuenta.Operaciones = null;
-
             return cuenta;
+        }
+
+        public void removerUsuario()
+        {
+            Usuario = null;
         }
 
         public static Cuenta crearCuentaConDNI(string DNI)
@@ -156,7 +161,6 @@ namespace WebApplicationCLIP.Models
             cuenta.Cvu = CVU;
             return cuenta;
         }
-
 
     }
 }

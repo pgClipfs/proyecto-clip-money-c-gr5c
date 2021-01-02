@@ -9,6 +9,62 @@ namespace WebApplicationCLIP.BD
 {
     public class CuentaDAO : CRUD<Cuenta>
     {
+        public List<Cuenta> consultarCuentasDelUsuario(SesionDeUsuario login)
+        {
+            string script = "select CVU, DNI_USUARIO, SALDO, DIVISA, TIPO_CUENTA from CUENTAS c inner join Usuarios u on c.DNI_USUARIO = u.DNI where NOMBRE_USUARIO = " + "'" + login.NombreDeUsuario + "'";
+            List<Cuenta> temp = null;
+            ConexionBD conexion = new ConexionBD();
+            conexion.abrir();
+
+            try
+            {
+                SqlCommand comando = new SqlCommand(script, conexion.conexionBD);
+                SqlDataReader lector = comando.ExecuteReader();
+                List<List<string>> cuentas = new List<List<string>>();
+                int j = 0;
+                while (lector.Read())
+                {
+                    cuentas.Add(new List<string>());
+                    for (int i = 0; i < lector.FieldCount; i++)
+                    {
+                        cuentas[j].Add(lector.GetValue(i).ToString());
+                    }
+                    j++;
+
+                }
+                if (cuentas.Count > 0)
+                {
+                    temp = new List<Cuenta>();
+                    for (int i = 0; i < cuentas.Count; i++)
+                    {
+                        temp.Add(Cuenta.ensamblarCuenta(cuentas[i]));
+                    }
+                    conexion.cerrar();
+
+                    //aca hay que "ensamblar" el objeto operacion resultado
+                    //operacionResultado = algo
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception("Error al ejecutar la consulta --> " + e.Message);
+            }
+
+            conexion.cerrar();
+
+            foreach (var item in temp)
+            {
+                item.removerUsuario();
+            }
+
+            return temp;
+        }
+
+        public Cuenta consultarCuenta(SesionDeUsuario login)
+        {
+            return null;
+        }
+
         public Cuenta consultar(string cvu)
         {
             string script = "SELECT * FROM CUENTAS WHERE CVU = " + "'" + cvu + "'";
@@ -31,7 +87,6 @@ namespace WebApplicationCLIP.BD
                 if (ensamblador.Count > 0)
                 {
                     conexion.cerrar();
-
                 }
             }
             catch (Exception e)
@@ -40,9 +95,54 @@ namespace WebApplicationCLIP.BD
             }
             conexion.cerrar();
             return Cuenta.ensamblarCuenta(ensamblador);
+            
         }
 
+        public List<Operacion> consultarOperacionesPorCVU(string cvu)
+        {
+            string script = "SELECT * FROM OPERACIONES WHERE CVU = " + "'" + cvu + "'";
+            List<Operacion> temp = null;
+            ConexionBD conexion = new ConexionBD();
+            conexion.abrir();
 
+            try
+            {
+                SqlCommand comando = new SqlCommand(script, conexion.conexionBD);
+                SqlDataReader lector = comando.ExecuteReader();
+                List<List<string>> operaciones = new List<List<string>>();
+                int j = 0;
+                while (lector.Read())
+                {
+                    operaciones.Add(new List<string>());
+                    for (int i = 0; i < lector.FieldCount; i++)
+                    {
+                        operaciones[j].Add(lector.GetValue(i).ToString());
+                    }
+                    j++;
+
+                }
+                if (operaciones.Count > 0)
+                {
+                    temp = new List<Operacion>();
+                    for (int i = 0; i < operaciones.Count; i++)
+                    {
+                        temp.Add(Operacion.ensamblarOperacion(operaciones[i]));
+                    }
+                    conexion.cerrar();
+
+                    //aca hay que "ensamblar" el objeto operacion resultado
+                    //operacionResultado = algo
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception("Error al ejecutar la consulta --> " + e.Message);
+            }
+
+            conexion.cerrar();
+
+            return temp;
+        }
 
         public void eliminar(Cuenta t)
         {
@@ -114,7 +214,7 @@ namespace WebApplicationCLIP.BD
 
         public Cuenta consultar(Cuenta t)
         {
-            throw new NotImplementedException();
+            throw new Exception();
         }
     }
 }
