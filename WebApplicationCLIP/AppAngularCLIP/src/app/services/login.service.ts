@@ -70,6 +70,8 @@ export class LoginService {
   public logout(): void {
     localStorage.removeItem('sesionActual');
     this.sesionActualSubject.next(null);
+    var returnUrl = this.route.snapshot.queryParams.returnUrl || '/';
+    this.router.navigate([returnUrl]);   
   }
 
 
