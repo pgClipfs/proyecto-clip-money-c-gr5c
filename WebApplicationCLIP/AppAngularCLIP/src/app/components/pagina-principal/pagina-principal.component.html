@@ -73,7 +73,7 @@
               </div>
               <div class="col-sm-9">
                 <div class="card-body" >
-                  <p class="pl-3 card-text text-card">INGRESAR DINERO</p>
+                  <p class="pl-3 card-text text-card">DEPOSITO/ EXTRACCION</p>
                 </div>
               </div>
             </div>
@@ -272,8 +272,13 @@
   </div>
 
   <ng-template #contentIngresarDinero let-modal>
-    <div class="modal-header">
-      <h4 class="modal-title">Ingresar/Retirar Dinero</h4>
+    <div class="modal-header mb-3">
+      <div class="card shadow-sm" style="width: 100%;">
+        <div class="card-body">
+          <h4 class="modal-title card-title">DEPOSITOS Y EXTRACCIONES</h4>
+        </div>
+      </div>
+
       <!--<button
         type="button"
         class="close"
@@ -284,16 +289,12 @@
       </button>-->
     </div>
     <div class="modal-body">
-      <app-pantalla-ingreso-egreso-dinero></app-pantalla-ingreso-egreso-dinero>
-    </div>
-    <div class="modal-footer">
-      <button
-        type="button"
-        class="btn btn-light"
-        (click)="modal.close('Close click')"
-      >
-        Close
-      </button>
+      <div class="card shadow" style="width: 100%;">
+        <div class="card-body">
+          <app-pantalla-ingreso-egreso-dinero></app-pantalla-ingreso-egreso-dinero>
+        </div>
+      </div>
+
     </div>
   </ng-template>
 </ng-sidebar-container>
