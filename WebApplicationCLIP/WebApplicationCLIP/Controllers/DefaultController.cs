@@ -31,7 +31,7 @@ namespace WebApplicationCLIP.Controllers
             }
             catch (Exception e)
             {
-                return Content(HttpStatusCode.ExpectationFailed, "No se encontró una cuenta con ese CVU " + e.Message);
+                return Content(HttpStatusCode.ExpectationFailed, "No se encontró una cuenta con ese CVU --> " + e.Message);
             }
             try
             {
@@ -40,7 +40,7 @@ namespace WebApplicationCLIP.Controllers
 
                 if (!(cuenta.Usuario.NombreDeUsuario.ToString() == usuario.NombreDeUsuario.ToString()))
                 {
-                    return Content(HttpStatusCode.Forbidden, "Esta cuenta no pertenece al usuario correspondiente");
+                    return Content(HttpStatusCode.Forbidden, "Esta cuenta no pertenece al usuario correspondiente.");
                 }
             }
             catch (UnauthorizedAccessException e)
@@ -83,7 +83,7 @@ namespace WebApplicationCLIP.Controllers
             }
             catch (Exception e)
             {
-                return Content(HttpStatusCode.ExpectationFailed, "No se encontró una cuenta con ese CVU " + e.Message);
+                return Content(HttpStatusCode.ExpectationFailed, "No se encontró una cuenta con ese CVU --> " + e.Message);
             }
             try
             {
@@ -92,7 +92,7 @@ namespace WebApplicationCLIP.Controllers
 
                 if (!(cuenta.Usuario.NombreDeUsuario.ToString() == usuario.NombreDeUsuario.ToString()))
                 {
-                    return Content(HttpStatusCode.Forbidden, "Esta cuenta no pertenece al usuario correspondiente");
+                    return Content(HttpStatusCode.Forbidden, "Esta cuenta no pertenece al usuario correspondiente.");
                 }
             }
             catch (UnauthorizedAccessException e)
@@ -155,7 +155,7 @@ namespace WebApplicationCLIP.Controllers
             }
             catch (Exception e)
             {
-                return Content(HttpStatusCode.ExpectationFailed, "No se encontró una cuenta con ese CVU " + e.Message);
+                return Content(HttpStatusCode.ExpectationFailed, "No se encontró una cuenta con ese CVU --> " + e.Message);
             }
             try
             {
@@ -164,7 +164,7 @@ namespace WebApplicationCLIP.Controllers
 
                 if (!(usuario.NombreDeUsuario.ToString() == usuario.NombreDeUsuario.ToString()))
                 {
-                    return Content(HttpStatusCode.Forbidden, "Esta cuenta no pertenece al usuario correspondiente");
+                    return Content(HttpStatusCode.Forbidden, "Esta cuenta no pertenece al usuario correspondiente.");
                 }
             }
             catch (UnauthorizedAccessException e)
@@ -218,7 +218,7 @@ namespace WebApplicationCLIP.Controllers
 
                 if (!(cuenta.Usuario.NombreDeUsuario.ToString() == usuario.NombreDeUsuario.ToString()))
                 {
-                    return Content(HttpStatusCode.Forbidden, "Esta cuenta no pertenece al usuario correspondiente");
+                    return Content(HttpStatusCode.Forbidden, "Esta cuenta no pertenece al usuario correspondiente.");
                 }
             }
             catch (UnauthorizedAccessException e)
@@ -266,7 +266,7 @@ namespace WebApplicationCLIP.Controllers
             }
             catch (Exception e)
             {
-                return Content(HttpStatusCode.ExpectationFailed, "No se encontró una cuenta con ese CVU " + e.Message);
+                return Content(HttpStatusCode.ExpectationFailed, "No se encontró una cuenta con ese CVU --> " + e.Message);
             }
             try
             {
@@ -275,7 +275,7 @@ namespace WebApplicationCLIP.Controllers
 
                 if (!(cuenta.Usuario.NombreDeUsuario.ToString() == usuario.NombreDeUsuario.ToString()))
                 {
-                    return Content(HttpStatusCode.Forbidden, "Esta cuenta no pertenece al usuario correspondiente");
+                    return Content(HttpStatusCode.Forbidden, "Esta cuenta no pertenece al usuario correspondiente.");
                 }
 
             }
