@@ -84,6 +84,15 @@ namespace WebApplicationCLIP.Controllers
                 throw new HttpRequestException();
             }
 
+            try
+            {
+            GestorUsuario.consultarUsuarioPorNombreDeUsuario(login.NombreDeUsuario);
+            }
+            catch (Exception)
+            {
+                throw new UnauthorizedAccessException("No se encontro el usuario");
+            }
+
             if (!LoginController.ValidarToken(login))
             {
                 throw new UnauthorizedAccessException("sesion de usuario expirada");
