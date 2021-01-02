@@ -16,7 +16,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { SignupPageComponent } from './components/signup-page/signup-page.component';
 import { PaginaPrincipalComponent } from './components/pagina-principal/pagina-principal.component';
 import { RegistroExitosoComponent } from './components/registro-exitoso/registro-exitoso.component';
-import { NavbarLateralComponent } from './components/navbar-lateral/navbar-lateral.component';
 import { SidebarModule } from 'ng-sidebar';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { PantallaIngresoEgresoDineroComponent } from './components/pantalla-ingreso-egreso-dinero/pantalla-ingreso-egreso-dinero.component';
@@ -35,7 +34,6 @@ import { OperacionesService } from './services/operaciones.service'
     SignupPageComponent,
     PaginaPrincipalComponent,
     RegistroExitosoComponent,
-    NavbarLateralComponent,
     PantallaIngresoEgresoDineroComponent,
     PantallaTransferenciaComponent,
     OperacionesComponent
@@ -51,8 +49,7 @@ import { OperacionesService } from './services/operaciones.service'
       { path: 'registroExitoso', component: RegistroExitosoComponent },
       { path: '', component: HomePageComponent },
       { path: 'login', component: LoginBox },
-      { path: 'principal', component: NavbarLateralComponent}, //hay que cambiar esto y volver a poner el principal     
-      { path: 'principalHome', component: PaginaPrincipalComponent}
+      { path: 'principal', component: PaginaPrincipalComponent}, //hay que cambiar esto y volver a poner el principal
     ]),
     NgbModule
   ],
