@@ -49,7 +49,7 @@ namespace WebApplicationCLIP.Controllers
             }
             catch (HttpRequestException e)
             {
-                return BadRequest("sesion de usuario null");
+                return BadRequest("Sesion de usuario null --> " + e);
             }
             catch (Exception e)
             {
@@ -101,7 +101,7 @@ namespace WebApplicationCLIP.Controllers
             }
             catch (HttpRequestException e)
             {
-                return BadRequest("Sesion de usuario null " + e);
+                return BadRequest("Sesion de usuario null --> " + e);
             }
             catch (Exception e)
             {
@@ -177,7 +177,7 @@ namespace WebApplicationCLIP.Controllers
             }
             catch (HttpRequestException e)
             {
-                return BadRequest("sesion de usuario null");
+                return BadRequest("Sesion de usuario null --> " + e);
             }
             catch (Exception e)
             {
@@ -231,7 +231,7 @@ namespace WebApplicationCLIP.Controllers
             }
             catch (HttpRequestException e)
             {
-                return BadRequest("sesion de usuario null");
+                return BadRequest("Sesion de usuario null --> " + e);
             }
             catch (Exception e)
             {
@@ -289,7 +289,7 @@ namespace WebApplicationCLIP.Controllers
             }
             catch (HttpRequestException e)
             {
-                return BadRequest("sesion de usuario null");
+                return BadRequest("Sesion de usuario null --> " + e);
             }
             catch (Exception e)
             {
