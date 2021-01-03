@@ -14,18 +14,17 @@ namespace WebApplicationCLIP.Models
         public Usuario Usuario { get; private set; }
         public float Saldo { get; private set; }
         public List<Operacion> Operaciones { get; private set; }
+        public object Divisa { get; internal set; }
+        public object TipoCuenta { get; internal set; }
 
-
-        public Cuenta()
-        {
-            //Constructor vacio
-        }
+        private Cuenta() { }
+        
         public static Cuenta ObtenerCuenta()
         {
-            Cuenta c = new Cuenta()
-            {
-                Cvu = "12345"
-            };
+            Cuenta c = new Cuenta();
+            
+                c.Cvu = "12345";
+            
             return c;
         }
 
@@ -96,7 +95,7 @@ namespace WebApplicationCLIP.Models
         {
             if (monto <= 0)
             {
-                throw new Exception("No se puede depositar un monto igual a 0 o negativo.");
+                throw new Exception("No se puede depositar un monto negativo o igual a 0.");
             }
             Saldo += monto;
             Operacion o = Operacion.crearOperacionDeposito(this, monto);
@@ -109,7 +108,7 @@ namespace WebApplicationCLIP.Models
         {
             if (monto <= 0)
             {
-                throw new Exception("No se puede extraer un monto igual a 0 o negativo.");
+                throw new Exception("No se puede extraer un monto negativo o igual a 0.");
             }
             if (Saldo < monto)
             {
@@ -122,7 +121,6 @@ namespace WebApplicationCLIP.Models
             gestorOperacion.registrar(o);
         }
 
-
         public static Cuenta ensamblarCuenta(List<string> ensamblador)
         {
             Cuenta c = new Cuenta();
@@ -133,8 +131,7 @@ namespace WebApplicationCLIP.Models
         public static Cuenta ensamblarCuenta(List<string> ensamblador, Cuenta cuenta)
         {
             cuenta.Cvu = ensamblador[0];
-            GestorUsuario gestorUsuario = new GestorUsuario();
-            cuenta.Usuario = gestorUsuario.consultarUsuarioPorDNI(ensamblador[1]);
+            cuenta.Usuario = GestorUsuario.consultarUsuarioPorDNI(ensamblador[1]);
             cuenta.Saldo = float.Parse(ensamblador[2]);
             // Todavia no se programo la obtencion de las operaciones
             cuenta.Operaciones = null;
@@ -149,12 +146,10 @@ namespace WebApplicationCLIP.Models
         public static Cuenta crearCuentaConDNI(string DNI)
         {
             Cuenta cuenta = new Cuenta();
-            GestorUsuario gestorUsuario = new GestorUsuario();
-            cuenta.Usuario = gestorUsuario.consultarUsuarioPorDNI(DNI);
+            cuenta.Usuario = GestorUsuario.consultarUsuarioPorDNI(DNI);
             return cuenta;
         }
-
-
+        
         public static Cuenta crearCuentaConCVU(string CVU)
         {
             Cuenta cuenta = new Cuenta();

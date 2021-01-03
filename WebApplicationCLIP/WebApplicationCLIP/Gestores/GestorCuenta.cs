@@ -16,18 +16,7 @@ namespace WebApplicationCLIP.Gestores
             return cuentaDAO.consultarCuentasDelUsuario(login);
         }
 
-        public int crearCuenta(string DNI)
-        {
-            GestorUsuario gestorUsuario = new GestorUsuario();
-            Usuario usuarioCuenta = gestorUsuario.consultarUsuarioPorDNI(DNI);
-            string nuevoCVU = obtenerUltimoCVU();
-            BigInteger temp = new BigInteger();
-            BigInteger.TryParse(nuevoCVU, out temp);
-            nuevoCVU = (temp + 1).ToString();
-            Cuenta cuenta = new Cuenta(nuevoCVU, usuarioCuenta);
-
-            return 0;
-        }
+      
 
         public Cuenta TraerCuenta(string CVU)
         {
