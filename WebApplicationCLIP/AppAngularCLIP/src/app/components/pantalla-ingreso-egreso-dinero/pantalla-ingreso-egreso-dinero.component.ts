@@ -17,15 +17,17 @@ export class PantallaIngresoEgresoDineroComponent implements OnInit {
   //esta cuenta, se carga automaticamente cuando se abre la ventana
   //@Input()
   cuentaOrigen: Cuenta
-  cvuIngresado: string = "1234";
- 
+  cvuIngresado: string;
+
   public buscarCuenta() {
 
-    this.cuentaOrigen.Cvu = "a"
+    console.log("buscarCuenta")
+
+    this.cuentaOrigen.Cvu = "cargando datos"
     this.cuentaOrigen.Saldo = 0
     this.cuentaOrigen.NombreUsuario = ""
 
-    this.cuentaService.obtenerCuenta(this.cvuIngresado).subscribe(
+    this.cuentaService.obtenerCuenta(this.inputCVU.value).subscribe(
       cuenta => {
         this.cuentaOrigen = cuenta;
       }, err => {
@@ -52,6 +54,7 @@ export class PantallaIngresoEgresoDineroComponent implements OnInit {
     this.cuentaService.obtenerCuentasUsuario().subscribe(
       cuenta => {
         this.cuentaOrigen = cuenta[0];
+        this.cvuIngresado = this.cuentaOrigen.Cvu
       }, err => {
       }, () => {
 

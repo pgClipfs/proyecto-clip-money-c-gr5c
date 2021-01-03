@@ -38,7 +38,8 @@
             <!-- Campo del CVU -->
             <div class="col-sm align-self-center">
               <label for="inputCVU"></label>
-              <input [(ngModel)]="cvuIngresado"
+              <input 
+              (input) ="buscarCuenta()"
                 type="text"
                 formControlName="inputCVU"
                 class="form-control-monto"
