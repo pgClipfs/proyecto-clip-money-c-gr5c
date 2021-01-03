@@ -20,9 +20,7 @@ export class PantallaIngresoEgresoDineroComponent implements OnInit {
   cvuIngresado: string;
 
   public buscarCuenta() {
-
-    console.log("buscarCuenta")
-
+   
     this.cuentaOrigen.Cvu = "cargando datos"
     this.cuentaOrigen.Saldo = 0
     this.cuentaOrigen.NombreUsuario = ""
@@ -38,9 +36,29 @@ export class PantallaIngresoEgresoDineroComponent implements OnInit {
   }
 
   public realizarOperacion() {
-    /*  var cvu = "00002222"
-      var monto = 1000
-      this.operacionService.realizarDeposito(cvu, monto);*/
+
+    if(this.inputMonto.value<=0 || this.inputMonto==null){
+      console.log("error: ingrese un monto valido")
+      return;
+    }
+
+    if(this.selectorTipoOperacion.value=="Deposito"){
+      this.operacionService.realizarDeposito(this.inputCVU.value, this.inputMonto.value).subscribe(
+        x=>{console.log("Deposito realizado exitosamente")},
+        err=>{console.log(err)}
+      );
+      return;      
+    }
+
+    if(this.selectorTipoOperacion.value=="Extraccion"){
+      this.operacionService.realizarExtraccion(this.inputCVU.value, this.inputMonto.value).subscribe(
+        x=>{console.log("Extraccion realizado exitosamente")},
+        err=>{console.log(err)}
+      );;
+      return;      
+    }
+
+    console.log("error: seleccione un tipo de operacion")
   }
 
   ngOnInit(): void {
@@ -79,6 +97,10 @@ export class PantallaIngresoEgresoDineroComponent implements OnInit {
 
   get selectorTipoOperacion() {
     return this.formDinero.get('selectorTipoOperacion');
+  }
+
+  get inputMonto() {
+    return this.formDinero.get('Monto');
   }
 
   get inputCVU() {
