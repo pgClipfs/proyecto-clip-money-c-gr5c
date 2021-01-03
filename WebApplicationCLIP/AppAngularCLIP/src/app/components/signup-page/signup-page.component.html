@@ -4,7 +4,9 @@
     <div class="card-body p-0">
       <!-- Nested Row within Card Body -->
       <div class="row">
-        <div class="col-lg-5 d-none d-lg-block bg-register-image"></div>
+        <div class="col-lg-5 d-none d-lg-block">
+          <img src="../../../assets/img/register.png" class=" bg-register-image" alt="">
+        </div>
         <div class="col-lg-7">
           <div class="p-5">
             <div class="text-center">
@@ -126,7 +128,7 @@
                   </span>
                 </div>
               </div>
-              
+
               <div class="row">
                 <div class="col-12">
 
@@ -138,10 +140,10 @@
 
               <div class="form-group text-center">
                 <label for="exampleFormControlFile1" class="">Cargar fotos del DNI</label>
-                <input type="file" formControlName="image" class="btn-warning ml-3 pl-3 btn"
+                <input type="file" formControlName="image" class="btn-registro-archivo ml-3 pl-3 btn"
                   id="exampleFormControlFile1">
               </div>
-              <input type="button" class="btn btn-primary btn-user btn-block" (click)="grabar()"
+              <input type="button" class="btn btn-registro btn-user btn-block" (click)="grabar()"
                 value=" Registrar Cuenta" [disabled]="!fgroup.valid?'disabled':''">
 
 
@@ -151,7 +153,7 @@
             <hr>
 
             <div class="text-center">
-              <a class="small" routerLink="/login" href="login.html">Ya tienes una cuenta? Inicia Sesion!</a>
+              <a class="small" routerLink="/login">Ya tienes una cuenta? Inicia Sesion!</a>
             </div>
           </div>
         </div>
