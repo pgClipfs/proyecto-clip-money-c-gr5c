@@ -16,6 +16,30 @@ namespace WebApplicationCLIP.Controllers
     [RoutePrefix("api")]
     public class DefaultController : ApiController
     {
+
+        [HttpGet]
+        [EnableCors(origins: "*", headers: "*", methods: "*")]
+        [Route("prueba1")]
+        public IHttpActionResult prueba()
+        {
+            Usuario usu=GestorUsuario.consultarUsuarioPorNombreDeUsuario("stephie");
+            Cuenta cuenta = new Cuenta("1234",usu);
+
+            CuentaDAO c = new CuentaDAO();
+
+            try
+            {
+                c.registrar(cuenta);
+            }
+            catch (Exception e)
+            {
+                return Content(HttpStatusCode.Conflict, e);
+            }
+
+            return Ok();
+        }
+
+
         [HttpPost]
         [EnableCors(origins: "*", headers: "*", methods: "*")]
         [Route("get/operaciones")]
@@ -49,7 +73,7 @@ namespace WebApplicationCLIP.Controllers
             }
             catch (HttpRequestException e)
             {
-                return BadRequest("sesion de usuario null");
+                return BadRequest("Sesion de usuario null --> " + e);
             }
             catch (Exception e)
             {
@@ -101,7 +125,7 @@ namespace WebApplicationCLIP.Controllers
             }
             catch (HttpRequestException e)
             {
-                return BadRequest("Sesion de usuario null " + e);
+                return BadRequest("Sesion de usuario null --> " + e);
             }
             catch (Exception e)
             {
@@ -177,7 +201,7 @@ namespace WebApplicationCLIP.Controllers
             }
             catch (HttpRequestException e)
             {
-                return BadRequest("sesion de usuario null");
+                return BadRequest("Sesion de usuario null --> " + e);
             }
             catch (Exception e)
             {
@@ -185,7 +209,7 @@ namespace WebApplicationCLIP.Controllers
             }
             try
             {
-                GestorCuenta gestorCuenta = new GestorCuenta(); 
+                GestorCuenta gestorCuenta = new GestorCuenta();
                 return Ok(gestorCuenta.ObtenerCuentasDelUsuario(login));
             }
             catch (Exception e)
@@ -231,7 +255,7 @@ namespace WebApplicationCLIP.Controllers
             }
             catch (HttpRequestException e)
             {
-                return BadRequest("sesion de usuario null");
+                return BadRequest("Sesion de usuario null --> " + e);
             }
             catch (Exception e)
             {
@@ -289,7 +313,7 @@ namespace WebApplicationCLIP.Controllers
             }
             catch (HttpRequestException e)
             {
-                return BadRequest("sesion de usuario null");
+                return BadRequest("Sesion de usuario null --> " + e);
             }
             catch (Exception e)
             {

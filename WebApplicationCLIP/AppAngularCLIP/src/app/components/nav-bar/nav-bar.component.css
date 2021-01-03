@@ -1,38 +1,49 @@
 :host{
-    --color1: #a228c7;
+    --color1:#7400B8;
+    --color2:#6930C3;
+    --color3:#5E60CE;
+    --color4:#5390D9;
+    --color5:#4EA8DE;
+    --color6:#48BFE3;
+    --color7:#56CFE1;
+    --color8:#64DFDF;
+    --color9:#72EFDD;
+    --color10:#80FFDB;
 }
 
 .navbar-brand{
-    color: var(--color1);
-    font-family:'Roboto', sans-serif;
+    color: var(--color3);
+    font-family:'Poppins', sans-serif;
     font-weight: 900;
     font-size: 2rem;
-    
+
 }
 
 .btn-nav{
     margin-left: 1rem;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Poppins', sans-serif;
     font-weight: 400;
-    font-size: 1.3rem;
+    font-size: 1rem;
     color:  grey ;
+    transition: 0.25s;
 }
 
 .btn-nav:hover{
-    color: rgb(161, 161, 161);
-    text-decoration: underline var(--color1);;
+    position: relative;
+    top: -5px;
+    border-bottom: 3px solid  var(--color8);
 }
 
 .estilo-botones{
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Poppins', sans-serif;
     font-weight: 700;
-    color:  var(--color1); ;
+    color:  var(--color8); ;
     margin-right: 1rem;
     transition: all 0.3s;
 }
 
 .estilo-botones:hover{
     color: white;
-    background-color: var(--color1);;
+    background-color: var(--color8);;
 }
 

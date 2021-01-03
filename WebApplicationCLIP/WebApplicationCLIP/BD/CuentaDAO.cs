@@ -170,10 +170,30 @@ namespace WebApplicationCLIP.BD
             }
             conexion.cerrar();
         }
-
+            
         public void registrar(Cuenta t)
         {
-            throw new NotImplementedException(); //CONTINUAR AQUI
+
+            //string script = "INSERT INTO CUENTAS (CVU, DNI_USUARIO, SALDO, DIVISA, TIPO_CUENTA) values" +
+              // (t.Cvu, t.DNI_USUARIO, t.Saldo, t.DIVISA, t.TIPO_CUENTA.ToString());
+            string script = "INSERT INTO CUENTAS VALUES ('" + t.Cvu + "', '" + t.Usuario.Dni + "', " +
+                "'" + t.Saldo + "', '" + t.Divisa + "', '" + t.TipoCuenta + "')";
+
+            ConexionBD conexion = new ConexionBD();
+            conexion.abrir();
+
+            try
+            {
+                SqlCommand comando = new SqlCommand(script, conexion.conexionBD);
+                SqlDataReader lector = comando.ExecuteReader();
+            }
+            catch (Exception e)
+            {
+                throw new Exception("Error al ejecutar la consulta --> " + e.Message);
+            }
+            conexion.cerrar();
+            return;
+
         }
 
         public string obtenerUltimoCVU()
@@ -183,8 +203,7 @@ namespace WebApplicationCLIP.BD
 
             ConexionBD conexion = new ConexionBD();
             conexion.abrir();
-
-
+            
             try
             {
                 SqlCommand comando = new SqlCommand(script, conexion.conexionBD);

@@ -60,7 +60,7 @@ namespace WebApplicationCLIP.Gestores
             }
         }
 
-        public Usuario consultarUsuarioPorDNI(string DNI)
+        public static Usuario consultarUsuarioPorDNI(string DNI)
         {
             Usuario temp = Usuario.CrearUsuarioConDNI(DNI);
             UsuarioDAO usuarioDAO = new UsuarioDAO();

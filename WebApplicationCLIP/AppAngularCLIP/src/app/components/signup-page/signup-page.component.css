@@ -1,75 +1,86 @@
-.container{
-   font-family: 'Roboto', sans-serif;
+:host{
+  --color1:#7400B8;
+  --color2:#6930C3;
+  --color3:#5E60CE;
+  --color4:#5390D9;
+  --color5:#4EA8DE;
+  --color6:#48BFE3;
+  --color7:#56CFE1;
+  --color8:#64DFDF;
+  --color9:#72EFDD;
+  --color10:#80FFDB;
 }
+
+
 .btn-google {
     color: #fff;
     background-color: #ea4335;
     border-color: #fff;
   }
-  
+
   .btn-google:hover {
     color: #fff;
     background-color: #e12717;
     border-color: #e6e6e6;
   }
-  
+
   .btn-google:focus, .btn-google.focus {
     color: #fff;
     background-color: #e12717;
     border-color: #e6e6e6;
     box-shadow: 0 0 0 0.2rem rgba(255, 255, 255, 0.5);
   }
-  
+
   .btn-google.disabled, .btn-google:disabled {
     color: #fff;
     background-color: #ea4335;
     border-color: #fff;
   }
-  
+
   .btn-google:not(:disabled):not(.disabled):active, .btn-google:not(:disabled):not(.disabled).active,
   .show > .btn-google.dropdown-toggle {
     color: #fff;
     background-color: #d62516;
     border-color: #dfdfdf;
   }
-  
+
   .btn-google:not(:disabled):not(.disabled):active:focus, .btn-google:not(:disabled):not(.disabled).active:focus,
   .show > .btn-google.dropdown-toggle:focus {
     box-shadow: 0 0 0 0.2rem rgba(255, 255, 255, 0.5);
   }
-  
+
   .btn-facebook {
     color: #fff;
     background-color: #3b5998;
     border-color: #fff;
   }
-  
+
   .btn-facebook:hover {
     color: #fff;
     background-color: #30497c;
     border-color: #e6e6e6;
   }
-  
+
   .btn-facebook:focus, .btn-facebook.focus {
     color: #fff;
     background-color: #30497c;
     border-color: #e6e6e6;
     box-shadow: 0 0 0 0.2rem rgba(255, 255, 255, 0.5);
   }
-  
+
   .btn-facebook.disabled, .btn-facebook:disabled {
     color: #fff;
     background-color: #3b5998;
     border-color: #fff;
   }
-  
+
   .btn-facebook:not(:disabled):not(.disabled):active, .btn-facebook:not(:disabled):not(.disabled).active,
   .show > .btn-facebook.dropdown-toggle {
     color: #fff;
     background-color: #2d4373;
     border-color: #dfdfdf;
   }
-  
+
   .btn-facebook:not(:disabled):not(.disabled):active:focus, .btn-facebook:not(:disabled):not(.disabled).active:focus,
   .show > .btn-facebook.dropdown-toggle:focus {
     box-shadow: 0 0 0 0.2rem rgba(255, 255, 255, 0.5);
@@ -79,14 +90,14 @@
   form.user .custom-checkbox.small label {
     line-height: 1.5rem;
   }
-  
+
   form.user .form-control-user {
     font-size: 0.8rem;
     border-radius: 10rem;
     padding: 1.5rem 1rem;
-    
+
   }
-  
+
   form.user .btn-user {
     font-size: 0.8rem;
     border-radius: 10rem;
@@ -94,17 +105,44 @@
   }
 
   .bg-register-image {
-    background: url("../../../assets/img/concepto-registro-online_23-2147987277.jpg");
-    background-position: center;
-    background-size: cover;
+    width: 35rem;
+    position: relative;
+    top: 5rem;
+    /*background: url("../../../assets/img/register.png");*/
   }
 
   input{
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Poppins', sans-serif;
     font-weight: 500;
   }
 
   .btn{
-    font-family: 'Roboto', sans-serif;
-    
+    font-family: 'Poppins', sans-serif;
+
+  }
+
+  .container{
+    font-family: 'Poppins',sans-serif;
+  }
+
+  .btn-registro-archivo{
+    background-color: #5e60ceb0 ;
+  }
+
+  .btn-registro{
+    background-color: var(--color7);
+  }
+
+  @media (min-width: 991.98px) {
+    .bg-register-image{
+      width: 30rem;
+    }
+  }
+
+  @media (max-width: 575.98px) {
+    #botonCargarArchivo{
+      position: relative;
+      right: 1.5rem;
+      font-size: 10px;
+    }
   }

@@ -19,14 +19,14 @@
       <li class="nav-item active ">
         <a class="btn-nav nav-link" href="#" routerLink="/">Contacto<span class="sr-only">(current)</span></a>
       </li>
-      
+
     </ul>
     <form class="form-inline my-2 my-md-0">
 
-      
-      <button *ngIf="!usuarioLogueado" class="btn estilo-botones rounded-pill shadow-sm" routerLink="/login">Iniciar Sesion</button>
-      <button *ngIf="!usuarioLogueado" class="btn ml-2 estilo-botones rounded-pill shadow-sm" routerLink="/signup">Registrarse</button>
-      <!-- 
+
+      <button *ngIf="!usuarioLogueado" class="btn estilo-botones rounded-pill shadow" routerLink="/login">Iniciar Sesion</button>
+      <button *ngIf="!usuarioLogueado" class="btn ml-2 estilo-botones rounded-pill shadow" routerLink="/signup">Registrarse</button>
+      <!--
         <button *ngIf="usuarioLogueado" class="btn ml-2 btn-light" (click)="cerrar_sesion()" routerLink="/">Cerrar Sesion</button>
       -->
     </form>
