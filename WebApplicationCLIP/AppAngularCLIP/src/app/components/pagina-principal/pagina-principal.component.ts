@@ -86,7 +86,7 @@ export class PaginaPrincipalComponent implements OnInit {
       }
     );
 
-    //#endregion 
+    //#endregion
 
     //#region datos usuario
 
