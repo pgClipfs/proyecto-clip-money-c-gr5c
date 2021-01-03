@@ -174,8 +174,10 @@ namespace WebApplicationCLIP.BD
         public void registrarCuentaHarcodeada(Cuenta t)
         {
 
-            string script = "INSERT INTO CUENTAS VALUES ('" + "0001111" + "', '" + "41225476" + "', " +
-                "'" + "2000" + "', '" + " Pesos " + "', '" + "Cuenta de ahorro" + "')";
+            string script = "INSERT INTO CUENTAS VALUES ('" + "00001112" + "', '" + "1111" + "', " +
+                "'" + "2000" + "', '" + "Pesos " + "', '" + "Cuenta de ahorro" + "')";
+
+            //El 2do parámetro que es el DNI debe pertenecer a la base de datos, sino tira excepción.
 
             ConexionBD conexion = new ConexionBD();
             conexion.abrir();
