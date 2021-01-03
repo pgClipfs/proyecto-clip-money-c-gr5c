@@ -30,8 +30,6 @@ namespace WebApplicationCLIP.Controllers
             try
             {
                 c.registrar(cuenta);
-
-
             }
             catch (Exception e)
             {

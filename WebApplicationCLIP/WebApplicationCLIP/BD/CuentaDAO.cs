@@ -170,29 +170,7 @@ namespace WebApplicationCLIP.BD
             }
             conexion.cerrar();
         }
-
-        public void registrarCuentaHarcodeada(Cuenta t)
-        {
-
-            string script = "INSERT INTO CUENTAS VALUES ('" + "0001111" + "', '" + "41225476" + "', " +
-                "'" + "2000" + "', '" + " Pesos " + "', '" + "Cuenta de ahorro" + "')";
-
-            ConexionBD conexion = new ConexionBD();
-            conexion.abrir();
-
-            try
-            {
-                SqlCommand comando = new SqlCommand(script, conexion.conexionBD);
-                SqlDataReader lector = comando.ExecuteReader();
-            }
-            catch (Exception e)
-            {
-                throw new Exception("Error al ejecutar la consulta --> " + e.Message);
-            }
-            conexion.cerrar();
-            return;
-
-        }
+            
         public void registrar(Cuenta t)
         {
 
