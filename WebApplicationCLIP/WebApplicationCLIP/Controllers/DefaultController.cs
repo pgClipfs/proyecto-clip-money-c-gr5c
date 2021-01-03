@@ -23,6 +23,7 @@ namespace WebApplicationCLIP.Controllers
         public IHttpActionResult prueba()
         {
 
+
             Cuenta cuenta = new Cuenta();
 
             CuentaDAO c = new CuentaDAO();
@@ -30,6 +31,7 @@ namespace WebApplicationCLIP.Controllers
             try
             {
                 c.registrar(cuenta);
+
 
             }
             catch (Exception e)

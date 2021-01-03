@@ -14,7 +14,9 @@ namespace WebApplicationCLIP.Models
         public Usuario Usuario { get; private set; }
         public float Saldo { get; private set; }
         public List<Operacion> Operaciones { get; private set; }
-
+        public object DNI_USUARIO { get; internal set; }
+        public object DIVISA { get; internal set; }
+        public object TIPO_CUENTA { get; internal set; }
 
         public Cuenta()
         {

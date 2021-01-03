@@ -171,11 +171,51 @@ namespace WebApplicationCLIP.BD
             conexion.cerrar();
         }
 
+        public void registrarCuentaHarcodeada(Cuenta t)
+        {
+
+            string script = "INSERT INTO CUENTAS VALUES ('" + "0001111" + "', '" + "41225476" + "', " +
+                "'" + "2000" + "', '" + " Pesos " + "', '" + "Cuenta de ahorro" + "')";
+
+            ConexionBD conexion = new ConexionBD();
+            conexion.abrir();
+
+            try
+            {
+                SqlCommand comando = new SqlCommand(script, conexion.conexionBD);
+                SqlDataReader lector = comando.ExecuteReader();
+            }
+            catch (Exception e)
+            {
+                throw new Exception("Error al ejecutar la consulta --> " + e.Message);
+            }
+            conexion.cerrar();
+            return;
+
+        }
         public void registrar(Cuenta t)
         {
-            //insert into cuentas
-            
-            throw new NotImplementedException(); //CONTINUAR AQUI
+
+            //string script = "INSERT INTO CUENTAS (CVU, DNI_USUARIO, SALDO, DIVISA, TIPO_CUENTA) values" +
+              // (t.Cvu, t.DNI_USUARIO, t.Saldo, t.DIVISA, t.TIPO_CUENTA.ToString());
+            string script = "INSERT INTO CUENTAS VALUES ('" + t.Cvu + "', '" + t.DNI_USUARIO + "', " +
+                "'" + t.Saldo + "', '" + t.DIVISA + "', '" + t.TIPO_CUENTA + "')";
+
+            ConexionBD conexion = new ConexionBD();
+            conexion.abrir();
+
+            try
+            {
+                SqlCommand comando = new SqlCommand(script, conexion.conexionBD);
+                SqlDataReader lector = comando.ExecuteReader();
+            }
+            catch (Exception e)
+            {
+                throw new Exception("Error al ejecutar la consulta --> " + e.Message);
+            }
+            conexion.cerrar();
+            return;
+
         }
 
         public string obtenerUltimoCVU()
