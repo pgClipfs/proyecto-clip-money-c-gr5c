@@ -114,7 +114,7 @@ namespace WebApplicationCLIP.BD
         public void comprobarRepeticion(Usuario t)
         {
             string script = "SELECT * FROM USUARIOS WHERE NOMBRE_USUARIO = " + "'" + t.NombreDeUsuario + "' or DNI ='" + t.Dni + "' or EMAIL = '" + t.Email + "'";
-
+            
             ConexionBD conexion = new ConexionBD();
             conexion.abrir();
 
