@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { OperacionesService } from "../../services/operaciones.service"
+import { OperacionService } from "../../services/operacion.service"
 
 @Component({
   selector: 'app-operaciones',
@@ -11,9 +11,9 @@ export class OperacionesComponent implements OnInit {
 
   operaciones:any[] = [];
 
-  constructor(private _servicio: OperacionesService) { 
+  constructor(private _servicio: OperacionService) { 
     
-    this.operaciones = _servicio.obtenerOperaciones();
+    //this.operaciones = _servicio.getOperacionesCvu();
   }
 
   nombreUsuario = 'juancuello98';

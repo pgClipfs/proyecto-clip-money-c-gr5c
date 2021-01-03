@@ -22,8 +22,6 @@ import { PantallaIngresoEgresoDineroComponent } from './components/pantalla-ingr
 import { PantallaTransferenciaComponent } from './components/pantalla-transferencia/pantalla-transferencia.component';
 import { OperacionesComponent } from './components/operaciones/operaciones.component';
 
-import { OperacionesService } from './services/operaciones.service'
-
 
 @NgModule({
   declarations: [
@@ -53,8 +51,7 @@ import { OperacionesService } from './services/operaciones.service'
     ]),
     NgbModule
   ],
-  providers: [[LoginService],[SignupService],
-[OperacionesService]],
+  providers: [[LoginService],[SignupService]],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

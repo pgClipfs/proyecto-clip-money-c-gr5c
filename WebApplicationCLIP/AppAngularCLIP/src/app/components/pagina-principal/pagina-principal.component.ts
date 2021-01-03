@@ -19,7 +19,7 @@ import { flatMap, retry } from 'rxjs/operators';
 export class PaginaPrincipalComponent implements OnInit {
 
   usuario: Usuario;
-  nombreUsuario: string = "Usuario generico";
+  nombreUsuario: string = "Usuario No Encontrado";
 
   saldoDolares=0
   saldoPesos = "-";
