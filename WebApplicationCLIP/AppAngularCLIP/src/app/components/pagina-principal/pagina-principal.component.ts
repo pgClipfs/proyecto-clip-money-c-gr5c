@@ -22,15 +22,11 @@ export class PaginaPrincipalComponent implements OnInit {
   nombreUsuario: string = "Usuario No Encontrado";
 
   saldoDolares = 0
-  saldoPesos = "-";
+  saldoPesos = "";
   opened = false;
   numeroCuenta = "-";
   numeroCuentaDol = "";
   nombreApellido = '- - -';
-  Fecha = '14/12/2020';
-  Descripcion = 'Ingreso de dinero';
-  Monto = '-';
-  tipoOperacion = 'Ingr.';
 
 
   openLg(contentIngresarDinero) {
