@@ -15,35 +15,48 @@ export class PantallaIngresoEgresoDineroComponent implements OnInit {
   constructor(private operacionService: OperacionService, private fb: FormBuilder, private cuentaService: CuentaService) { }
 
   //esta cuenta, se carga automaticamente cuando se abre la ventana
-  @Input()
+  //@Input()
   cuentaOrigen: Cuenta
-  cvuIngresado: string
+  cvuIngresado: string = "1234";
+ 
+  public buscarCuenta() {
 
-  public actualizarDatosCuenta() {
-    
-    console.log("obteniendo datos cuenta")
+    this.cuentaOrigen.Cvu = "a"
+    this.cuentaOrigen.Saldo = 0
+    this.cuentaOrigen.NombreUsuario = ""
+
     this.cuentaService.obtenerCuenta(this.cvuIngresado).subscribe(
       cuenta => {
         this.cuentaOrigen = cuenta;
-      },err=>{
-        this.cuentaOrigen.Cvu=""
-        this.cuentaOrigen.Saldo=0
-        this.cuentaOrigen.NombreUsuario=""
+      }, err => {
+        this.cuentaOrigen.NombreUsuario = "no se encontro la cuenta :c"
+      }, () => {
       }
     )
   }
 
   public realizarOperacion() {
-
-    var cvu = "00002222"
-    var monto = 1000
-    console.log("realizando operaciones")
-    this.operacionService.realizarDeposito(cvu, monto);
+    /*  var cvu = "00002222"
+      var monto = 1000
+      this.operacionService.realizarDeposito(cvu, monto);*/
   }
 
   ngOnInit(): void {
 
-    this.cvuIngresado = this.cuentaOrigen.Cvu
+    this.cuentaOrigen = new Cuenta()
+
+    this.cuentaOrigen.Cvu = ""
+    this.cuentaOrigen.Saldo = 0
+    this.cuentaOrigen.NombreUsuario = ""
+
+    this.cuentaService.obtenerCuentasUsuario().subscribe(
+      cuenta => {
+        this.cuentaOrigen = cuenta[0];
+      }, err => {
+      }, () => {
+
+      }
+    )
 
     //#region 
     this.formDinero = this.fb.group({
@@ -86,8 +99,7 @@ export class PantallaIngresoEgresoDineroComponent implements OnInit {
 
   public verCuenta() {
 
-    console.log("viendo datos cuenta")
-    this.actualizarDatosCuenta()
+
     this.verDatosCuenta = !this.verDatosCuenta;
     if (this.verDatosCuenta == true) {
       this.labelBotonCuenta = 'Esconder datos de cuenta';
@@ -97,5 +109,5 @@ export class PantallaIngresoEgresoDineroComponent implements OnInit {
     }
 
   }
-//#endregion
+  //#endregion
 }
