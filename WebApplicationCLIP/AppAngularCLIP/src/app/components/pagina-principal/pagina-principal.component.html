@@ -60,8 +60,9 @@
           </div>
         </div>
       </div>
+
       <div class="row mt-4" id="inputsTarjetas">
-        <div class="col-sm-3 pb-3">
+        <div class="col-xl-3 col-md-6 pb-3">
           <div class="card card-ingresar-pesos shadow " (click)="openLg(contentIngresarDinero)" style="width: 100%">
             <div class="row g-0">
               <div class="col-sm-3 pl-4">
@@ -79,7 +80,7 @@
             </div>
           </div>
         </div>
-        <div class="col-sm-3 pb-3">
+        <div class="col-xl-3 col-md-6 pb-3">
           <div class="card card-ingresar-pesos shadow" style="width: 100%">
             <div class="row g-0">
               <div class="col-sm-3 pl-4">
@@ -97,7 +98,7 @@
             </div>
           </div>
         </div>
-        <div class="col-sm-3 pb-3">
+        <div class="col-xl-3 col-md-6 pb-3">
           <div class="card card-ingresar-pesos shadow" style="width: 100%">
             <div class="row g-0">
               <div class="col-md-3 pl-4">
@@ -115,7 +116,7 @@
             </div>
           </div>
         </div>
-        <div class="col-sm-3 pb-3">
+        <div class="col-xl-3 col-md-6 pb-3">
           <div class="card card-ingresar-pesos shadow" style="width: 100%">
             <div class="row g-0">
               <div class="col-md-3 pl-4">
@@ -135,7 +136,7 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-sm-9 pt-4">
+        <div class="col-xl-9 col-lg-8 col-sm-12 pt-4">
           <h3 class="text-title-info mb-3">Actividad Reciente</h3>
           <table class="table shadow table-inverse">
             <thead class="thead-inverse">
@@ -157,7 +158,7 @@
             </tbody>
           </table>
         </div>
-        <div class="col-sm-3 pt-4">
+        <div class="col-lg-4 col-xl-3 pt-4">
           <h3 class="text-title-info mb-3">Cotizaciones</h3>
           <h3 class="text-title-cotizacion mb-3">Monedas Extranjeras</h3>
           <table class="table shadow table-inverse">
@@ -235,7 +236,7 @@
       </button>-->
     </div>
     <div class="modal-body">
-      <app-pantalla-ingreso-egreso-dinero></app-pantalla-ingreso-egreso-dinero>
+      <app-pantalla-ingreso-egreso-dinero [cuentaOrigen]="cuentaUsuario" ></app-pantalla-ingreso-egreso-dinero>
     </div>
   </ng-template>
 </ng-sidebar-container>

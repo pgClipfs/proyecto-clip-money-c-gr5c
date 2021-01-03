@@ -21,7 +21,7 @@ export class PaginaPrincipalComponent implements OnInit {
   usuario: Usuario;
   nombreUsuario: string = "Usuario No Encontrado";
 
-  saldoDolares=0
+  saldoDolares = 0
   saldoPesos = "-";
   opened = false;
   numeroCuenta = "-";
@@ -52,8 +52,20 @@ export class PaginaPrincipalComponent implements OnInit {
   private returnUrl: string;
 
   operaciones: Operacion[] = [];
-  cuentas: Cuenta[];
   cuentaUsuario: Cuenta
+
+  private obtenerOperaciones() {
+    this.operacionesService.getOperacionesCvu(this.cuentaUsuario.Cvu).subscribe(
+      ops => {
+        this.operaciones = ops;
+      },
+      err => {
+        console.log(err)
+      }
+    );
+
+  }
+
 
   ngOnInit(): void {
 
@@ -65,22 +77,16 @@ export class PaginaPrincipalComponent implements OnInit {
         //console.log(this.cuentaUsuario)
       },
       err => {
-        console.log(err)
+        console.log("el usuario no tiene cuenta, inicie sesion con otro usuario")
+        this.loginService.logout()
+        this.redireccionar.landingPage()
       },
       () => {
 
-        this.saldoPesos=this.cuentaUsuario.Saldo.toString()
-        this.numeroCuenta=this.cuentaUsuario.Cvu
-        //console.log(this.cuentaUsuario.Cvu)
-        this.operacionesService.getOperacionesCvu(this.cuentaUsuario.Cvu).subscribe(
-          ops => {
-            this.operaciones = ops;
-            console.log(ops)
-          },
-          err => {
-            console.log(err)
-          }
-        );
+        this.saldoPesos = this.cuentaUsuario.Saldo.toString()
+        this.numeroCuenta = this.cuentaUsuario.Cvu
+        this.obtenerOperaciones()
+        this.obtenerDatosUsuario()
       }
     );
 
@@ -93,9 +99,14 @@ export class PaginaPrincipalComponent implements OnInit {
       console.log("el usuario debe loguearse antes de ver la pagina principal")
     }
 
+  }
+
+  public obtenerDatosUsuario() {
+
     this.datosUsuarioService.obtenerDatosUsuario().subscribe(
       user => {
         this.usuario = user;
+        this.cuentaUsuario.NombreUsuario = user.NombreDeUsuario
         this.nombreUsuario = this.usuario.Nombre + " " + this.usuario.Apellido;
       },
       err => {
