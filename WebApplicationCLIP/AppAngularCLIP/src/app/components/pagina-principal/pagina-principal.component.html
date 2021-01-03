@@ -154,7 +154,7 @@
                 <td>{{ op.Monto | currency}}</td>
                 <td>{{ op.Tipo }}</td>
                 <td>{{ op.IdOperacion }}</td>
-              </tr>         
+              </tr>
             </tbody>
           </table>
         </div>
@@ -233,10 +233,13 @@
         (click)="modal.dismiss('Cross click')"
       >
         <span aria-hidden="true">&times;</span>
-      </button>-->
+      </button>
+
+     [cuentaOrigen]="cuentaUsuario"
+    -->
     </div>
     <div class="modal-body">
-      <app-pantalla-ingreso-egreso-dinero [cuentaOrigen]="cuentaUsuario" ></app-pantalla-ingreso-egreso-dinero>
+      <app-pantalla-ingreso-egreso-dinero ></app-pantalla-ingreso-egreso-dinero>
     </div>
   </ng-template>
 </ng-sidebar-container>
