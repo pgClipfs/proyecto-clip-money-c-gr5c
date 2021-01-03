@@ -9,6 +9,7 @@ import { map, retry, catchError } from 'rxjs/operators';
 import { LoginService } from './login.service';
 import { Sesion } from '../clases';
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -18,27 +19,38 @@ export class CuentaService {
 
   private urlApi = "http://localhost:59642/api/"; //linea para hacer pruebas
 
-  /*public obtenerCuenta(cvu:string): Observable<Cuenta>{
 
-  }*/
+  public obtenerCuenta(Cvu: string): Observable<Cuenta> {
 
-  public obtenerCuenta(cvu: string): Observable<Cuenta> {
-    /*var c= new Cuenta ();
+    var SesionDeUsuario = this.loginService.obtenerSesionActual
+
+    return this.http.post<any>(this.urlApi + 'get/datoscuenta', {Cvu,SesionDeUsuario})
+      .pipe(
+        //retry(2), //esto es para decirle cuantas veces lo tiene que intentar antes de tirar error :o
+        catchError(err => {
+          //console.log("err"+err)
+          throw err;
+        }),
+        map(cta => {
+  
+          var cuenta: Cuenta
+
+            cuenta = new Cuenta()
+            cuenta.Cvu = cta.Cvu
+            cuenta.Saldo = cta.Saldo
+            cuenta.NombreUsuario = SesionDeUsuario.NombreDeUsuario
+            cuenta.datosUsuario=cta.Usuario;
  
-    c.Cvu="00005600"
-    c.NombreUsuario="Pepe"
-    c.Saldo=4400
- 
-    this.cuenta=new BehaviorSubject(c);
-    return this.cuenta.asObservable();*/
-    return null;
-
+          return cuenta;
+        }
+        )
+      );
   }
 
   public obtenerCuentasUsuario(): Observable<Cuenta[]> {
 
     var sesion = this.loginService.obtenerSesionActual
-console.log(sesion)
+
     return this.http.post<any>(this.urlApi + 'get/cuentasusuario', sesion)
       .pipe(
         //retry(2), //esto es para decirle cuantas veces lo tiene que intentar antes de tirar error :o
@@ -57,10 +69,10 @@ console.log(sesion)
             cuenta = new Cuenta()
             cuenta.Cvu = cta.Cvu
             cuenta.Saldo = cta.Saldo
-            cuenta.NombreUsuario =sesion.NombreDeUsuario
+            cuenta.NombreUsuario = sesion.NombreDeUsuario
             cuentas.push(cuenta)
           });
-          
+
           return cuentas;
         }
         )
