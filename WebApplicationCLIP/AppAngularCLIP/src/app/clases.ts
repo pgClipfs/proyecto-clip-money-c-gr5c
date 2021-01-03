@@ -1,3 +1,5 @@
+import { Usuario } from "./modelos/usuario";
+
 export class Operacion {
   IdOperacion: string;
   Monto: number;
@@ -14,4 +16,5 @@ export class Cuenta{
   Saldo: number;
   Cvu: string;
   NombreUsuario: string;
+  datosUsuario:Usuario;
 }

@@ -110,8 +110,7 @@ namespace WebApplicationCLIP.Controllers
             try
             {
                 GestorCuenta gestorCuenta = new GestorCuenta();
-                Cuenta c = gestorCuenta.TraerCuenta(cvu);
-                c.removerUsuario();
+                Cuenta c = gestorCuenta.TraerCuenta(cvu);                
                 return Ok(c);
             }
             catch (Exception e)
