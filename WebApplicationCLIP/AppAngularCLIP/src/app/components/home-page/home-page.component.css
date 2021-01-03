@@ -3,7 +3,7 @@
 }
 
 .estilo-home{
-    top:10rem;   
+    top:10rem;
     color: grey;
     width: 40%;
 }
@@ -22,7 +22,7 @@ p{
 }
 
 .btn-home{
-    background-color: #5e60ce;
+    background-color:  #5e60ceb4 ;
     color: white;
     font-family:'Roboto', sans-serif;
     font-weight: 700;

@@ -5,7 +5,7 @@
     font-weight: 900;
     opacity: 80%;
   }
- 
+
 
   .text-card{
     font-size: 2rem;
@@ -279,7 +279,7 @@ justify-content: center;
 }
 
 .card-info-cuenta{
-  background-image: linear-gradient(to right, #5390D9, #7400B8);
+  background-image: linear-gradient(to right, #6830c3be, #5e60ceb4 );
   border: none;
 
 }
