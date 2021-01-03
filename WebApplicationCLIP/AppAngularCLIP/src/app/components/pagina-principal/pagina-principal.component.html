@@ -44,13 +44,13 @@
               <div class="col-sm-9">
                 <div class="card-body">
                   <h4 class="card-title title-card">TU DINERO</h4>
-                  <p class="card-text text-card">CA $ {{ saldoPesos }}</p>
-                  <h4 class="card-title title-card">{{ nombreApellido }}</h4>
+                  <p class="card-text text-card">CA {{ saldoPesos| currency }}</p>
+                  <h4 class="card-title title-card"> {{ nombreUsuario | uppercase }}</h4>
                   <p class="card-text text-card">CVU - {{ numeroCuenta }}</p>
                   <h4 class="card-title title-card">
                     TU DINERO EN TU CUENTA EN DOLARES
                   </h4>
-                  <p class="card-text text-card">U$D {{ saldoPesos }}</p>
+                  <p class="card-text text-card">U$D {{ saldoDolares | currency:'USD' }}</p>
                 </div>
               </div>
               <div class="col-sm-3">
@@ -141,18 +141,18 @@
             <thead class="thead-inverse">
               <tr>
                 <th>Fecha</th>
-                <th>Numero de operacion</th>
                 <th>Monto</th>
-                <th>Tipo</th>
+                <th>Tipo Transaccion</th>
+                <th>ID Operacion</th>
               </tr>
             </thead>
             <tbody *ngFor="let op of operaciones">
 
               <tr>
                 <td>{{ op.Fecha | date:'dd/MM/yyyy'}}</td>
-                <td>{{ op.IdOperacion }}</td>
-                <td>{{ op.Monto }}</td>
+                <td>{{ op.Monto | currency}}</td>
                 <td>{{ op.Tipo }}</td>
+                <td>{{ op.IdOperacion }}</td>
               </tr>         
             </tbody>
           </table>

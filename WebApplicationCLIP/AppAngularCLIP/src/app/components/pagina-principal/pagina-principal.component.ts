@@ -21,14 +21,15 @@ export class PaginaPrincipalComponent implements OnInit {
   usuario: Usuario;
   nombreUsuario: string = "Usuario generico";
 
-  saldoPesos = 2555;
+  saldoDolares=0
+  saldoPesos = "-";
   opened = false;
-  numeroCuenta = "201241535212312";
-  numeroCuentaDol = 20124134534512;
-  nombreApellido = 'JUAN CRUZ CUELLO';
+  numeroCuenta = "-";
+  numeroCuentaDol = "";
+  nombreApellido = '- - -';
   Fecha = '14/12/2020';
   Descripcion = 'Ingreso de dinero';
-  Monto = '$2500';
+  Monto = '-';
   tipoOperacion = 'Ingr.';
 
 
@@ -68,7 +69,7 @@ export class PaginaPrincipalComponent implements OnInit {
       },
       () => {
 
-        this.saldoPesos=this.cuentaUsuario.Saldo
+        this.saldoPesos=this.cuentaUsuario.Saldo.toString()
         this.numeroCuenta=this.cuentaUsuario.Cvu
         //console.log(this.cuentaUsuario.Cvu)
         this.operacionesService.getOperacionesCvu(this.cuentaUsuario.Cvu).subscribe(
