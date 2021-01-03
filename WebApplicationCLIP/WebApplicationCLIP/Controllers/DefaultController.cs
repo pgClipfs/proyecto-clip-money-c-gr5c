@@ -22,9 +22,8 @@ namespace WebApplicationCLIP.Controllers
         [Route("prueba1")]
         public IHttpActionResult prueba()
         {
-
-
-            Cuenta cuenta = new Cuenta();
+            Usuario usu=GestorUsuario.consultarUsuarioPorNombreDeUsuario("stephie");
+            Cuenta cuenta = new Cuenta("1234",usu);
 
             CuentaDAO c = new CuentaDAO();
 
