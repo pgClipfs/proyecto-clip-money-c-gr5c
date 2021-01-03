@@ -8,7 +8,7 @@ export class Operacion {
 }
 
 export class Sesion {
-  NombreUsuario: string;
+  NombreDeUsuario: string;
   Token: string;
 }
 

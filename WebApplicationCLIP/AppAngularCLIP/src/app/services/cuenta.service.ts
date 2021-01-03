@@ -38,7 +38,7 @@ export class CuentaService {
   public obtenerCuentasUsuario(): Observable<Cuenta[]> {
 
     var sesion = this.loginService.obtenerSesionActual
-
+console.log(sesion)
     return this.http.post<any>(this.urlApi + 'get/cuentasusuario', sesion)
       .pipe(
         //retry(2), //esto es para decirle cuantas veces lo tiene que intentar antes de tirar error :o
@@ -46,7 +46,21 @@ export class CuentaService {
           //console.log("err"+err)
           throw err;
         }),
-        map(cuentas => {
+        map(ctas => {
+
+          var cuentas: Cuenta[] = []
+          var cuenta: Cuenta
+
+
+          ctas.forEach(cta => {
+
+            cuenta = new Cuenta()
+            cuenta.Cvu = cta.Cvu
+            cuenta.Saldo = cta.Saldo
+            cuenta.NombreUsuario =sesion.NombreDeUsuario
+            cuentas.push(cuenta)
+          });
+          
           return cuentas;
         }
         )
