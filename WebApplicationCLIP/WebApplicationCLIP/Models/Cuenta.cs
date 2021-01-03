@@ -96,7 +96,7 @@ namespace WebApplicationCLIP.Models
         {
             if (monto <= 0)
             {
-                throw new Exception("No se puede depositar un monto negativo.");
+                throw new Exception("No se puede depositar un monto igual a 0 o negativo.");
             }
             Saldo += monto;
             Operacion o = Operacion.crearOperacionDeposito(this, monto);
@@ -109,7 +109,7 @@ namespace WebApplicationCLIP.Models
         {
             if (monto <= 0)
             {
-                throw new Exception("No se puede extraer un monto negativo.");
+                throw new Exception("No se puede extraer un monto igual a 0 o negativo.");
             }
             if (Saldo < monto)
             {

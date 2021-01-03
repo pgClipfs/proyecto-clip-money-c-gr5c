@@ -18,7 +18,7 @@ export class HomePageComponent implements OnInit {
   ngOnInit(): void {
 
     if(this.loginService.sesionEstaAbierta()){
-        this.redireccionar.home()
+        this.redireccionar.principal()
   }}
 
 }

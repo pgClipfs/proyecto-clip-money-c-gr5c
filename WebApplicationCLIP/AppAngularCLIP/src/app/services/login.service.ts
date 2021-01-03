@@ -5,6 +5,7 @@ import { Sesion } from '../clases';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map, retry, catchError } from 'rxjs/operators';
 import { ActivatedRoute, Router } from '@angular/router';
+import { RedireccionService } from './redireccion.service';
 
 @Injectable({
   providedIn: "root"
@@ -16,7 +17,7 @@ export class LoginService {
   private sesionActualSubject: BehaviorSubject<Sesion>;
   private sesionActual: Observable<Sesion>;
 
-  constructor(private route: ActivatedRoute, private router: Router,private http: HttpClient) {
+  constructor(private http: HttpClient, private redireccionar: RedireccionService) {
     this.sesionActualSubject = new BehaviorSubject<Sesion>(JSON.parse(localStorage.getItem
       ('sesionActual')));
     this.sesionActual = this.sesionActualSubject.asObservable();
@@ -26,13 +27,12 @@ export class LoginService {
 
     if (!(this.sesionEstaAbierta)) {
       //en este if se comprueba si el usuario tiene la sesion abierta, y si no es asi, se lo manda al login 
-      var returnUrl = this.route.snapshot.queryParams.returnUrl || '/login';
-      this.router.navigate([returnUrl]);      
+      //this.redireccionar.login()
     }
     return this.sesionActualSubject.value;
   }
 
-  public sesionEstaAbierta(){   
+  public sesionEstaAbierta() {
 
     return this.sesionActualSubject.value != null;
   }
@@ -47,16 +47,7 @@ export class LoginService {
       .pipe(
         retry(2), //esto es para decirle cuantas veces lo tiene que intentar antes de tirar error :o
         catchError(err => {
-          if (err.error == 2) {
-            throw 'Nombre de usuario o contraseña incorrectos';
-          }
-          if (err.error == 1) {
-            throw 'problema al acceder a la BD desde el backend';
-          }
-          if (err.statusText = "Unknown Error") {
-            throw 'problema de conexion al backend (probablemente este caido)';
-          }
-          throw 'error extraño';
+          throw err;
         }), //esto es para procesar los errores que devuelva el backend
         map(sesion => {
           localStorage.setItem('sesionActual', JSON.stringify(sesion));
@@ -71,8 +62,7 @@ export class LoginService {
   public logout(): void {
     localStorage.removeItem('sesionActual');
     this.sesionActualSubject.next(null);
-    var returnUrl = this.route.snapshot.queryParams.returnUrl || '/';
-    this.router.navigate([returnUrl]);   
+    //this.redireccionar.landingPage()
   }
 
 

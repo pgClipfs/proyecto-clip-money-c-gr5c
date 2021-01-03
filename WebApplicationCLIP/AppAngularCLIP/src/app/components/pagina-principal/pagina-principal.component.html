@@ -32,7 +32,7 @@
       <li class="nav-item"><a href="">Mis datos</a></li>
       <li class="nav-item"><a href="">Configuracion</a></li>
     </ul>
-    <a class="btn btn-cerrarsesion m-3" href="#" role="button">Cerrar sesion</a>
+    <button class="btn btn-cerrarsesion m-3" (click)="cerrar_sesion()">Cerrar sesion</button>
   </ng-sidebar>
   <div ng-sidebar-content >
     <div class="container pt-3">
@@ -44,13 +44,13 @@
               <div class="col-sm-9">
                 <div class="card-body">
                   <h4 class="card-title title-card">TU DINERO</h4>
-                  <p class="card-text text-card">CA $ {{ saldoPesos }}</p>
-                  <h4 class="card-title title-card">{{ nombreApellido }}</h4>
+                  <p class="card-text text-card">CA {{ saldoPesos| currency }}</p>
+                  <h4 class="card-title title-card"> {{ nombreUsuario | uppercase }}</h4>
                   <p class="card-text text-card">CVU - {{ numeroCuenta }}</p>
                   <h4 class="card-title title-card">
                     Tu dinero en cuenta en dolares
                   </h4>
-                  <p class="card-text text-card">U$D {{ saldoPesos }}</p>
+                  <p class="card-text text-card">U$D {{ saldoDolares | currency:'USD' }}</p>
                 </div>
               </div>
               <div class="col-sm-3">
@@ -141,72 +141,19 @@
             <thead class="thead-inverse">
               <tr>
                 <th>Fecha</th>
-                <th>Descripcion</th>
                 <th>Monto</th>
-                <th>Tipo</th>
+                <th>Tipo Transaccion</th>
+                <th>ID Operacion</th>
               </tr>
             </thead>
-            <tbody>
+            <tbody *ngFor="let op of operaciones">
+
               <tr>
-                <td>{{ Fecha }}</td>
-                <td>{{ Descripcion }}</td>
-                <td>{{ Monto }}</td>
-                <td>{{ tipoOperacion }}</td>
-              </tr>
-              <tr>
-                <td>{{ Fecha }}</td>
-                <td>{{ Descripcion }}</td>
-                <td>{{ Monto }}</td>
-                <td>{{ tipoOperacion }}</td>
-              </tr>
-              <tr>
-                <td>{{ Fecha }}</td>
-                <td>{{ Descripcion }}</td>
-                <td>{{ Monto }}</td>
-                <td>{{ tipoOperacion }}</td>
-              </tr>
-              <tr>
-                <td>{{ Fecha }}</td>
-                <td>{{ Descripcion }}</td>
-                <td>{{ Monto }}</td>
-                <td>{{ tipoOperacion }}</td>
-              </tr>
-              <tr>
-                <td>{{ Fecha }}</td>
-                <td>{{ Descripcion }}</td>
-                <td>{{ Monto }}</td>
-                <td>{{ tipoOperacion }}</td>
-              </tr>
-              <tr>
-                <td>{{ Fecha }}</td>
-                <td>{{ Descripcion }}</td>
-                <td>{{ Monto }}</td>
-                <td>{{ tipoOperacion }}</td>
-              </tr>
-              <tr>
-                <td>{{ Fecha }}</td>
-                <td>{{ Descripcion }}</td>
-                <td>{{ Monto }}</td>
-                <td>{{ tipoOperacion }}</td>
-              </tr>
-              <tr>
-                <td>{{ Fecha }}</td>
-                <td>{{ Descripcion }}</td>
-                <td>{{ Monto }}</td>
-                <td>{{ tipoOperacion }}</td>
-              </tr>
-              <tr>
-                <td>{{ Fecha }}</td>
-                <td>{{ Descripcion }}</td>
-                <td>{{ Monto }}</td>
-                <td>{{ tipoOperacion }}</td>
-              </tr>
-              <tr>
-                <td>{{ Fecha }}</td>
-                <td>{{ Descripcion }}</td>
-                <td>{{ Monto }}</td>
-                <td>{{ tipoOperacion }}</td>
-              </tr>
+                <td>{{ op.Fecha | date:'dd/MM/yyyy'}}</td>
+                <td>{{ op.Monto | currency}}</td>
+                <td>{{ op.Tipo }}</td>
+                <td>{{ op.IdOperacion }}</td>
+              </tr>         
             </tbody>
           </table>
         </div>

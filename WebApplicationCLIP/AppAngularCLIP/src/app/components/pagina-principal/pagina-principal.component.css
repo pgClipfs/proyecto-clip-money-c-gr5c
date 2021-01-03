@@ -5,6 +5,7 @@
     font-weight: 900;
     opacity: 80%;
   }
+ 
 
   .text-card{
     font-size: 2rem;
@@ -116,7 +117,7 @@ tr {
 
 
 ng-sidebar-container{
-  height: 70rem;
+  height: 90vh;
 
 }
 
