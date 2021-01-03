@@ -171,6 +171,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Cuenta.cs" />
+    <Compile Include="Models\ExcepcionesCLIP.cs" />
     <Compile Include="Models\Operacion.cs" />
     <Compile Include="Models\SesionDeUsuario.cs" />
     <Compile Include="Models\SolicitudLogin.cs" />

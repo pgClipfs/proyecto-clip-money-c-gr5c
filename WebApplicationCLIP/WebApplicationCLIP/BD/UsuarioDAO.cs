@@ -136,21 +136,21 @@ namespace WebApplicationCLIP.BD
 
                     if (t.Dni == ensamblador[0])
                     {
-                        throw new Exception("Dni repetido");
+                        throw new ErrorDniRepetido();
                     }
                     if (t.NombreDeUsuario == ensamblador[4])
                     {
-                        throw new Exception("Nombre de usuario repetido");
+                        throw new ErrorNombreUsuarioRepetido();
                     }
                     if (t.Email == ensamblador[5])
                     {
-                        throw new Exception("Email repetido");
+                        throw new ErrorEmailRepetido();
                     }
                 }
             }
             catch (Exception e)
             {
-                throw new Exception("Error al ejecutar la consulta --> " + e.Message);
+                throw e;
             }
             conexion.cerrar();
         }
