@@ -13,24 +13,19 @@ namespace WebApplicationCLIP.Gestores
         public bool consultarCredencialesUsuario(string nombreUsuario, string contraseña)
         {
             Usuario usu = Usuario.CrearUsuarioConNombreDeUsuario(nombreUsuario);
-            Usuario temp;
             UsuarioDAO usuarioDAO = new UsuarioDAO();
-
+            string temp;
+            
             try
             {
-                temp = usuarioDAO.consultar(usu);
+                temp = usuarioDAO.consultarContraseñaUsuario(usu);
+                return temp == contraseña;
             }
             catch (Exception e)
             {
                 throw e;
             }
 
-            if (temp.Contraseña != contraseña)
-            {
-                Console.WriteLine("Contraseña invalida para el usuario '" + temp.NombreDeUsuario + "'");
-                return false;
-            }
-            return true;
         }
 
 

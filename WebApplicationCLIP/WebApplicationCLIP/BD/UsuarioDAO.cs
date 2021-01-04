@@ -76,6 +76,10 @@ namespace WebApplicationCLIP.BD
             conexion.cerrar();
             return usuario_resultado;
         }
+
+
+
+
         public Usuario consultar(Usuario t)
         {
             string script = "SELECT * FROM USUARIOS WHERE DNI = " + "'" + t.Dni + "'";
@@ -111,10 +115,42 @@ namespace WebApplicationCLIP.BD
             return usuario_resultado;
         }
 
+        public string consultarContraseñaUsuario(Usuario t)
+        {
+            string script = "SELECT * FROM USUARIOS WHERE NOMBRE_USUARIO = " + "'" + t.NombreDeUsuario + "'";
+            ConexionBD conexion = new ConexionBD();
+            conexion.abrir();
+
+            List<string> ensamblador = new List<string>();
+            try
+            {
+                SqlCommand comando = new SqlCommand(script, conexion.conexionBD);
+                SqlDataReader lector = comando.ExecuteReader();
+                while (lector.Read())
+                {
+                    for (int i = 0; i < lector.FieldCount; i++)
+                    {
+                        ensamblador.Add(lector.GetValue(i).ToString());
+                    }
+                }
+                if (ensamblador.Count > 0)
+                {
+                    conexion.cerrar();
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            conexion.cerrar();
+            return ensamblador[7];
+
+        }
+
         public void comprobarRepeticion(Usuario t)
         {
             string script = "SELECT * FROM USUARIOS WHERE NOMBRE_USUARIO = " + "'" + t.NombreDeUsuario + "' or DNI ='" + t.Dni + "' or EMAIL = '" + t.Email + "'";
-            
+
             ConexionBD conexion = new ConexionBD();
             conexion.abrir();
 
