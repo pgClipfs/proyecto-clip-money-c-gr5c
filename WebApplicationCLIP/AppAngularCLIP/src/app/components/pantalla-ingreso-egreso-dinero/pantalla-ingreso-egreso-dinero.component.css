@@ -1,6 +1,14 @@
+:host{
+
+  --color7:#56CFE1;
+  --color8:#64DFDF;
+  --color9:#72EFDD;
+  --color10:#80FFDB;
+}
+
 .form-control-monto{
   border:0;
-  border-bottom: 3px solid #80FFDB;
+  border-bottom: 3px solid var(--color8);
   font-family: 'Poppins', sans-serif;
   font-weight: 200;
   font-size: 1.5rem;
@@ -68,7 +76,7 @@ select{
   font-family: 'Poppins',sans-serif;
   width: 100%;
   background-color: rgba(255, 255, 255, 0.897);
-  border: 1px solid rgb(93, 208, 243);
+  border: 1px solid var(--color8);
 }
 
 
@@ -78,7 +86,7 @@ select{
 }
 
 #cardDatosCuenta .card{
-  background-color: #e9e7e7b9;
+  background-color: #42424267;
   font-family: 'Poppins',sans-serif;
 }
 
@@ -87,7 +95,7 @@ font-weight: 600;
 
 }
 .btn-operacion{
-  background-color: #80FFDB;
+  background-color: var(--color8);
   font-family: 'Poppins',sans-serif;
   font-weight: 400;
 }

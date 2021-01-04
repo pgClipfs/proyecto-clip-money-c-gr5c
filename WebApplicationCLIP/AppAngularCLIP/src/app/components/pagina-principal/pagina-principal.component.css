@@ -411,7 +411,7 @@ tr {
     left: 3rem;
   }
 
-  #inputsTarjetas .col-sm-3 .pl-4{
+  #inputsTarjetas .col-sm-3{
     height: 1rem;
   }
 
@@ -425,7 +425,7 @@ tr {
   {
     font-size: 20px;
   }
- }
+}
 
 
 .form-control-monto{
