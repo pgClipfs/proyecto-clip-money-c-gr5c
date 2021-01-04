@@ -160,9 +160,12 @@
     <Compile Include="BD\CuentaDAO.cs" />
     <Compile Include="BD\OperacionDAO.cs" />
     <Compile Include="BD\UsuarioDAO.cs" />
+    <Compile Include="Controllers\CuentaController.cs" />
     <Compile Include="Controllers\DefaultController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\OperacionesController.cs" />
+    <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="Gestores\GestorCuenta.cs" />
     <Compile Include="Gestores\GestorOperacion.cs" />
     <Compile Include="Gestores\GestorTransferencia.cs" />
