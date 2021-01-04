@@ -101,15 +101,7 @@ namespace WebApplicationCLIP.Controllers
                 return Content(HttpStatusCode.Conflict, e.Message);
             }
             Cuenta cuenta;
-            try
-            {
-                CuentaDAO cuentaDAO = new CuentaDAO();
-                cuenta = cuentaDAO.consultarCuenta(login);
-            }
-            catch (Exception e)
-            {
-                return Content(HttpStatusCode.ExpectationFailed, "No se encontró una cuenta con ese CVU --> " + e.Message);
-            }
+      
             try
             {
                 LoginController.ValidarSesion(login);

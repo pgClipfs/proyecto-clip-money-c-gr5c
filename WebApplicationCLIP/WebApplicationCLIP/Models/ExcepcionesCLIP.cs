@@ -5,11 +5,54 @@ using System.Web;
 
 namespace WebApplicationCLIP.Models
 {
-    public class ExcepcionesCLIP
+    public class ErrorDniRepetido : Exception
     {
+        public ErrorDniRepetido(string dni)
+            : base("Dni Repetido: " + dni) { }
+    }
+    public class ErrorEmailRepetido : Exception
+    {
+        public ErrorEmailRepetido(string email)
+            : base("email Repetido: " + email) { }
     }
 
-    public class ErrorDniRepetido : Exception { }
-    public class ErrorNombreUsuarioRepetido : Exception { }
-    public class ErrorEmailRepetido : Exception { }
+    public class ErrorNombreUsuarioRepetido : Exception
+    {
+        public ErrorNombreUsuarioRepetido(string nombre)
+            : base("Nombre de Usuario Repetido: " + nombre) { }
+    }
+
+    public class SesionExpirada : Exception
+    {
+        public SesionExpirada()
+            : base("La sesión del usuario expiró") { }
+    }
+
+    public class UsuarioNoEncontrado : Exception
+    {
+        public UsuarioNoEncontrado(string usu)
+            : base("No se encontro el usuario " + usu) { }
+    }
+
+    public class SaldoInsuficiente : Exception
+    {
+        public SaldoInsuficiente()
+            : base("Saldo insuficiente para realizar la operacion") { }
+        public SaldoInsuficiente(string msg)
+            : base(msg) { }
+    }
+
+    public class MontoInvalido : Exception
+    {
+        public MontoInvalido()
+            : base("El monto no puede ser negativo, y debe ser mayor a cero") { }
+        public MontoInvalido(string msg)
+            : base(msg) { }
+    }
+
+    public class ErrorTransferencia : Exception
+    {
+        public ErrorTransferencia(string msg)
+            : base("Error al realizar la transferencia: " + msg) { }
+    }
 }

@@ -30,7 +30,7 @@ namespace WebApplicationCLIP.BD
             }
             catch (Exception e)
             {
-                Console.WriteLine("Error al abrir BD : " + e.Message);
+                throw new Exception("Error al abrir BD : " + e.Message);
             }
         }
 

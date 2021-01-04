@@ -54,10 +54,18 @@ namespace WebApplicationCLIP.Models
 
             Cuenta cuentaOrigen = this;
 
-            if (monto > cuentaOrigen.Saldo || monto <= 0)
+            if (cuentaOrigen==cuentaDestino)
             {
-                //no se puede hacer la operacion                
-                return;//se podria usar una excepcion personalizada
+                throw new ErrorTransferencia("la cuenta de destino no puede ser la misma que la de origen");
+            }
+
+            if (monto > cuentaOrigen.Saldo )
+            {
+                throw new SaldoInsuficiente();
+                //no se puede hacer la operacion                               
+            }
+            if (monto <= 0) {
+                throw new MontoInvalido();
             }
 
             Transferencia transferencia = new Transferencia(cuentaDestino, cuentaOrigen, monto, referencia, concepto);
@@ -95,7 +103,7 @@ namespace WebApplicationCLIP.Models
         {
             if (monto <= 0)
             {
-                throw new Exception("No se puede depositar un monto negativo o igual a 0.");
+                throw new MontoInvalido("No se puede depositar un monto negativo o igual a 0.");
             }
             Saldo += monto;
             Operacion o = Operacion.crearOperacionDeposito(this, monto);
@@ -108,11 +116,11 @@ namespace WebApplicationCLIP.Models
         {
             if (monto <= 0)
             {
-                throw new Exception("No se puede extraer un monto negativo o igual a 0.");
+                throw new MontoInvalido("No se puede extraer un monto negativo o igual a 0.");
             }
             if (Saldo < monto)
             {
-                throw new Exception("El saldo a extraer es mayor al disponible en la cuenta.");
+                throw new SaldoInsuficiente("El saldo a extraer es mayor al disponible en la cuenta.");
             }
             Saldo -= monto;
             Operacion o = Operacion.crearOperacionExtraccion(this, monto);

@@ -117,11 +117,6 @@ namespace WebApplicationCLIP.BD
             conexion.cerrar();
         }
 
-        public Operacion consultar(string cvu)
-        {
-            return null;
-        }
-
         public Operacion consultar(Operacion t)
         {
             throw new NotImplementedException();
@@ -141,40 +136,6 @@ namespace WebApplicationCLIP.BD
         {
             throw new NotImplementedException();
         }
-
-        public string obtenerUltimoCVU()
-        {
-            string script = "SELECT TOP 1 * FROM CUENTAS ORDER BY CVU DESC";
-            string ultimoCVU;
-
-            ConexionBD conexion = new ConexionBD();
-            conexion.abrir();
-
-            try
-            {
-                SqlCommand comando = new SqlCommand(script, conexion.conexionBD);
-                SqlDataReader lector = comando.ExecuteReader();
-                List<string> ensamblador = new List<string>();
-                while (lector.Read())
-                {
-                    for (int i = 0; i < lector.FieldCount; i++)
-                    {
-                        ensamblador.Add(lector.GetValue(i).ToString());
-                    }
-                }
-                if (ensamblador.Count > 0)
-                {
-                    conexion.cerrar();
-                    ultimoCVU = ensamblador[0];
-                    return ultimoCVU;
-                }
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine("Error al ejecutar la consulta --> " + e.Message);
-            }
-            conexion.cerrar();
-            return "ERROR";
-        }
+              
     }
 }
