@@ -5,6 +5,13 @@ using System.Web;
 
 namespace WebApplicationCLIP.Models
 {
+
+    public class CvuInvalido : Exception
+    {
+        public CvuInvalido()
+             : base("No existe una cuenta con ese CVU") { }
+    }
+
     public class ErrorDniRepetido : Exception
     {
         public ErrorDniRepetido(string dni)
@@ -13,7 +20,7 @@ namespace WebApplicationCLIP.Models
     public class ErrorEmailRepetido : Exception
     {
         public ErrorEmailRepetido(string email)
-            : base("email Repetido: " + email) { }
+            : base("Email Repetido: " + email) { }
     }
 
     public class ErrorNombreUsuarioRepetido : Exception

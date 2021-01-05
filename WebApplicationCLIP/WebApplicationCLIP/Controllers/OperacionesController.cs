@@ -142,10 +142,14 @@ namespace WebApplicationCLIP.Controllers
             {
                 CuentaDAO cuentaDAO = new CuentaDAO();
                 cuenta = cuentaDAO.consultar(cvu);
+            }catch(CvuInvalido e)
+            {
+                return Content(HttpStatusCode.Forbidden, e.Message);
             }
+
             catch (Exception e)
             {
-                return Content(HttpStatusCode.ExpectationFailed, "No se encontró una cuenta con ese CVU --> " + e.Message);
+                return Content(HttpStatusCode.Conflict, "No se encontró una cuenta con ese CVU --> " + e.Message);
             }
             try
             {
@@ -177,6 +181,11 @@ namespace WebApplicationCLIP.Controllers
                 //Operacion o = Operacion.crearOperacionExtraccion(null, monto);
                 return Ok();
             }
+            catch(SaldoInsuficiente e)
+            {
+                return Content(HttpStatusCode.Forbidden, e.Message);
+            }
+
             catch (Exception e)
             {
                 return Content(HttpStatusCode.Conflict, "No se pudó registrar la operación extracción --> " + e.Message);
