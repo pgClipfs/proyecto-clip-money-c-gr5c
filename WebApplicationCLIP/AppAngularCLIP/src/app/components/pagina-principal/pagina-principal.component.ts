@@ -52,13 +52,13 @@ export class PaginaPrincipalComponent implements OnInit {
 
   private obtenerOperaciones() {
     this.operacionesService.getOperacionesCvu(this.cuentaUsuario.Cvu).subscribe(
-      ops => {                
+      ops => {
         this.operaciones = []
         if (ops.length >= 10) {
           for (var i = 0; i < 10; i++) {
             this.operaciones.push(ops[i]);
           }
-        }
+        } else { this.operaciones = ops }
 
         //this.operaciones=ops //descomentar esta linea para que se muestren todas las operaciones
       },
