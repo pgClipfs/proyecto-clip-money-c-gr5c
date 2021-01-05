@@ -52,8 +52,15 @@ export class PaginaPrincipalComponent implements OnInit {
 
   private obtenerOperaciones() {
     this.operacionesService.getOperacionesCvu(this.cuentaUsuario.Cvu).subscribe(
-      ops => {
-        this.operaciones = ops;
+      ops => {                
+        this.operaciones = []
+        if (ops.length >= 10) {
+          for (var i = 0; i < 10; i++) {
+            this.operaciones.push(ops[i]);
+          }
+        }
+
+        //this.operaciones=ops //descomentar esta linea para que se muestren todas las operaciones
       },
       err => {
         console.log(err)
