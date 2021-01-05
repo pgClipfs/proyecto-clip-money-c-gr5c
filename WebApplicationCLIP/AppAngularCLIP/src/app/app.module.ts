@@ -21,6 +21,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { PantallaIngresoEgresoDineroComponent } from './components/pantalla-ingreso-egreso-dinero/pantalla-ingreso-egreso-dinero.component';
 import { PantallaTransferenciaComponent } from './components/pantalla-transferencia/pantalla-transferencia.component';
 import { OperacionesComponent } from './components/operaciones/operaciones.component';
+import { PantallaExitoComponent } from './components/pantalla-exito/pantalla-exito.component';
+import { PantallaFalloComponent } from './components/pantalla-fallo/pantalla-fallo.component';
 
 
 @NgModule({
@@ -34,7 +36,9 @@ import { OperacionesComponent } from './components/operaciones/operaciones.compo
     RegistroExitosoComponent,
     PantallaIngresoEgresoDineroComponent,
     PantallaTransferenciaComponent,
-    OperacionesComponent
+    OperacionesComponent,
+    PantallaExitoComponent,
+    PantallaFalloComponent
   ],
   imports: [
     BrowserModule,
@@ -47,6 +51,8 @@ import { OperacionesComponent } from './components/operaciones/operaciones.compo
       { path: 'registroExitoso', component: RegistroExitosoComponent },
       { path: '', component: HomePageComponent },
       { path: 'login', component: LoginBox },
+      { path: 'exito', component: PantallaExitoComponent },
+      { path: 'fallo', component: PantallaFalloComponent},
       { path: 'principal', component: PaginaPrincipalComponent}, //hay que cambiar esto y volver a poner el principal
     ]),
     NgbModule
