@@ -1,7 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, Validators, FormGroup, FormsModule } from '@angular/forms'
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Cuenta } from 'src/app/clases';
 import { OperacionService } from 'src/app/services/operacion.service';
+import { RedireccionService } from 'src/app/services/redireccion.service';
 import { Usuario } from '../../modelos/usuario';
 import { CuentaService } from '../../services/cuenta.service'
 
@@ -12,7 +14,7 @@ import { CuentaService } from '../../services/cuenta.service'
 })
 export class PantallaIngresoEgresoDineroComponent implements OnInit {
 
-  constructor(private operacionService: OperacionService, private fb: FormBuilder, private cuentaService: CuentaService) { }
+  constructor(private modalService: NgbModal,private redireccionar: RedireccionService, private operacionService: OperacionService, private fb: FormBuilder, private cuentaService: CuentaService) { }
 
   //esta cuenta, se carga automaticamente cuando se abre la ventana
   //@Input()
@@ -20,7 +22,7 @@ export class PantallaIngresoEgresoDineroComponent implements OnInit {
   cvuIngresado: string;
 
   public buscarCuenta() {
-   
+
     this.cuentaOrigen.Cvu = "cargando datos"
     this.cuentaOrigen.Saldo = 0
     this.cuentaOrigen.NombreUsuario = ""
@@ -37,25 +39,40 @@ export class PantallaIngresoEgresoDineroComponent implements OnInit {
 
   public realizarOperacion() {
 
-    if(this.inputMonto.value<=0 || this.inputMonto==null){
+    if (this.inputMonto.value <= 0 || this.inputMonto == null) {
       console.log("error: ingrese un monto valido")
       return;
     }
 
-    if(this.selectorTipoOperacion.value=="Deposito"){
+    if (this.selectorTipoOperacion.value == "Deposito") {
       this.operacionService.realizarDeposito(this.inputCVU.value, this.inputMonto.value).subscribe(
-        x=>{console.log("Deposito realizado exitosamente")},
-        err=>{console.log(err)}
+        x => {
+          this.redireccionar.exito();
+          this.modalService.dismissAll();
+        },
+        err => {
+          console.log(err);
+          this.redireccionar.fallo();
+          this.modalService.dismissAll()
+        }
       );
-      return;      
+      return;
     }
 
-    if(this.selectorTipoOperacion.value=="Extraccion"){
+    if (this.selectorTipoOperacion.value == "Extraccion") {
       this.operacionService.realizarExtraccion(this.inputCVU.value, this.inputMonto.value).subscribe(
-        x=>{console.log("Extraccion realizado exitosamente")},
-        err=>{console.log(err)}
-      );;
-      return;      
+        x => {
+          console.log("Extraccion realizado exitosamente");
+          this.redireccionar.exito();
+          this.modalService.dismissAll()
+        },
+        err => {
+          console.log(err);
+          this.redireccionar.fallo();
+          this.modalService.dismissAll()
+        }
+      );
+      return;
     }
 
     console.log("error: seleccione un tipo de operacion")

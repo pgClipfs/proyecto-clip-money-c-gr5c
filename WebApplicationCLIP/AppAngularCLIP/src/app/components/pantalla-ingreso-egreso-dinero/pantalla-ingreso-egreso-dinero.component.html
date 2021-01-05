@@ -9,6 +9,7 @@
             <h5 class="card-title text-left">INGRESE UN MONTO</h5>
             <label for="inputMonto" class="simboloPesos">$</label>
             <input
+            autocomplete="off"
               type="text"
               formControlName="Monto"
               class="form-control-monto text-center"
@@ -30,7 +31,7 @@
       </div>
     </div>
 
-    <div class="container" id="cardDatosOperacion">
+    <div class="container"  id="cardDatosOperacion">
       <div class="card mt-4 shadow">
         <div class="card-body">
           <h5 class="card-title text-left">Datos de la operacion</h5>
@@ -38,7 +39,7 @@
             <!-- Campo del CVU -->
             <div class="col-sm align-self-center">
               <label for="inputCVU"></label>
-              <input 
+              <input autocomplete="off"
               (input) ="buscarCuenta()"
                 type="text"
                 formControlName="inputCVU"
