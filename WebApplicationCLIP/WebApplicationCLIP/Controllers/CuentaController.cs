@@ -29,6 +29,10 @@ namespace WebApplicationCLIP.Controllers
             {
                 CuentaDAO cuentaDAO = new CuentaDAO();
                 cuenta = cuentaDAO.consultar(cvu);
+            }catch (CvuInvalido e)
+            {
+                return Content(HttpStatusCode.Forbidden,  e.Message);
+                
             }
             catch (Exception e)
             {

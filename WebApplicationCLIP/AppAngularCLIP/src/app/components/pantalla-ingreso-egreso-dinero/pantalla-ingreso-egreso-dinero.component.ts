@@ -31,7 +31,7 @@ export class PantallaIngresoEgresoDineroComponent implements OnInit {
       cuenta => {
         this.cuentaOrigen = cuenta;
       }, err => {
-        this.cuentaOrigen.NombreUsuario = "no se encontro la cuenta :c"
+        this.cuentaOrigen.NombreUsuario = err.error
       }, () => {
       }
     )
