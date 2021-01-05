@@ -59,15 +59,14 @@ namespace WebApplicationCLIP.BD
         public void registrar(Operacion o)
         {
             string cvu = o.Cuenta.Cvu;
-            string registrarDeposito = "INSERT INTO OPERACIONES VALUES ('" + o.Monto + "', '" + o.Fecha.Date.ToString("yyyy-MM-dd") + "', '" + cvu + "', '" + o.TipoOperacion + "')";
-            string idOperacion = "SELECT TOP 1 ID_OPERACION FROM OPERACIONES ORDER BY ID_OPERACION DESC";
+            string registrarDeposito = "INSERT INTO OPERACIONES VALUES ('" + o.Monto + "', '" + o.Fecha.Date.ToString("yyyy-MM-dd") + "', '" + cvu + "', '" + o.TipoOperacion + "')";DESC";
             string montoCuenta = "SELECT SALDO FROM CUENTAS WHERE CVU = " + "'" + cvu + "'";
             float montoActual = 0;
+            string ultimoID = 0;
             
             ConexionBD conexion = new ConexionBD();
             conexion.abrir();
 
-            string ultimoID = "";
             string temp = "";
 
             //Registro de operación deposito
@@ -83,19 +82,14 @@ namespace WebApplicationCLIP.BD
                   temp =  lectorSaldo.GetValue(0).ToString();
                 }
                 montoActual = float.Parse(temp);
-                lectorSaldo.Close();
 
-                SqlCommand comandoID = new SqlCommand(idOperacion, conexion.conexionBD);
-                SqlDataReader lectorID = comandoID.ExecuteReader();
-                while (lectorID.Read())
-                {
-                    ultimoID = lectorID.GetValue(0).ToString();
-                }
-                lectorID.Close();
+                ultimoID = obtenerUltimaOperacionCreada(cvu);
+
             }
             catch (Exception e)
             {
                 Console.WriteLine("Error al registrar la operación depósito: " + e);
+                conexion.cerrar();
                 throw e;
             }
             /*if (registroExitoso)
@@ -117,10 +111,6 @@ namespace WebApplicationCLIP.BD
             conexion.cerrar();
         }
 
-        public Operacion consultar(string cvu)
-        {
-            return null;
-        }
 
         public Operacion consultar(Operacion t)
         {
@@ -175,6 +165,29 @@ namespace WebApplicationCLIP.BD
             }
             conexion.cerrar();
             return "ERROR";
+        }
+
+
+
+        public string obtenerUltimaOperacionCreada(string cvuCuenta) 
+        {
+            string idOperacion = "SELECT TOP 1 ID_OPERACION FROM OPERACIONES ORDER BY ID_OPERACION DESC";
+            string ultimoID = "";
+
+            ConexionBD conexion = new ConexionBD();
+            conexion.abrir();
+
+
+            SqlCommand comandoID = new SqlCommand(idOperacion, conexion.conexionBD);
+            SqlDataReader lectorID = comandoID.ExecuteReader();
+            while (lectorID.Read())
+            {
+                ultimoID = lectorID.GetValue(0).ToString();
+            }
+            conexion.cerrar();
+
+            return ultimoID;
+
         }
     }
 }
