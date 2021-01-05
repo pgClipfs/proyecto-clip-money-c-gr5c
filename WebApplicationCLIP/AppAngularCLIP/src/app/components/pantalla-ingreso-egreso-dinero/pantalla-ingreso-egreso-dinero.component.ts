@@ -40,7 +40,7 @@ export class PantallaIngresoEgresoDineroComponent implements OnInit {
   public realizarOperacion() {
 
     if (this.inputMonto.value <= 0 || this.inputMonto == null) {
-      console.log("error: ingrese un monto valido")
+      alert("error: ingrese un monto valido")
       return;
     }
 
@@ -52,8 +52,9 @@ export class PantallaIngresoEgresoDineroComponent implements OnInit {
         },
         err => {
           console.log(err);
-          this.redireccionar.fallo();
-          this.modalService.dismissAll()
+          alert(err.error);
+          //this.redireccionar.fallo();
+          //this.modalService.dismissAll()
         }
       );
       return;
@@ -67,15 +68,14 @@ export class PantallaIngresoEgresoDineroComponent implements OnInit {
           this.modalService.dismissAll()
         },
         err => {
-          console.log(err);
-          this.redireccionar.fallo();
-          this.modalService.dismissAll()
+          alert(err.error);
+          //this.redireccionar.fallo();
+          //this.modalService.dismissAll()
         }
       );
       return;
     }
-
-    console.log("error: seleccione un tipo de operacion")
+    alert("error: seleccione un tipo de operacion")
   }
 
   ngOnInit(): void {
