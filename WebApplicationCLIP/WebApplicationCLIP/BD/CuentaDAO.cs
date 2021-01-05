@@ -59,12 +59,7 @@ namespace WebApplicationCLIP.BD
 
             return temp;
         }
-
-        public Cuenta consultarCuenta(SesionDeUsuario login)
-        {
-            return null;
-        }
-
+        
         public Cuenta consultar(string cvu)
         {
             string script = "SELECT * FROM CUENTAS WHERE CVU = " + "'" + cvu + "'";

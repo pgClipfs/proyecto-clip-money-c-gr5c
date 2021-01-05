@@ -82,7 +82,7 @@ namespace WebApplicationCLIP.Models
                 this.NombreDeUsuario = ensamblador[4];
                 this.Email = ensamblador[5].ToLower();
                 this.Telefono = ensamblador[6];
-                this.Contraseña = ensamblador[7]; //por seguridad, que la contraseña no este en memoria
+                //this.Contraseña = ensamblador[7]; //por seguridad, que la contraseña no este en memoria
                 comprobarIntegridadDeParametros(this);
             }
             catch (Exception e)
