@@ -5,7 +5,14 @@ using System.Web;
 
 namespace WebApplicationCLIP.Models
 {
+    public class ConsultaSinResultado : Exception
+    {
+        public ConsultaSinResultado()
+             : base("La consulta SQL realizada no encontro ningun resultado") { }
+        public ConsultaSinResultado(string elementoNoEncontrado)
+             : base("No se pudo encontrar: " + elementoNoEncontrado + " en la base de datos") { }
 
+    }
     public class CvuInvalido : Exception
     {
         public CvuInvalido()

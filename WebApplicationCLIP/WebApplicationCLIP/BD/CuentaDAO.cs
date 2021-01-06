@@ -12,97 +12,48 @@ namespace WebApplicationCLIP.BD
         public List<Cuenta> consultarCuentasDelUsuario(SesionDeUsuario login)
         {
             string script = "select CVU, DNI_USUARIO, SALDO, DIVISA, TIPO_CUENTA from CUENTAS c inner join Usuarios u on c.DNI_USUARIO = u.DNI where NOMBRE_USUARIO = " + "'" + login.NombreDeUsuario + "'";
-            List<Cuenta> temp = null;
-            ConexionBD conexion = new ConexionBD();
-            conexion.abrir();
+            List<Cuenta> cuentas = null;
+            List<List<string>> ensamblador = new List<List<string>>();
 
             try
             {
-                SqlCommand comando = new SqlCommand(script, conexion.conexionBD);
-                SqlDataReader lector = comando.ExecuteReader();
-                List<List<string>> cuentas = new List<List<string>>();
-                int j = 0;
-                while (lector.Read())
-                {
-                    cuentas.Add(new List<string>());
-                    for (int i = 0; i < lector.FieldCount; i++)
-                    {
-                        cuentas[j].Add(lector.GetValue(i).ToString());
-                    }
-                    j++;
-
-                }
-                if (cuentas.Count > 0)
-                {
-                    temp = new List<Cuenta>();
-                    for (int i = 0; i < cuentas.Count; i++)
-                    {
-                        temp.Add(Cuenta.ensamblarCuenta(cuentas[i]));
-                    }
-                    conexion.cerrar();
-
-                    //aca hay que "ensamblar" el objeto operacion resultado
-                    //operacionResultado = algo
-                }
+                ConexionBD conexionBD = new ConexionBD();
+                ensamblador = conexionBD.selectMultiple(script);
             }
-            catch (Exception e)
+            catch (ConsultaSinResultado e)
             {
-                throw new Exception("Error al ejecutar la consulta --> " + e.Message);
+                throw new Exception("El usuario no tiene Cuentas");
             }
-
-            conexion.cerrar();
-
-            foreach (var item in temp)
+            
+            cuentas = new List<Cuenta>();
+            for (int i = 0; i < ensamblador.Count; i++)
+            {
+                cuentas.Add(Cuenta.ensamblarCuenta(ensamblador[i]));
+            }
+            
+            foreach (var item in cuentas)
             {
                 item.removerUsuario();
             }
 
-            return temp;
+            return cuentas;
         }
 
         public Cuenta consultar(string cvu)
         {
             string script = "SELECT * FROM CUENTAS WHERE CVU = " + "'" + cvu + "'";
-
-            ConexionBD conexion = new ConexionBD();
-            conexion.abrir();
-            List<string> ensamblador = new List<string>();
-
-            bool entroAlWhile = false;
+            List<string> ensamblador;
 
             try
             {
-                SqlCommand comando = new SqlCommand(script, conexion.conexionBD);
-                SqlDataReader lector = comando.ExecuteReader();
-
-
-                while (lector.Read())
-                {
-                    entroAlWhile = true;
-                    for (int i = 0; i < lector.FieldCount; i++)
-                    {
-                        ensamblador.Add(lector.GetValue(i).ToString());
-                    }
-                }
-
-                if (!entroAlWhile)
-                {
-                    throw new CvuInvalido();
-                }
-
-                if (ensamblador.Count > 0)
-                {
-                    conexion.cerrar();
-                }
+                ConexionBD conexionBD = new ConexionBD();
+                ensamblador = conexionBD.selectUnico(script);
             }
-            catch (CvuInvalido e) {
-                throw e;
-            }
-            catch (Exception e)
+            catch (ConsultaSinResultado e)
             {
-                throw new Exception("Error al ejecutar la consulta --> " + e.Message);
+                throw new CvuInvalido();
             }
-            conexion.cerrar();
+
             return Cuenta.ensamblarCuenta(ensamblador);
 
         }
@@ -110,47 +61,29 @@ namespace WebApplicationCLIP.BD
         public List<Operacion> consultarOperacionesPorCVU(string cvu)
         {
             string script = "SELECT * FROM OPERACIONES WHERE CVU = " + "'" + cvu + "'";
-            List<Operacion> temp = null;
-            ConexionBD conexion = new ConexionBD();
-            conexion.abrir();
+            List<Operacion> operaciones = null;
+            List<List<string>> ensamblador = new List<List<string>>();
 
             try
             {
-                SqlCommand comando = new SqlCommand(script, conexion.conexionBD);
-                SqlDataReader lector = comando.ExecuteReader();
-                List<List<string>> operaciones = new List<List<string>>();
-                int j = 0;
-                while (lector.Read())
-                {
-                    operaciones.Add(new List<string>());
-                    for (int i = 0; i < lector.FieldCount; i++)
-                    {
-                        operaciones[j].Add(lector.GetValue(i).ToString());
-                    }
-                    j++;
-
-                }
-                if (operaciones.Count > 0)
-                {
-                    temp = new List<Operacion>();
-                    for (int i = 0; i < operaciones.Count; i++)
-                    {
-                        temp.Add(Operacion.ensamblarOperacion(operaciones[i]));
-                    }
-                    conexion.cerrar();
-
-                    //aca hay que "ensamblar" el objeto operacion resultado
-                    //operacionResultado = algo
-                }
+                ConexionBD conexionBD = new ConexionBD();
+                ensamblador = conexionBD.selectMultiple(script);
             }
-            catch (Exception e)
+            catch (ConsultaSinResultado e)
             {
-                throw new Exception("Error al ejecutar la consulta --> " + e.Message);
+                throw new Exception("La cuenta no tiene operaciones");
             }
 
-            conexion.cerrar();
+            if (ensamblador.Count > 0)
+            {
+                operaciones = new List<Operacion>();
+                for (int i = 0; i < ensamblador.Count; i++)
+                {
+                    operaciones.Add(Operacion.ensamblarOperacion(ensamblador[i]));
+                }
+            }
 
-            return temp;
+            return operaciones;
         }
 
         public void eliminar(Cuenta t)
