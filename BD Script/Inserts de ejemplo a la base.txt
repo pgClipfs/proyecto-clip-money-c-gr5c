@@ -1,0 +1,39 @@
+--Primero hacer los DELETES a los antiguos datos de las tablas para limpiar la base y empezarla de 0.
+
+--Todo el código para generar esta mini base de datos esta abajo:
+
+
+
+
+
+DELETE FROM OPERACIONES; --Ejecutar primero este delete
+DELETE FROM CUENTAS; --Despues este
+DELETE FROM USUARIOS; --Despues este
+DELETE FROM TIPOS_OPERACIONES; --Despues este
+
+--insertar los valores de abajo en el orden que están escritos: primero TIPOS_OPERACIONES, despues USUARIOS, etc.
+
+insert into TIPOS_OPERACIONES values ('Transferencia','Transferir dinero a otra cuenta');
+insert into TIPOS_OPERACIONES values ('Deposito','Depositar dinero en una cuenta');
+insert into TIPOS_OPERACIONES values ('Extraccion','Extraer dinero de una cuenta');
+insert into TIPOS_OPERACIONES values ('GiroAlDescubierto','Transferir dinero a otra cuenta dependiendo de la situación crediticia');
+
+insert into USUARIOS values ('40999999','John','Doe','normal','john10', 'Nueva Dheli 123','johndoe@gmail.com','3511234567','johnny123');
+insert into USUARIOS values ('40888888','Albert','Einstein','normal','alb', 'Barrio Relatividad 523','emc@gmail.com','3511234566','albert123');
+insert into USUARIOS values ('40777777','Fulano','Detal','normal','fuli10', 'Barrio Fulano 164','fuli@gmail.com','3511234556','fulano123');
+insert into USUARIOS values ('40666666','Stephen','Hawking','normal','stephie', 'Barrio Black Hole Society 255','hawking@gmail.com','3511234456','blackhole');
+INSERT INTO USUARIOS values ('40555555', 'hector', 'prueba', 'normal', 'hectorp', 'Barrio Los Miradores 123', 'hectorprueba@gmail.com', '3516778244', 'hectorin22')
+INSERT INTO USUARIOS values ('40444444', 'martin', 'prueba', 'normal', 'martinp', 'Barrio Atahualpa 999', 'martinprueba@gmail.com', '3516984311', 'martinin77')
+
+insert into CUENTAS values ('00001234','1234','1000','pesos','debito');
+insert into CUENTAS values ('00004321','4321','2000','pesos','debito');
+insert into CUENTAS values ('00001111','1111','3000','pesos','credito');
+insert into CUENTAS values ('00002222','2222','4000','pesos','credito');
+insert into CUENTAS values ('00002223','2222','200','dolares','credito');
+
+insert into OPERACIONES values ('200','2020/05/25','00001234','Extraccion');
+insert into OPERACIONES values ('500','2020/03/22','00004321','Deposito');
+insert into OPERACIONES values ('1100','2020/01/04','00001111','Extraccion');
+insert into OPERACIONES values ('200','2020/04/22','00002222','Deposito');
+insert into OPERACIONES values ('300','2020/02/13','00001234','Deposito');
+insert into OPERACIONES values ('1000','2020/08/12','00001111','Deposito');
