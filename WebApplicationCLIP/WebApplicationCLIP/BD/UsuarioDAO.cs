@@ -242,6 +242,12 @@ namespace WebApplicationCLIP.BD
             throw new NotImplementedException();
         }
 
+        public void modificarDatosUsuario(string domi, string tel, string email)
+        {
+            //string script = "UPDATE USUARIO VALUES ('" + .Cvu + "', '" + t.Usuario.Dni + "', " +
+            //    "'" + t.Saldo + "', '" + t.Divisa + "', '" + t.TipoCuenta + "')";
+        }
+
         public void eliminar(Usuario t)
         {
             throw new NotImplementedException();
