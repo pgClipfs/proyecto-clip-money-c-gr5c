@@ -61,19 +61,19 @@ export class OperacionService {
         map(ops => {
           ops.forEach(op => {
             switch (op.TipoOperacion) {
-              case 1: {
+              case 0: {
                 op.Tipo = "Transferencia";
                 break;
               }
-              case 2: {
+              case 1: {
                 op.Tipo = "Depósito";
                 break;
               }
-              case 3: {
+              case 2: {
                 op.Tipo = "Extracción";
                 break;
               }
-              case 4: {
+              case 3: {
                 op.Tipo = "Giro al Descubierto";
                 break;
               }

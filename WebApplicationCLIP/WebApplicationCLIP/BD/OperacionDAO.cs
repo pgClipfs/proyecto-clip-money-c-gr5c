@@ -12,7 +12,7 @@ namespace WebApplicationCLIP.BD
     {
         public List<Operacion> consultarOperacionesPorCVU(string cvu)
         {
-            string script = "SELECT * FROM OPERACIONES WHERE CVU = " + "'" + cvu + "'";
+            string script = "SELECT * FROM OPERACIONES WHERE CVU = " + "'" + cvu + "' order by ID_OPERACION desc";
             List<Operacion> temp = null;
             ConexionBD conexion = new ConexionBD();
             conexion.abrir();

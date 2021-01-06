@@ -1,3 +1,16 @@
+:host{
+  --color1:#7400B8;
+  --color2:#6930C3;
+  --color3:#5E60CE;
+  --color4:#5390D9;
+  --color5:#4EA8DE;
+  --color6:#48BFE3;
+  --color7:#56CFE1;
+  --color8:#64DFDF;
+  --color9:#72EFDD;
+  --color10:#80FFDB;
+}
+
 /*Aca termina todo lo que tiene que ver con el boton de desplegar la barra lateral*/
 
 .title-card{
@@ -23,11 +36,7 @@
 
   }
 
-  .card-info-cuenta{
-    background-image: linear-gradient(to right, #22248b , #5e60ce);
-    border: none;
 
-  }
 
   .card-info-cuenta .title-card {
     color: rgb(255, 255, 255);
@@ -132,8 +141,8 @@ ng-sidebar-container{
 
 .navbar-brand {
   font-family: 'Poppins',sans-serif;
-  color: black;
-  font-weight: 300;
+  color: rgb(109, 109, 109);
+  font-weight: 400;
 }
 
 .navbar-brand:hover {
@@ -279,7 +288,7 @@ justify-content: center;
 }
 
 .card-info-cuenta{
-  background-image: linear-gradient(to right, #6830c3be, #5e60ceb4 );
+  background-image: linear-gradient(to right, var(--color2),var(--color3) );
   border: none;
 
 }
@@ -349,18 +358,23 @@ justify-content: center;
 }
 
 /*Estilo de la tabla*/
+
+
 th{
-color: #22248b;
+  border: 0;
+  color: var(--color3);
 }
 
 tr {
-font-weight: 300;
+  font-family: 'Poppins',sans-serif;
+  font-weight: 400;
+  color: #383838;
 }
 
 /* Estilo de la parte de las cotizaciones */
 .text-title-cotizacion{
   font-size: 1rem;
-  color: #6b6b6b;
+  color: #4e4e4e;
 
 }
 /* Estilo del modal ingresar dinero */
@@ -397,7 +411,7 @@ font-weight: 300;
     left: 3rem;
   }
 
-  #inputsTarjetas .col-sm-3 .pl-4{
+  #inputsTarjetas .col-sm-3{
     height: 1rem;
   }
 
@@ -411,7 +425,7 @@ font-weight: 300;
   {
     font-size: 20px;
   }
- }
+}
 
 
 .form-control-monto{

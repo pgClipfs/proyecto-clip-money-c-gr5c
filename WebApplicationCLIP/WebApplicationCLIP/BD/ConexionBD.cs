@@ -11,7 +11,7 @@ namespace WebApplicationCLIP.BD
         //aca pone el nombre de tu base de datos: 
         //Data Source= "nombre de tu conexion"
         //Initial Catalog= "nombre de tu base de datos"
-        String cadena = "Data Source=localhost\\SQLEXPRESS;Initial Catalog=ClipBank;Integrated Security=True;";
+        String cadena = "Data Source=localhost\\sqlexpress;Initial Catalog=ClipBank;Integrated Security=True;";
 
 
         public SqlConnection conexionBD = new SqlConnection();
@@ -30,7 +30,7 @@ namespace WebApplicationCLIP.BD
             }
             catch (Exception e)
             {
-                Console.WriteLine("Error al abrir BD : " + e.Message);
+                throw new Exception("Error al abrir BD : " + e.Message);
             }
         }
 

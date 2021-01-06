@@ -1,21 +1,13 @@
-<nav
-  class="navbar navbar-expand-lg navbar-dark bg-white shadow-sm"
-  aria-label="Fifth navbar example"
->
+<nav class="navbar navbar-expand-lg navbar-dark bg-white shadow-sm" aria-label="Fifth navbar example">
   <div class="container-fluid">
     <div class="menu-wrap" (click)="abrirSideBar()">
       <input type="checkbox" class="toggler" />
-      <div class="hamburger"><div></div></div>
+      <div class="hamburger">
+        <div></div>
+      </div>
     </div>
     <a class="navbar-brand" href="#">
-      {{ nombreUsuario }}
-      <span
-        ><img
-          class="rounded-circle"
-          src="../../../assets/img/foto-login.jpg"
-          alt=""
-          width="40px" /></span
-    ></a>
+      {{ nombreUsuario }}</a>
   </div>
 </nav>
 <ng-sidebar-container>
@@ -24,9 +16,8 @@
     <h2 class="title-card p-3">Bienvenido a ClipMoney</h2>
     <ul class="menu navbar-nav">
       <li class="nav-item"><button routerLink="/principalHome">Inicio</button></li>
-      <li class="nav-item">
-        <button (click)="openLg(contentIngresarDinero)">Ingresar Dinero</button>
-      </li>
+       <li class="nav-item"> <button (click)="openLg(contentIngresarDinero)">Ingresar Dinero</button> </li>
+
       <li class="nav-item"><a href="">Transferir</a></li>
       <li class="nav-item"><a href="">Giro al descubierto</a></li>
       <li class="nav-item"><a href="">Mis datos</a></li>
@@ -34,7 +25,7 @@
     </ul>
     <button class="btn btn-cerrarsesion m-3" (click)="cerrar_sesion()">Cerrar sesion</button>
   </ng-sidebar>
-  <div ng-sidebar-content >
+  <div ng-sidebar-content>
     <div class="container pt-3">
       <div class="row">
         <div class="col-sm-12">
@@ -63,17 +54,15 @@
 
       <div class="row mt-4" id="inputsTarjetas">
         <div class="col-xl-3 col-md-6 pb-3">
+          <!-- <div class="card card-ingresar-pesos shadow " (click)="openLg(contentIngresarDinero)" style="width: 100%"> -->
           <div class="card card-ingresar-pesos shadow " (click)="openLg(contentIngresarDinero)" style="width: 100%">
             <div class="row g-0">
               <div class="col-sm-3 pl-4">
-                <img
-                  src="../../../assets/img/1332873-e-commerce/1332873-e-commerce/png/001-add.png"
-                  class="card-img"
-                  alt="..."
-                />
+                <img src="../../../assets/img/Iconos/ingresarRetirar.png" class="card-img"
+                  alt="..." />
               </div>
               <div class="col-sm-9">
-                <div class="card-body" >
+                <div class="card-body">
                   <p class="pl-3 card-text text-card">Deposito y Extraccion</p>
                 </div>
               </div>
@@ -84,11 +73,8 @@
           <div class="card card-ingresar-pesos shadow" style="width: 100%">
             <div class="row g-0">
               <div class="col-sm-3 pl-4">
-                <img
-                  src="../../../assets/img/1332873-e-commerce/1332873-e-commerce/png/019-cash.png"
-                  class="card-img"
-                  alt="..."
-                />
+                <img src="../../../assets/img/Iconos/Transferir.png" class="card-img"
+                  alt="..." />
               </div>
               <div class="col-sm-9">
                 <div class="card-body">
@@ -102,11 +88,8 @@
           <div class="card card-ingresar-pesos shadow" style="width: 100%">
             <div class="row g-0">
               <div class="col-sm-3 pl-4">
-                <img
-                  src="../../../assets/img/1332873-e-commerce/1332873-e-commerce/png/073-dollar-symbol-2.png"
-                  class="card-img"
-                  alt="..."
-                />
+                <img src="../../../assets/img/Iconos/giroAlDescubierto.png"
+                  class="card-img" alt="..." />
               </div>
               <div class="col-sm-9">
                 <div class="card-body">
@@ -120,11 +103,8 @@
           <div class="card card-ingresar-pesos shadow" style="width: 100%">
             <div class="row g-0">
               <div class="col-sm-3 pl-4">
-                <img
-                  src="../../../assets/img/1332873-e-commerce/1332873-e-commerce/png/064-payment-method.png"
-                  class="card-img"
-                  alt="..."
-                />
+                <img src="../../../assets/img/Iconos/PagarServicios.png"
+                  class="card-img" alt="..." />
               </div>
               <div class="col-sm-9">
                 <div class="card-body">
@@ -138,12 +118,12 @@
       <div class="row">
         <div class="col-xl-9 col-lg-8 col-sm-12 pt-4">
           <h3 class="text-title-info mb-3">Actividad Reciente</h3>
-          <table class="table shadow table-inverse">
+          <table class="table shadow table-inverse  rounded">
             <thead class="thead-inverse">
               <tr>
                 <th>Fecha</th>
                 <th>Monto</th>
-                <th>Tipo Transaccion</th>
+                <th>Tipo Operacion</th>
                 <th>ID Operacion</th>
               </tr>
             </thead>
@@ -219,7 +199,7 @@
     </div>
   </div>
 
-  <ng-template #contentIngresarDinero let-modal>
+  <ng-template  #contentIngresarDinero let-modal>
     <div class="">
       <div class="modal-header">
         <p class="modal-title-default ">Depositos y Extracciones</p>
@@ -239,6 +219,7 @@
     -->
     </div>
     <div class="modal-body">
+      <!-- <app-pantalla-ingreso-egreso-dinero [cuentaOrigen]="cuentaUsuario"></app-pantalla-ingreso-egreso-dinero> -->
       <app-pantalla-ingreso-egreso-dinero ></app-pantalla-ingreso-egreso-dinero>
     </div>
   </ng-template>

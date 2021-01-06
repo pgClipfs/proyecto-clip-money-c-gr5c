@@ -22,15 +22,11 @@ export class PaginaPrincipalComponent implements OnInit {
   nombreUsuario: string = "Usuario No Encontrado";
 
   saldoDolares = 0
-  saldoPesos = "-";
+  saldoPesos = "";
   opened = false;
   numeroCuenta = "-";
   numeroCuentaDol = "";
   nombreApellido = '- - -';
-  Fecha = '14/12/2020';
-  Descripcion = 'Ingreso de dinero';
-  Monto = '-';
-  tipoOperacion = 'Ingr.';
 
 
   openLg(contentIngresarDinero) {
@@ -57,7 +53,14 @@ export class PaginaPrincipalComponent implements OnInit {
   private obtenerOperaciones() {
     this.operacionesService.getOperacionesCvu(this.cuentaUsuario.Cvu).subscribe(
       ops => {
-        this.operaciones = ops;
+        this.operaciones = []
+        if (ops.length >= 10) {
+          for (var i = 0; i < 10; i++) {
+            this.operaciones.push(ops[i]);
+          }
+        } else { this.operaciones = ops }
+
+        //this.operaciones=ops //descomentar esta linea para que se muestren todas las operaciones
       },
       err => {
         console.log(err)
@@ -90,7 +93,7 @@ export class PaginaPrincipalComponent implements OnInit {
       }
     );
 
-    //#endregion 
+    //#endregion
 
     //#region datos usuario
 

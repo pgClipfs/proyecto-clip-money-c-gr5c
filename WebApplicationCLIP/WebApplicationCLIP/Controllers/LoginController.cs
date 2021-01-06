@@ -73,7 +73,7 @@ namespace WebApplicationCLIP.Controllers
             }
             catch (Exception e)
             {
-                return Content(HttpStatusCode.BadRequest, e.Message);
+                return Content(HttpStatusCode.Forbidden, e.Message);
             }
         }
 
@@ -90,12 +90,12 @@ namespace WebApplicationCLIP.Controllers
             }
             catch (Exception)
             {
-                throw new UnauthorizedAccessException("No se encontro el usuario");
+                throw new UsuarioNoEncontrado(login.NombreDeUsuario);
             }
 
             if (!LoginController.ValidarToken(login))
             {
-                throw new UnauthorizedAccessException("sesion de usuario expirada");
+                throw new SesionExpirada();
             }
         }
 

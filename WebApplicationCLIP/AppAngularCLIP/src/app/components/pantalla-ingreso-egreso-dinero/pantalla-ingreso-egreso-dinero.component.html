@@ -2,43 +2,48 @@
   <div class="container">
     <!-- Campo del monto -->
 
-    <div class="row">
-      <div class="col align-self-center">
-        <div class="card rounded shadow">
-          <div class="card-body text-center">
-            <h5 class="card-title text-left">INGRESE UN MONTO</h5>
-            <label for="inputMonto" class="simboloPesos">$</label>
-            <input
-              type="text"
-              formControlName="Monto"
-              class="form-control-monto text-center"
-              id="inputMonto"
-              placeholder="0"
-            />
+   <div class="row justify-content-center">
+<div class="col-11 col-lg-7 align-self-center ">
 
-            <span
-              class="text-danger text-subtitle"
-              *ngIf="
-                formDinero.controls.Monto.errors?.required &&
-                formDinero.controls.Monto.touched
-              "
-            >
-              Dato requerido.</span
-            >
-          </div>
-        </div>
+    <div class="card rounded shadow">
+      <div class="card-body text-center">
+        <h5 class="card-title text-left">INGRESE UN MONTO</h5>
+        <label for="inputMonto" class="simboloPesos">$</label>
+        <input
+        autocomplete="off"
+        type="text"
+        formControlName="Monto"
+        class="form-control-monto text-center"
+        id="inputMonto"
+        placeholder="0"
+        />
+        
+        <span
+        class="text-danger text-subtitle"
+        *ngIf="
+        formDinero.controls.Monto.errors?.required &&
+        formDinero.controls.Monto.touched
+        "
+        >
+        Dato requerido.</span
+        >
       </div>
     </div>
 
-    <div class="container" id="cardDatosOperacion">
+        
+      </div>
+    </div>
+
+    <div class="container"  id="cardDatosOperacion">
       <div class="card mt-4 shadow">
         <div class="card-body">
           <h5 class="card-title text-left">Datos de la operacion</h5>
           <div class="row">
             <!-- Campo del CVU -->
-            <div class="col-sm align-self-center">
+            <div class="col-lg-6 align-self-center">
               <label for="inputCVU"></label>
-              <input
+              <input autocomplete="off"
+              (input) ="buscarCuenta()"
                 type="text"
                 formControlName="inputCVU"
                 class="form-control-monto"
@@ -114,12 +119,12 @@
                 <div class="card-body">
                   <h4 class="card-title">Datos de la cuenta</h4>
                   <p class="card-text">
-                    Nombre de usuario:  {{ usuarioCuenta }}
+                    Nombre de usuario:  {{ cuentaOrigen.NombreUsuario }}
                   </p>
                   <p class="card-text">
-                    Saldo de la cuenta: $ {{ saldoCuenta }}
+                    Saldo de la cuenta: {{ cuentaOrigen.Saldo| currency }}
                   </p>
-                  <p class="card-text">CVU de la cuenta: {{ cvuCuenta }}</p>
+                  <p class="card-text">CVU de la cuenta: {{ cuentaOrigen.Cvu }}</p>
                 </div>
               </div>
             </div>
@@ -133,6 +138,7 @@
     <div class="row">
       <div class="col">
         <button
+        (click)="realizarOperacion()"
           type="button"
           name=""
           id=""

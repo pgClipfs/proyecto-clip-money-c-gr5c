@@ -60,11 +60,6 @@ namespace WebApplicationCLIP.BD
             return temp;
         }
 
-        public Cuenta consultarCuenta(SesionDeUsuario login)
-        {
-            return null;
-        }
-
         public Cuenta consultar(string cvu)
         {
             string script = "SELECT * FROM CUENTAS WHERE CVU = " + "'" + cvu + "'";
@@ -73,21 +68,35 @@ namespace WebApplicationCLIP.BD
             conexion.abrir();
             List<string> ensamblador = new List<string>();
 
+            bool entroAlWhile = false;
+
             try
             {
                 SqlCommand comando = new SqlCommand(script, conexion.conexionBD);
                 SqlDataReader lector = comando.ExecuteReader();
+
+
                 while (lector.Read())
                 {
+                    entroAlWhile = true;
                     for (int i = 0; i < lector.FieldCount; i++)
                     {
                         ensamblador.Add(lector.GetValue(i).ToString());
                     }
                 }
+
+                if (!entroAlWhile)
+                {
+                    throw new CvuInvalido();
+                }
+
                 if (ensamblador.Count > 0)
                 {
                     conexion.cerrar();
                 }
+            }
+            catch (CvuInvalido e) {
+                throw e;
             }
             catch (Exception e)
             {
@@ -95,7 +104,7 @@ namespace WebApplicationCLIP.BD
             }
             conexion.cerrar();
             return Cuenta.ensamblarCuenta(ensamblador);
-            
+
         }
 
         public List<Operacion> consultarOperacionesPorCVU(string cvu)
@@ -173,7 +182,27 @@ namespace WebApplicationCLIP.BD
 
         public void registrar(Cuenta t)
         {
-            throw new NotImplementedException(); //CONTINUAR AQUI
+
+            //string script = "INSERT INTO CUENTAS (CVU, DNI_USUARIO, SALDO, DIVISA, TIPO_CUENTA) values" +
+            // (t.Cvu, t.DNI_USUARIO, t.Saldo, t.DIVISA, t.TIPO_CUENTA.ToString());
+            string script = "INSERT INTO CUENTAS VALUES ('" + t.Cvu + "', '" + t.Usuario.Dni + "', " +
+                "'" + t.Saldo + "', '" + t.Divisa + "', '" + t.TipoCuenta + "')";
+
+            ConexionBD conexion = new ConexionBD();
+            conexion.abrir();
+
+            try
+            {
+                SqlCommand comando = new SqlCommand(script, conexion.conexionBD);
+                SqlDataReader lector = comando.ExecuteReader();
+            }
+            catch (Exception e)
+            {
+                throw new Exception("Error al ejecutar la consulta --> " + e.Message);
+            }
+            conexion.cerrar();
+            return;
+
         }
 
         public string obtenerUltimoCVU()
@@ -183,7 +212,6 @@ namespace WebApplicationCLIP.BD
 
             ConexionBD conexion = new ConexionBD();
             conexion.abrir();
-
 
             try
             {
