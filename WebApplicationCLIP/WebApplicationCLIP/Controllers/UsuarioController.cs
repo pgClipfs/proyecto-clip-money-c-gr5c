@@ -48,7 +48,6 @@ namespace WebApplicationCLIP.Controllers
 
         }
 
-
         [HttpPost]
         [EnableCors(origins: "*", headers: "*", methods: "*")]
         [Route("post/modificardatosusuario")]
