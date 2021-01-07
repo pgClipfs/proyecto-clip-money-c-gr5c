@@ -26,13 +26,14 @@ namespace WebApplicationCLIP.Models
             };
         }
 
-        private Usuario(string dni, string nombre, string apellido, string sitCrediticia, string nombreDeUsuario, string email, string telefono, string contraseña)
+        private Usuario(string dni, string nombre, string apellido, string sitCrediticia, string nombreDeUsuario, string domicilio, string email, string telefono, string contraseña)
         {
             Dni = dni;
             Nombre = nombre;
             Apellido = apellido;
             SitCrediticia = sitCrediticia;
             NombreDeUsuario = nombreDeUsuario;
+            Domicilio = domicilio;
             Email = email.ToLower();
             Telefono = telefono;
             Contraseña = contraseña;
