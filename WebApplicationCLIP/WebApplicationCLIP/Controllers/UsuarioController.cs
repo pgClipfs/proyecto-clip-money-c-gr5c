@@ -61,6 +61,14 @@ namespace WebApplicationCLIP.Controllers
             SesionDeUsuario login = obj["SesionDeUsuario"].ToObject<SesionDeUsuario>();
             try
             {
+                LoginController.ValidarSesion(login);
+            }
+            catch (UnauthorizedAccessException e)
+            {
+                return Content(HttpStatusCode.Unauthorized, e.Message);
+            }
+            try
+            {
                 UsuarioDAO usuarioDAO = new UsuarioDAO();
                 usuarioDAO.modificarDatosUsuario(domi, email, tel, login);
                 return Ok("Sus datos han sido modificados correctamente.");
