@@ -1,0 +1,42 @@
+--Hacer estos inserts una vez DROPEADAS todas las tablas y ejecutada la Script BD CLIP Create de nuevo
+
+--Insertar los valores de abajo en el orden que están escritos: primero TIPOS_OPERACIONES, despues USUARIOS, etc.
+
+
+
+
+insert into TIPOS_OPERACIONES values ('Transferencia','Transferir dinero a otra cuenta');
+insert into TIPOS_OPERACIONES values ('Deposito','Depositar dinero en una cuenta');
+insert into TIPOS_OPERACIONES values ('Extraccion','Extraer dinero de una cuenta');
+insert into TIPOS_OPERACIONES values ('GiroAlDescubierto','Transferir dinero a otra cuenta dependiendo de la situación crediticia');
+
+insert into SITUACIONES_CREDITICIAS values ('Normal','Puede girar al descubierto','1000');
+insert into SITUACIONES_CREDITICIAS values ('Deudor','Puede girar al descubierto','500');
+insert into SITUACIONES_CREDITICIAS values ('No habilitado','No puede girar al descubierto','0');
+
+insert into USUARIOS values ('40999999','John','Doe','Normal','john10', 'Nueva Dheli 123','johndoe@gmail.com','3511234567','johnny123');
+insert into USUARIOS values ('40888888','Albert','Einstein','Normal','alb', 'Barrio Relatividad 523','emc@gmail.com','3511234566','albert123');
+insert into USUARIOS values ('40777777','Fulano','Detal','Normal','fuli10', 'Barrio Fulano 164','fuli@gmail.com','3511234556','fulano123');
+insert into USUARIOS values ('40666666','Stephen','Hawking','Normal','stephie', 'Barrio Black Hole Society 255','hawking@gmail.com','3511234456','blackhole');
+INSERT INTO USUARIOS values ('40555555', 'hector', 'prueba', 'Normal', 'hectorp', 'Barrio Los Miradores 123', 'hectorprueba@gmail.com', '3516778244', 'hectorin22');
+INSERT INTO USUARIOS values ('40444444', 'martin', 'prueba', 'Normal', 'martinp', 'Barrio Atahualpa 999', 'martinprueba@gmail.com', '3516984311', 'martinin77');
+
+INSERT INTO CUENTAS values ('000040999999','40999999','1000','Pesos', 'Caja de ahorro');
+INSERT INTO CUENTAS values ('100040999999','40999999','0','Pesos', 'Caja de ahorro');
+
+INSERT INTO CUENTAS values ('000040888888','40888888','500','Pesos', 'Caja de ahorro');
+INSERT INTO CUENTAS values ('100040888888','40888888','0','Pesos', 'Caja de ahorro');
+
+INSERT INTO CUENTAS values ('000040777777','40777777','200','Pesos', 'Caja de ahorro');
+INSERT INTO CUENTAS values ('100040777777','40777777','0','Pesos', 'Caja de ahorro');
+
+INSERT INTO CUENTAS values ('000040666666','40666666','360','Pesos', 'Caja de ahorro');
+INSERT INTO CUENTAS values ('100040666666','40666666','0','Pesos', 'Caja de ahorro');
+
+INSERT INTO CUENTAS values ('000040555555','40555555','2000','Pesos', 'Caja de ahorro');
+INSERT INTO CUENTAS values ('100040555555','40555555','0','Pesos', 'Caja de ahorro');
+
+INSERT INTO CUENTAS values ('000040444444','40444444','700','Pesos', 'Caja de ahorro');
+INSERT INTO CUENTAS values ('100040444444','40444444','0','Pesos', 'Caja de ahorro');
+
+INSERT INTO OPERACIONES values ('1000','2020-01-24 10:27:22','000040444444', 'Deposito');
