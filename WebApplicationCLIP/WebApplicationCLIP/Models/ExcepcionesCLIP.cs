@@ -19,6 +19,12 @@ namespace WebApplicationCLIP.Models
              : base("No existe una cuenta con ese CVU") { }
     }
 
+    public class ErrorCvuRepetido : Exception
+    {
+        public ErrorCvuRepetido(string dni)
+             : base("Dni repetido: " + dni) { }
+    }
+
     public class ErrorDniRepetido : Exception
     {
         public ErrorDniRepetido(string dni)

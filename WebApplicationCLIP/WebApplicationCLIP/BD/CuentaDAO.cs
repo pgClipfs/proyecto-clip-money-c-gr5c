@@ -24,13 +24,13 @@ namespace WebApplicationCLIP.BD
             {
                 throw new Exception("El usuario no tiene Cuentas");
             }
-            
+
             cuentas = new List<Cuenta>();
             for (int i = 0; i < ensamblador.Count; i++)
             {
                 cuentas.Add(Cuenta.ensamblarCuenta(ensamblador[i]));
             }
-            
+
             foreach (var item in cuentas)
             {
                 item.removerUsuario();
@@ -113,6 +113,31 @@ namespace WebApplicationCLIP.BD
             conexion.cerrar();
         }
 
+        public void comprobarRepeticion(Cuenta t)
+        {
+            string script = "SELECT * FROM cuentas WHERE cvu = " + "'" + t.Cvu + "'";
+            List<string> ensamblador;
+            ConexionBD conexion = new ConexionBD();
+
+            try
+            {
+                ensamblador = conexion.selectUnico(script);
+            }
+            catch (ConsultaSinResultado e)
+            {
+                return;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            if (t.Cvu == ensamblador[0])
+            {
+                throw new ErrorCvuRepetido(ensamblador[0]);
+            }
+        }
+
         public void registrar(Cuenta t)
         {
 
@@ -126,6 +151,7 @@ namespace WebApplicationCLIP.BD
 
             try
             {
+                comprobarRepeticion(t);
                 SqlCommand comando = new SqlCommand(script, conexion.conexionBD);
                 SqlDataReader lector = comando.ExecuteReader();
             }

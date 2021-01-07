@@ -69,6 +69,7 @@ namespace WebApplicationCLIP.Controllers
             try
             {
                 gestor.registrarUsuario(usuario);
+                usuario.CrearNuevaCuenta();
                 return Ok("El usuario se registro exitosamente");
             }
             catch (Exception e)

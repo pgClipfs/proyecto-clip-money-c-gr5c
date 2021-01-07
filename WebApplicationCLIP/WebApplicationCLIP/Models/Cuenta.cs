@@ -18,14 +18,42 @@ namespace WebApplicationCLIP.Models
         public object TipoCuenta { get; internal set; }
 
         private Cuenta() { }
-        
+
         public static Cuenta ObtenerCuenta()
         {
             Cuenta c = new Cuenta();
-            
-                c.Cvu = "12345";
-            
+
+            c.Cvu = "12345";
+
             return c;
+        }
+
+        private string GenerarCVU(Usuario usuario)
+        {
+            Random random = new Random();
+
+            string cvu = "02000" +
+                usuario.Dni +
+                random.Next(0, 9).ToString() +
+                random.Next(0, 9).ToString() +
+                random.Next(0, 9).ToString();
+
+            return cvu;
+        }
+
+        public Cuenta(Usuario usuario)
+        {
+
+            if (usuario is null)
+            {
+                //excepcion de que uno de los argumentos es null
+                throw new ArgumentNullException("usuario", "El usuario de una cuenta no puede ser null");
+            }
+
+            this.Cvu = GenerarCVU(usuario);
+            this.Usuario = usuario;
+            this.Saldo = 0;
+            this.Operaciones = new List<Operacion>();
         }
 
         public Cuenta(string cvu, Usuario usuario)
@@ -54,17 +82,18 @@ namespace WebApplicationCLIP.Models
 
             Cuenta cuentaOrigen = this;
 
-            if (cuentaOrigen==cuentaDestino)
+            if (cuentaOrigen == cuentaDestino)
             {
                 throw new ErrorTransferencia("la cuenta de destino no puede ser la misma que la de origen");
             }
 
-            if (monto > cuentaOrigen.Saldo )
+            if (monto > cuentaOrigen.Saldo)
             {
                 throw new SaldoInsuficiente();
                 //no se puede hacer la operacion                               
             }
-            if (monto <= 0) {
+            if (monto <= 0)
+            {
                 throw new MontoInvalido();
             }
 
@@ -157,7 +186,7 @@ namespace WebApplicationCLIP.Models
             cuenta.Usuario = GestorUsuario.consultarUsuarioPorDNI(DNI);
             return cuenta;
         }
-        
+
         public static Cuenta crearCuentaConCVU(string CVU)
         {
             Cuenta cuenta = new Cuenta();

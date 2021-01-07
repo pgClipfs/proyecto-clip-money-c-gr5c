@@ -3,6 +3,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using WebApplicationCLIP.BD;
+using WebApplicationCLIP.Gestores;
 
 namespace WebApplicationCLIP.Models
 {
@@ -26,6 +28,30 @@ namespace WebApplicationCLIP.Models
             };
         }
 
+        public void CrearNuevaCuenta()
+        {
+            bool reintentar = true;
+
+            while (reintentar)
+            {
+                GestorCuenta gestor = new GestorCuenta();
+                Cuenta cuenta = new Cuenta(this);
+
+                try
+                {
+                    gestor.RegistrarCuenta(cuenta);
+                    reintentar = false;
+                }
+
+                catch (ErrorCvuRepetido) { }
+                catch (Exception e)
+                {
+                    throw e;
+                }
+            }
+        }
+
+
         private Usuario(string dni, string nombre, string apellido, string sitCrediticia, string nombreDeUsuario, string domicilio, string email, string telefono, string contraseña)
         {
             Dni = dni;
@@ -47,14 +73,23 @@ namespace WebApplicationCLIP.Models
             {
                 throw new ArgumentNullException("parametros de usuario invalidos");
             }
-        /*    if (u.Dni == "" || u.Email == "" || u.Apellido == "" || u.Nombre == "" || u.NombreDeUsuario == "")
-            {
-                throw new ArgumentNullException("parametros de usuario invalidos");
-            }*/
+            /*    if (u.Dni == "" || u.Email == "" || u.Apellido == "" || u.Nombre == "" || u.NombreDeUsuario == "")
+                {
+                    throw new ArgumentNullException("parametros de usuario invalidos");
+                }*/
         }
 
         public Usuario(JObject usuarioJSON)
         {
+            if (usuarioJSON["Domicilio"] == null)
+            {
+                this.Domicilio = "indefinido";
+            }
+            else
+            {
+                this.Domicilio = (string)usuarioJSON["Domicilio"];
+            }
+
             try
             {
                 this.NombreDeUsuario = (string)usuarioJSON["NombreDeUsuario"];
@@ -63,7 +98,6 @@ namespace WebApplicationCLIP.Models
                 this.Email = (string)usuarioJSON["Email"];
                 this.Nombre = (string)usuarioJSON["Nombre"];
                 this.SitCrediticia = (string)usuarioJSON["SitCrediticia"];
-                this.Domicilio = (string)usuarioJSON["Domicilio"];
                 this.Telefono = (string)usuarioJSON["Telefono"];
                 this.Contraseña = (string)usuarioJSON["Contraseña"];
                 comprobarIntegridadDeParametros(this);
@@ -75,7 +109,7 @@ namespace WebApplicationCLIP.Models
         }
 
         public Usuario(List<string> ensamblador)
-        {            
+        {
             try
             {
                 this.Dni = ensamblador[0];

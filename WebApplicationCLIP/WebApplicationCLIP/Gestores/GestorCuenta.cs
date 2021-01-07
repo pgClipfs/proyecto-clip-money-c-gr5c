@@ -16,7 +16,12 @@ namespace WebApplicationCLIP.Gestores
             return cuentaDAO.consultarCuentasDelUsuario(login);
         }
 
-      
+        public void RegistrarCuenta(Cuenta cuenta)
+        {
+            CuentaDAO dao = new CuentaDAO();
+            dao.registrar(cuenta);
+        }
+          
 
         public Cuenta TraerCuenta(string CVU)
         {
