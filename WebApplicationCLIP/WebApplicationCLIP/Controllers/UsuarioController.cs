@@ -47,6 +47,40 @@ namespace WebApplicationCLIP.Controllers
             }
 
         }
-         
+
+
+        [HttpPost]
+        [EnableCors(origins: "*", headers: "*", methods: "*")]
+        [Route("post/modificardatosusuario")]
+        public IHttpActionResult ModificarDatos(JObject obj)
+        //public IHttpActionResult DepositarMonto(float monto, string cvu, [FromBody] SesionDeUsuario login)
+        {
+            string domi = (string)obj["Domicilio"];
+            string email = (string)obj["Email"];
+            string tel = (string)obj["Telefono"];
+            SesionDeUsuario login = obj["SesionDeUsuario"].ToObject<SesionDeUsuario>();
+            try
+            {
+                LoginController.ValidarSesion(login);
+            }
+            catch (UnauthorizedAccessException e)
+            {
+                return Content(HttpStatusCode.Unauthorized, e.Message);
+            }
+            try
+            {
+                UsuarioDAO usuarioDAO = new UsuarioDAO();
+                usuarioDAO.modificarDatosUsuario(domi, email, tel, login);
+                return Ok("Sus datos han sido modificados correctamente.");
+            }
+            catch (HttpRequestException e)
+            {
+                return BadRequest();
+            }
+            catch (Exception e)
+            {
+                return Content(HttpStatusCode.Conflict, e.Message);
+            }
+        }
     }
 }

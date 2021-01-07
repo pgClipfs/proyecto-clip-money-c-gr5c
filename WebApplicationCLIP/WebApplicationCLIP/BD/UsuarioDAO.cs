@@ -141,7 +141,7 @@ namespace WebApplicationCLIP.BD
                 throw e;
             }
             conexion.cerrar();
-            return ensamblador[7];
+            return ensamblador[8];
 
         }
 
@@ -242,10 +242,120 @@ namespace WebApplicationCLIP.BD
             throw new NotImplementedException();
         }
 
-        public void modificarDatosUsuario(string domi, string tel, string email)
+        public void modificarDatosUsuario(string domi, string email, string tel, SesionDeUsuario login)
         {
-            //string script = "UPDATE USUARIO VALUES ('" + .Cvu + "', '" + t.Usuario.Dni + "', " +
-            //    "'" + t.Saldo + "', '" + t.Divisa + "', '" + t.TipoCuenta + "')";
+            //se guardan los datos actuales en caso de no llegar a cambiar alguno
+            string scriptDomi = "SELECT DOMICILIO FROM USUARIOS WHERE NOMBRE_USUARIO = '" + login.NombreDeUsuario + "' ";
+            string scriptEmail = "SELECT EMAIL FROM USUARIOS WHERE NOMBRE_USUARIO = '" + login.NombreDeUsuario + "' ";
+            string scriptTel = "SELECT TELEFONO FROM USUARIOS WHERE NOMBRE_USUARIO = '" + login.NombreDeUsuario + "' ";
+            string domicilioActual = "";
+            string emailActual = "";
+            string telActual = "";
+            try
+            {
+                ConexionBD conexionBD = new ConexionBD();
+                conexionBD.abrir();
+
+                SqlCommand comandoDomicilio = new SqlCommand(scriptDomi, conexionBD.conexionBD);
+                SqlDataReader lectorDomicilio = comandoDomicilio.ExecuteReader();
+
+                while (lectorDomicilio.Read())
+                {
+                    domicilioActual = lectorDomicilio.GetValue(0).ToString();
+                }
+                lectorDomicilio.Close();
+
+                SqlCommand comandoEmail = new SqlCommand(scriptEmail, conexionBD.conexionBD);
+                SqlDataReader lectorEmail = comandoEmail.ExecuteReader();
+
+                while (lectorEmail.Read())
+                {
+                    emailActual = lectorEmail.GetValue(0).ToString();
+                }
+                lectorEmail.Close();
+
+                SqlCommand comandoTel = new SqlCommand(scriptTel, conexionBD.conexionBD);
+                SqlDataReader lectorTel = comandoTel.ExecuteReader();
+
+                while (lectorTel.Read())
+                {
+                    telActual = lectorTel.GetValue(0).ToString();
+                }
+                lectorTel.Close();
+
+                conexionBD.cerrar();
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            string selectEmails = "SELECT EMAIL FROM USUARIOS";
+            string selectTel = "SELECT TELEFONO FROM USUARIOS";
+
+            List<string> emails;
+            List<string> telefonos;
+
+            try
+            {
+                ConexionBD conexionBD = new ConexionBD();
+                conexionBD.abrir();
+
+                emails = conexionBD.selectUnico(selectEmails);
+                telefonos = conexionBD.selectUnico(selectTel);
+
+                //Se comprueba que el email o telefono a modificar no exista en la BD, caso contrario se lanza excepción
+                if (emails.Contains(email))
+                {
+                    throw new ErrorEmailRepetido("Este email ya está registrado.");
+                }
+                if (telefonos.Contains(tel))
+                {
+                    throw new ErrorTelefonoRepetido("Este teléfono ya está registrado.");
+                }
+
+                if (domi.Trim() == "")
+                {
+                    domi = domicilioActual;
+                }
+                if (email.Trim() == "")
+                {
+                    email = emailActual;
+                }
+                if (tel.Trim() == "")
+                {
+                    tel = telActual;
+                }
+                conexionBD.cerrar();
+            }
+            catch (ErrorEmailRepetido e)
+            {
+                throw e;
+            }
+            catch (ErrorTelefonoRepetido e)
+            {
+                throw e;
+            }
+
+            //Recién acá se empezaría a efectuar la parte donde se actualizan los datos del usuario
+
+            string actualizar = "UPDATE USUARIOS SET DOMICILIO = '" + domi + "', EMAIL = '" + email + "', TELEFONO = " +
+                "'" + tel + "' WHERE NOMBRE_USUARIO = '" + login.NombreDeUsuario + "'";
+
+            ConexionBD conexion = new ConexionBD();
+            conexion.abrir();
+
+            try
+            {
+                SqlCommand comando = new SqlCommand(actualizar, conexion.conexionBD);
+                SqlDataReader lector = comando.ExecuteReader();
+            }
+            catch (Exception e)
+            {
+                throw new Exception("Se produjo un error al modificar los datos --> " + e.Message);
+            }
+            
+            conexion.cerrar();
         }
 
         public void eliminar(Usuario t)

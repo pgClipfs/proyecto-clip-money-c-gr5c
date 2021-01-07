@@ -22,18 +22,31 @@ namespace WebApplicationCLIP.Models
     public class ErrorDniRepetido : Exception
     {
         public ErrorDniRepetido(string dni)
-            : base("Dni Repetido: " + dni) { }
+            : base("Dni repetido: " + dni) { }
     }
+
     public class ErrorEmailRepetido : Exception
     {
         public ErrorEmailRepetido(string email)
-            : base("Email Repetido: " + email) { }
+            : base("Email repetido: " + email) { }
+    }
+
+    public class ErrorTelefonoRepetido : Exception
+    {
+        public ErrorTelefonoRepetido(string tel)
+            : base("Teléfono repetido: " + tel) { }
     }
 
     public class ErrorNombreUsuarioRepetido : Exception
     {
         public ErrorNombreUsuarioRepetido(string nombre)
-            : base("Nombre de Usuario Repetido: " + nombre) { }
+            : base("Nombre de Usuario repetido: " + nombre) { }
+    }
+
+    public class DomicilioVacio : Exception
+    {
+        public DomicilioVacio()
+            : base("Nombre de Usuario repetido: ") { }
     }
 
     public class SesionExpirada : Exception
@@ -51,7 +64,7 @@ namespace WebApplicationCLIP.Models
     public class SaldoInsuficiente : Exception
     {
         public SaldoInsuficiente()
-            : base("Saldo insuficiente para realizar la operacion") { }
+            : base("Saldo insuficiente para realizar la operación.") { }
         public SaldoInsuficiente(string msg)
             : base(msg) { }
     }
@@ -59,7 +72,7 @@ namespace WebApplicationCLIP.Models
     public class MontoInvalido : Exception
     {
         public MontoInvalido()
-            : base("El monto no puede ser negativo, y debe ser mayor a cero") { }
+            : base("El monto no puede ser negativo, y debe ser mayor a cero.") { }
         public MontoInvalido(string msg)
             : base(msg) { }
     }

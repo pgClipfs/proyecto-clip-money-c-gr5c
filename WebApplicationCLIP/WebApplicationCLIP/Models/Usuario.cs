@@ -14,6 +14,7 @@ namespace WebApplicationCLIP.Models
         public string Apellido { get; private set; }
         public string SitCrediticia { get; private set; }
         public string NombreDeUsuario { get; private set; }
+        public string Domicilio { get; private set; }
         public string Email { get; private set; }
         public string Telefono { get; private set; }
         public string Contraseña { get; private set; }
@@ -61,6 +62,7 @@ namespace WebApplicationCLIP.Models
                 this.Email = (string)usuarioJSON["Email"];
                 this.Nombre = (string)usuarioJSON["Nombre"];
                 this.SitCrediticia = (string)usuarioJSON["SitCrediticia"];
+                this.Domicilio = (string)usuarioJSON["Domicilio"];
                 this.Telefono = (string)usuarioJSON["Telefono"];
                 this.Contraseña = (string)usuarioJSON["Contraseña"];
                 comprobarIntegridadDeParametros(this);
@@ -80,9 +82,10 @@ namespace WebApplicationCLIP.Models
                 this.Apellido = ensamblador[2];
                 this.SitCrediticia = ensamblador[3];
                 this.NombreDeUsuario = ensamblador[4];
-                this.Email = ensamblador[5].ToLower();
-                this.Telefono = ensamblador[6];
-                //this.Contraseña = ensamblador[7]; //por seguridad, que la contraseña no este en memoria
+                this.Domicilio = ensamblador[5];
+                this.Email = ensamblador[6].ToLower();
+                this.Telefono = ensamblador[7];
+                //this.Contraseña = ensamblador[8]; //por seguridad, que la contraseña no este en memoria
                 comprobarIntegridadDeParametros(this);
             }
             catch (Exception e)

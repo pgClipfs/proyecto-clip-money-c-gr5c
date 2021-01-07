@@ -81,7 +81,7 @@ namespace WebApplicationCLIP.Gestores
 
             try
             {
-                Usuario usu = usuarioDAO.consultar(temp); //aca da el problema
+                Usuario usu = usuarioDAO.consultar(temp); 
                 return usu;
             }
             catch (Exception e)

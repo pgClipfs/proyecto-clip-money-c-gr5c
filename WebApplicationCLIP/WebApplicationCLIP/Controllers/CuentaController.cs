@@ -29,7 +29,8 @@ namespace WebApplicationCLIP.Controllers
             {
                 CuentaDAO cuentaDAO = new CuentaDAO();
                 cuenta = cuentaDAO.consultar(cvu);
-            }catch (CvuInvalido e)
+            }
+            catch (CvuInvalido e)
             {
                 return Content(HttpStatusCode.Forbidden,  e.Message);
                 
@@ -104,8 +105,6 @@ namespace WebApplicationCLIP.Controllers
             {
                 return Content(HttpStatusCode.Conflict, e.Message);
             }
-            Cuenta cuenta;
-      
             try
             {
                 LoginController.ValidarSesion(login);
