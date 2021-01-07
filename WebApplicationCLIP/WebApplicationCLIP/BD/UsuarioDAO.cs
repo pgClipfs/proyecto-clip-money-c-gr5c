@@ -250,9 +250,7 @@ namespace WebApplicationCLIP.BD
         public void modificarDatosUsuario(string domi, string email, string tel, SesionDeUsuario login)
         {
             //se guardan los datos actuales en caso de no llegar a cambiar alguno
-            string scriptDomi = "SELECT DOMICILIO FROM USUARIOS WHERE NOMBRE_USUARIO = '" + login.NombreDeUsuario + "' ";
-            string scriptEmail = "SELECT EMAIL FROM USUARIOS WHERE NOMBRE_USUARIO = '" + login.NombreDeUsuario + "' ";
-            string scriptTel = "SELECT TELEFONO FROM USUARIOS WHERE NOMBRE_USUARIO = '" + login.NombreDeUsuario + "' ";
+            string scriptDatos = "SELECT DOMICILIO, EMAIL, TELEFONO FROM USUARIOS WHERE NOMBRE_USUARIO = '" + login.NombreDeUsuario + "' ";
             string domicilioActual = "";
             string emailActual = "";
             string telActual = "";
@@ -261,33 +259,16 @@ namespace WebApplicationCLIP.BD
                 ConexionBD conexionBD = new ConexionBD();
                 conexionBD.abrir();
 
-                SqlCommand comandoDomicilio = new SqlCommand(scriptDomi, conexionBD.conexionBD);
-                SqlDataReader lectorDomicilio = comandoDomicilio.ExecuteReader();
+                SqlCommand comando= new SqlCommand(scriptDatos, conexionBD.conexionBD);
+                SqlDataReader lectorDatos = comando.ExecuteReader();
 
-                while (lectorDomicilio.Read())
+                while (lectorDatos.Read())
                 {
-                    domicilioActual = lectorDomicilio.GetValue(0).ToString();
+                    domicilioActual = lectorDatos.GetValue(0).ToString();
+                    emailActual = lectorDatos.GetValue(1).ToString();
+                    telActual = lectorDatos.GetValue(2).ToString();
                 }
-                lectorDomicilio.Close();
-
-                SqlCommand comandoEmail = new SqlCommand(scriptEmail, conexionBD.conexionBD);
-                SqlDataReader lectorEmail = comandoEmail.ExecuteReader();
-
-                while (lectorEmail.Read())
-                {
-                    emailActual = lectorEmail.GetValue(0).ToString();
-                }
-                lectorEmail.Close();
-
-                SqlCommand comandoTel = new SqlCommand(scriptTel, conexionBD.conexionBD);
-                SqlDataReader lectorTel = comandoTel.ExecuteReader();
-
-                while (lectorTel.Read())
-                {
-                    telActual = lectorTel.GetValue(0).ToString();
-                }
-                lectorTel.Close();
-
+                lectorDatos.Close();
                 conexionBD.cerrar();
             }
             catch (Exception e)
