@@ -34,6 +34,9 @@ export class SignupPageComponent implements OnInit {
     })
   }
 
+  errorRegistro=false;
+  mensajeError="error";
+
   grabar() {
     if (this.fgroup.valid) {
 
@@ -60,6 +63,7 @@ export class SignupPageComponent implements OnInit {
 
       console.log(usuario);
 
+      this.errorRegistro=false;
 
       this.signupService.registerUser(usuario).subscribe(
         () => {
@@ -68,6 +72,8 @@ export class SignupPageComponent implements OnInit {
            this.router.navigate([returnUrl]);
           },
         err => {
+          this.errorRegistro=true
+          this.mensajeError=err
           console.log("error en el registro");
           console.log(err);
         }
