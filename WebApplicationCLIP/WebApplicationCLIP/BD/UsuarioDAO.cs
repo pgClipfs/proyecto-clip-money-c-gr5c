@@ -147,7 +147,7 @@ namespace WebApplicationCLIP.BD
 
         public void comprobarRepeticion(Usuario t)
         {
-            string script = "SELECT * FROM USUARIOS WHERE NOMBRE_USUARIO = " + "'" + t.NombreDeUsuario + "' or DNI ='" + t.Dni + "' or EMAIL = '" + t.Email + "'";
+            string script = "SELECT * FROM USUARIOS WHERE NOMBRE_USUARIO = " + "'" + t.NombreDeUsuario + "' or DNI ='" + t.Dni + "' or EMAIL = '" + t.Email + "' or TELEFONO = '" + t.Telefono + "'";
 
             ConexionBD conexion = new ConexionBD();
             conexion.abrir();
@@ -179,6 +179,10 @@ namespace WebApplicationCLIP.BD
                     if (t.Email == ensamblador[6])
                     {
                         throw new ErrorEmailRepetido(t.Email);
+                    }
+                    if (t.Telefono == ensamblador[7])
+                    {
+                        throw new ErrorTelefonoRepetido(t.Telefono);
                     }
                 }
             }
