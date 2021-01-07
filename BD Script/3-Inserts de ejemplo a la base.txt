@@ -1,8 +1,5 @@
 --Hacer estos inserts una vez DROPEADAS todas las tablas y ejecutada la Script BD CLIP Create de nuevo
 
---Insertar los valores de abajo en el orden que están escritos: primero TIPOS_OPERACIONES, despues USUARIOS, etc.
-
-
 
 
 insert into TIPOS_OPERACIONES values ('Transferencia','Transferir dinero a otra cuenta');
