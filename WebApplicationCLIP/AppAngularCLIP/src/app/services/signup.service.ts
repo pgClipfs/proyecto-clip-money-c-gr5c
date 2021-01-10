@@ -22,7 +22,6 @@ export class SignupService {
  
   public registerUser(usuario: Usuario): Observable<any> {
     //return this.http.post<any>(this.urlApi + 'registration/registerUser',{dni,nombreDeUsuario});
-
     return this.http.post<any>(this.urlApi + 'login/registerUser',
       usuario)
       .pipe(catchError(err => {

@@ -25,6 +25,7 @@ export class SignupPageComponent implements OnInit {
       Nombre: ['', [Validators.required, Validators.maxLength(55), Validators.pattern("^[a-zA-Z' ]+$")]],
       Apellido: ['', [Validators.required, Validators.maxLength(55), Validators.pattern("^[a-zA-Z' ]+$")]],
       Email: ['', [Validators.required, Validators.maxLength(55), Validators.email]],
+      Direccion: ['', [Validators.required, Validators.maxLength(55)]],
       Dni: ['', [Validators.required, Validators.minLength(8), Validators.pattern("^[0-9]{1,8}$")]],
       Telefono: ['', [Validators.pattern("^[0-9]{1,20}$")]],
       Contrasena: ['', [Validators.required, Validators.minLength(8),  Validators.maxLength(55)]],
@@ -57,12 +58,10 @@ export class SignupPageComponent implements OnInit {
       usuario.NombreDeUsuario = this.fgroup.value.NombreUsuario;
       usuario.Dni = this.fgroup.value.Dni;
       usuario.Email = this.fgroup.value.Email;
+      usuario.Domicilio = this.fgroup.value.Direccion;
       usuario.Telefono = this.fgroup.value.Telefono;
       usuario.SitCrediticia = "normal";
       usuario.Contraseña = this.fgroup.value.Contrasena;
-
-      console.log(usuario);
-
       this.errorRegistro=false;
 
       this.signupService.registerUser(usuario).subscribe(
