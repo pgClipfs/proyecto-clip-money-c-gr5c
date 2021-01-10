@@ -5,6 +5,7 @@ export class Usuario {
   NombreDeUsuario : string ;
   SitCrediticia : string ;
   Email : string ;
+  Direccion : string;
   Telefono : string ;
   Contraseña : string ;  
 /*

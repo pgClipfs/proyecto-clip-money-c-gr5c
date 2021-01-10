@@ -22,23 +22,11 @@ export class SignupService {
  
   public registerUser(usuario: Usuario): Observable<any> {
     //return this.http.post<any>(this.urlApi + 'registration/registerUser',{dni,nombreDeUsuario});
-
     return this.http.post<any>(this.urlApi + 'login/registerUser',
       usuario)
       .pipe(catchError(err => {
-        if (err.error == 2) {
-          throw "error en el insert"
-        }
-        if (err.error == 3) {
-          throw "dni repetido"
-        }
-        if (err.error == 4) {
-          throw "nombre de usuario repetido"
-        }
-        if (err.error == 5) {
-          throw "email repetido"
-        }
-        throw "error misterioso (error tipo "+err.error+")"
+       
+        throw err.error
       }),
         map(
           () => {
