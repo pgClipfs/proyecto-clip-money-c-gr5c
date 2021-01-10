@@ -23,6 +23,7 @@ import { PantallaTransferenciaComponent } from './components/pantalla-transferen
 import { OperacionesComponent } from './components/operaciones/operaciones.component';
 import { PantallaExitoComponent } from './components/pantalla-exito/pantalla-exito.component';
 import { PantallaFalloComponent } from './components/pantalla-fallo/pantalla-fallo.component';
+import { SidebarComponent } from './components/sidebar/sidebar.component';
 
 
 @NgModule({
@@ -38,7 +39,8 @@ import { PantallaFalloComponent } from './components/pantalla-fallo/pantalla-fal
     PantallaTransferenciaComponent,
     OperacionesComponent,
     PantallaExitoComponent,
-    PantallaFalloComponent
+    PantallaFalloComponent,
+    SidebarComponent
   ],
   imports: [
     BrowserModule,
@@ -53,7 +55,8 @@ import { PantallaFalloComponent } from './components/pantalla-fallo/pantalla-fal
       { path: 'login', component: LoginBox },
       { path: 'exito', component: PantallaExitoComponent },
       { path: 'fallo', component: PantallaFalloComponent},
-      { path: 'principal', component: PaginaPrincipalComponent}, //hay que cambiar esto y volver a poner el principal
+      { path: 'home', component: SidebarComponent},
+
     ]),
     NgbModule
   ],

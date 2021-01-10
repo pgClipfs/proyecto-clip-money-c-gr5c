@@ -29,18 +29,12 @@ export class PaginaPrincipalComponent implements OnInit {
   nombreApellido = '- - -';
 
 
-  openLg(contentIngresarDinero) {
-    this.modalService.open(contentIngresarDinero, { size: 'lg' });
-  }
+
 
   abrirSideBar() {
     this.opened = !this.opened;
   }
 
-  cerrar_sesion() {
-    this.loginService.logout();
-    this.redireccionar.landingPage();
-  }
 
 
   constructor(private cuentasService: CuentaService, private operacionesService: OperacionService, private modalService: NgbModal, private redireccionar: RedireccionService, private loginService: LoginService, private datosUsuarioService: DatosUsuarioService) { }
