@@ -167,6 +167,26 @@ namespace WebApplicationCLIP.BD
             return "ERROR";
         }
 
+        public static string obtenerUltimaOperacionCreada(string cvu)
+        {
+            string idOperacion = "SELECT TOP 1 ID_OPERACION FROM OPERACIONES where CVU='"+cvu+"' ORDER BY ID_OPERACION DESC";
+            string ultimoID = "";
+
+            ConexionBD conexion = new ConexionBD();
+            conexion.abrir();
+
+
+            SqlCommand comandoID = new SqlCommand(idOperacion, conexion.conexionBD);
+            SqlDataReader lectorID = comandoID.ExecuteReader();
+            while (lectorID.Read())
+            {
+                ultimoID = lectorID.GetValue(0).ToString();
+            }
+            conexion.cerrar();
+
+            return ultimoID;
+
+        }
 
 
         public static string obtenerUltimaOperacionCreada()

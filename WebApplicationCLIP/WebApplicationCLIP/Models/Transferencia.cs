@@ -15,7 +15,7 @@ namespace WebApplicationCLIP.Models
         public string ReferenciaDestino { get; protected set; }
         public CategoriaTransferencia Categoria { get; protected set; }
 
-        public Transferencia(Cuenta cuentaDestino, Cuenta cuentaOrigen, float monto, CategoriaTransferencia categoria) 
+        public Transferencia(Cuenta cuentaDestino, Cuenta cuentaOrigen,  float monto, string referencia, CategoriaTransferencia categoria) 
         {
             //campos de la clase concreta transferencia
             this.NumeroTransferencia = generarNumeroTransferencia();
@@ -36,8 +36,9 @@ namespace WebApplicationCLIP.Models
             return rnd.Next(1, 1000000).ToString();
         }
 
+        
 
-        public static Transferencia generarTransferencia(string cvuOrigen , string cvuDestino , CategoriaTransferencia concepto , string monto) 
+    /*    public static Transferencia generarTransferencia(string cvuOrigen , string cvuDestino , string monto, string referencia, CategoriaTransferencia concepto)
         {
             CuentaDAO cuentaDAO = new CuentaDAO();
             Cuenta cuentaOrigen = Cuenta.crearCuentaConCVU(cvuOrigen);
@@ -45,11 +46,11 @@ namespace WebApplicationCLIP.Models
             cuentaOrigen = cuentaDAO.consultar(cuentaOrigen);
             cuentaDestino = cuentaDAO.consultar(cuentaDestino);
 
-            Transferencia t = new Transferencia(cuentaDestino, cuentaOrigen, float.Parse(monto), concepto);
+            Transferencia t = new Transferencia(cuentaDestino, cuentaOrigen, float.Parse(monto), referencia, concepto);
 
             return t;
             
-        }
+        }*/
     }
 }
  

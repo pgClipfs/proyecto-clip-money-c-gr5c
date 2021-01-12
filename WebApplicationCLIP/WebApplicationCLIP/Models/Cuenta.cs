@@ -48,7 +48,7 @@ namespace WebApplicationCLIP.Models
             this.Operaciones = new List<Operacion>();
         }
 
-        public void Transferir(Cuenta cuentaDestino, float monto, string referencia, Transferencia.ConceptoTransferencia concepto)
+        public void Transferir(Cuenta cuentaDestino, float monto, string referencia, Transferencia.CategoriaTransferencia concepto)
         {
             //no se si tiene que devolver void
 
