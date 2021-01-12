@@ -63,11 +63,11 @@ namespace WebApplicationCLIP.BD
             string idOperacion = "SELECT TOP 1 ID_OPERACION FROM OPERACIONES ORDER BY ID_OPERACION DESC";
             string montoCuenta = "SELECT SALDO FROM CUENTAS WHERE CVU = " + "'" + cvu + "'";
             float montoActual = 0;
+            string ultimoID = "";
             
             ConexionBD conexion = new ConexionBD();
             conexion.abrir();
 
-            string ultimoID = "";
             string temp = "";
 
             //Registro de operación deposito
@@ -83,19 +83,14 @@ namespace WebApplicationCLIP.BD
                   temp =  lectorSaldo.GetValue(0).ToString();
                 }
                 montoActual = float.Parse(temp);
-                lectorSaldo.Close();
 
-                SqlCommand comandoID = new SqlCommand(idOperacion, conexion.conexionBD);
-                SqlDataReader lectorID = comandoID.ExecuteReader();
-                while (lectorID.Read())
-                {
-                    ultimoID = lectorID.GetValue(0).ToString();
-                }
-                lectorID.Close();
+                ultimoID = obtenerUltimaOperacionCreada(cvu);
+
             }
             catch (Exception e)
             {
                 Console.WriteLine("Error al registrar la operación depósito: " + e);
+                conexion.cerrar();
                 throw e;
             }
             /*if (registroExitoso)
@@ -152,6 +147,83 @@ namespace WebApplicationCLIP.BD
         {
             throw new NotImplementedException();
         }
-              
+
+        public string obtenerUltimoCVU()
+        {
+            string script = "SELECT TOP 1 * FROM CUENTAS ORDER BY CVU DESC";
+            string ultimoCVU;
+
+            ConexionBD conexion = new ConexionBD();
+            conexion.abrir();
+
+            try
+            {
+                SqlCommand comando = new SqlCommand(script, conexion.conexionBD);
+                SqlDataReader lector = comando.ExecuteReader();
+                List<string> ensamblador = new List<string>();
+                while (lector.Read())
+                {
+                    for (int i = 0; i < lector.FieldCount; i++)
+                    {
+                        ensamblador.Add(lector.GetValue(i).ToString());
+                    }
+                }
+                if (ensamblador.Count > 0)
+                {
+                    conexion.cerrar();
+                    ultimoCVU = ensamblador[0];
+                    return ultimoCVU;
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Error al ejecutar la consulta --> " + e.Message);
+            }
+            conexion.cerrar();
+            return "ERROR";
+        }
+
+        public static string obtenerUltimaOperacionCreada(string cvu)
+        {
+            string idOperacion = "SELECT TOP 1 ID_OPERACION FROM OPERACIONES where CVU='"+cvu+"' ORDER BY ID_OPERACION DESC";
+            string ultimoID = "";
+
+            ConexionBD conexion = new ConexionBD();
+            conexion.abrir();
+
+
+            SqlCommand comandoID = new SqlCommand(idOperacion, conexion.conexionBD);
+            SqlDataReader lectorID = comandoID.ExecuteReader();
+            while (lectorID.Read())
+            {
+                ultimoID = lectorID.GetValue(0).ToString();
+            }
+            conexion.cerrar();
+
+            return ultimoID;
+
+        }
+
+
+        public static string obtenerUltimaOperacionCreada()
+        {
+            string idOperacion = "SELECT TOP 1 ID_OPERACION FROM OPERACIONES ORDER BY ID_OPERACION DESC";
+            string ultimoID = "";
+
+            ConexionBD conexion = new ConexionBD();
+            conexion.abrir();
+
+
+            SqlCommand comandoID = new SqlCommand(idOperacion, conexion.conexionBD);
+            SqlDataReader lectorID = comandoID.ExecuteReader();
+            while (lectorID.Read())
+            {
+                ultimoID = lectorID.GetValue(0).ToString();
+            }
+            conexion.cerrar();
+
+            return ultimoID;
+
+        }
     }
 }

@@ -193,5 +193,77 @@ namespace WebApplicationCLIP.Controllers
             //if (!LoginController.ValidarToken(sesion))return Unauthorized();
         }
 
+        [HttpPost]
+        [EnableCors(origins: "*", headers: "*", methods: "*")]
+        [Route("post/transferir")]
+        public IHttpActionResult Transferir(JObject obj)
+        //public IHttpActionResult DepositarMonto(float monto, string cvu, [FromBody] SesionDeUsuario login)
+        {
+            float monto = (float)obj["Monto"];
+            string cvuOrigen = (string)obj["CvuOrigen"];
+            string cvuDestino = (string)obj["CvuDestino"];
+            string referencia = (string)obj["Referencia"];
+            Transferencia.CategoriaTransferencia categoria;
+            try
+            {
+                categoria = obj["Categoria"].ToObject<Transferencia.CategoriaTransferencia>();
+            }
+            catch (Exception e)
+            {
+                throw new ErrorTransferencia("No existe esa categoria");
+            }
+            
+            SesionDeUsuario login = obj["SesionDeUsuario"].ToObject<SesionDeUsuario>();
+            Cuenta cuentaOrigen;
+            Cuenta cuentaDestino;
+
+            try
+            {
+                CuentaDAO cuentaDAO = new CuentaDAO();
+                cuentaOrigen = cuentaDAO.consultar(cvuOrigen);
+                cuentaDestino = cuentaDAO.consultar(cvuDestino);
+            }
+            catch (Exception e)
+            {
+                return Content(HttpStatusCode.ExpectationFailed, "No se encontró una cuenta con ese CVU --> " + e.Message);
+            }
+
+            try
+            {
+                LoginController.ValidarSesion(login);
+                Usuario usuario = GestorUsuario.consultarUsuarioPorNombreDeUsuario(login.NombreDeUsuario);
+
+                if (!(cuentaOrigen.Usuario.NombreDeUsuario.ToString() == usuario.NombreDeUsuario.ToString()))
+                {
+                    return Content(HttpStatusCode.Forbidden, "Esta cuenta no pertenece al usuario correspondiente.");
+                }
+            }
+            catch (UnauthorizedAccessException e)
+            {
+                return Content(HttpStatusCode.Unauthorized, e.Message);
+            }
+            catch (HttpRequestException e)
+            {
+                return BadRequest("Sesion de usuario null --> " + e);
+            }
+            catch (Exception e)
+            {
+                return Content(HttpStatusCode.Conflict, e.Message);
+            }
+
+            try
+            {
+                //Operacion o = Operacion.crearOperacionExtraccion(null, monto);
+                Transferencia transferencia = cuentaOrigen.Transferir(cuentaDestino, monto, referencia, categoria);
+                return Ok(transferencia);
+            }
+            catch (Exception e)
+            {
+                return Content(HttpStatusCode.Conflict, "No se pudo registrar la operación deposito --> " + e.Message);
+            }
+            //por ahora no se valida la sesion ni nada, simplemente se devuelven las operaciones del usuario
+            //if (!LoginController.ValidarToken(sesion))return Unauthorized();
+        }
+
     }
 }

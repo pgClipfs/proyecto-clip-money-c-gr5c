@@ -20,15 +20,6 @@ namespace WebApplicationCLIP.Models
 
         private Cuenta() { }
 
-        public static Cuenta ObtenerCuenta()
-        {
-            Cuenta c = new Cuenta();
-
-            c.Cvu = "12345";
-
-            return c;
-        }
-
         private string GenerarCVU(Usuario usuario)
         {
             Random random = new Random();
@@ -77,7 +68,7 @@ namespace WebApplicationCLIP.Models
             this.Operaciones = new List<Operacion>();
         }
 
-        public void Transferir(Cuenta cuentaDestino, float monto, string referencia, Transferencia.ConceptoTransferencia concepto)
+        public Transferencia Transferir(Cuenta cuentaDestino, float monto, string referencia, Transferencia.CategoriaTransferencia concepto)
         {
             //no se si tiene que devolver void
 
@@ -101,6 +92,10 @@ namespace WebApplicationCLIP.Models
             Transferencia transferencia = new Transferencia(cuentaDestino, cuentaOrigen, monto, referencia, concepto);
             cuentaDestino.RegistrarTransferencia(transferencia);
             cuentaOrigen.RegistrarTransferencia(transferencia);
+            TransferenciaDAO transferenciaDAO = new TransferenciaDAO();
+            transferenciaDAO.registrar(transferencia);
+
+            return transferencia;
 
             //comandos para guardar todo en la BD (la transferencia solo se debe guardar una unica vez)
 
@@ -124,8 +119,9 @@ namespace WebApplicationCLIP.Models
                 }
             }
 
-            Operaciones.Add(transferencia);
-
+            //Operaciones.Add(transferencia);
+            CuentaDAO cuentaDAO = new CuentaDAO();
+            cuentaDAO.modificar(this);
             //comandos para generar operacion y agregarla a la lista
         }
 
@@ -180,7 +176,7 @@ namespace WebApplicationCLIP.Models
             cuenta.Usuario = GestorUsuario.consultarUsuarioPorDNI(ensamblador[1]);
             cuenta.Saldo = float.Parse(ensamblador[2]);
             // Todavia no se programo la obtencion de las operaciones
-            cuenta.Operaciones = null;
+            cuenta.Operaciones = new List<Operacion>();
             return cuenta;
         }
 
