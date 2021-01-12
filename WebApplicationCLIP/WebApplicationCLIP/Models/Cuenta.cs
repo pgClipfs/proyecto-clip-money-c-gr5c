@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Http;
+using WebApplicationCLIP.BD;
 using WebApplicationCLIP.Gestores;
 
 namespace WebApplicationCLIP.Models
@@ -128,8 +129,15 @@ namespace WebApplicationCLIP.Models
             //comandos para generar operacion y agregarla a la lista
         }
 
-        public void Depositar(float monto)
+        private Operacion devolverUltimaOperacion()
         {
+            OperacionDAO operacionDAO = new OperacionDAO();
+            return operacionDAO.obtenerUltimaOperacionCreada(this.Cvu);
+        }
+
+        public Operacion Depositar(float monto)
+        {
+
             if (monto <= 0)
             {
                 throw new MontoInvalido("No se puede depositar un monto negativo o igual a 0.");
@@ -139,9 +147,10 @@ namespace WebApplicationCLIP.Models
             GestorOperacion gestorOperacion = new GestorOperacion();
             GestorCuenta.actualizar(this);
             gestorOperacion.registrar(o);
+            return devolverUltimaOperacion();
         }
 
-        public void Extraer(float monto)
+        public Operacion Extraer(float monto)
         {
             if (monto <= 0)
             {
@@ -156,6 +165,7 @@ namespace WebApplicationCLIP.Models
             GestorOperacion gestorOperacion = new GestorOperacion();
             GestorCuenta.actualizar(this);
             gestorOperacion.registrar(o);
+            return devolverUltimaOperacion();
         }
 
         public static Cuenta ensamblarCuenta(List<string> ensamblador)

@@ -115,9 +115,8 @@ namespace WebApplicationCLIP.Controllers
 
             try
             {
-                cuenta.Depositar(monto);
                 //Operacion o = Operacion.crearOperacionExtraccion(null, monto);
-                return Ok();
+                return Ok(cuenta.Depositar(monto));
             }
             catch (Exception e)
             {
@@ -178,9 +177,8 @@ namespace WebApplicationCLIP.Controllers
 
             try
             {
-                cuenta.Extraer(monto);
                 //Operacion o = Operacion.crearOperacionExtraccion(null, monto);
-                return Ok();
+                return Ok(cuenta.Extraer(monto));
             }
             catch(SaldoInsuficiente e)
             {

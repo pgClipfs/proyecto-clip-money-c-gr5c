@@ -117,6 +117,22 @@ namespace WebApplicationCLIP.BD
             conexion.cerrar();
         }
 
+        public Operacion obtenerUltimaOperacionCreada(string cvu)
+        {
+            string script = "SELECT TOP 1 * FROM OPERACIONES where CVU='" + cvu + "' ORDER BY ID_OPERACION DESC";
+            List<string> ensamblador;
+            try
+            {
+                ConexionBD conexion = new ConexionBD();
+                ensamblador = conexion.selectUnico(script);
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            return Operacion.ensamblarOperacion(ensamblador);
+        }
+
         public Operacion consultar(Operacion t)
         {
             throw new NotImplementedException();
