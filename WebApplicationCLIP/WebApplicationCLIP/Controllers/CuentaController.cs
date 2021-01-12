@@ -141,7 +141,7 @@ namespace WebApplicationCLIP.Controllers
 
         [HttpPost]
         [EnableCors(origins: "*", headers: "*", methods: "*")]
-        [Route("get/datosPublicosOtroUsuario")]
+        [Route("get/datosCuentaTerceros")]
         public IHttpActionResult GetCuentaOtroUsuario(JObject obj)
         {
             string cvu = (string)obj["Cvu"];
