@@ -7,9 +7,29 @@ using WebApplicationCLIP.Models;
 
 namespace WebApplicationCLIP.BD
 {
-    public class TransferenciaDAO
+    public class TransferenciaDAO : CRUD<Transferencia>
     {
-        public void efectuarTransferencia(Transferencia t)
+        public Transferencia consultar(Transferencia t)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void eliminar(Transferencia t)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Transferencia> listarTodos()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void modificar(Transferencia t)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void registrar(Transferencia t)
         {
             // La Clase debe : Registrar los datos correspondientes a la operacion y a la transferencia en sus respectivas tablas y enlazarlas a traves del DATOS_OPERACION presente en transferencias
 
