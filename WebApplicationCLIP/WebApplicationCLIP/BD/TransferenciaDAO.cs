@@ -32,14 +32,17 @@ namespace WebApplicationCLIP.BD
         public void registrar(Transferencia t)
         {
             // La Clase debe : Registrar los datos correspondientes a la operacion y a la transferencia en sus respectivas tablas y enlazarlas a traves del DATOS_OPERACION presente en transferencias
+            OperacionDAO dao = new OperacionDAO();
+
+            dao.registrar(t);
+
+            ConexionBD conexion = new ConexionBD();
 
 
-            string scriptOperacion = "INSERT INTO OPERACIONES ( MONTO , FECHA, CVU , NOMBRE_TIPO_OPERACION ) " + 
+      /*      string scriptOperacion = "INSERT INTO OPERACIONES ( MONTO , FECHA, CVU , NOMBRE_TIPO_OPERACION ) " + 
                 "VALUES (@monto , @fecha , @cvu , @nombre_tipo_operacion)";
 
 
-            ConexionBD conexion = new ConexionBD();
-            conexion.abrir();
 
             try {
                 SqlCommand comando = new SqlCommand(scriptOperacion, conexion.conexionBD);
@@ -57,7 +60,7 @@ namespace WebApplicationCLIP.BD
                 conexion.cerrar();
                 throw new Exception("Error al realizar INSERT --> " + e.Message);
             }
-
+            */
 
             // Transferencia
 
