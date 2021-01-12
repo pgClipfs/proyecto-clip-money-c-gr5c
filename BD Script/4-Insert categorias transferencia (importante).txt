@@ -1,0 +1,12 @@
+
+
+insert into Categorias_transferencias values(   'Varios             ','')
+insert into Categorias_transferencias values(   'Alquiler           ','')
+insert into Categorias_transferencias values(   'AportesDeCapital   ','')
+insert into Categorias_transferencias values(   'Expensas           ','')
+insert into Categorias_transferencias values(   'Factura            ','')
+insert into Categorias_transferencias values(   'Haberes            ','')
+insert into Categorias_transferencias values(   'Honorarios         ','')
+insert into Categorias_transferencias values(   'Prestamo           ','')
+insert into Categorias_transferencias values(   'Seguro             ','')
+insert into Categorias_transferencias values(   'Cuota              ','')
