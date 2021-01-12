@@ -322,9 +322,13 @@ namespace WebApplicationCLIP.BD
             {
                 throw e;
             }
+            //En caso de no atraparse ninguna de las anteriores excepciones, que se atrape una generica y nos diga que pasó
+            catch (Exception e)
+            {
+                throw e;
+            }
 
             //Recién acá se empezaría a efectuar la parte donde se actualizan los datos del usuario
-
             string actualizar = "UPDATE USUARIOS SET DOMICILIO = '" + domi + "', EMAIL = '" + email + "', TELEFONO = " +
                 "'" + tel + "' WHERE NOMBRE_USUARIO = '" + login.NombreDeUsuario + "'";
 

@@ -73,6 +73,11 @@ namespace WebApplicationCLIP.Gestores
 
         }
 
+        public static Usuario consultarDatosPublicosUsuario(string nombre, string apellido, string email)
+        {
+            Usuario u = Usuario.ConsultarDatosPublicosUsuario(nombre, apellido, email);
+            return u;
+        }
 
         public static Usuario consultarUsuarioPorNombreDeUsuario(string nombre)
         {

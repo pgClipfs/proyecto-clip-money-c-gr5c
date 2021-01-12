@@ -139,6 +139,40 @@ namespace WebApplicationCLIP.Controllers
         }
 
 
+        [HttpPost]
+        [EnableCors(origins: "*", headers: "*", methods: "*")]
+        [Route("get/datosPublicosOtroUsuario")]
+        public IHttpActionResult GetCuentaOtroUsuario(JObject obj)
+        {
+            string cvu = (string)obj["Cvu"];
+            Cuenta cuenta;
+            try
+            {
+                CuentaDAO cuentaDAO = new CuentaDAO();
+                cuenta = cuentaDAO.consultar(cvu);
+            }
+            catch (CvuInvalido e)
+            {
+                return Content(HttpStatusCode.Forbidden, e.Message);
+
+            }
+            catch (Exception e)
+            {
+                return Content(HttpStatusCode.ExpectationFailed, "No se encontró una cuenta con ese CVU --> " + e.Message);
+            }
+
+            try
+            {
+                CuentaDAO cuentaDAO = new CuentaDAO();
+                cuenta = cuentaDAO.consultarDatosPublicosUsuario(cvu);
+                return Ok(cuenta);
+            }
+            catch (Exception e)
+            {
+                return Content(HttpStatusCode.Conflict, e.Message);
+            }
+        }
+
 
     }
 }

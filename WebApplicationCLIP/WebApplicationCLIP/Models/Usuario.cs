@@ -51,7 +51,6 @@ namespace WebApplicationCLIP.Models
             }
         }
 
-
         private Usuario(string dni, string nombre, string apellido, string sitCrediticia, string nombreDeUsuario, string domicilio, string email, string telefono, string contraseña)
         {
             Dni = dni;
@@ -146,6 +145,14 @@ namespace WebApplicationCLIP.Models
             return usuario;
         }
 
+        public static Usuario ConsultarDatosPublicosUsuario(string nombre, string apellido, string email)
+        {
+            Usuario usuario = new Usuario();
+            usuario.Nombre = nombre;
+            usuario.Apellido = apellido;
+            usuario.Email = email;
+            return usuario;
+        }
 
         /*  public static Usuario nuevoUsuario(string dni, string nombre, string apellido, string nombreDeUsuario, string email, string telefono, string contraseña)
           {

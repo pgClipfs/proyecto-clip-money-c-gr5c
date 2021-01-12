@@ -162,7 +162,6 @@ namespace WebApplicationCLIP.Models
         {
             Cuenta c = new Cuenta();
             return ensamblarCuenta(ensamblador, c);
-
         }
 
         public static Cuenta ensamblarCuenta(List<string> ensamblador, Cuenta cuenta)
@@ -171,6 +170,17 @@ namespace WebApplicationCLIP.Models
             cuenta.Usuario = GestorUsuario.consultarUsuarioPorDNI(ensamblador[1]);
             cuenta.Saldo = float.Parse(ensamblador[2]);
             // Todavia no se programo la obtencion de las operaciones
+            cuenta.Operaciones = null;
+            return cuenta;
+        }
+
+        public static Cuenta ensamblarCuentaConDatosPublicosUsuario(List<string> ensamblador)
+        {
+            Cuenta cuenta = new Cuenta();
+            cuenta.Cvu = ensamblador[0];
+            cuenta.Usuario = GestorUsuario.consultarDatosPublicosUsuario(ensamblador[1], ensamblador[2], ensamblador[3]);
+            cuenta.Saldo = -1;
+            //Todavia no se programo la obtencion de las operaciones
             cuenta.Operaciones = null;
             return cuenta;
         }
@@ -193,6 +203,5 @@ namespace WebApplicationCLIP.Models
             cuenta.Cvu = CVU;
             return cuenta;
         }
-
     }
 }

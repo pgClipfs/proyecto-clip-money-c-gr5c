@@ -203,5 +203,38 @@ namespace WebApplicationCLIP.BD
         {
             throw new Exception();
         }
+
+        public Cuenta consultarDatosPublicosUsuario(string cvu)
+        {
+            string script = "select CVU, NOMBRE, APELLIDO, EMAIL from CUENTAS c inner join USUARIOS u on c.DNI_USUARIO = u.DNI where cvu = " + "'" + cvu + "'";
+            List<string> ensamblador = new List<string>();
+            try
+            {
+                ConexionBD conexionBD = new ConexionBD();
+                conexionBD.abrir();
+
+                SqlCommand comando = new SqlCommand(script, conexionBD.conexionBD);
+                SqlDataReader lector = comando.ExecuteReader();
+
+                while (lector.Read())
+                {
+                    for (int i = 0; i < lector.FieldCount; i++)
+                    {
+                        ensamblador.Add(lector.GetValue(i).ToString());
+                    }
+                }
+                lector.Close();
+                conexionBD.cerrar();
+            }
+            catch (CvuInvalido e)
+            {
+                throw new CvuInvalido();
+            }
+            catch (Exception e)
+            {
+                throw new ConsultaSinResultado();
+            }
+            return Cuenta.ensamblarCuentaConDatosPublicosUsuario(ensamblador);
+        }
     }
 }

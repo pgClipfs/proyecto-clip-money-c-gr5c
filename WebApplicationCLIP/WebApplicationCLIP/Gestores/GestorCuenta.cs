@@ -21,7 +21,6 @@ namespace WebApplicationCLIP.Gestores
             CuentaDAO dao = new CuentaDAO();
             dao.registrar(cuenta);
         }
-          
 
         public Cuenta TraerCuenta(string CVU)
         {
