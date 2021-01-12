@@ -1,3 +1,17 @@
+:host{
+  --color1:#7400B8;
+  --color2:#6930C3;
+  --color3:#5E60CE;
+  --color4:#5390D9;
+  --color5:#4EA8DE;
+  --color6:#48BFE3;
+  --color7:#56CFE1;
+  --color8:#64DFDF;
+  --color9:#72EFDD;
+  --color10:#80FFDB;
+}
+
+
 /*navbar superior*/
 .navbar-brand {
   font-family: 'Poppins',sans-serif;
@@ -6,7 +20,7 @@
 }
 
 .navbar-brand:hover {
-  color: blue;
+  color: var(--color4);
 }
 
 .bg-white{
@@ -29,37 +43,52 @@ ng-sidebar-container{
 
 
 /*Estilo del menu desplegable de la izquierda*/
-li{
-background-color: #fff;
-position: relative;
-width: 30rem;
-padding: 1rem;
+.titulo-sidebar {
+  font-size: 1rem;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 800;
 }
 
-li:hover{
-background-color:#87f2dd;
-color: white;
-cursor: pointer;
+.title-variante{
+  color: var(--color8);
+  font-size: 1.5rem;
+}
+.btn-item {
+
+ padding: 1rem;
+ border:0;
+ background-color: #fff;
+ width: 300px;
+ text-align: left;
+ padding-left: 2rem;
+ color: rgb(46, 46, 46);
+ font-family: 'Poppins',sans-serif;
+ margin-bottom: 10px;
+ transition: 0.3s;
+
+
+
 }
 
-li a {
-text-decoration: none;
-color: #4e4e4e;
-font-size: 1rem;
+.btn-item:hover {
+  background-color: var(--color8);
+  color: #fff;
 }
 
-li a:hover {
-color: white;
+.btn-item :active{
+  border:0;
 }
 
 .btn-cerrarsesion {
-background-color: #87f2dd;
+border-color: var(--color8);
 transition: 0.2s;
+font-family: 'Poppins', sans-serif;
+
 
 }
 
 .btn-cerrarsesion:hover{
-background-color: #37ffd7;
+background-color: var(--color8);
 color: white;
 }
 /* Menu hamburger ,*/
