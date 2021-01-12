@@ -59,10 +59,10 @@ namespace WebApplicationCLIP.BD
         public void registrar(Operacion o)
         {
             string cvu = o.Cuenta.Cvu;
-            string registrarDeposito = "INSERT INTO OPERACIONES VALUES ('" + o.Monto + "', '" + o.Fecha.Date.ToString("yyyy-MM-dd") + "', '" + cvu + "', '" + o.TipoOperacion + "')";DESC";
+            string registrarDeposito = "INSERT INTO OPERACIONES VALUES ('" + o.Monto + "', '" + o.Fecha.Date.ToString("yyyy-MM-dd") + "', '" + cvu + "', '" + o.TipoOperacion + "')";
             string montoCuenta = "SELECT SALDO FROM CUENTAS WHERE CVU = " + "'" + cvu + "'";
             float montoActual = 0;
-            string ultimoID = 0;
+            string ultimoID = "";
             
             ConexionBD conexion = new ConexionBD();
             conexion.abrir();
@@ -169,7 +169,7 @@ namespace WebApplicationCLIP.BD
 
 
 
-        public string obtenerUltimaOperacionCreada(string cvuCuenta) 
+        public static string obtenerUltimaOperacionCreada()
         {
             string idOperacion = "SELECT TOP 1 ID_OPERACION FROM OPERACIONES ORDER BY ID_OPERACION DESC";
             string ultimoID = "";
