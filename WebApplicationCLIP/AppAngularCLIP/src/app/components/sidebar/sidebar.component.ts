@@ -16,9 +16,16 @@ export class SidebarComponent implements OnInit {
   nombreUsuario: string = "Usuario No Encontrado";
   usuario : Usuario;
   cuentaUsuario: Cuenta;
+
+  isGiroAlDescubierto : boolean = false;
+  isDashboard : boolean = true;
+  isIngresoEgreso : boolean = false;
+  isTransferencia : boolean = false;
+
   constructor(private redireccionar: RedireccionService, private loginService: LoginService, private datosUsuarioService: DatosUsuarioService) { }
 
   ngOnInit(): void {
+    this.obtenerDatosUsuario();
   }
 
   cerrar_sesion() {
@@ -36,8 +43,7 @@ export class SidebarComponent implements OnInit {
     this.datosUsuarioService.obtenerDatosUsuario().subscribe(
       user => {
         this.usuario = user;
-        this.cuentaUsuario.NombreUsuario = user.NombreDeUsuario
-        this.nombreUsuario = this.usuario.Nombre + " " + this.usuario.Apellido;
+        this.nombreUsuario = this.usuario.NombreDeUsuario;
       },
       err => {
         console.log("no se encontro el usuario (?");
@@ -45,5 +51,33 @@ export class SidebarComponent implements OnInit {
     );
 
     //#endregion
+  }
+
+  routeDashboard(){
+    this.isDashboard = true;
+    this.isGiroAlDescubierto = false;
+    this.isIngresoEgreso = false;
+    this.isTransferencia = false;
+  }
+
+  routeIngresoEgreso(){
+    this.isDashboard = false;
+    this.isGiroAlDescubierto = false;
+    this.isIngresoEgreso = true;
+    this.isTransferencia = false;
+  }
+
+  routeTransferencia(){
+    this.isDashboard = false;
+    this.isGiroAlDescubierto = false;
+    this.isIngresoEgreso = false;
+    this.isTransferencia = true;
+  }
+
+  routeGiroAlDescubierto(){
+    this.isDashboard = false;
+    this.isGiroAlDescubierto = true;
+    this.isIngresoEgreso = false;
+    this.isTransferencia = false;
   }
 }

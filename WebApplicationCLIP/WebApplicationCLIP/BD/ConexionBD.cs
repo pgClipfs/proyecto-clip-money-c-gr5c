@@ -11,7 +11,7 @@ namespace WebApplicationCLIP.BD
         //aca pone el nombre de tu base de datos: 
         //Data Source= "nombre de tu conexion"
         //Initial Catalog= "nombre de tu base de datos"
-        String cadena = "Data Source=localhost\\sqlexpress;Initial Catalog=ClipBank;Integrated Security=True;";
+        String cadena = "Data Source=localhost;Initial Catalog=ClipBank;Integrated Security=True;";
 
 
         public SqlConnection conexionBD = new SqlConnection();
