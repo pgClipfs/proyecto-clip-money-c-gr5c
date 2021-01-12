@@ -8,6 +8,12 @@ namespace WebApplicationCLIP.Models
 {
     public class Transferencia : Operacion
     {
+        public new void BorrarDatosEscenciales()
+        {
+            this.CuentaDestino = null;            
+            base.BorrarDatosEscenciales();
+        }
+
         public enum CategoriaTransferencia { Varios, Alquiler, AportesDeCapital, Expensas, Factura, Haberes, Honorarios, Prestamo, Seguro, Cuota };
 
         public string NumeroTransferencia { get; protected set; }

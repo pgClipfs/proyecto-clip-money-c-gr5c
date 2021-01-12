@@ -8,6 +8,11 @@ namespace WebApplicationCLIP.Models
 {
     public class Operacion
     {
+        public void BorrarDatosEscenciales()
+        {
+            this.Cuenta = null;            
+        }
+
         public static List<Operacion> ObtenerOperacionesDePrueba()
         {
             List<Operacion> lista = new List<Operacion>();

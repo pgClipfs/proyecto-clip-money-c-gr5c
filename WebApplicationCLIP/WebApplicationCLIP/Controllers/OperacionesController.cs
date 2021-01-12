@@ -210,7 +210,7 @@ namespace WebApplicationCLIP.Controllers
             }
             catch (Exception e)
             {
-                throw new ErrorTransferencia("No existe esa categoria");
+                return Content(HttpStatusCode.Forbidden, new ErrorTransferencia("No existe esa categoria").Message);
             }
             
             SesionDeUsuario login = obj["SesionDeUsuario"].ToObject<SesionDeUsuario>();
@@ -255,11 +255,12 @@ namespace WebApplicationCLIP.Controllers
             {
                 //Operacion o = Operacion.crearOperacionExtraccion(null, monto);
                 Transferencia transferencia = cuentaOrigen.Transferir(cuentaDestino, monto, referencia, categoria);
+                transferencia.BorrarDatosEscenciales();
                 return Ok(transferencia);
             }
             catch (Exception e)
             {
-                return Content(HttpStatusCode.Conflict, "No se pudo registrar la operación deposito --> " + e.Message);
+                return Content(HttpStatusCode.Conflict, e.Message);
             }
             //por ahora no se valida la sesion ni nada, simplemente se devuelven las operaciones del usuario
             //if (!LoginController.ValidarToken(sesion))return Unauthorized();

@@ -8,6 +8,7 @@ export class Usuario {
   Direccion : string;
   Telefono : string ;
   Contraseña : string ;  
+  Domicilio:string;
 /*
   Dni: string;
   Nombre: string;

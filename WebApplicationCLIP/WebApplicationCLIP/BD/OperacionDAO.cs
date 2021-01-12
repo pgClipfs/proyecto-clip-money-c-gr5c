@@ -56,6 +56,8 @@ namespace WebApplicationCLIP.BD
             return temp;
         }
 
+
+
         public void registrar(Operacion o)
         {
             string cvu = o.Cuenta.Cvu;
@@ -84,7 +86,7 @@ namespace WebApplicationCLIP.BD
                 }
                 montoActual = float.Parse(temp);
 
-                ultimoID = obtenerUltimaOperacionCreada(cvu);
+                ultimoID = obtenerUltimoID(cvu);
 
             }
             catch (Exception e)
@@ -93,22 +95,7 @@ namespace WebApplicationCLIP.BD
                 conexion.cerrar();
                 throw e;
             }
-            /*if (registroExitoso)
-            {
-                float resultado = montoActual + o.Monto;
-                string depositar = "UPDATE CUENTAS SET SALDO = " + "'" + resultado.ToString() + "'" + " WHERE CVU = " + "'" + cvu + "'";
-                try
-                {   
-                    SqlCommand comando = new SqlCommand(depositar, conexion.conexionBD);
-                    comando.ExecuteNonQuery();
-                }
-                catch (Exception e)
-                {
-                    string delete = "DELETE FROM OPERACIONES WHERE ID_OPERACION ="+ultimoID;
-                    Console.WriteLine("Se revirtió el registro de la operación" + e);
-                    conexion.cerrar(); 
-                }
-            }*/
+    
             conexion.cerrar();
         }
 
@@ -183,7 +170,7 @@ namespace WebApplicationCLIP.BD
             return "ERROR";
         }
 
-        public static string obtenerUltimaOperacionCreada(string cvu)
+        public string obtenerUltimoID(string cvu)
         {
             string idOperacion = "SELECT TOP 1 ID_OPERACION FROM OPERACIONES where CVU='"+cvu+"' ORDER BY ID_OPERACION DESC";
             string ultimoID = "";

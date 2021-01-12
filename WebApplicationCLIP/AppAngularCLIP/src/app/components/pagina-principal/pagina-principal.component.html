@@ -122,6 +122,7 @@
             <thead class="thead-inverse">
               <tr>
                 <th>Fecha</th>
+                <th>Hora</th>
                 <th>Monto</th>
                 <th>Tipo Operacion</th>
                 <th>ID Operacion</th>
@@ -131,6 +132,7 @@
 
               <tr>
                 <td>{{ op.Fecha | date:'dd/MM/yyyy'}}</td>
+                <td>{{ op.Fecha | date:'HH:mm'}}</td>
                 <td>{{ op.Monto | currency}}</td>
                 <td>{{ op.Tipo }}</td>
                 <td>{{ op.IdOperacion }}</td>
