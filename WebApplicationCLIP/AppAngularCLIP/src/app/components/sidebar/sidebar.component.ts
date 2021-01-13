@@ -10,8 +10,12 @@ import { Cuenta } from 'src/app/clases';
   templateUrl: './sidebar.component.html',
   styleUrls: ['./sidebar.component.css']
 })
-export class SidebarComponent implements OnInit {
 
+export class SidebarComponent implements OnInit {
+  
+  ventanaActual: Ventana = Ventana.Dashboard;
+  ventana =Ventana; //esta linea es necesaria porque el html no conoce a la clase "Modo", por eso hay que declarar una variable en el ts que sirva de "intermediario"
+  
   opened = false;
   nombreUsuario: string = "Usuario No Encontrado";
   usuario : Usuario;
@@ -54,30 +58,29 @@ export class SidebarComponent implements OnInit {
   }
 
   routeDashboard(){
-    this.isDashboard = true;
-    this.isGiroAlDescubierto = false;
-    this.isIngresoEgreso = false;
-    this.isTransferencia = false;
+    this.ventanaActual=Ventana.Dashboard
+    this.opened = false;
   }
-
+  
   routeIngresoEgreso(){
-    this.isDashboard = false;
-    this.isGiroAlDescubierto = false;
-    this.isIngresoEgreso = true;
-    this.isTransferencia = false;
+    this.ventanaActual=Ventana.IngresosEgresos
+    this.opened = false;
   }
-
+  
   routeTransferencia(){
-    this.isDashboard = false;
-    this.isGiroAlDescubierto = false;
-    this.isIngresoEgreso = false;
-    this.isTransferencia = true;
+    this.ventanaActual=Ventana.Transferencia
+    this.opened = false;
   }
-
+  
   routeGiroAlDescubierto(){
-    this.isDashboard = false;
-    this.isGiroAlDescubierto = true;
-    this.isIngresoEgreso = false;
-    this.isTransferencia = false;
+    this.ventanaActual=Ventana.Giro
+    this.opened = false;
   }
+}
+
+export enum Ventana {
+  IngresosEgresos,
+  Dashboard,
+  Transferencia,
+  Giro
 }

@@ -26,9 +26,9 @@
   </ng-sidebar>
   <div ng-sidebar-content>
 
-    <app-pagina-principal *ngIf="isDashboard"></app-pagina-principal>
-    <app-pantalla-ingreso-egreso-dinero *ngIf="isIngresoEgreso"></app-pantalla-ingreso-egreso-dinero>
-    <app-pantalla-transferencia *ngIf="isTransferencia"></app-pantalla-transferencia>
+    <app-pagina-principal *ngIf="ventanaActual===ventana.Dashboard"></app-pagina-principal>
+    <app-pantalla-ingreso-egreso-dinero *ngIf="ventanaActual===ventana.IngresosEgresos"></app-pantalla-ingreso-egreso-dinero>
+    <app-pantalla-transferencia *ngIf="ventanaActual===ventana.Transferencia"></app-pantalla-transferencia>
 
 
   </div>

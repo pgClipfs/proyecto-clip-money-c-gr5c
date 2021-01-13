@@ -24,7 +24,7 @@ export class RedireccionService {
   }
   
   public principal(){
-    var returnUrl = this.route.snapshot.queryParams.returnUrl || '/principal';
+    var returnUrl = this.route.snapshot.queryParams.returnUrl || '/home';
     this.router.navigate([returnUrl]);   
   }
   public exito(){
