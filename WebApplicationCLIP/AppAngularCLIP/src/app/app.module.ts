@@ -54,7 +54,7 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
       { path: '', component: HomePageComponent },
       { path: 'login', component: LoginBox },
       { path: 'exito', component: PantallaExitoComponent },
-      { path: 'fallo', component: PantallaFalloComponent},
+      { path: 'transferencia', component: PantallaTransferenciaComponent},
       { path: 'home', component: SidebarComponent},
 
     ]),
