@@ -1,228 +1,171 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-white shadow-sm" aria-label="Fifth navbar example">
-  <div class="container-fluid">
-    <div class="menu-wrap" (click)="abrirSideBar()">
-      <input type="checkbox" class="toggler" />
-      <div class="hamburger">
-        <div></div>
-      </div>
-    </div>
-    <a class="navbar-brand" href="#">
-      {{ nombreUsuario }}</a>
-  </div>
-</nav>
-<ng-sidebar-container>
-  <ng-sidebar [opened]="opened">
-    <!-- Sidebar -->
-    <h2 class="title-card p-3">Bienvenido a ClipMoney</h2>
-    <ul class="menu navbar-nav">
-      <li class="nav-item"><button routerLink="/principalHome">Inicio</button></li>
-       <li class="nav-item"> <button (click)="openLg(contentIngresarDinero)">Ingresar Dinero</button> </li>
-
-      <li class="nav-item"><a href="">Transferir</a></li>
-      <li class="nav-item"><a href="">Giro al descubierto</a></li>
-      <li class="nav-item"><a href="">Mis datos</a></li>
-      <li class="nav-item"><a href="">Configuracion</a></li>
-    </ul>
-    <button class="btn btn-cerrarsesion m-3" (click)="cerrar_sesion()">Cerrar sesion</button>
-  </ng-sidebar>
-  <div ng-sidebar-content>
-    <div class="container pt-3">
-      <div class="row">
-        <div class="col-sm-12">
-          <h3 class="text-title-info mb-3">Informacion de la cuenta</h3>
-          <div class="card card-info-cuenta shadow">
-            <div class="row g-0">
-              <div class="col-sm-9">
-                <div class="card-body">
-                  <h4 class="card-title title-card">TU DINERO</h4>
-                  <p class="card-text text-card">CA {{ saldoPesos| currency }}</p>
-                  <h4 class="card-title title-card"> {{ nombreUsuario | uppercase }}</h4>
-                  <p class="card-text text-card">CVU - {{ numeroCuenta }}</p>
-                  <h4 class="card-title title-card">
-                    Tu dinero en cuenta en dolares
-                  </h4>
-                  <p class="card-text text-card">U$D {{ saldoDolares | currency:'USD' }}</p>
-                </div>
-              </div>
-              <div class="col-sm-3">
-                <h2 class="card-info-img">ClipMoney</h2>
-              </div>
+<div class="container pt-3">
+  <div class="row">
+    <div class="col-sm-12">
+      <h3 class="text-title-info mb-3">Informacion de la cuenta</h3>
+      <div class="card card-info-cuenta shadow">
+        <div class="row g-0">
+          <div class="col-sm-9">
+            <div class="card-body">
+              <h4 class="card-title title-card">TU DINERO</h4>
+              <p class="card-text text-card">CA {{ saldoPesos| currency }}</p>
+              <h4 class="card-title title-card"> {{ nombreUsuario | uppercase }}</h4>
+              <p class="card-text text-card">CVU - {{ numeroCuenta }}</p>
+              <h4 class="card-title title-card">
+                Tu dinero en cuenta en dolares
+              </h4>
+              <p class="card-text text-card">U$D {{ saldoDolares | currency:'USD' }}</p>
             </div>
           </div>
-        </div>
-      </div>
-
-      <div class="row mt-4" id="inputsTarjetas">
-        <div class="col-xl-3 col-md-6 pb-3">
-          <!-- <div class="card card-ingresar-pesos shadow " (click)="openLg(contentIngresarDinero)" style="width: 100%"> -->
-          <div class="card card-ingresar-pesos shadow " (click)="openLg(contentIngresarDinero)" style="width: 100%">
-            <div class="row g-0">
-              <div class="col-sm-3 pl-4">
-                <img src="../../../assets/img/Iconos/ingresarRetirar.png" class="card-img"
-                  alt="..." />
-              </div>
-              <div class="col-sm-9">
-                <div class="card-body">
-                  <p class="pl-3 card-text text-card">Deposito y Extraccion</p>
-                </div>
-              </div>
-            </div>
+          <div class="col-sm-3">
+            <h2 class="card-info-img">ClipMoney</h2>
           </div>
-        </div>
-        <div class="col-xl-3 col-md-6 pb-3">
-          <div class="card card-ingresar-pesos shadow" style="width: 100%">
-            <div class="row g-0">
-              <div class="col-sm-3 pl-4">
-                <img src="../../../assets/img/Iconos/Transferir.png" class="card-img"
-                  alt="..." />
-              </div>
-              <div class="col-sm-9">
-                <div class="card-body">
-                  <p class="pl-3 card-text text-card">Transferir Dinero</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-xl-3 col-md-6 pb-3">
-          <div class="card card-ingresar-pesos shadow" style="width: 100%">
-            <div class="row g-0">
-              <div class="col-sm-3 pl-4">
-                <img src="../../../assets/img/Iconos/giroAlDescubierto.png"
-                  class="card-img" alt="..." />
-              </div>
-              <div class="col-sm-9">
-                <div class="card-body">
-                  <p class="pl-3 card-text text-card">Giro al Descubierto</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-xl-3 col-md-6 pb-3">
-          <div class="card card-ingresar-pesos shadow" style="width: 100%">
-            <div class="row g-0">
-              <div class="col-sm-3 pl-4">
-                <img src="../../../assets/img/Iconos/PagarServicios.png"
-                  class="card-img" alt="..." />
-              </div>
-              <div class="col-sm-9">
-                <div class="card-body">
-                  <p class="pl-3 card-text text-card">Pagar Servicios</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-xl-9 col-lg-8 col-sm-12 pt-4">
-          <h3 class="text-title-info mb-3">Actividad Reciente</h3>
-          <table class="table shadow table-inverse  rounded">
-            <thead class="thead-inverse">
-              <tr>
-                <th>Fecha</th>
-                <th>Hora</th>
-                <th>Monto</th>
-                <th>Tipo Operacion</th>
-                <th>ID Operacion</th>
-              </tr>
-            </thead>
-            <tbody *ngFor="let op of operaciones">
-
-              <tr>
-                <td>{{ op.Fecha | date:'dd/MM/yyyy'}}</td>
-                <td>{{ op.Fecha | date:'HH:mm'}}</td>
-                <td>{{ op.Monto | currency}}</td>
-                <td>{{ op.Tipo }}</td>
-                <td>{{ op.IdOperacion }}</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        <div class="col-lg-4 col-xl-3 pt-4">
-          <h3 class="text-title-info mb-3">Cotizaciones</h3>
-          <h3 class="text-title-cotizacion mb-3">Monedas Extranjeras</h3>
-          <table class="table shadow table-inverse">
-            <thead class="thead-inverse">
-              <tr>
-                <th>Nombre</th>
-                <th>Compra</th>
-                <th>Venta</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Dolar</td>
-                <td>140</td>
-                <td>148</td>
-              </tr>
-              <tr>
-                <td>Dolar</td>
-                <td>140</td>
-                <td>148</td>
-              </tr>
-              <tr>
-                <td>Dolar</td>
-                <td>140</td>
-                <td>148</td>
-              </tr>
-            </tbody>
-          </table>
-          <h3 class="text-title-cotizacion mb-3 pt-3">Criptomonedas</h3>
-          <table class="table shadow table-inverse">
-            <thead class="thead-inverse">
-              <tr>
-                <th>Nombre</th>
-                <th>Compra</th>
-                <th>Venta</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Dolar</td>
-                <td>140</td>
-                <td>148</td>
-              </tr>
-              <tr>
-                <td>Dolar</td>
-                <td>140</td>
-                <td>148</td>
-              </tr>
-              <tr>
-                <td>Dolar</td>
-                <td>140</td>
-                <td>148</td>
-              </tr>
-            </tbody>
-          </table>
         </div>
       </div>
     </div>
   </div>
 
-  <ng-template  #contentIngresarDinero let-modal>
-    <div class="">
-      <div class="modal-header">
-        <p class="modal-title-default ">Depositos y Extracciones</p>
+  <div class="row mt-4" id="inputsTarjetas">
+    <div class="col-xl-3 col-md-6 pb-3">
+      <!-- <div class="card card-ingresar-pesos shadow " (click)="openLg(contentIngresarDinero)" style="width: 100%"> -->
+      <div class="card card-ingresar-pesos shadow " style="width: 100%">
+        <div class="row g-0">
+          <div class="col-sm-3 pl-4">
+            <img src="../../../assets/img/Iconos/ingresarRetirar.png" class="card-img"
+              alt="..." />
+          </div>
+          <div class="col-sm-9">
+            <div class="card-body">
+              <p class="pl-3 card-text text-card">Deposito y Extraccion</p>
+            </div>
+          </div>
+        </div>
       </div>
-
-
-      <!--<button
-        type="button"
-        class="close"
-        aria-label="Close"
-        (click)="modal.dismiss('Cross click')"
-      >
-        <span aria-hidden="true">&times;</span>
-      </button>
-
-     [cuentaOrigen]="cuentaUsuario"
-    -->
     </div>
-    <div class="modal-body">
-      <!-- <app-pantalla-ingreso-egreso-dinero [cuentaOrigen]="cuentaUsuario"></app-pantalla-ingreso-egreso-dinero> -->
-      <app-pantalla-ingreso-egreso-dinero ></app-pantalla-ingreso-egreso-dinero>
+    <div class="col-xl-3 col-md-6 pb-3">
+      <div class="card card-ingresar-pesos shadow" style="width: 100%">
+        <div class="row g-0">
+          <div class="col-sm-3 pl-4">
+            <img src="../../../assets/img/Iconos/Transferir.png" class="card-img"
+              alt="..." />
+          </div>
+          <div class="col-sm-9">
+            <div class="card-body">
+              <p class="pl-3 card-text text-card">Transferir Dinero</p>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-  </ng-template>
-</ng-sidebar-container>
+    <div class="col-xl-3 col-md-6 pb-3">
+      <div class="card card-ingresar-pesos shadow" style="width: 100%">
+        <div class="row g-0">
+          <div class="col-sm-3 pl-4">
+            <img src="../../../assets/img/Iconos/giroAlDescubierto.png"
+              class="card-img" alt="..." />
+          </div>
+          <div class="col-sm-9">
+            <div class="card-body">
+              <p class="pl-3 card-text text-card">Giro al Descubierto</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-xl-3 col-md-6 pb-3">
+      <div class="card card-ingresar-pesos shadow" style="width: 100%">
+        <div class="row g-0">
+          <div class="col-sm-3 pl-4">
+            <img src="../../../assets/img/Iconos/PagarServicios.png"
+              class="card-img" alt="..." />
+          </div>
+          <div class="col-sm-9">
+            <div class="card-body">
+              <p class="pl-3 card-text text-card">Pagar Servicios</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xl-9 col-lg-8 col-sm-12 pt-4">
+      <h3 class="text-title-info mb-3">Actividad Reciente</h3>
+      <table class="table shadow table-inverse  rounded">
+        <thead class="thead-inverse">
+          <tr>
+            <th>Fecha</th>
+            <th>Monto</th>
+            <th>Tipo Operacion</th>
+            <th>ID Operacion</th>
+          </tr>
+        </thead>
+        <tbody *ngFor="let op of operaciones">
+
+          <tr>
+            <td>{{ op.Fecha | date:'dd/MM/yyyy'}}</td>
+            <td>{{ op.Monto | currency}}</td>
+            <td>{{ op.Tipo }}</td>
+            <td>{{ op.IdOperacion }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-lg-4 col-xl-3 pt-4">
+      <h3 class="text-title-info mb-3">Cotizaciones</h3>
+      <h3 class="text-title-cotizacion mb-3">Monedas Extranjeras</h3>
+      <table class="table shadow table-inverse">
+        <thead class="thead-inverse">
+          <tr>
+            <th>Nombre</th>
+            <th>Compra</th>
+            <th>Venta</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Dolar</td>
+            <td>140</td>
+            <td>148</td>
+          </tr>
+          <tr>
+            <td>Dolar</td>
+            <td>140</td>
+            <td>148</td>
+          </tr>
+          <tr>
+            <td>Dolar</td>
+            <td>140</td>
+            <td>148</td>
+          </tr>
+        </tbody>
+      </table>
+      <h3 class="text-title-cotizacion mb-3 pt-3">Criptomonedas</h3>
+      <table class="table shadow table-inverse">
+        <thead class="thead-inverse">
+          <tr>
+            <th>Nombre</th>
+            <th>Compra</th>
+            <th>Venta</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Dolar</td>
+            <td>140</td>
+            <td>148</td>
+          </tr>
+          <tr>
+            <td>Dolar</td>
+            <td>140</td>
+            <td>148</td>
+          </tr>
+          <tr>
+            <td>Dolar</td>
+            <td>140</td>
+            <td>148</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
