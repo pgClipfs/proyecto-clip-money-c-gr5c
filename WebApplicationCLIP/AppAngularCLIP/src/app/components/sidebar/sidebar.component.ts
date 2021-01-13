@@ -3,7 +3,7 @@ import { LoginService } from 'src/app/services/login.service';
 import { RedireccionService } from 'src/app/services/redireccion.service';
 import { DatosUsuarioService } from 'src/app/services/datos-usuario.service';
 import { Usuario } from 'src/app/modelos/usuario';
-import { Cuenta } from 'src/app/clases';
+import { Cuenta, Ventana } from 'src/app/clases';
 
 @Component({
   selector: 'app-sidebar',
@@ -57,6 +57,13 @@ export class SidebarComponent implements OnInit {
     //#endregion
   }
 
+  routeTo(vent: Ventana){
+    this.ventanaActual=vent
+    this.opened = false;
+    console.log("viendo "+vent)
+    console.log(vent)
+  }
+
   routeDashboard(){
     this.ventanaActual=Ventana.Dashboard
     this.opened = false;
@@ -78,9 +85,3 @@ export class SidebarComponent implements OnInit {
   }
 }
 
-export enum Ventana {
-  IngresosEgresos,
-  Dashboard,
-  Transferencia,
-  Giro
-}

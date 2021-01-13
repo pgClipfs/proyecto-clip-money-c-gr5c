@@ -26,7 +26,7 @@
   </ng-sidebar>
   <div ng-sidebar-content>
 
-    <app-pagina-principal *ngIf="ventanaActual===ventana.Dashboard"></app-pagina-principal>
+    <app-pagina-principal (ventanaEmitida)="routeTo($event)" *ngIf="ventanaActual===ventana.Dashboard"></app-pagina-principal>
     <app-pantalla-ingreso-egreso-dinero *ngIf="ventanaActual===ventana.IngresosEgresos"></app-pantalla-ingreso-egreso-dinero>
     <app-pantalla-transferencia *ngIf="ventanaActual===ventana.Transferencia"></app-pantalla-transferencia>
 

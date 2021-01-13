@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, Input, OnInit, Output, ViewEncapsulation,EventEmitter } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Usuario } from 'src/app/modelos/usuario';
 import { DatosUsuarioService } from 'src/app/services/datos-usuario.service';
@@ -7,9 +7,10 @@ import { LoginService } from 'src/app/services/login.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { RedireccionService } from 'src/app/services/redireccion.service';
 import { OperacionService } from 'src/app/services/operacion.service';
-import { Cuenta, Operacion } from 'src/app/clases';
+import { Cuenta, Operacion, Ventana } from 'src/app/clases';
 import { CuentaService } from 'src/app/services/cuenta.service';
 import { flatMap, retry } from 'rxjs/operators';
+
 
 @Component({
   selector: 'app-pagina-principal',
@@ -28,18 +29,19 @@ export class PaginaPrincipalComponent implements OnInit {
   numeroCuentaDol = "";
   nombreApellido = '- - -';
 
-
-
-
   abrirSideBar() {
     this.opened = !this.opened;
   }
 
-
-
   constructor(private cuentasService: CuentaService, private operacionesService: OperacionService, private modalService: NgbModal, private redireccionar: RedireccionService, private loginService: LoginService, private datosUsuarioService: DatosUsuarioService) { }
 
-  private returnUrl: string;
+  @Output()
+  ventanaEmitida = new EventEmitter<Ventana>() 
+  ventana=Ventana
+
+  emitir(vent:Ventana) {
+    this.ventanaEmitida.emit(vent);
+  }
 
   operaciones: Operacion[] = [];
   cuentaUsuario: Cuenta

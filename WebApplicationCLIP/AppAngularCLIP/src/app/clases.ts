@@ -18,3 +18,12 @@ export class Cuenta{
   NombreUsuario: string;
   datosUsuario:Usuario;
 }
+
+//enum ventana actual
+export enum Ventana {
+  IngresosEgresos,
+  Dashboard,
+  Transferencia,
+  Giro,
+  PagarServicios
+}
