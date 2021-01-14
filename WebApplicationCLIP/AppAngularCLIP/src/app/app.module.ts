@@ -24,6 +24,7 @@ import { OperacionesComponent } from './components/operaciones/operaciones.compo
 import { PantallaExitoComponent } from './components/pantalla-exito/pantalla-exito.component';
 import { PantallaFalloComponent } from './components/pantalla-fallo/pantalla-fallo.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
+import { PantallaEdicionPerfilComponent } from './pantalla-edicion-perfil/pantalla-edicion-perfil.component';
 
 
 @NgModule({
@@ -40,7 +41,8 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
     OperacionesComponent,
     PantallaExitoComponent,
     PantallaFalloComponent,
-    SidebarComponent
+    SidebarComponent,
+    PantallaEdicionPerfilComponent
   ],
   imports: [
     BrowserModule,
