@@ -116,6 +116,15 @@ namespace WebApplicationCLIP.Models
             o.TipoOperacion = TipoDeOperacion.Extraccion;
             return o;
         }
+        public static Operacion crearGiroAlDescubierto(Cuenta c, float monto)
+        {
+            Operacion o = new Operacion();
+            o.Monto = monto;
+            o.Fecha = DateTime.Now;
+            o.Cuenta = c;
+            o.TipoOperacion = TipoDeOperacion.GiroAlDescubierto;
+            return o;
+        }
         protected Operacion(Cuenta c, float monto, TipoDeOperacion tipo)
         {
 

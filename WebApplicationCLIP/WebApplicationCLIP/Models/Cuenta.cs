@@ -148,20 +148,46 @@ namespace WebApplicationCLIP.Models
 
         public Operacion Extraer(float monto)
         {
+            float montoGiroDescubierto = 0;
             if (monto <= 0)
             {
                 throw new MontoInvalido("No se puede extraer un monto negativo o igual a 0.");
             }
             if (Saldo < monto)
             {
+                //compruebo si se puede hacer un giro
+                montoGiroDescubierto = monto - Saldo;
+
+                if (montoGiroDescubierto<=Saldo*0.1)//if monto a girar al descubierto menor o igual al 10% del saldo actual
+                {
+                    //se puede hacer giro al descubierto
+                }
+                else
+                {
                 throw new SaldoInsuficiente("El saldo a extraer es mayor al disponible en la cuenta.");
+                }                
+                
             }
             Saldo -= monto;
             Operacion o = Operacion.crearOperacionExtraccion(this, monto);
             GestorOperacion gestorOperacion = new GestorOperacion();
             GestorCuenta.actualizar(this);
+
+            if (montoGiroDescubierto>0)
+            {
+                this.GirarAlDescubierto(montoGiroDescubierto);
+            }
+
             gestorOperacion.registrar(o);
             return devolverUltimaOperacion();
+
+        }
+
+        private void GirarAlDescubierto(float monto)
+        {
+            Operacion o = Operacion.crearGiroAlDescubierto(this, monto);
+            GestorOperacion gestorOperacion = new GestorOperacion();
+            gestorOperacion.registrar(o);
         }
 
         public static Cuenta ensamblarCuenta(List<string> ensamblador)
