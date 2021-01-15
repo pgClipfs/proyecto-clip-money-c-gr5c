@@ -5,12 +5,10 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
-
 export class SignupService {
-  
-  private urlApi = "http://localhost:59642/api/"; //linea para hacer pruebas
+  private urlApi = 'http://localhost:59642/api/'; //linea para hacer pruebas
 
   public validate(): boolean {
     /*esta funcion lo que hace es consultar la BD para comprobar que no haya
@@ -19,22 +17,20 @@ export class SignupService {
     */
     return true;
   }
- 
+
   public registerUser(usuario: Usuario): Observable<any> {
     //return this.http.post<any>(this.urlApi + 'registration/registerUser',{dni,nombreDeUsuario});
-    return this.http.post<any>(this.urlApi + 'login/registerUser',
-      usuario)
-      .pipe(catchError(err => {
-       
-        throw err.error
-      }),
-        map(
-          () => {
-            return "usuario registrado correctamente";
-          }));
-
+    return this.http
+      .post<any>(this.urlApi + 'login/registerUser', usuario)
+      .pipe(
+        catchError((err) => {
+          throw err.error;
+        }),
+        map(() => {
+          return 'usuario registrado correctamente';
+        })
+      );
   }
 
-  constructor(private http: HttpClient) { }
-
+  constructor(private http: HttpClient) {}
 }

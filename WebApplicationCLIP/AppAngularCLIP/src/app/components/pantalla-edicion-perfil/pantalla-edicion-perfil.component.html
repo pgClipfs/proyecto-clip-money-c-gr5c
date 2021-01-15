@@ -20,28 +20,56 @@
     <div>
       <!-- Nombre -->
       <label for="nombre" class="mt-2 form-label">Nombre:</label>
-      <input type="text" class="form-control" id="nombre" disabled />
+      <input
+        type="text"
+        formControlName="Nombre"
+        class="form-control rounded-pill"
+        id="nombre"
+        disabled
+      />
 
       <!-- Apellido -->
       <label for="apellido" class="mt-2 form-label">Apellido:</label>
-      <input type="text" class="form-control" id="apellido" disabled />
+      <input
+        type="text"
+        formControlName="Apellido"
+        class="form-control rounded-pill"
+        id="apellido"
+        disabled
+      />
 
       <!-- Domicilio -->
       <label for="domicilio" class="mt-2 form-label">Domicilio:</label>
-      <input type="text" class="form-control" id="domicilio" />
+      <input
+        type="text"
+        formControlName="Domicilio"
+        class="form-control rounded-pill"
+        id="domicilio"
+      />
 
       <!-- E-mail -->
       <label for="email" class="mt-2 form-label">E-mail:</label>
-      <input type="email" class="form-control" id="email" />
+      <input
+        type="email"
+        formControlName="Email"
+        class="form-control rounded-pill"
+        id="email"
+      />
 
       <!-- Teléfono  -->
       <label for="telefono" class="mt-2 form-label">Teléfono:</label>
-      <input type="text" class="form-control" id="telefono" />
+      <input
+        type="text"
+        formControlName="Telefono"
+        class="form-control rounded-pill"
+        id="telefono"
+      />
     </div>
     <div class="row justify-content-around">
       <button
         class="btn btn-success rounded-pill col-lg-5 col-md-12 mt-5"
         type="submit"
+        (click)="actualizar()"
       >
         Guardar Cambios</button
       ><button

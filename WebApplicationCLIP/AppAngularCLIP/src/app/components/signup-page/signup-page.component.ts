@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators, FormGroup, FormsModule } from '@angular/forms'
+import {
+  FormBuilder,
+  Validators,
+  FormGroup,
+  FormsModule,
+} from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { stringify } from 'querystring';
 import { Usuario } from 'src/app/modelos/usuario';
@@ -9,47 +14,89 @@ import { SignupService } from 'src/app/services/signup.service';
 @Component({
   selector: 'app-signup-page',
   templateUrl: './signup-page.component.html',
-  styleUrls: ['./signup-page.component.css']
+  styleUrls: ['./signup-page.component.css'],
 })
 export class SignupPageComponent implements OnInit {
-
   clavesNoCoinciden: boolean = false;
   fgroup: FormGroup; //Agrupa los datos de carga del formulario
-  constructor(private fb: FormBuilder, private route: ActivatedRoute, private router: Router, private loginService: LoginService, private signupService: SignupService) { }
+  constructor(
+    private fb: FormBuilder,
+    private route: ActivatedRoute,
+    private router: Router,
+    private loginService: LoginService,
+    private signupService: SignupService
+  ) {}
 
   ngOnInit(): void {
     //Se le indica al formGroup que vamos a crear con el FormBuilder un grupo de elementos
     // de carga constituido por un objeto json que va a contener los campos.
     this.fgroup = this.fb.group({
-      NombreUsuario: ['', [Validators.required, Validators.maxLength(30), Validators.minLength(8), Validators.pattern("^[a-zA-Z0-9_-]+$")]],
-      Nombre: ['', [Validators.required, Validators.maxLength(55), Validators.pattern("^[a-zA-Z' ]+$")]],
-      Apellido: ['', [Validators.required, Validators.maxLength(55), Validators.pattern("^[a-zA-Z' ]+$")]],
-      Email: ['', [Validators.required, Validators.maxLength(55), Validators.email]],
+      NombreUsuario: [
+        '',
+        [
+          Validators.required,
+          Validators.maxLength(30),
+          Validators.minLength(8),
+          Validators.pattern('^[a-zA-Z0-9_-]+$'),
+        ],
+      ],
+      Nombre: [
+        '',
+        [
+          Validators.required,
+          Validators.maxLength(55),
+          Validators.pattern("^[a-zA-Z' ]+$"),
+        ],
+      ],
+      Apellido: [
+        '',
+        [
+          Validators.required,
+          Validators.maxLength(55),
+          Validators.pattern("^[a-zA-Z' ]+$"),
+        ],
+      ],
+      Email: [
+        '',
+        [Validators.required, Validators.maxLength(55), Validators.email],
+      ],
       Direccion: ['', [Validators.required, Validators.maxLength(55)]],
-      Dni: ['', [Validators.required, Validators.minLength(8), Validators.pattern("^[0-9]{1,8}$")]],
-      Telefono: ['', [Validators.pattern("^[0-9]{1,20}$")]],
-      Contrasena: ['', [Validators.required, Validators.minLength(8),  Validators.maxLength(55)]],
+      Dni: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(8),
+          Validators.pattern('^[0-9]{1,8}$'),
+        ],
+      ],
+      Telefono: ['', [Validators.pattern('^[0-9]{1,20}$')]],
+      Contrasena: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(8),
+          Validators.maxLength(55),
+        ],
+      ],
       ContrasenaRep: ['', [Validators.required, Validators.maxLength(55)]],
-      image: ['',]
-
-    })
+      image: [''],
+    });
   }
 
-  errorRegistro=false;
-  mensajeError="error";
+  errorRegistro = false;
+  mensajeError = 'error';
 
   grabar() {
     if (this.fgroup.valid) {
-
       if (this.fgroup.value.Contrasena != this.fgroup.value.ContrasenaRep) {
         this.clavesNoCoinciden = true;
-        console.log("Las contraseñas no coinciden")
+        console.log('Las contraseñas no coinciden');
         return;
       } else {
         this.clavesNoCoinciden = false;
       }
 
-      console.log("Registrando Usuario");
+      console.log('Registrando Usuario');
 
       var usuario = new Usuario();
 
@@ -60,28 +107,27 @@ export class SignupPageComponent implements OnInit {
       usuario.Email = this.fgroup.value.Email;
       usuario.Domicilio = this.fgroup.value.Direccion;
       usuario.Telefono = this.fgroup.value.Telefono;
-      usuario.SitCrediticia = "normal";
+      usuario.SitCrediticia = 'normal';
       usuario.Contraseña = this.fgroup.value.Contrasena;
-      this.errorRegistro=false;
+      this.errorRegistro = false;
 
       this.signupService.registerUser(usuario).subscribe(
         () => {
-           console.log("Registro Exitoso"); 
-           var returnUrl = this.route.snapshot.queryParams.returnUrl || '/registroExitoso';   
-           this.router.navigate([returnUrl]);
-          },
-        err => {
-          this.errorRegistro=true
-          this.mensajeError=err
-          console.log("error en el registro");
+          console.log('Registro Exitoso');
+          var returnUrl =
+            this.route.snapshot.queryParams.returnUrl || '/registroExitoso';
+          this.router.navigate([returnUrl]);
+        },
+        (err) => {
+          this.errorRegistro = true;
+          this.mensajeError = err;
+          console.log('error en el registro');
           console.log(err);
         }
-      );  
+      );
+    } else {
+      console.log('Hay datos invalidos');
     }
-    else {
-      console.log("Hay datos invalidos")
-    }
-
   }
 
   LimpiarForm() {
