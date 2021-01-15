@@ -9,6 +9,8 @@ export class PantallaTransferenciaComponent implements OnInit {
 
   constructor() { }
 
+  saldoTransferencia : number = 2500;
+
   ngOnInit(): void {
   }
 

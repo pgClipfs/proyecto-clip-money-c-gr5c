@@ -1,4 +1,4 @@
-import { Usuario } from "./modelos/usuario";
+import { Usuario } from './modelos/usuario';
 
 export class Operacion {
   IdOperacion: string;
@@ -12,11 +12,11 @@ export class Sesion {
   Token: string;
 }
 
-export class Cuenta{
+export class Cuenta {
   Saldo: number;
   Cvu: string;
   NombreUsuario: string;
-  datosUsuario:Usuario;
+  datosUsuario: Usuario;
 }
 
 //enum ventana actual
@@ -25,5 +25,18 @@ export enum Ventana {
   Dashboard,
   Transferencia,
   Giro,
-  PagarServicios
+  PagarServicios,
+}
+
+export enum CategoriaTransferencia {
+  Varios,
+  Alquiler,
+  AportesDeCapital,
+  Expensas,
+  Factura,
+  Haberes,
+  Honorarios,
+  Prestamo,
+  Seguro,
+  Cuota,
 }

@@ -1,1 +1,72 @@
-<p>pantalla-transferencia works!</p>
+<div class="container pt-4">
+  <!-- Formulario de transferencia -->
+  <div class="row">
+    <div class="col-7">
+      <h3>Historico de transferencias</h3>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Transferencia</th>
+            <th>Tipo</th>
+            <th>Origen</th>
+            <th>Destino</th>
+            <th>Monto</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td scope="row"></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-5">
+      <h3>Nueva transferencia</h3>
+      <div class="form-group">
+        <!-- Mostrar saldo -->
+        <h4>{{saldoTransferencia}}</h4>
+        <!-- Campo CVU destino-->
+        <label for="cvuDestino">CVU Destino</label>
+        <input
+          type="text"
+          name="cvuDestino"
+          id="cvuDestino"
+          class="form-control"
+          placeholder="Ingrese CVU destino"
+          aria-describedby="helpId"
+        />
+        <small id="helpId" class="text-muted"
+          >Debe ingresar el CVU del destinatario de la transferencia</small
+        >
+
+        <!-- Campo monto-->
+        <label for="montoTransferencia">Monto</label>
+        <input
+          type="text"
+          name="montoTransferencia"
+          id="montoTransferencia"
+          class="form-control"
+          placeholder="Ingrese su CVU"
+          aria-describedby="helpId"
+        />
+        <small id="helpId" class="text-muted">Help text</small>
+        <label for="cvuOrigen">CVU Origen</label>
+        <input
+          type="text"
+          name="cvuOrigen"
+          id="cvuOrigen"
+          class="form-control"
+          placeholder="Ingrese su CVU"
+          aria-describedby="helpId"
+        />
+        <small id="helpId" class="text-muted">Help text</small>
+      </div>
+    </div>
+  </div>
+
+  <!-- Input de CVU Origen -->
+</div>
