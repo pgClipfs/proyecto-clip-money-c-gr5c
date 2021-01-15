@@ -12,10 +12,10 @@ import { Cuenta, Ventana } from 'src/app/clases';
 })
 
 export class SidebarComponent implements OnInit {
-  
+
   ventanaActual: Ventana = Ventana.Dashboard;
   ventana =Ventana; //esta linea es necesaria porque el html no conoce a la clase "Modo", por eso hay que declarar una variable en el ts que sirva de "intermediario"
-  
+
   opened = false;
   nombreUsuario: string = "Usuario No Encontrado";
   usuario : Usuario;
@@ -68,19 +68,24 @@ export class SidebarComponent implements OnInit {
     this.ventanaActual=Ventana.Dashboard
     this.opened = false;
   }
-  
+
   routeIngresoEgreso(){
     this.ventanaActual=Ventana.IngresosEgresos
     this.opened = false;
   }
-  
+
   routeTransferencia(){
     this.ventanaActual=Ventana.Transferencia
     this.opened = false;
   }
-  
+
   routeGiroAlDescubierto(){
     this.ventanaActual=Ventana.Giro
+    this.opened = false;
+  }
+
+  routeEdicionPerfil(){
+    this.ventanaActual=Ventana.EdicionPerfil;
     this.opened = false;
   }
 }

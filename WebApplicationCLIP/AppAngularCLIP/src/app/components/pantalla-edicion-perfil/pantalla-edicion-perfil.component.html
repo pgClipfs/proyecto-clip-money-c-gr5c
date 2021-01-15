@@ -1,40 +1,53 @@
-<div class="row container-fluid justify-content-center d-flex flex-column">
-  <div class="row justify-content-center text-center">
-    <h1 class="mt-4 col-sm-11 col-md-8 col-lg-5">EDITAR DATOS DEL PERFIL</h1>
+<div
+  class="row container-fluid justify-content-center d-flex flex-column"
+  id="wrapper"
+>
+  <div class="row justify-content-center text-center mt-5">
+    <h2 class="col-sm-11 col-md-8 col-lg-5 p-0">Editar datos del perfil</h2>
   </div>
 
   <form
     action=""
-    class="container-fluid col-sm-11 col-md-8 col-lg-5 p-4 h-80 mt-5 mb-5"
+    class="container-fluid col-sm-11 col-md-8 col-lg-5 p-4 h-80 mb-5"
   >
     <div class="d-flex justify-content-center">
-      <img src="./usr-img.png" class="img-fluid col-6" alt="foto de perfil" />
+      <img
+        src="../../../assets/img/usr-img.png"
+        class="img-fluid col-6"
+        alt="foto de perfil"
+      />
     </div>
     <div>
       <!-- Nombre -->
-      <label for="nombre" class="form-label">Nombre:</label>
+      <label for="nombre" class="mt-2 form-label">Nombre:</label>
       <input type="text" class="form-control" id="nombre" disabled />
 
       <!-- Apellido -->
-      <label for="apellido" class="form-label">Apellido:</label>
+      <label for="apellido" class="mt-2 form-label">Apellido:</label>
       <input type="text" class="form-control" id="apellido" disabled />
 
       <!-- Domicilio -->
-      <label for="domicilio" class="form-label">Domicilio:</label>
+      <label for="domicilio" class="mt-2 form-label">Domicilio:</label>
       <input type="text" class="form-control" id="domicilio" />
 
       <!-- E-mail -->
-      <label for="email" class="form-label">E-mail:</label>
+      <label for="email" class="mt-2 form-label">E-mail:</label>
       <input type="email" class="form-control" id="email" />
 
       <!-- Teléfono  -->
-      <label for="telefono" class="form-label">Teléfono:</label>
+      <label for="telefono" class="mt-2 form-label">Teléfono:</label>
       <input type="text" class="form-control" id="telefono" />
     </div>
     <div class="row justify-content-around">
-      <button class="btn btn-primary col-lg-5 col-md-12 mt-5" type="submit">
+      <button
+        class="btn btn-success rounded-pill col-lg-5 col-md-12 mt-5"
+        type="submit"
+      >
         Guardar Cambios</button
-      ><button class="btn btn-secondary col-lg-5 col-md-12 mt-5" type="">
+      ><button
+        class="btn btn-secondary rounded-pill col-lg-5 col-md-12 mt-5"
+        type=""
+      >
         Cancelar
       </button>
     </div>

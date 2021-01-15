@@ -1,178 +1,337 @@
 <div class="container">
-
   <div class="card o-hidden border-0 shadow-lg my-5">
     <div class="card-body p-0">
       <!-- Nested Row within Card Body -->
       <div class="row">
         <div class="col-lg-5 d-none d-lg-block">
-          <img src="../../../assets/img/register.png" class=" bg-register-image" alt="">
+          <img
+            src="../../../assets/img/register.png"
+            class="bg-register-image"
+            alt=""
+          />
         </div>
         <div class="col-lg-7">
           <div class="p-5">
             <div class="text-center">
-              <h1 class="h4  mb-4">Crea una cuenta!</h1>
+              <h1 class="h4 mb-4">Crea una cuenta!</h1>
             </div>
             <form [formGroup]="fgroup" class="user">
               <div class="form-group">
-
                 <!-- nombre usuario -->
-                <input type="text" formControlName="NombreUsuario" class="form-control form-control-user"
-                  id="exampleInputUsuario" placeholder="Usuario">
-                <span class="text-danger"
-                  *ngIf="fgroup.controls.NombreUsuario.errors?.required && fgroup.controls.NombreUsuario.touched">
-                  Dato requerido.</span>
-                <span class="text-danger"
-                  *ngIf="fgroup.controls.NombreUsuario.errors?.pattern && fgroup.controls.NombreUsuario.dirty">
-                  Formato invalido.</span>
-                <span class="text-danger"
-                  *ngIf="fgroup.controls.NombreUsuario.errors?.minlength && fgroup.controls.NombreUsuario.touched">
-                  El nombre de usuario debe tener al menos 8 caracteres.</span>
-                <span class="text-danger" *ngIf="fgroup.controls.NombreUsuario.errors?.maxlength">
-                  El nombre de usuario debe tener menos de 30 caracteres.</span>
-
+                <input
+                  type="text"
+                  formControlName="NombreUsuario"
+                  class="form-control form-control-user"
+                  id="exampleInputUsuario"
+                  placeholder="Usuario"
+                />
+                <span
+                  class="text-danger"
+                  *ngIf="
+                    fgroup.controls.NombreUsuario.errors?.required &&
+                    fgroup.controls.NombreUsuario.touched
+                  "
+                >
+                  Dato requerido.</span
+                >
+                <span
+                  class="text-danger"
+                  *ngIf="
+                    fgroup.controls.NombreUsuario.errors?.pattern &&
+                    fgroup.controls.NombreUsuario.dirty
+                  "
+                >
+                  Formato invalido.</span
+                >
+                <span
+                  class="text-danger"
+                  *ngIf="
+                    fgroup.controls.NombreUsuario.errors?.minlength &&
+                    fgroup.controls.NombreUsuario.touched
+                  "
+                >
+                  El nombre de usuario debe tener al menos 8 caracteres.</span
+                >
+                <span
+                  class="text-danger"
+                  *ngIf="fgroup.controls.NombreUsuario.errors?.maxlength"
+                >
+                  El nombre de usuario debe tener menos de 30 caracteres.</span
+                >
               </div>
               <div class="form-group row">
                 <div class="col-sm-6 mb-3 mb-sm-0">
-
                   <!-- Nombre -->
-                  <input type="text" formControlName="Nombre" class="form-control form-control-user"
-                    id="exampleFirstName" placeholder="Nombre">
-                  <span class="text-danger" *ngIf="fgroup.controls.Nombre.touched
-                        && fgroup.controls.Nombre.errors?.required">
-                    Dato requerido.</span>
-                  <span class="text-danger" *ngIf="fgroup.controls.Nombre.errors?.maxlength">
-                    El nombre no puede tener mas 55 caracteres. </span>
-                  <span class="text-danger"
-                    *ngIf="fgroup.controls.Nombre.dirty && fgroup.controls.Nombre.errors?.pattern">
-                    Caracteres invalidos. </span>
-
+                  <input
+                    type="text"
+                    formControlName="Nombre"
+                    class="form-control form-control-user"
+                    id="exampleFirstName"
+                    placeholder="Nombre"
+                  />
+                  <span
+                    class="text-danger"
+                    *ngIf="
+                      fgroup.controls.Nombre.touched &&
+                      fgroup.controls.Nombre.errors?.required
+                    "
+                  >
+                    Dato requerido.</span
+                  >
+                  <span
+                    class="text-danger"
+                    *ngIf="fgroup.controls.Nombre.errors?.maxlength"
+                  >
+                    El nombre no puede tener mas 55 caracteres.
+                  </span>
+                  <span
+                    class="text-danger"
+                    *ngIf="
+                      fgroup.controls.Nombre.dirty &&
+                      fgroup.controls.Nombre.errors?.pattern
+                    "
+                  >
+                    Caracteres invalidos.
+                  </span>
                 </div>
                 <div class="col-sm-6">
-
                   <!-- Apellido -->
-                  <input type="text" formControlName="Apellido" class="form-control form-control-user"
-                    id="exampleLastName" placeholder="Apellido">
-                  <span class="text-danger"
-                    *ngIf="fgroup.controls.Apellido.errors?.required && fgroup.controls.Apellido.touched">
-                    Dato requerido.</span>
-                  <span class="text-danger"
-                    *ngIf="fgroup.controls.Apellido.errors?.pattern && fgroup.controls.Apellido.dirty">
-                    Caracteres invalidos.</span>
-                  <span class="text-danger" *ngIf="fgroup.controls.Apellido.errors?.maxlength">
-                    El apellido no puede tener mas 55 caracteres.</span>
-
+                  <input
+                    type="text"
+                    formControlName="Apellido"
+                    class="form-control form-control-user"
+                    id="exampleLastName"
+                    placeholder="Apellido"
+                  />
+                  <span
+                    class="text-danger"
+                    *ngIf="
+                      fgroup.controls.Apellido.errors?.required &&
+                      fgroup.controls.Apellido.touched
+                    "
+                  >
+                    Dato requerido.</span
+                  >
+                  <span
+                    class="text-danger"
+                    *ngIf="
+                      fgroup.controls.Apellido.errors?.pattern &&
+                      fgroup.controls.Apellido.dirty
+                    "
+                  >
+                    Caracteres invalidos.</span
+                  >
+                  <span
+                    class="text-danger"
+                    *ngIf="fgroup.controls.Apellido.errors?.maxlength"
+                  >
+                    El apellido no puede tener mas 55 caracteres.</span
+                  >
                 </div>
               </div>
               <div class="form-group">
-
                 <!-- Email -->
-                <input type="email" formControlName="Email" class="form-control form-control-user"
-                  id="exampleInputEmail" placeholder="Email">
-                <span class="text-danger"
-                  *ngIf="fgroup.controls.Email.errors?.required && fgroup.controls.Email.touched">
-                  Dato requerido.</span>
-                <span class="text-danger" *ngIf="fgroup.controls.Email.errors?.email && fgroup.controls.Email.dirty">
-                  Formato de email invalido.</span>
-                <span class="text-danger" *ngIf="fgroup.controls.NombreUsuario.errors?.maxlength">
-                  El email no puede tener mas de 55 caracteres.</span>
+                <input
+                  type="email"
+                  formControlName="Email"
+                  class="form-control form-control-user"
+                  id="exampleInputEmail"
+                  placeholder="Email"
+                />
+                <span
+                  class="text-danger"
+                  *ngIf="
+                    fgroup.controls.Email.errors?.required &&
+                    fgroup.controls.Email.touched
+                  "
+                >
+                  Dato requerido.</span
+                >
+                <span
+                  class="text-danger"
+                  *ngIf="
+                    fgroup.controls.Email.errors?.email &&
+                    fgroup.controls.Email.dirty
+                  "
+                >
+                  Formato de email invalido.</span
+                >
+                <span
+                  class="text-danger"
+                  *ngIf="fgroup.controls.NombreUsuario.errors?.maxlength"
+                >
+                  El email no puede tener mas de 55 caracteres.</span
+                >
               </div>
 
               <div class="form-group">
                 <!--Direccion-->
-                <input type="text" formControlName="Direccion" class="form-control form-control-user"
-                  id="direccionUsuario" placeholder="Direccion">
-                <span class="text-danger"
-                  *ngIf="fgroup.controls.Direccion.errors?.required && fgroup.controls.Direcicon.touched">
+                <input
+                  type="text"
+                  formControlName="Direccion"
+                  class="form-control form-control-user"
+                  id="direccionUsuario"
+                  placeholder="Direccion"
+                />
+                <span
+                  class="text-danger"
+                  *ngIf="
+                    fgroup.controls.Direccion.errors?.required &&
+                    fgroup.controls.Direcicon.touched
+                  "
+                >
                   Dato requerido.
                 </span>
               </div>
               <div class="form-group row">
                 <div class="col-sm-6 mb-3 mb-sm-0">
-
                   <!-- DNI -->
-                  <input type="text" formControlName="Dni" class="form-control form-control-user" id="exampleInputDni"
-                    placeholder="Ingrese su DNI">
+                  <input
+                    type="text"
+                    formControlName="Dni"
+                    class="form-control form-control-user"
+                    id="exampleInputDni"
+                    placeholder="Ingrese su DNI"
+                  />
 
-                  <span class="text-danger"
-                    *ngIf="(fgroup.controls.Dni.errors?.minlength && fgroup.controls.Dni.touched) || (fgroup.controls.Dni.dirty && fgroup.controls.Dni.errors?.pattern)">
-                    Formato Invalido (debe ingresar 8 caracteres numericos).</span>
-                  <span class="text-danger" *ngIf="fgroup.controls.Dni.touched && fgroup.controls.Dni.errors?.required">
-                    Dato requerido. </span>
-
+                  <span
+                    class="text-danger"
+                    *ngIf="
+                      (fgroup.controls.Dni.errors?.minlength &&
+                        fgroup.controls.Dni.touched) ||
+                      (fgroup.controls.Dni.dirty &&
+                        fgroup.controls.Dni.errors?.pattern)
+                    "
+                  >
+                    Formato Invalido (debe ingresar 8 caracteres
+                    numericos).</span
+                  >
+                  <span
+                    class="text-danger"
+                    *ngIf="
+                      fgroup.controls.Dni.touched &&
+                      fgroup.controls.Dni.errors?.required
+                    "
+                  >
+                    Dato requerido.
+                  </span>
                 </div>
                 <div class="col-sm-6">
-
                   <!-- Telefono -->
-                  <input type="text" formControlName="Telefono" class="form-control form-control-user"
-                    id="exampleRepeatTelefono" placeholder="Telefono">
-                  <span class="text-danger"
-                    *ngIf="fgroup.controls.Telefono.errors?.pattern && fgroup.controls.Telefono.dirty">
-                    Formato invalido.</span>
-
+                  <input
+                    type="text"
+                    formControlName="Telefono"
+                    class="form-control form-control-user"
+                    id="exampleRepeatTelefono"
+                    placeholder="Telefono"
+                  />
+                  <span
+                    class="text-danger"
+                    *ngIf="
+                      fgroup.controls.Telefono.errors?.pattern &&
+                      fgroup.controls.Telefono.dirty
+                    "
+                  >
+                    Formato invalido.</span
+                  >
                 </div>
               </div>
               <div class="form-group row">
                 <div class="col-sm-6 mb-3 mb-sm-0">
-
                   <!-- Contraseña 1 -->
-                  <input type="password" formControlName="Contrasena" class="form-control form-control-user"
-                    id="exampleInputPassword" placeholder="Contraseña">
-                  <span class="text-danger"
-                    *ngIf="fgroup.controls.Contrasena.errors?.required && fgroup.controls.Contrasena.touched">
-                    Dato requerido.</span>
-                    <span class="text-danger"
-                  *ngIf="fgroup.controls.Contrasena.errors?.minlength && fgroup.controls.Contrasena.touched">
-                  La contraseña debe tener al menos 8 caracteres.</span>
+                  <input
+                    type="password"
+                    formControlName="Contrasena"
+                    class="form-control form-control-user"
+                    id="exampleInputPassword"
+                    placeholder="Contraseña"
+                  />
+                  <span
+                    class="text-danger"
+                    *ngIf="
+                      fgroup.controls.Contrasena.errors?.required &&
+                      fgroup.controls.Contrasena.touched
+                    "
+                  >
+                    Dato requerido.</span
+                  >
+                  <span
+                    class="text-danger"
+                    *ngIf="
+                      fgroup.controls.Contrasena.errors?.minlength &&
+                      fgroup.controls.Contrasena.touched
+                    "
+                  >
+                    La contraseña debe tener al menos 8 caracteres.</span
+                  >
                 </div>
                 <div class="col-sm-6">
-
                   <!-- Contraseña 2 -->
-                  <input type="password" formControlName="ContrasenaRep" class="form-control form-control-user"
-                    id="exampleRepeatPassword" placeholder="Confirmar contraseña">
-                  <span class="text-danger"
-                    *ngIf="fgroup.controls.ContrasenaRep.errors?.required && fgroup.controls.ContrasenaRep.touched">
+                  <input
+                    type="password"
+                    formControlName="ContrasenaRep"
+                    class="form-control form-control-user"
+                    id="exampleRepeatPassword"
+                    placeholder="Confirmar contraseña"
+                  />
+                  <span
+                    class="text-danger"
+                    *ngIf="
+                      fgroup.controls.ContrasenaRep.errors?.required &&
+                      fgroup.controls.ContrasenaRep.touched
+                    "
+                  >
                     Dato requerido.
-
                   </span>
                 </div>
               </div>
 
               <div class="row">
                 <div class="col-12">
-
-                 
-                  <div *ngIf="clavesNoCoinciden" class="alert alert-danger" role="alert">
-                    Las contraseñas no coinciden </div>
+                  <div
+                    *ngIf="clavesNoCoinciden"
+                    class="alert alert-danger"
+                    role="alert"
+                  >
+                    Las contraseñas no coinciden
                   </div>
-
+                </div>
               </div>
 
               <div class="form-group text-center">
-                <label for="exampleFormControlFile1" class="">Cargar fotos del DNI</label>
-                <input type="file" formControlName="image" class="btn-registro-archivo ml-3 pl-3 btn"
-                  id="botonCargarArchivo">
+                <label for="exampleFormControlFile1" class=""
+                  >Cargar fotos del DNI</label
+                >
+                <input
+                  type="file"
+                  formControlName="image"
+                  class="btn-registro-archivo ml-3 pl-3 btn"
+                  id="botonCargarArchivo"
+                />
               </div>
-              <input type="button" class="btn btn-registro btn-user btn-block" (click)="grabar()"
-                value=" Registrar Cuenta" [disabled]="!fgroup.valid?'disabled':''">
-
+              <input
+                type="button"
+                class="btn btn-registro btn-user btn-block"
+                (click)="grabar()"
+                value=" Registrar Cuenta"
+                [disabled]="!fgroup.valid ? 'disabled' : ''"
+              />
             </form>
             <div *ngIf="errorRegistro" class="alert alert-danger" role="alert">
-             
-
-             <p>
-               {{mensajeError}}
-
-             </p>
-             </div>
-            <hr>
+              <p>
+                {{ mensajeError }}
+              </p>
+            </div>
+            <hr />
 
             <div class="text-center">
-              <a class="small" routerLink="/login">Ya tienes una cuenta? Inicia Sesion!</a>
+              <a class="small" routerLink="/login"
+                >Ya tienes una cuenta? Inicia Sesion!</a
+              >
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-
 </div>

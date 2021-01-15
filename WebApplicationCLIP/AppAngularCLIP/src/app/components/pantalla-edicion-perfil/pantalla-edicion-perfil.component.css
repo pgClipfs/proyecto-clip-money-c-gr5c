@@ -1,0 +1,35 @@
+:host {
+  --color1: #7400b8;
+  --color2: #6930c3;
+  --color3: #5e60ce;
+  --color4: #5390d9;
+  --color5: #4ea8de;
+  --color6: #48bfe3;
+  --color7: #56cfe1;
+  --color8: #64dfdf;
+  --color9: #72efdd;
+  --color10: #80ffdb;
+}
+
+h2 {
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  color: #6b6b6b;
+}
+
+form {
+  border: none;
+  border-radius: 1.5rem;
+  background-image: linear-gradient(to right, #6830c3be, #5e60ceb4);
+}
+
+#wrapper {
+  background-color: #fff;
+}
+
+.btn-success {
+  background-color: var(--color6);
+  border: none;
+  color: black;
+  font-weight: 500;
+}
