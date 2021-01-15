@@ -7,6 +7,7 @@ import {
 } from '@angular/forms';
 import { Usuario } from 'src/app/modelos/usuario';
 import { EdicionPerfilService } from 'src/app/services/edicion-perfil.service';
+import { DatosUsuarioService } from 'src/app/services/datos-usuario.service';
 
 @Component({
   selector: 'app-pantalla-edicion-perfil',
@@ -49,4 +50,19 @@ export class PantallaEdicionPerfilComponent implements OnInit {
       //Necesario crear el servicio para traer los datos actuales del usuario antes de continuar
     }
   }
+
+  public obtenerDatosUsuario() {
+
+    this.datosUsuarioService.obtenerDatosUsuario().subscribe(
+      user => {
+        this.usuario = user;
+        this.cuentaUsuario.NombreUsuario = user.NombreDeUsuario
+        this.nombreUsuario = this.usuario.Nombre + " " + this.usuario.Apellido;
+      },
+      err => {
+        console.log("no se encontro el usuario (?");
+      }
+    );
+  }
+    console.log('Actualizando Usuario');
 }

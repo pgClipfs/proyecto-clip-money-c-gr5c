@@ -11,15 +11,16 @@ export class EdicionPerfilService {
   private urlApi = 'http://localhost:59642/api/';
 
   public updateUser(usuario: Usuario): Observable<any> {
-    //return this.http.post<any>(this.urlApi + 'registration/registerUser',{dni,nombreDeUsuario});
-    return this.http.put<any>(this.urlApi + 'crear endpoint', usuario).pipe(
-      catchError((err) => {
-        throw err.error;
-      }),
-      map(() => {
-        return 'usuario actualizado correctamente';
-      })
-    );
+    return this.http
+      .put<any>(this.urlApi + 'post/modificardatosusuario', usuario)
+      .pipe(
+        catchError((err) => {
+          throw err.error;
+        }),
+        map(() => {
+          return 'usuario actualizado correctamente';
+        })
+      );
   }
 
   constructor(private http: HttpClient) {}
