@@ -215,7 +215,7 @@ namespace WebApplicationCLIP.BD
 
         public List<Operacion> consultarTransferenciasPorCVU(string cvu , string tipoOperacion)
         {
-            string script = "SELECT * FROM OPERACIONES WHERE CVU = " + "'" + cvu + "' AND NOMBRE_TIPO_OPERACION = '"+tipoOperacion+"' order by ID_OPERACION desc";
+            string script = "SELECT TOP 10 * FROM OPERACIONES WHERE CVU = " + "'" + cvu + "' AND NOMBRE_TIPO_OPERACION = '"+tipoOperacion+"' order by ID_OPERACION desc";
             List<Operacion> temp = null;
             ConexionBD conexion = new ConexionBD();
             conexion.abrir();

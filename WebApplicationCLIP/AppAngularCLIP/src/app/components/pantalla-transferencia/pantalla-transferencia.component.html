@@ -71,26 +71,68 @@
         <div class="row">
           <!-- comboBox Tipo-->
           <label for="comboCategoria">Categoria</label>
-          <select name="comboCategoria" id="comboCategoria" class="Default select example">
+          <select
+            name="comboCategoria"
+            id="comboCategoria"
+            class="Default select example"
+          >
             <option value="{{ categorias.Alquiler }}">Alquiler</option>
-            <option value="{{categorias.AportesDeCapital}}">Aportes de Capital</option>
-            <option value="{{categorias.Cuota}}">Cuota</option>
-            <option value="{{categorias.Expensas}}">Expensas</option>
-            <option value="{{categorias.Factura}}">Factura</option>
-            <option value="{{categorias.Haberes}}">Haberes</option>
-            <option value="{{categorias.Honorarios}}">Honorarios</option>
-            <option value="{{categorias.Prestamo}}">Prestamo</option>
-            <option value="{{categorias.Seguro}}">Seguro</option>
-            <option value="{{categorias.Varios}}">Varios</option>
+            <option value="{{ categorias.AportesDeCapital }}">
+              Aportes de Capital
+            </option>
+            <option value="{{ categorias.Cuota }}">Cuota</option>
+            <option value="{{ categorias.Expensas }}">Expensas</option>
+            <option value="{{ categorias.Factura }}">Factura</option>
+            <option value="{{ categorias.Haberes }}">Haberes</option>
+            <option value="{{ categorias.Honorarios }}">Honorarios</option>
+            <option value="{{ categorias.Prestamo }}">Prestamo</option>
+            <option value="{{ categorias.Seguro }}">Seguro</option>
+            <option value="{{ categorias.Varios }}">Varios</option>
           </select>
-          <small id="helpId" class="text-muted">Debe seleccionar una categoria</small>
+          <small id="helpId" class="text-muted"
+            >Debe seleccionar una categoria</small
+          >
+        </div>
+        <div class="row">
+          <button
+            class="btn btn-outline-primary mb-2 mr-2"
+            (click)="openVerticallyCentered(content)"
+          >
+            Transferir
+          </button>
         </div>
       </div>
     </div>
   </div>
-  <button (click)="realizarTransferencia()">Realizar transferncia</button>
 
   <!-- Input de CVU Origen -->
 </div>
 
-<ng-template> </ng-template>
+<!--Modal para confirmacion de la transferencia -->
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">Nueva transferencia</h4>
+    <button
+      type="button"
+      class="close"
+      aria-label="Close"
+      (click)="modal.dismiss('Cross click')"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <p>Se realizara una transferencia a CVU: {{CvuDestino}} de ${{Monto}} pesos.</p>
+  </div>
+  <div class="modal-footer">
+    <button
+      type="button"
+      class="btn btn-light"
+      (click)="modal.close('Close click')"
+    >
+      Cancelar
+    </button>
+
+    <button class="btn btn-info" (click)="realizarTransferencia()">Confirmar transferncia</button>
+  </div>
+</ng-template>

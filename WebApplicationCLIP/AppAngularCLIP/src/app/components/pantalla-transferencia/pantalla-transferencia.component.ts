@@ -5,6 +5,7 @@ import {CategoriaTransferencia, Operacion, Cuenta} from '../../clases'
 import { Observable } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
 import { CuentaService } from 'src/app/services/cuenta.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-pantalla-transferencia',
@@ -17,13 +18,13 @@ import { CuentaService } from 'src/app/services/cuenta.service';
 export class PantallaTransferenciaComponent implements OnInit {
 
 
-  constructor(private cuentaService: CuentaService  , private transferenciaService : TransferenciasService, private ToastService : ToastrService) { }
+  constructor(private modalService: NgbModal,private cuentaService: CuentaService  , private transferenciaService : TransferenciasService, private ToastService : ToastrService) { }
 
   textobotonTransferencia : string = 'Nueva transferencia';
   nuevaTransferencia : boolean = false;
   transferenciaPrueba : Observable<any>;
   CvuDestino : string = '000040444444';
-  CvuOrigen : string = '000040777777';
+  CvuOrigen : string = '000040666666';
   Monto : number = 60;
   Referencia : string = 'Test';
   Categoria : string = CategoriaTransferencia.Expensas.toString();
@@ -34,7 +35,6 @@ export class PantallaTransferenciaComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.getTransferencias();
 
     this.cuentaOrigen = new Cuenta()
 
@@ -51,6 +51,8 @@ export class PantallaTransferenciaComponent implements OnInit {
 
       }
     )
+
+    this.getTransferencias();
   }
 
   public buscarCuenta() {
@@ -84,6 +86,8 @@ export class PantallaTransferenciaComponent implements OnInit {
 
       }
     )
+
+    this.modalService.dismissAll()
   }
 
   public getTransferencias(){
@@ -118,6 +122,10 @@ export class PantallaTransferenciaComponent implements OnInit {
     else{
       this.textobotonTransferencia = 'Nueva transferencia';
     }
+  }
+
+  openVerticallyCentered(content) {
+    this.modalService.open(content, { centered: true });
   }
 
 }
