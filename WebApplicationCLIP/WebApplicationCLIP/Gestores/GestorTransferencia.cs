@@ -9,6 +9,11 @@ namespace WebApplicationCLIP.Gestores
 {
     public class GestorTransferencia
     {
-      
+        public List<Operacion> ObtenerTransferenciasPorCVU(string cvu, string tipoTransferencia)
+        {
+            OperacionDAO operacionDAO = new OperacionDAO();
+            return operacionDAO.consultarTransferenciasPorCVU(cvu, tipoTransferencia);
+        }
+
     }
 }

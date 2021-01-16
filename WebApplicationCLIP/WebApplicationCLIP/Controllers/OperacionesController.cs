@@ -266,5 +266,58 @@ namespace WebApplicationCLIP.Controllers
             //if (!LoginController.ValidarToken(sesion))return Unauthorized();
         }
 
+        [HttpPost]
+        [EnableCors(origins: "*", headers: "*", methods: "*")]
+        [Route("get/transferencias")]
+        public IHttpActionResult GetTransferencias(JObject obj)
+        {
+            string tipoOperacion = "transferencia";
+            string cvu = (string)obj["Cvu"];
+            SesionDeUsuario login = obj["SesionDeUsuario"].ToObject<SesionDeUsuario>();
+            Cuenta cuenta;
+            try
+            {
+                CuentaDAO cuentaDAO = new CuentaDAO();
+                cuenta = cuentaDAO.consultar(cvu);
+            }
+            catch (Exception e)
+            {
+                return Content(HttpStatusCode.ExpectationFailed, "No se encontró una cuenta con ese CVU --> " + e.Message);
+            }
+            try
+            {
+                LoginController.ValidarSesion(login);
+                Usuario usuario = GestorUsuario.consultarUsuarioPorNombreDeUsuario(login.NombreDeUsuario);
+
+                if (!(cuenta.Usuario.NombreDeUsuario.ToString() == usuario.NombreDeUsuario.ToString()))
+                {
+                    return Content(HttpStatusCode.Forbidden, "Esta cuenta no pertenece al usuario correspondiente.");
+                }
+            }
+            catch (UnauthorizedAccessException e)
+            {
+                return Content(HttpStatusCode.Unauthorized, e.Message);
+            }
+            catch (HttpRequestException e)
+            {
+                return BadRequest("Sesion de usuario null --> " + e);
+            }
+            catch (Exception e)
+            {
+                return Content(HttpStatusCode.Conflict, e.Message);
+            }
+            try
+            {
+                GestorTransferencia gestorTransferencia = new GestorTransferencia();
+                return Ok(gestorTransferencia.ObtenerTransferenciasPorCVU(cvu,tipoOperacion));
+            }
+            catch (Exception e)
+            {
+                return Content(HttpStatusCode.Conflict, e.Message);
+            }
+            //por ahora no se valida la sesion ni nada, simplemente se devuelven las operaciones del usuario
+            //if (!LoginController.ValidarToken(sesion))return Unauthorized();
+        }
+
     }
 }

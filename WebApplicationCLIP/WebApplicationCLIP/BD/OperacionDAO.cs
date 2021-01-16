@@ -212,5 +212,51 @@ namespace WebApplicationCLIP.BD
             return ultimoID;
 
         }
+
+        public List<Operacion> consultarTransferenciasPorCVU(string cvu , string tipoOperacion)
+        {
+            string script = "SELECT * FROM OPERACIONES WHERE CVU = " + "'" + cvu + "' AND NOMBRE_TIPO_OPERACION = '"+tipoOperacion+"' order by ID_OPERACION desc";
+            List<Operacion> temp = null;
+            ConexionBD conexion = new ConexionBD();
+            conexion.abrir();
+
+            try
+            {
+                SqlCommand comando = new SqlCommand(script, conexion.conexionBD);
+                SqlDataReader lector = comando.ExecuteReader();
+                List<List<string>> operaciones = new List<List<string>>();
+                int j = 0;
+                while (lector.Read())
+                {
+                    operaciones.Add(new List<string>());
+                    for (int i = 0; i < lector.FieldCount; i++)
+                    {
+                        operaciones[j].Add(lector.GetValue(i).ToString());
+                    }
+                    j++;
+
+                }
+                if (operaciones.Count > 0)
+                {
+                    temp = new List<Operacion>();
+                    for (int i = 0; i < operaciones.Count; i++)
+                    {
+                        temp.Add(Operacion.ensamblarOperacion(operaciones[i]));
+                    }
+                    conexion.cerrar();
+
+                    //aca hay que "ensamblar" el objeto operacion resultado
+                    //operacionResultado = algo
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception("Error al ejecutar la consulta --> " + e.Message);
+            }
+
+            conexion.cerrar();
+
+            return temp;
+        }
     }
 }

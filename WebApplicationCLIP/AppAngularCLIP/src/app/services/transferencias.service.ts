@@ -20,8 +20,8 @@ export class TransferenciasService {
 
   public realizarTransferencia (CvuDestino:String, Monto: number, Referencia : String, CvuOrigen: String, Categoria : String): Observable<any> {
     var dir = 'post/transferir';
-    var SesionUsuario = this.loginService.obtenerSesionActual;
-    return this.http.post<any>(this.urlApi + dir, {CvuDestino,Monto,Referencia,CvuOrigen,SesionUsuario, Categoria})
+    var SesionDeUsuario = this.loginService.obtenerSesionActual;
+    return this.http.post<any>(this.urlApi + dir, {CvuDestino,Monto,Referencia,CvuOrigen,SesionDeUsuario, Categoria})
     .pipe(
       catchError(err => {
         throw err.error;
@@ -36,4 +36,24 @@ export class TransferenciasService {
     )
   }
 
-}
+  public obtenerTransferencias (Cvu : String) : Observable<any>{
+    var dir = 'get/transferencias';
+    var SesionDeUsuario = this.loginService.obtenerSesionActual;
+    return this.http.post<any>(this.urlApi + dir, {Cvu,SesionDeUsuario})
+    .pipe(
+      catchError(err => {
+        throw err.error;
+
+      }),
+      map(
+        data => {
+          return data;
+        }
+      )
+    )
+
+    }
+
+  }
+
+

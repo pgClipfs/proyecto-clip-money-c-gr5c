@@ -2,71 +2,95 @@
   <!-- Formulario de transferencia -->
   <div class="row">
     <div class="col-7">
-      <h3>Historico de transferencias</h3>
+      <h3>
+        Historico de transferencias<span
+          ><button
+            (click)="AbrirCerrarNuevaTransferencia()"
+            class="btn btn-primary ml-3"
+          >
+            {{ textobotonTransferencia }}
+          </button></span
+        >
+      </h3>
       <table class="table">
         <thead>
           <tr>
-            <th>Transferencia</th>
-            <th>Tipo</th>
-            <th>Origen</th>
-            <th>Destino</th>
+            <th>Id Operacion</th>
+            <th>Fecha</th>
             <th>Monto</th>
+            <th>Tipo</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody *ngFor="let transf of transferencias">
           <tr>
-            <td scope="row"></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td>{{ transf.IdOperacion }}</td>
+            <td>{{ transf.Fecha | date: "dd/MM/yyyy" }}</td>
+            <td>{{ transf.Monto | currency }}</td>
+            <td>transferencia</td>
           </tr>
         </tbody>
       </table>
     </div>
-    <div class="col-5">
+    <div class="col-5" *ngIf="nuevaTransferencia">
       <h3>Nueva transferencia</h3>
       <div class="form-group">
-        <!-- Mostrar saldo -->
-        <h4>{{saldoTransferencia}}</h4>
-        <!-- Campo CVU destino-->
-        <label for="cvuDestino">CVU Destino</label>
-        <input
-          type="text"
-          name="cvuDestino"
-          id="cvuDestino"
-          class="form-control"
-          placeholder="Ingrese CVU destino"
-          aria-describedby="helpId"
-        />
-        <small id="helpId" class="text-muted"
-          >Debe ingresar el CVU del destinatario de la transferencia</small
-        >
-
-        <!-- Campo monto-->
-        <label for="montoTransferencia">Monto</label>
-        <input
-          type="text"
-          name="montoTransferencia"
-          id="montoTransferencia"
-          class="form-control"
-          placeholder="Ingrese su CVU"
-          aria-describedby="helpId"
-        />
-        <small id="helpId" class="text-muted">Help text</small>
-        <label for="cvuOrigen">CVU Origen</label>
-        <input
-          type="text"
-          name="cvuOrigen"
-          id="cvuOrigen"
-          class="form-control"
-          placeholder="Ingrese su CVU"
-          aria-describedby="helpId"
-        />
-        <small id="helpId" class="text-muted">Help text</small>
+        <div class="row">
+          <!-- Mostrar saldo -->
+          <h4>Saldo: {{ cuentaOrigen.Saldo | currency }}</h4>
+        </div>
+        <div class="row">
+          <!-- Campo CVU destino-->
+          <label for="cvuDestino">CVU Destino</label>
+          <input
+            type="text"
+            name="cvuDestino"
+            id="cvuDestino"
+            class="form-control"
+            placeholder="Ingrese CVU destino"
+            aria-describedby="helpId"
+          />
+          <small id="helpId" class="text-muted"
+            >Debe ingresar el CVU del destinatario de la transferencia</small
+          >
+        </div>
+        <div class="row">
+          <!-- Campo monto-->
+          <label for="montoTransferencia">Monto</label>
+          <input
+            type="text"
+            name="montoTransferencia"
+            id="montoTransferencia"
+            class="form-control"
+            placeholder="Ingrese un monto"
+            aria-describedby="helpId"
+          />
+          <small id="helpId" class="text-muted"
+            >Debe ingresar un monto menor o igual al saldo.</small
+          >
+        </div>
+        <div class="row">
+          <!-- comboBox Tipo-->
+          <label for="comboCategoria">Categoria</label>
+          <select name="comboCategoria" id="comboCategoria" class="Default select example">
+            <option value="{{ categorias.Alquiler }}">Alquiler</option>
+            <option value="{{categorias.AportesDeCapital}}">Aportes de Capital</option>
+            <option value="{{categorias.Cuota}}">Cuota</option>
+            <option value="{{categorias.Expensas}}">Expensas</option>
+            <option value="{{categorias.Factura}}">Factura</option>
+            <option value="{{categorias.Haberes}}">Haberes</option>
+            <option value="{{categorias.Honorarios}}">Honorarios</option>
+            <option value="{{categorias.Prestamo}}">Prestamo</option>
+            <option value="{{categorias.Seguro}}">Seguro</option>
+            <option value="{{categorias.Varios}}">Varios</option>
+          </select>
+          <small id="helpId" class="text-muted">Debe seleccionar una categoria</small>
+        </div>
       </div>
     </div>
   </div>
+  <button (click)="realizarTransferencia()">Realizar transferncia</button>
 
   <!-- Input de CVU Origen -->
 </div>
+
+<ng-template> </ng-template>
