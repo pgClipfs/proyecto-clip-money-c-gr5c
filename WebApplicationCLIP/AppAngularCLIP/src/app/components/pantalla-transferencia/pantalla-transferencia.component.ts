@@ -20,8 +20,8 @@ export class PantallaTransferenciaComponent implements OnInit {
 
   constructor(private modalService: NgbModal,private cuentaService: CuentaService  , private transferenciaService : TransferenciasService, private ToastService : ToastrService) { }
 
-  textobotonTransferencia : string = 'Nueva transferencia';
-  nuevaTransferencia : boolean = false;
+  textobotonTransferencia : string = 'Ver ultimas transferencias';
+  utimasTransferencia : boolean = false;
   transferenciaPrueba : Observable<any>;
   CvuDestino : string = '000040444444';
   CvuOrigen : string = '000040666666';
@@ -114,13 +114,13 @@ export class PantallaTransferenciaComponent implements OnInit {
   }
 
   public AbrirCerrarNuevaTransferencia(){
-    this.nuevaTransferencia = !this.nuevaTransferencia;
-    if (this.nuevaTransferencia == true)
+    this.utimasTransferencia = !this.utimasTransferencia;
+    if (this.utimasTransferencia == true)
     {
-      this.textobotonTransferencia = 'Cancelar transferencia';
+      this.textobotonTransferencia = 'Cerrar';
     }
     else{
-      this.textobotonTransferencia = 'Nueva transferencia';
+      this.textobotonTransferencia = 'Ver ultimas transferencias';
     }
   }
 

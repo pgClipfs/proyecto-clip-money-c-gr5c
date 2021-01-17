@@ -1,106 +1,151 @@
 <div class="container pt-4">
   <!-- Formulario de transferencia -->
   <div class="row">
-    <div class="col-7">
-      <h3>
-        Historico de transferencias<span
-          ><button
-            (click)="AbrirCerrarNuevaTransferencia()"
-            class="btn btn-primary ml-3"
-          >
-            {{ textobotonTransferencia }}
-          </button></span
+    <!-- Seccion de nueva transferencia y saldo actual -->
+    <div class="col-12">
+      <div class="row">
+        <div class="col item-saldo">
+          <p>
+            Su saldo actual es
+            <span class="decoration-saldo">{{
+              cuentaOrigen.Saldo | currency
+            }}</span>
+          </p>
+        </div>
+      </div>
+      <div class="row justify-content-center">
+        <div
+          class="col-4 col rounded-pill text-center align-self-center shadow-sm"
+          id="tituloTransferencia"
         >
-      </h3>
-      <table class="table">
-        <thead>
-          <tr>
-            <th>Id Operacion</th>
-            <th>Fecha</th>
-            <th>Monto</th>
-            <th>Tipo</th>
-          </tr>
-        </thead>
-        <tbody *ngFor="let transf of transferencias">
-          <tr>
-            <td>{{ transf.IdOperacion }}</td>
-            <td>{{ transf.Fecha | date: "dd/MM/yyyy" }}</td>
-            <td>{{ transf.Monto | currency }}</td>
-            <td>transferencia</td>
-          </tr>
-        </tbody>
-      </table>
+          <h3>Nueva transferencia</h3>
+        </div>
+      </div>
+      <div class="card shadow rounded-3 pt-4 bordes-card">
+        <div class="card-body">
+          <div class="form-group">
+            <div class="row">
+              <div class="col-md-4 col-12">
+                <!-- Campo CVU destino-->
+                <label for="cvuDestino">CVU Destino</label>
+                <input
+                  type="text"
+                  name="cvuDestino"
+                  id="cvuDestino"
+                  class="form-control rounded-pill"
+                  placeholder="Ingrese CVU destino"
+                  aria-describedby="helpId"
+                />
+                <small id="helpId" class="text-muted"
+                  >Debe ingresar el CVU del destinatario</small
+                >
+              </div>
+              <div class="col-md-4 col-12">
+                <!-- Campo monto-->
+                <label for="montoTransferencia">Monto</label>
+                <input
+                  type="text"
+                  name="montoTransferencia"
+                  id="montoTransferencia"
+                  class="form-control rounded-pill"
+                  placeholder="Ingrese un monto"
+                  aria-describedby="helpId"
+                />
+                <small id="helpId" class="text-muted"
+                  >Debe ingresar un monto menor o igual al saldo.</small
+                >
+              </div>
+              <div class="col-md-4 col-12">
+                <!-- comboBox Tipo-->
+                <label for="comboCategoria">Categoria</label>
+                <select
+                  name="comboCategoria"
+                  id="comboCategoria"
+                  class="form-control rounded-pill"
+                >
+                  <option value="{{ categorias.Alquiler }}">Alquiler</option>
+                  <option value="{{ categorias.AportesDeCapital }}">
+                    Aportes de Capital
+                  </option>
+                  <option value="{{ categorias.Cuota }}">Cuota</option>
+                  <option value="{{ categorias.Expensas }}">Expensas</option>
+                  <option value="{{ categorias.Factura }}">Factura</option>
+                  <option value="{{ categorias.Haberes }}">Haberes</option>
+                  <option value="{{ categorias.Honorarios }}">
+                    Honorarios
+                  </option>
+                  <option value="{{ categorias.Prestamo }}">Prestamo</option>
+                  <option value="{{ categorias.Seguro }}">Seguro</option>
+                  <option value="{{ categorias.Varios }}">Varios</option>
+                </select>
+                <small id="helpId" class="text-muted"
+                  >Debe seleccionar una categoria</small
+                >
+              </div>
+            </div>
+            <div class="row pt-3">
+              <div class="col-md-6 col-12">
+                <div class="form-group">
+                  <label for="referenciaCampo">Referencia</label>
+                  <input
+                    type="text"
+                    class="form-control rounded-pill"
+                    name="referenciaCampo"
+                    id="referenciaCampo"
+                    aria-describedby="helpId"
+                    placeholder="Ingrese una referencia"
+                  />
+                  <small id="helpId" class="form-text text-muted"
+                    >Debe ingresar una referencia para que esta transferencia
+                    sea identificada por su destinatario</small
+                  >
+                </div>
+              </div>
+              <div class="col-md-6 col-12 mt-4">
+                <button
+                  class="btn btn-outline-primary rounded-pill mt-2"
+                  (click)="openVerticallyCentered(content)"
+                >
+                  Transferir
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="col-5" *ngIf="nuevaTransferencia">
-      <h3>Nueva transferencia</h3>
-      <div class="form-group">
-        <div class="row">
-          <!-- Mostrar saldo -->
-          <h4>Saldo: {{ cuentaOrigen.Saldo | currency }}</h4>
+  </div>
+  <button type="button" class="btn btn-transferencias rounded-pill" (click)="AbrirCerrarNuevaTransferencia()">{{textobotonTransferencia}}</button>
+  <div class="row mt-3 mb-3"  *ngIf="utimasTransferencia">
+    <!-- Seccion de historico de transferencias  -->
+    <div class="col-md-12 col-12">
+      <div class="row justify-content-center">
+        <div
+          class="col-4 col rounded-pill text-center align-self-center shadow-sm"
+          id="tituloTransferencia"
+        >
+          <h3>Historico de Transferencias</h3>
         </div>
-        <div class="row">
-          <!-- Campo CVU destino-->
-          <label for="cvuDestino">CVU Destino</label>
-          <input
-            type="text"
-            name="cvuDestino"
-            id="cvuDestino"
-            class="form-control"
-            placeholder="Ingrese CVU destino"
-            aria-describedby="helpId"
-          />
-          <small id="helpId" class="text-muted"
-            >Debe ingresar el CVU del destinatario de la transferencia</small
-          >
-        </div>
-        <div class="row">
-          <!-- Campo monto-->
-          <label for="montoTransferencia">Monto</label>
-          <input
-            type="text"
-            name="montoTransferencia"
-            id="montoTransferencia"
-            class="form-control"
-            placeholder="Ingrese un monto"
-            aria-describedby="helpId"
-          />
-          <small id="helpId" class="text-muted"
-            >Debe ingresar un monto menor o igual al saldo.</small
-          >
-        </div>
-        <div class="row">
-          <!-- comboBox Tipo-->
-          <label for="comboCategoria">Categoria</label>
-          <select
-            name="comboCategoria"
-            id="comboCategoria"
-            class="Default select example"
-          >
-            <option value="{{ categorias.Alquiler }}">Alquiler</option>
-            <option value="{{ categorias.AportesDeCapital }}">
-              Aportes de Capital
-            </option>
-            <option value="{{ categorias.Cuota }}">Cuota</option>
-            <option value="{{ categorias.Expensas }}">Expensas</option>
-            <option value="{{ categorias.Factura }}">Factura</option>
-            <option value="{{ categorias.Haberes }}">Haberes</option>
-            <option value="{{ categorias.Honorarios }}">Honorarios</option>
-            <option value="{{ categorias.Prestamo }}">Prestamo</option>
-            <option value="{{ categorias.Seguro }}">Seguro</option>
-            <option value="{{ categorias.Varios }}">Varios</option>
-          </select>
-          <small id="helpId" class="text-muted"
-            >Debe seleccionar una categoria</small
-          >
-        </div>
-        <div class="row">
-          <button
-            class="btn btn-outline-primary mb-2 mr-2"
-            (click)="openVerticallyCentered(content)"
-          >
-            Transferir
-          </button>
-        </div>
+      </div>
+      <div class="card shadow rounded-3 pt-4 bordes-card">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Id Operacion</th>
+              <th>Fecha</th>
+              <th>Monto</th>
+              <th>Tipo</th>
+            </tr>
+          </thead>
+          <tbody *ngFor="let transf of transferencias">
+            <tr>
+              <td>{{ transf.IdOperacion }}</td>
+              <td>{{ transf.Fecha | date: "dd/MM/yyyy" }}</td>
+              <td>{{ transf.Monto | currency }}</td>
+              <td>transferencia</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
   </div>
@@ -122,7 +167,10 @@
     </button>
   </div>
   <div class="modal-body">
-    <p>Se realizara una transferencia a CVU: {{CvuDestino}} de ${{Monto}} pesos.</p>
+    <p>
+      Se realizara una transferencia a CVU: {{ CvuDestino }} de ${{ Monto }}
+      pesos.
+    </p>
   </div>
   <div class="modal-footer">
     <button
@@ -133,6 +181,8 @@
       Cancelar
     </button>
 
-    <button class="btn btn-info" (click)="realizarTransferencia()">Confirmar transferncia</button>
+    <button class="btn btn-info" (click)="realizarTransferencia()">
+      Confirmar transferncia
+    </button>
   </div>
 </ng-template>
