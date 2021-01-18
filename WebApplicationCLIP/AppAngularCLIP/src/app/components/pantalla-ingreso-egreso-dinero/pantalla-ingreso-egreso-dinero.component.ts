@@ -45,7 +45,7 @@ export class PantallaIngresoEgresoDineroComponent implements OnInit {
     }
 
     if (this.selectorTipoOperacion.value == "Deposito") {
-      this.operacionService.realizarDeposito(this.inputCVU.value, this.inputMonto.value).subscribe(
+      this.operacionService.realizarDeposito(this.cuentaOrigen.Cvu, this.inputMonto.value).subscribe(
         x => {
           this.redireccionar.exito();
           this.modalService.dismissAll();
@@ -61,7 +61,7 @@ export class PantallaIngresoEgresoDineroComponent implements OnInit {
     }
 
     if (this.selectorTipoOperacion.value == "Extraccion") {
-      this.operacionService.realizarExtraccion(this.inputCVU.value, this.inputMonto.value).subscribe(
+      this.operacionService.realizarExtraccion(this.cuentaOrigen.Cvu, this.inputMonto.value).subscribe(
         x => {
           console.log("Extraccion realizado exitosamente");
           this.redireccionar.exito();
