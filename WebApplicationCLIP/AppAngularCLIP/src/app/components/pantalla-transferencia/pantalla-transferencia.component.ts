@@ -18,7 +18,8 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 export class PantallaTransferenciaComponent implements OnInit {
 
 
-  constructor(private modalService: NgbModal,private cuentaService: CuentaService  , private transferenciaService : TransferenciasService, private ToastService : ToastrService) { }
+
+  constructor(private formConstructor : FormBuilder,private modalService: NgbModal,private cuentaService: CuentaService  , private transferenciaService : TransferenciasService, private ToastService : ToastrService) { }
 
   textobotonTransferencia : string = 'Ver ultimas transferencias';
   utimasTransferencia : boolean = false;
@@ -32,9 +33,19 @@ export class PantallaTransferenciaComponent implements OnInit {
   transferencias : Array<Operacion> = [];
   cuentaOrigen : Cuenta;
   categorias = CategoriaTransferencia;
+  sumbitted = false;
 
+  formGroupTransferencia : FormGroup;
 
   ngOnInit(): void {
+
+    this.formGroupTransferencia = this.formConstructor.group({
+
+      CvuDestino: ['', [Validators.required, Validators.pattern("^[0-9]{1,22}$")]],
+      Monto: ['', [Validators.required, Validators.pattern("^[0-9]{1,20}$")]],
+      Referencia: ['', [Validators.required, Validators.maxLength(22)]],
+      Categoria: [1, [Validators.required]]
+    })
 
     this.cuentaOrigen = new Cuenta()
 
@@ -125,6 +136,12 @@ export class PantallaTransferenciaComponent implements OnInit {
   }
 
   openVerticallyCentered(content) {
+    //cambiamos la variable de sumbitted a true
+    this.sumbitted = true;
+    //Verifica los validadores
+    if (this.formGroupTransferencia.invalid) {
+      return;
+    }
     this.modalService.open(content, { centered: true });
   }
 
