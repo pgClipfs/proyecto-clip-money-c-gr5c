@@ -1,1 +1,303 @@
-<p>pantalla-transferencia works!</p>
+<div class="container pt-4">
+  <!-- Formulario de transferencia -->
+  <div class="row">
+    <!-- Seccion de nueva transferencia y saldo actual -->
+    <div class="col-12">
+      <div class="row">
+        <div class="col item-saldo">
+          <p>
+            Su saldo actual es
+            <span class="decoration-saldo">{{
+              cuentaOrigen.Saldo | currency
+            }}</span>
+          </p>
+        </div>
+      </div>
+      <div class="row justify-content-center">
+        <div
+          class="col-4 col rounded-pill text-center align-self-center shadow-sm"
+          id="tituloTransferencia"
+        >
+          <h3>Nueva transferencia</h3>
+        </div>
+      </div>
+      <form [formGroup]="formGroupTransferencia">
+        <div class="card shadow rounded-3 pt-4 bordes-card">
+          <div class="card-body">
+            <div class="form-group">
+              <div class="row">
+                <div class="col-md-4 col-12">
+                  <!-- Campo CVU destino-->
+                  <label for="cvuDestino">CVU Destino</label>
+                  <input
+                    type="text"
+                    name="cvuDestino"
+                    id="cvuDestino"
+                    class="form-control rounded-pill"
+                    placeholder="Ingrese CVU destino"
+                    aria-describedby="helpId"
+                    formControlName="CvuDestino"
+                    [ngClass]="{
+                      'is-invalid':
+                        (formGroupTransferencia.controls.CvuDestino.touched ||
+                          sumbitted) &&
+                        formGroupTransferencia.controls.CvuDestino.errors,
+                      'is-valid': !formGroupTransferencia.controls.CvuDestino
+                        .errors
+                    }"
+                  />
+                  <span
+                    class="text-danger"
+                    *ngIf="
+                      formGroupTransferencia.controls.CvuDestino.errors
+                        ?.required &&
+                      (formGroupTransferencia.controls.CvuDestino.touched ||
+                        sumbitted)
+                    "
+                  >
+                    Dato requerido.</span
+                  >
+                  <span
+                    class="text-danger"
+                    *ngIf="
+                      formGroupTransferencia.controls.CvuDestino.errors
+                        ?.pattern &&
+                      formGroupTransferencia.controls.CvuDestino.touched
+                    "
+                  >
+                    Dato numerico, entre 1 y 22 digitos.</span
+                  >
+                  <small id="helpId" class="text-muted"
+                    >Debe ingresar un CVU del destinatario.
+                  </small>
+                </div>
+                <div class="col-md-4 col-12">
+                  <!-- Campo monto-->
+                  <label for="montoTransferencia">Monto</label>
+                  <input
+                    type="text"
+                    name="montoTransferencia"
+                    id="montoTransferencia"
+                    class="form-control rounded-pill"
+                    placeholder="Ingrese un monto"
+                    aria-describedby="helpId"
+                    formControlName="Monto"
+                    [ngClass]="{
+                      'is-invalid':
+                        (formGroupTransferencia.controls.Monto.touched ||
+                          sumbitted) &&
+                        formGroupTransferencia.controls.Monto.errors,
+                      'is-valid': !formGroupTransferencia.controls.Monto.errors
+                    }"
+                  />
+                  <span
+                    class="text-danger"
+                    *ngIf="
+                      formGroupTransferencia.controls.Monto.errors?.required &&
+                      (formGroupTransferencia.controls.Monto.touched ||
+                        sumbitted)
+                    "
+                  >
+                    Dato requerido.
+                  </span>
+                  <span
+                    class="text-danger"
+                    *ngIf="
+                      formGroupTransferencia.controls.Monto.errors?.pattern &&
+                      formGroupTransferencia.controls.Monto.touched
+                    "
+                  >
+                    Dato numerico.
+                  </span>
+
+                  <small id="helpId" class="text-muted"
+                    >Debe ingresar un monto menor o igual al saldo.</small
+                  >
+                </div>
+                <div class="col-md-4 col-12">
+                  <!-- comboBox Tipo-->
+                  <label for="comboCategoria">Categoria</label>
+                  <select
+                    name="comboCategoria"
+                    id="comboCategoria"
+                    class="form-control rounded-pill"
+                    formControlName="Categoria"
+                    [ngClass]="{
+                      'is-invalid':
+                        (formGroupTransferencia.controls.Categoria.touched ||
+                          sumbitted) &&
+                        formGroupTransferencia.controls.Categoria.errors,
+                      'is-valid': !formGroupTransferencia.controls.Monto.errors
+                    }"
+                  >
+                    <option value="{{ categorias.Alquiler }}">Alquiler</option>
+                    <option value="{{ categorias.AportesDeCapital }}">
+                      Aportes de Capital
+                    </option>
+                    <option value="{{ categorias.Cuota }}">Cuota</option>
+                    <option value="{{ categorias.Expensas }}">Expensas</option>
+                    <option value="{{ categorias.Factura }}">Factura</option>
+                    <option value="{{ categorias.Haberes }}">Haberes</option>
+                    <option value="{{ categorias.Honorarios }}">
+                      Honorarios
+                    </option>
+                    <option value="{{ categorias.Prestamo }}">Prestamo</option>
+                    <option value="{{ categorias.Seguro }}">Seguro</option>
+                    <option value="{{ categorias.Varios }}">Varios</option>
+                  </select>
+                  <span
+                    class="text-danger"
+                    *ngIf="
+                      formGroupTransferencia.controls.Categoria.errors
+                        ?.required &&
+                      (formGroupTransferencia.controls.Categoria.touched ||
+                        sumbitted)
+                    "
+                  >
+                    Dato requerido.
+                  </span>
+                  <small id="helpId" class="text-muted"
+                    >Debe seleccionar una categoria</small
+                  >
+                </div>
+              </div>
+              <div class="row pt-3">
+                <div class="col-md-6 col-12">
+                  <div class="form-group">
+                    <label for="referenciaCampo">Referencia</label>
+                    <input
+                      type="text"
+                      class="form-control rounded-pill"
+                      name="referenciaCampo"
+                      id="referenciaCampo"
+                      aria-describedby="helpId"
+                      placeholder="Ingrese una referencia"
+                      formControlName="Referencia"
+                      [ngClass]="{
+                        'is-invalid':
+                          (formGroupTransferencia.controls.Referencia.touched ||
+                            sumbitted) &&
+                          formGroupTransferencia.controls.Referencia.errors,
+                        'is-valid': !formGroupTransferencia.controls.Referencia
+                          .errors
+                      }"
+                    />
+                    <span
+                      class="text-danger"
+                      *ngIf="
+                        formGroupTransferencia.controls.Referencia.errors
+                          ?.required &&
+                        (formGroupTransferencia.controls.Referencia.touched ||
+                          sumbitted)
+                      "
+                    >
+                      Dato requerido.
+                    </span>
+                    <span
+                      class="text-danger"
+                      *ngIf="
+                        formGroupTransferencia.controls.Referencia.errors
+                          ?.maxlength &&
+                        (formGroupTransferencia.controls.Referencia.touched ||
+                          sumbitted)
+                      "
+                    >
+                      Dato de 1 a 22 digitos.
+                    </span>
+                    <small id="helpId" class="form-text text-muted"
+                      >Debe ingresar una referencia para que esta transferencia
+                      sea identificada por su destinatario</small
+                    >
+                  </div>
+                </div>
+                <div class="col-md-6 col-12 mt-4">
+                  <button
+                    class="btn btn-outline-primary rounded-pill mt-2"
+                    (click)="openVerticallyCentered(content)"
+                  >
+                    Transferir
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  <button
+    type="button"
+    class="btn btn-transferencias rounded-pill"
+    (click)="AbrirCerrarNuevaTransferencia()"
+  >
+    {{ textobotonTransferencia }}
+  </button>
+  <div class="row mt-3 mb-3" *ngIf="utimasTransferencia">
+    <!-- Seccion de historico de transferencias  -->
+    <div class="col-md-12 col-12">
+      <div class="row justify-content-center">
+        <div
+          class="col-4 col rounded-pill text-center align-self-center shadow-sm"
+          id="tituloTransferencia"
+        >
+          <h3>Historico de Transferencias</h3>
+        </div>
+      </div>
+      <div class="card shadow rounded-3 pt-4 bordes-card">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Id Operacion</th>
+              <th>Fecha</th>
+              <th>Monto</th>
+              <th>Tipo</th>
+            </tr>
+          </thead>
+          <tbody *ngFor="let transf of transferencias">
+            <tr>
+              <td>{{ transf.IdOperacion }}</td>
+              <td>{{ transf.Fecha | date: "dd/MM/yyyy" }}</td>
+              <td>{{ transf.Monto | currency }}</td>
+              <td>transferencia</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- Input de CVU Origen -->
+</div>
+
+<!--Modal para confirmacion de la transferencia -->
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">Nueva transferencia</h4>
+    <button
+      type="button"
+      class="close"
+      aria-label="Close"
+      (click)="modal.dismiss('Cross click')"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <p>
+      El dia <b>18/01/2021</b> se solicita transferir $<b>{{ Monto }}</b> de la cuenta CA $ <b>{{CvuOrigen}}</b> y acreditar $<b>{{ Monto }}</b> en la cuenta CA $ <b>{{ CvuDestino }}</b>.
+    </p>
+  </div>
+  <div class="modal-footer">
+    <button
+      type="button"
+      class="btn btn-danger rounded-pill"
+      (click)="modal.close('Close click')"
+    >
+      Cancelar
+    </button>
+
+    <button class="btn btn-info rounded-pill" (click)="realizarTransferencia()">
+      Confirmar transferencia
+    </button>
+  </div>
+</ng-template>

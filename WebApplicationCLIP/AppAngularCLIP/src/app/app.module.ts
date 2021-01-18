@@ -25,6 +25,10 @@ import { PantallaExitoComponent } from './components/pantalla-exito/pantalla-exi
 import { PantallaFalloComponent } from './components/pantalla-fallo/pantalla-fallo.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 
+//Importo el modulo para los alerts de error y exito
+
+import {BrowserAnimationsModule} from  '@angular/platform-browser/animations';
+import {ToastrModule} from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -48,13 +52,15 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
     SidebarModule,
     FormsModule,
     ReactiveFormsModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot(),
     RouterModule.forRoot([
       { path: 'signup', component: SignupPageComponent },
       { path: 'registroExitoso', component: RegistroExitosoComponent },
       { path: '', component: HomePageComponent },
       { path: 'login', component: LoginBox },
       { path: 'exito', component: PantallaExitoComponent },
-      { path: 'fallo', component: PantallaFalloComponent},
+      { path: 'transferencia', component: PantallaTransferenciaComponent},
       { path: 'home', component: SidebarComponent},
 
     ]),

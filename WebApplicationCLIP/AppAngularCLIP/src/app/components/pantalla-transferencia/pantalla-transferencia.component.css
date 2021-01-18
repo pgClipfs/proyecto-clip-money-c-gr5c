@@ -1,0 +1,86 @@
+*{
+  font-family: 'Poppins',sans-serif;
+}
+
+:host{
+  --color1:#7400B8;
+  --color2:#6930C3;
+  --color3:#5E60CE;
+  --color4:#5390D9;
+  --color5:#4EA8DE;
+  --color6:#48BFE3;
+  --color7:#56CFE1;
+  --color8:#64DFDF;
+  --color9:#72EFDD;
+  --color10:#80FFDB;
+}
+
+.card{
+  border-radius: 15px;
+  padding: 1rem;
+  border:0;
+  font-family: 'Poppins', sans-serif;
+}
+
+#tituloTransferencia{
+  font-family: 'Poppins',sans-serif;
+  background-color: #ffffff;
+  border: 2px solid #f5f5f5;
+  padding-top: 0.5rem;
+  border-left: 2px solid var(--color9);
+  z-index: 1;
+  position: relative;
+  top: 1rem;
+}
+
+#tituloTransferencia > h3 {
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.btn-outline-primary{
+  color: var(--color3);
+  border-color: var(--color3);
+  transition: 0.10s;
+}
+
+.btn-outline-primary:hover {
+  background-color: var(--color3);
+  color:#ffffff;
+
+}
+
+
+.item-saldo{
+  font-family: 'Poppins',sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  color: rgb(104, 104, 104);
+}
+
+.decoration-saldo{
+  text-decoration: underline var(--color8);
+}
+
+.bordes-card{
+  border-left: 2px solid  var(--color9);
+}
+
+th {
+  border:0;
+}
+
+.btn-transferencias{
+  font-family: 'Poppins', sans-serif;
+  font-size: 1rem;
+  margin-top: 3rem;
+  background-color: var(--color3);
+  color: #ffffff;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  transition: 0.20s;
+}
+
+.btn-transferencias:hover{
+  background-color: var(--color2);
+}
