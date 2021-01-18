@@ -40,45 +40,6 @@
           <h5 class="card-title text-left">Datos de la operacion</h5>
           <div class="row">
             <!-- Campo del CVU -->
-            <div class="col-lg-6 align-self-center">
-              <label for="inputCVU"></label>
-              <input autocomplete="off"
-              (input) ="buscarCuenta()"
-                type="text"
-                formControlName="inputCVU"
-                class="form-control-monto"
-                id="inputCVU"
-                placeholder="CVU"
-              />
-
-              <span
-                class="text-danger text-subtitle"
-                *ngIf="
-                  formDinero.controls.inputCVU.errors?.required &&
-                  formDinero.controls.inputCVU.touched
-                "
-              >
-                Dato requerido.</span
-              >
-              <span
-                class="text-danger"
-                *ngIf="
-                  formDinero.controls.inputCVU.errors?.minlength &&
-                  formDinero.controls.inputCVU.touched
-                "
-              >
-                El CVU no puede tener menos de 22 digitos.</span
-              >
-              <span
-                class="text-danger"
-                *ngIf="
-                  formDinero.controls.inputCVU.errors?.maxlength &&
-                  formDinero.controls.inputCVU.touched
-                "
-              >
-                El CVU no puede tener mas de 22 digitos.</span
-              >
-            </div>
             <!-- Combobox del tipo de operacion -->
             <div class="col-sm align-self-center">
               <div class="input-group mb-3">
@@ -98,33 +59,21 @@
               </div>
             </div>
           </div>
-          <div class="row mt-3">
-            <!-- Boton para ver los datos de la cuenta -->
-            <div class="col-sm">
-              <button
-                type="button"
-                name=""
-                id=""
-                class="btn btn-operacion"
-                (click)="verCuenta()"
-              >
-                {{ labelBotonCuenta }}
-              </button>
-            </div>
-          </div>
           <!-- Datos de la cuenta en la que se va a hacer la operacion -->
           <div class="row" id="cardDatosCuenta">
             <div class="container" *ngIf="verDatosCuenta">
               <div class="card mt-3">
-                <div class="card-body">
-                  <h4 class="card-title">Datos de la cuenta</h4>
-                  <p class="card-text">
-                    Nombre de usuario:  {{ cuentaOrigen.NombreUsuario }}
-                  </p>
-                  <p class="card-text">
-                    Saldo de la cuenta: {{ cuentaOrigen.Saldo| currency }}
-                  </p>
-                  <p class="card-text">CVU de la cuenta: {{ cuentaOrigen.Cvu }}</p>
+                <div calss="container">
+                  <div class="row">
+                    <div class="card-body col-md-6">
+                      <h4 class="card-title">Saldo de la cuenta</h4>
+                      <p class="card-text">{{ cuentaOrigen.Saldo| currency }}</p>
+                    </div>
+                    <div class="card-body col-md-6" >
+                        <h5>CVU de la cuenta</h5>
+                        <p class="card-text" id="inputCVU" >{{ cuentaOrigen.Cvu }}</p>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
