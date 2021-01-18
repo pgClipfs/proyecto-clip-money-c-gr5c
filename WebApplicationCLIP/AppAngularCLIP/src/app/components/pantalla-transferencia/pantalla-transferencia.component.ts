@@ -1,7 +1,7 @@
 import { Component, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormGroup, Validators} from '@angular/forms';
-import { TransferenciasService} from '../../services/transferencias.service';
-import {CategoriaTransferencia, Operacion, Cuenta} from '../../clases'
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { TransferenciasService } from '../../services/transferencias.service';
+import { CategoriaTransferencia, Operacion, Cuenta } from '../../clases'
 import { Observable } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
 import { CuentaService } from 'src/app/services/cuenta.service';
@@ -17,29 +17,30 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 export class PantallaTransferenciaComponent implements OnInit {
 
+  verDatosCuenta: boolean = false;
+  mostrarError: boolean = false;
 
+  constructor(private formConstructor: FormBuilder, private modalService: NgbModal, private cuentaService: CuentaService, private transferenciaService: TransferenciasService, private ToastService: ToastrService) { }
 
-  constructor(private formConstructor : FormBuilder,private modalService: NgbModal,private cuentaService: CuentaService  , private transferenciaService : TransferenciasService, private ToastService : ToastrService) { }
+  textobotonTransferencia: string = 'Ver ultimas transferencias';
+  utimasTransferencia: boolean = false;
+  transferenciaResultado: Observable<any>;
 
-  textobotonTransferencia : string = 'Ver ultimas transferencias';
-  utimasTransferencia : boolean = false;
-  transferenciaResultado : Observable<any>;
+  CvuDestino: string = '';
+  CvuOrigen: string = '';
+  Monto: number = 0;
+  Referencia: string = '';
+  Categoria: string = '';
 
-  CvuDestino : string = '';
-  CvuOrigen : string = '';
-  Monto : number = 0;
-  Referencia : string = '';
-  Categoria : string = '';
+  saldoTransferencia: number = 0;
+  transferencias: Array<Operacion> = [];
+  montoMayorASaldo: boolean = false;
 
-  saldoTransferencia : number = 0;
-  transferencias : Array<Operacion> = [];
-  montoMayorASaldo : boolean = false;
-
-  cuentaOrigen : Cuenta;
+  cuentaOrigen: Cuenta;
   categorias = CategoriaTransferencia;
   sumbitted = false;
 
-  formGroupTransferencia : FormGroup;
+  formGroupTransferencia: FormGroup;
 
   ngOnInit(): void {
 
@@ -68,76 +69,88 @@ export class PantallaTransferenciaComponent implements OnInit {
     )
   }
 
+  public mostrarErrorBusqueda() {
+    this.verDatosCuenta = false
+    this.mostrarError = true
+    this.mensajeError="No se encontro una cuenta con ese CVU"
+  }
+
+  titularCuentaDestino: string;
+  emailCuentaDestino: string;
+  cvuCuentaDestino: string;
+  mensajeError:string="No se encontro una cuenta con ese CVU"
+
   public buscarCuenta() {
+    this.verDatosCuenta = false
+    this.mensajeError="Buscando"
 
-    this.cuentaOrigen.Cvu = "cargando datos"
-    this.cuentaOrigen.Saldo = 0
-    this.cuentaOrigen.NombreUsuario = ""
-
-    this.cuentaService.obtenerCuenta(this.CvuOrigen).subscribe(
+    this.cuentaService.obtenerCuentaOtroUsuario(this.campoCvuDestino.value).subscribe(
       cuenta => {
-        this.cuentaOrigen = cuenta;
-        this.saldoTransferencia = cuenta.Saldo;
+        this.mostrarError = false    
+        this.verDatosCuenta = true
+        this.titularCuentaDestino = cuenta.datosUsuario.Nombre + " " + cuenta.datosUsuario.Apellido
+        this.emailCuentaDestino = cuenta.datosUsuario.Email
+        this.cvuCuentaDestino= cuenta.Cvu
       }, err => {
-        this.cuentaOrigen.NombreUsuario = err.error
+        this.mostrarErrorBusqueda()
+
       }, () => {
       }
     )
   }
 
-  public realizarTransferencia(){
+  public realizarTransferencia() {
 
-    this.transferenciaService.realizarTransferencia(this.CvuDestino,this.Monto,this.Referencia,this.CvuOrigen,this.Categoria)
-    .subscribe(
-      data => {
-        this.transferenciaResultado = data;
-        this.showToastrSucces('Operacion realizada con exito','Nueva Transferencia');
-        this.sumbitted = false;
-        this.limpiarForm();
+    this.transferenciaService.realizarTransferencia(this.CvuDestino, this.Monto, this.Referencia, this.CvuOrigen, this.Categoria)
+      .subscribe(
+        data => {
+          this.transferenciaResultado = data;
+          this.showToastrSucces('Operacion realizada con exito', 'Nueva Transferencia');
+          this.sumbitted = false;
+          this.limpiarForm();
 
-      },
-      err => {
-        console.log(err);
-        this.showToastrError(err,'Operacion Fallida')
+        },
+        err => {
+          console.log(err);
+          this.showToastrError(err, 'Operacion Fallida')
 
 
-      }
-    )
+        }
+      )
 
     this.modalService.dismissAll()
   }
 
-  public getTransferencias(){
+  public getTransferencias() {
     this.transferenciaService.obtenerTransferencias(this.CvuOrigen)
-    .subscribe(
-      data => {
-        this.transferencias = data;
-      },
-      err => {
-        console.log(err);
-        this.showToastrError(err,'Operacion Fallida')
+      .subscribe(
+        data => {
+          this.transferencias = data;
+        },
+        err => {
+          console.log(err);
+          this.showToastrError(err, 'Operacion Fallida')
 
 
-      }
-    )
+        }
+      )
   }
 
-  public showToastrSucces(mensajeAlert : string, tituloAlert: string){
+  public showToastrSucces(mensajeAlert: string, tituloAlert: string) {
     this.ToastService.success(mensajeAlert, tituloAlert)
   }
 
-  public showToastrError(mensajeAlert : string, tituloAlert: string){
+  public showToastrError(mensajeAlert: string, tituloAlert: string) {
     this.ToastService.error(mensajeAlert, tituloAlert)
   }
 
-  public AbrirCerrarNuevaTransferencia(){
+  public AbrirCerrarNuevaTransferencia() {
     this.getTransferencias();
     this.utimasTransferencia = !this.utimasTransferencia;
-    if (this.utimasTransferencia == true)
-    {
+    if (this.utimasTransferencia == true) {
       this.textobotonTransferencia = 'Cerrar';
     }
-    else{
+    else {
       this.textobotonTransferencia = 'Ver ultimas transferencias';
     }
   }
@@ -173,7 +186,7 @@ export class PantallaTransferenciaComponent implements OnInit {
     return this.formGroupTransferencia.get('Referencia');
   }
 
-  public limpiarForm(){
+  public limpiarForm() {
     this.formGroupTransferencia.reset();
   }
 }

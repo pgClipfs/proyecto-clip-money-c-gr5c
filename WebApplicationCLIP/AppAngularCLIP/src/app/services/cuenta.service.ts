@@ -19,6 +19,29 @@ export class CuentaService {
 
   private urlApi = "http://localhost:59642/api/"; //linea para hacer pruebas
 
+  public obtenerCuentaOtroUsuario(Cvu: string): Observable<Cuenta> {
+
+    return this.http.post<any>(this.urlApi + 'get/datosCuentaTerceros', {Cvu})
+      .pipe(
+        //retry(2), //esto es para decirle cuantas veces lo tiene que intentar antes de tirar error :o
+        catchError(err => {
+          //console.log("err"+err)
+          throw err;
+        }),
+        map(cta => {
+  
+          var cuenta: Cuenta
+
+            cuenta = new Cuenta()
+            cuenta.Cvu = cta.Cvu
+            cuenta.Saldo = cta.Saldo
+            cuenta.datosUsuario=cta.Usuario;
+ 
+          return cuenta;
+        }
+        )
+      );
+  }
 
   public obtenerCuenta(Cvu: string): Observable<Cuenta> {
 
