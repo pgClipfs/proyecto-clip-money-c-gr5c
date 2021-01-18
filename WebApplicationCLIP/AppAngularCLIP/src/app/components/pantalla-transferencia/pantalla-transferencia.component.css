@@ -1,3 +1,7 @@
+*{
+  font-family: 'Poppins',sans-serif;
+}
+
 :host{
   --color1:#7400B8;
   --color2:#6930C3;

@@ -23,14 +23,18 @@ export class PantallaTransferenciaComponent implements OnInit {
 
   textobotonTransferencia : string = 'Ver ultimas transferencias';
   utimasTransferencia : boolean = false;
-  transferenciaPrueba : Observable<any>;
-  CvuDestino : string = '000040444444';
-  CvuOrigen : string = '000040666666';
-  Monto : number = 60;
-  Referencia : string = 'Test';
-  Categoria : string = CategoriaTransferencia.Expensas.toString();
-  saldoTransferencia : number = 2500;
+  transferenciaResultado : Observable<any>;
+
+  CvuDestino : string = '';
+  CvuOrigen : string = '';
+  Monto : number = 0;
+  Referencia : string = '';
+  Categoria : string = '';
+
+  saldoTransferencia : number = 0;
   transferencias : Array<Operacion> = [];
+  montoMayorASaldo : boolean = false;
+
   cuentaOrigen : Cuenta;
   categorias = CategoriaTransferencia;
   sumbitted = false;
@@ -62,8 +66,6 @@ export class PantallaTransferenciaComponent implements OnInit {
 
       }
     )
-
-    this.getTransferencias();
   }
 
   public buscarCuenta() {
@@ -84,11 +86,15 @@ export class PantallaTransferenciaComponent implements OnInit {
   }
 
   public realizarTransferencia(){
+
     this.transferenciaService.realizarTransferencia(this.CvuDestino,this.Monto,this.Referencia,this.CvuOrigen,this.Categoria)
     .subscribe(
       data => {
-        this.transferenciaPrueba = data;
+        this.transferenciaResultado = data;
         this.showToastrSucces('Operacion realizada con exito','Nueva Transferencia');
+        this.sumbitted = false;
+        this.limpiarForm();
+
       },
       err => {
         console.log(err);
@@ -125,6 +131,7 @@ export class PantallaTransferenciaComponent implements OnInit {
   }
 
   public AbrirCerrarNuevaTransferencia(){
+    this.getTransferencias();
     this.utimasTransferencia = !this.utimasTransferencia;
     if (this.utimasTransferencia == true)
     {
@@ -142,7 +149,31 @@ export class PantallaTransferenciaComponent implements OnInit {
     if (this.formGroupTransferencia.invalid) {
       return;
     }
+
     this.modalService.open(content, { centered: true });
+    this.CvuDestino = this.campoCvuDestino.value;
+    this.Monto = this.campoMonto.value;
+    this.Referencia = this.campoReferencia.value;
+    this.Categoria = this.campoCategoria.value;
   }
 
+  get campoCvuDestino() {
+    return this.formGroupTransferencia.get('CvuDestino');
+  }
+
+  get campoMonto() {
+    return this.formGroupTransferencia.get('Monto');
+  }
+
+  get campoCategoria() {
+    return this.formGroupTransferencia.get('Categoria');
+  }
+
+  get campoReferencia() {
+    return this.formGroupTransferencia.get('Referencia');
+  }
+
+  public limpiarForm(){
+    this.formGroupTransferencia.reset();
+  }
 }

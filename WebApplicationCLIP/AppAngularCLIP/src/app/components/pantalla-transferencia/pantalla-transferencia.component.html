@@ -109,6 +109,7 @@
                   >
                     Dato numerico.
                   </span>
+
                   <small id="helpId" class="text-muted"
                     >Debe ingresar un monto menor o igual al saldo.</small
                   >
@@ -283,21 +284,20 @@
   </div>
   <div class="modal-body">
     <p>
-      Se realizara una transferencia a CVU: {{ CvuDestino }} de ${{ Monto }}
-      pesos.
+      El dia <b>18/01/2021</b> se solicita transferir $<b>{{ Monto }}</b> de la cuenta CA $ <b>{{CvuOrigen}}</b> y acreditar $<b>{{ Monto }}</b> en la cuenta CA $ <b>{{ CvuDestino }}</b>.
     </p>
   </div>
   <div class="modal-footer">
     <button
       type="button"
-      class="btn btn-light"
+      class="btn btn-danger rounded-pill"
       (click)="modal.close('Close click')"
     >
       Cancelar
     </button>
 
-    <button class="btn btn-info" (click)="realizarTransferencia()">
-      Confirmar transferncia
+    <button class="btn btn-info rounded-pill" (click)="realizarTransferencia()">
+      Confirmar transferencia
     </button>
   </div>
 </ng-template>
