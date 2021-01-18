@@ -142,8 +142,18 @@ namespace WebApplicationCLIP.Controllers
         public IHttpActionResult ExtraerMonto(JObject obj)
         //public IHttpActionResult DepositarMonto(float monto, string cvu, [FromBody] SesionDeUsuario login)
         {
-            float monto = (float)obj["Monto"];
-            string cvu = (string)obj["Cvu"];
+            float monto;
+            string cvu;
+            try
+            {
+                monto = (float)obj["Monto"];
+                cvu = (string)obj["Cvu"];
+            }
+            catch (Exception)
+            {
+                return Content(HttpStatusCode.BadRequest, "formato de numero invalido");
+            }
+
             SesionDeUsuario login = obj["SesionDeUsuario"].ToObject<SesionDeUsuario>();
             Cuenta cuenta;
 
@@ -190,7 +200,7 @@ namespace WebApplicationCLIP.Controllers
                 //Operacion o = Operacion.crearOperacionExtraccion(null, monto);
                 return Ok(cuenta.Extraer(monto));
             }
-            catch(SaldoInsuficiente e)
+            catch (SaldoInsuficiente e)
             {
                 return Content(HttpStatusCode.Forbidden, e.Message);
             }
@@ -222,7 +232,7 @@ namespace WebApplicationCLIP.Controllers
             {
                 return Content(HttpStatusCode.Forbidden, new ErrorTransferencia("No existe esa categoria").Message);
             }
-            
+
             SesionDeUsuario login = obj["SesionDeUsuario"].ToObject<SesionDeUsuario>();
             Cuenta cuentaOrigen;
             Cuenta cuentaDestino;
@@ -287,9 +297,9 @@ namespace WebApplicationCLIP.Controllers
             {
                 cantidadTransferencias = (int)obj["cantidad"];
             }
-            catch 
+            catch
             {
-                cantidadTransferencias = 10;                
+                cantidadTransferencias = 10;
             }
 
             string tipoOperacion = "transferencia";
@@ -330,7 +340,7 @@ namespace WebApplicationCLIP.Controllers
             try
             {
                 GestorTransferencia gestorTransferencia = new GestorTransferencia();
-                return Ok(gestorTransferencia.ObtenerTransferenciasPorCVU(cvu,tipoOperacion));
+                return Ok(gestorTransferencia.ObtenerTransferenciasPorCVU(cvu, tipoOperacion));
             }
             catch (Exception e)
             {

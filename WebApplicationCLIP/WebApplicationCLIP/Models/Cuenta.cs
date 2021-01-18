@@ -74,7 +74,7 @@ namespace WebApplicationCLIP.Models
 
             Cuenta cuentaOrigen = this;
 
-            if (cuentaOrigen == cuentaDestino)
+            if (cuentaOrigen.Cvu == cuentaDestino.Cvu)
             {
                 throw new ErrorTransferencia("la cuenta de destino no puede ser la misma que la de origen");
             }

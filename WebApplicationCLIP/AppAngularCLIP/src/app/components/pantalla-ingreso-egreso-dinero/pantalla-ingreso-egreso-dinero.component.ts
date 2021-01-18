@@ -14,7 +14,7 @@ import { CuentaService } from '../../services/cuenta.service'
 })
 export class PantallaIngresoEgresoDineroComponent implements OnInit {
 
-  constructor(private modalService: NgbModal,private redireccionar: RedireccionService, private operacionService: OperacionService, private fb: FormBuilder, private cuentaService: CuentaService) { }
+  constructor(private modalService: NgbModal, private redireccionar: RedireccionService, private operacionService: OperacionService, private fb: FormBuilder, private cuentaService: CuentaService) { }
 
   //esta cuenta, se carga automaticamente cuando se abre la ventana
   //@Input()
@@ -39,8 +39,12 @@ export class PantallaIngresoEgresoDineroComponent implements OnInit {
 
   public realizarOperacion() {
 
+    var boton = <HTMLInputElement>document.getElementById("botonConfirmar")
+    boton.disabled = true;
+
     if (this.inputMonto.value <= 0 || this.inputMonto == null) {
       alert("error: ingrese un monto valido")
+      boton.disabled = false;
       return;
     }
 
@@ -49,10 +53,12 @@ export class PantallaIngresoEgresoDineroComponent implements OnInit {
         x => {
           this.redireccionar.exito();
           this.modalService.dismissAll();
+          boton.disabled = false;
         },
         err => {
           console.log(err);
           alert(err.error);
+          boton.disabled = false;
           //this.redireccionar.fallo();
           //this.modalService.dismissAll()
         }
@@ -66,9 +72,11 @@ export class PantallaIngresoEgresoDineroComponent implements OnInit {
           console.log("Extraccion realizado exitosamente");
           this.redireccionar.exito();
           this.modalService.dismissAll()
+          boton.disabled = false;
         },
         err => {
           alert(err.error);
+          boton.disabled = false;
           //this.redireccionar.fallo();
           //this.modalService.dismissAll()
         }
