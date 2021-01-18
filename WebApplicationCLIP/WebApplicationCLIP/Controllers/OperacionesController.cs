@@ -21,6 +21,16 @@ namespace WebApplicationCLIP.Controllers
         [Route("get/operaciones")]
         public IHttpActionResult GetOperacionesCuenta(JObject obj)
         {
+            int cantidadOperaciones;
+            try
+            {
+                cantidadOperaciones = (int)obj["cantidad"];
+            }
+            catch
+            {
+                cantidadOperaciones = 10;
+            }
+
             string cvu = (string)obj["Cvu"];
             SesionDeUsuario login = obj["SesionDeUsuario"].ToObject<SesionDeUsuario>();
             Cuenta cuenta;
@@ -266,11 +276,22 @@ namespace WebApplicationCLIP.Controllers
             //if (!LoginController.ValidarToken(sesion))return Unauthorized();
         }
 
+        //api de prueba de juan
         [HttpPost]
         [EnableCors(origins: "*", headers: "*", methods: "*")]
         [Route("get/transferencias")]
         public IHttpActionResult GetTransferencias(JObject obj)
         {
+            int cantidadTransferencias;
+            try
+            {
+                cantidadTransferencias = (int)obj["cantidad"];
+            }
+            catch 
+            {
+                cantidadTransferencias = 10;                
+            }
+
             string tipoOperacion = "transferencia";
             string cvu = (string)obj["Cvu"];
             SesionDeUsuario login = obj["SesionDeUsuario"].ToObject<SesionDeUsuario>();
@@ -300,7 +321,7 @@ namespace WebApplicationCLIP.Controllers
             }
             catch (HttpRequestException e)
             {
-                return BadRequest("Sesion de usuario null --> " + e);
+                return BadRequest("Sesion de usuario null --> " + e.Message);
             }
             catch (Exception e)
             {
