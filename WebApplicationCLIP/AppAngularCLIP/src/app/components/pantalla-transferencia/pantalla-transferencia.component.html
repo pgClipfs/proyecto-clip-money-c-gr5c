@@ -61,8 +61,7 @@
                     aria-describedby="helpId" formControlName="Monto" [ngClass]="{
                       'is-invalid':
                         (formGroupTransferencia.controls.Monto.touched ||
-                          sumbitted) &&
-                        formGroupTransferencia.controls.Monto.errors ,
+                          sumbitted) && (formGroupTransferencia.controls.Monto.errors || !saldoSuficiente) ,
                       'is-valid': !formGroupTransferencia.controls.Monto.errors && saldoSuficiente
                     }" />
                   <span class="text-danger" *ngIf="
