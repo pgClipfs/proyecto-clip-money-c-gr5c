@@ -26,15 +26,14 @@
                 <div class="col-md-4 col-12">
                   <!-- Campo CVU destino-->
                   <label for="cvuDestino">CVU Destino</label>
-                  <input type="text" (input)="buscarCuenta()" name="cvuDestino" id="cvuDestino"
+                  <input autocomplete="off" type="text" (input)="buscarCuenta()" name="cvuDestino" id="cvuDestino"
                     class="form-control rounded-pill" placeholder="Ingrese CVU destino" aria-describedby="helpId"
                     formControlName="CvuDestino" [ngClass]="{
                       'is-invalid':
                         (formGroupTransferencia.controls.CvuDestino.touched ||
                           sumbitted) &&
                         formGroupTransferencia.controls.CvuDestino.errors,
-                      'is-valid': !formGroupTransferencia.controls.CvuDestino
-                        .errors
+                      'is-valid': !formGroupTransferencia.controls.CvuDestino.errors && estadoActual==estadoBusqueda.ResultadoExitoso
                     }" />
                   <span class="text-danger" *ngIf="
                       formGroupTransferencia.controls.CvuDestino.errors
@@ -43,6 +42,8 @@
                         sumbitted)
                     ">
                     Dato requerido.</span>
+                  <span class="text-danger" *ngIf="estadoActual==estadoBusqueda.Error">
+                    Cuenta no encontrada.</span>
                   <span class="text-danger" *ngIf="
                       formGroupTransferencia.controls.CvuDestino.errors
                         ?.pattern &&
@@ -55,13 +56,14 @@
                 <div class="col-md-4 col-12">
                   <!-- Campo monto-->
                   <label for="montoTransferencia">Monto</label>
-                  <input type="text" name="montoTransferencia" id="montoTransferencia" class="form-control rounded-pill"
-                    placeholder="Ingrese un monto" aria-describedby="helpId" formControlName="Monto" [ngClass]="{
+                  <input (input)="verificarSaldoDisponible()" autocomplete="off" type="text" name="montoTransferencia"
+                    id="montoTransferencia" class="form-control rounded-pill" placeholder="Ingrese un monto"
+                    aria-describedby="helpId" formControlName="Monto" [ngClass]="{
                       'is-invalid':
                         (formGroupTransferencia.controls.Monto.touched ||
                           sumbitted) &&
-                        formGroupTransferencia.controls.Monto.errors,
-                      'is-valid': !formGroupTransferencia.controls.Monto.errors
+                        formGroupTransferencia.controls.Monto.errors ,
+                      'is-valid': !formGroupTransferencia.controls.Monto.errors && saldoSuficiente
                     }" />
                   <span class="text-danger" *ngIf="
                       formGroupTransferencia.controls.Monto.errors?.required &&
@@ -74,8 +76,12 @@
                       formGroupTransferencia.controls.Monto.errors?.pattern &&
                       formGroupTransferencia.controls.Monto.touched
                     ">
-                    Dato numerico.
+                    Dato numerico requerido.
                   </span>
+                  <span class="text-danger" *ngIf="formGroupTransferencia.controls.Monto.dirty && !saldoSuficiente">
+                    Saldo Insufuciente.
+                  </span>
+
 
                   <small id="helpId" class="text-muted">Debe ingresar un monto menor o igual al saldo.</small>
                 </div>
@@ -117,7 +123,7 @@
                 </div>
               </div>
               <div class="row" id="cardDatosCuenta">
-                <div class="container" *ngIf="verDatosCuenta">
+                <div class="container" *ngIf="estadoActual==estadoBusqueda.ResultadoExitoso">
                   <div class="card mt-3">
                     <div calss="container justify-content-center">
                       <!-- datos cuenta de destino -->
@@ -140,11 +146,18 @@
                     </div>
                   </div>
                 </div>
-                <div class="container" *ngIf="mostrarError">
+                <div class="container" *ngIf="estadoActual==estadoBusqueda.Error">
+                  <div class="card mt-3">
+                    <div class="card-body text-center col-md-12">
+                      <h4 class="card-title">No se encontro una cuenta con ese CVU</h4>
+                    </div>
+                  </div>
+                </div>
+                <div class="container" *ngIf="estadoActual==estadoBusqueda.Buscando">
 
                   <div class="card mt-3">
                     <div class="card-body text-center col-md-12">
-                      <h4 class="card-title">{{mensajeError}}</h4>
+                      <h4 class="card-title">Buscando</h4>
 
                     </div>
                   </div>
@@ -155,9 +168,9 @@
                 <div class="col-md-6 col-12">
                   <div class="form-group">
                     <label for="referenciaCampo">Referencia</label>
-                    <input type="text" class="form-control rounded-pill" name="referenciaCampo" id="referenciaCampo"
-                      aria-describedby="helpId" placeholder="Ingrese una referencia" formControlName="Referencia"
-                      [ngClass]="{
+                    <input autocomplete="off" type="text" class="form-control rounded-pill" name="referenciaCampo"
+                      id="referenciaCampo" aria-describedby="helpId" placeholder="Ingrese una referencia"
+                      formControlName="Referencia" [ngClass]="{
                         'is-invalid':
                           (formGroupTransferencia.controls.Referencia.touched ||
                             sumbitted) &&

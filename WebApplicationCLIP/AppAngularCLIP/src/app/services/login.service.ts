@@ -45,9 +45,15 @@ export class LoginService {
     return this.http.post<any>(this.urlApi + 'login/authenticate',
       { contraseña, nombreDeUsuario })
       .pipe(
-        retry(2), //esto es para decirle cuantas veces lo tiene que intentar antes de tirar error :o
+     //   retry(2), //esto es para decirle cuantas veces lo tiene que intentar antes de tirar error :o
         catchError(err => {
-          throw err;
+
+          //detectar si esta caido el backend
+          if (err.status == 0) {
+            throw "No se pudo establecer conexion con el servidor";
+          }
+
+          throw err.error;
         }), //esto es para procesar los errores que devuelva el backend
         map(sesion => {
           localStorage.setItem('sesionActual', JSON.stringify(sesion));

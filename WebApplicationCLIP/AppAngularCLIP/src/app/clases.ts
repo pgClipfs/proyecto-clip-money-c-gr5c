@@ -28,6 +28,13 @@ export enum Ventana {
   PagarServicios,
 }
 
+export enum EstadoBusqueda {
+  ResultadoExitoso,
+  Error,
+  Buscando,
+  Nada,
+}
+
 export enum CategoriaTransferencia {
   Varios,
   Alquiler,

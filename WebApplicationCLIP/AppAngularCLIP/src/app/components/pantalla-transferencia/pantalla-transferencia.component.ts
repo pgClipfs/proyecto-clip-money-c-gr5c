@@ -1,7 +1,7 @@
 import { Component, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { TransferenciasService } from '../../services/transferencias.service';
-import { CategoriaTransferencia, Operacion, Cuenta } from '../../clases'
+import { CategoriaTransferencia, Operacion, Cuenta, EstadoBusqueda } from '../../clases'
 import { Observable } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
 import { CuentaService } from 'src/app/services/cuenta.service';
@@ -17,10 +17,12 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 export class PantallaTransferenciaComponent implements OnInit {
 
-  verDatosCuenta: boolean = false;
-  mostrarError: boolean = false;
+  estadoActual: EstadoBusqueda = EstadoBusqueda.Nada
+  estadoBusqueda=EstadoBusqueda
 
-  constructor(private formConstructor: FormBuilder, private modalService: NgbModal, private cuentaService: CuentaService, private transferenciaService: TransferenciasService, private ToastService: ToastrService) { }
+  constructor(private formConstructor: FormBuilder, private modalService: NgbModal, private cuentaService: CuentaService, private transferenciaService: TransferenciasService, private ToastService: ToastrService) { 
+    
+  }
 
   textobotonTransferencia: string = 'Ver ultimas transferencias';
   utimasTransferencia: boolean = false;
@@ -32,6 +34,8 @@ export class PantallaTransferenciaComponent implements OnInit {
   Referencia: string = '';
   Categoria: string = '';
 
+  saldoSuficiente:boolean
+
   saldoTransferencia: number = 0;
   transferencias: Array<Operacion> = [];
   montoMayorASaldo: boolean = false;
@@ -41,6 +45,10 @@ export class PantallaTransferenciaComponent implements OnInit {
   sumbitted = false;
 
   formGroupTransferencia: FormGroup;
+
+  verificarSaldoDisponible(){
+    this.saldoSuficiente= (this.campoMonto.value <= this.cuentaOrigen.Saldo)
+  }
 
   ngOnInit(): void {
 
@@ -69,30 +77,24 @@ export class PantallaTransferenciaComponent implements OnInit {
     )
   }
 
-  public mostrarErrorBusqueda() {
-    this.verDatosCuenta = false
-    this.mostrarError = true
-    this.mensajeError="No se encontro una cuenta con ese CVU"
-  }
+
 
   titularCuentaDestino: string;
   emailCuentaDestino: string;
   cvuCuentaDestino: string;
-  mensajeError:string="No se encontro una cuenta con ese CVU"
 
   public buscarCuenta() {
-    this.verDatosCuenta = false
-    this.mensajeError="Buscando"
+    this.estadoActual=EstadoBusqueda.Buscando
+
 
     this.cuentaService.obtenerCuentaOtroUsuario(this.campoCvuDestino.value).subscribe(
       cuenta => {
-        this.mostrarError = false    
-        this.verDatosCuenta = true
+        this.estadoActual=EstadoBusqueda.ResultadoExitoso
         this.titularCuentaDestino = cuenta.datosUsuario.Nombre + " " + cuenta.datosUsuario.Apellido
         this.emailCuentaDestino = cuenta.datosUsuario.Email
         this.cvuCuentaDestino= cuenta.Cvu
       }, err => {
-        this.mostrarErrorBusqueda()
+        this.estadoActual=EstadoBusqueda.Error
 
       }, () => {
       }

@@ -35,7 +35,7 @@ export class LoginBox {
                 err => {
                     this.error = true;
 
-                    this.msg_error=err.error;
+                    this.msg_error=err;
 
                     this.value_user = "";
                     this.value_pasw = "";
