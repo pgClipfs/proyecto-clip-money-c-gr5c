@@ -84,3 +84,7 @@ th {
 .btn-transferencias:hover{
   background-color: var(--color2);
 }
+
+#cardDatosCuenta > .card {
+  background-color: rgb(224, 69, 69);
+}

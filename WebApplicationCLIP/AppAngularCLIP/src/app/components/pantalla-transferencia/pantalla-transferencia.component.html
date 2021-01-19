@@ -32,7 +32,7 @@
                       'is-invalid':
                         (formGroupTransferencia.controls.CvuDestino.touched ||
                           sumbitted) &&
-                        formGroupTransferencia.controls.CvuDestino.errors,
+                        (formGroupTransferencia.controls.CvuDestino.errors || estadoActual==estadoBusqueda.Error) ,
                       'is-valid': !formGroupTransferencia.controls.CvuDestino.errors && estadoActual==estadoBusqueda.ResultadoExitoso
                     }" />
                   <span class="text-danger" *ngIf="
@@ -78,7 +78,7 @@
                     Dato numerico requerido.
                   </span>
                   <span class="text-danger" *ngIf="formGroupTransferencia.controls.Monto.dirty && !saldoSuficiente">
-                    Saldo Insufuciente.
+                    Monto mayor al saldo actual o monto cero.
                   </span>
 
 

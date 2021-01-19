@@ -20,8 +20,8 @@ export class PantallaTransferenciaComponent implements OnInit {
   estadoActual: EstadoBusqueda = EstadoBusqueda.Nada
   estadoBusqueda=EstadoBusqueda
 
-  constructor(private formConstructor: FormBuilder, private modalService: NgbModal, private cuentaService: CuentaService, private transferenciaService: TransferenciasService, private ToastService: ToastrService) { 
-    
+  constructor(private formConstructor: FormBuilder, private modalService: NgbModal, private cuentaService: CuentaService, private transferenciaService: TransferenciasService, private ToastService: ToastrService) {
+
   }
 
   textobotonTransferencia: string = 'Ver ultimas transferencias';
@@ -47,7 +47,7 @@ export class PantallaTransferenciaComponent implements OnInit {
   formGroupTransferencia: FormGroup;
 
   verificarSaldoDisponible(){
-    this.saldoSuficiente= (this.campoMonto.value <= this.cuentaOrigen.Saldo)
+    this.saldoSuficiente = (this.campoMonto.value <= this.cuentaOrigen.Saldo && this.campoMonto.value > 0)
   }
 
   ngOnInit(): void {
@@ -110,6 +110,7 @@ export class PantallaTransferenciaComponent implements OnInit {
           this.showToastrSucces('Operacion realizada con exito', 'Nueva Transferencia');
           this.sumbitted = false;
           this.limpiarForm();
+          this.estadoActual = this.estadoBusqueda.Nada;
 
         },
         err => {
@@ -161,7 +162,7 @@ export class PantallaTransferenciaComponent implements OnInit {
     //cambiamos la variable de sumbitted a true
     this.sumbitted = true;
     //Verifica los validadores
-    if (this.formGroupTransferencia.invalid) {
+    if (this.formGroupTransferencia.invalid || this.estadoActual == this.estadoBusqueda.Error || !this.saldoSuficiente) {
       return;
     }
 
