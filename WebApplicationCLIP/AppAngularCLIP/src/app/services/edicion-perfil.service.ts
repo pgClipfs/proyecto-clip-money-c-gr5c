@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Usuario } from '../modelos/usuario';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 
 @Injectable({
@@ -12,7 +12,7 @@ export class EdicionPerfilService {
 
   public updateUser(usuario: Usuario): Observable<any> {
     return this.http
-      .put<any>(this.urlApi + 'post/modificardatosusuario', usuario)
+      .post<any>(this.urlApi + 'post/modificardatosusuario', usuario)
       .pipe(
         catchError((err) => {
           throw err.error;

@@ -8,6 +8,10 @@ import {
 import { Usuario } from 'src/app/modelos/usuario';
 import { EdicionPerfilService } from 'src/app/services/edicion-perfil.service';
 import { DatosUsuarioService } from 'src/app/services/datos-usuario.service';
+import { Cuenta } from 'src/app/clases';
+import { CuentaService } from 'src/app/services/cuenta.service';
+import { RedireccionService } from 'src/app/services/redireccion.service';
+import { LoginService } from 'src/app/services/login.service';
 
 @Component({
   selector: 'app-pantalla-edicion-perfil',
@@ -15,13 +19,37 @@ import { DatosUsuarioService } from 'src/app/services/datos-usuario.service';
   styleUrls: ['./pantalla-edicion-perfil.component.css'],
 })
 export class PantallaEdicionPerfilComponent implements OnInit {
+  usuario: Usuario;
   fgroup: FormGroup;
-  constructor(private fb: FormBuilder) {}
+  nombreUsuario: string = 'Usuario No Encontrado';
+  apellidoUsuario: string;
+  cuentaUsuario: Cuenta;
+
+  constructor(
+    private fb: FormBuilder,
+    private datosUsuarioService: DatosUsuarioService,
+    private cuentasService: CuentaService,
+    private redireccionar: RedireccionService,
+    private loginService: LoginService
+  ) {}
 
   ngOnInit(): void {
+    this.cuentasService.obtenerCuentasUsuario().subscribe(
+      (val) => {
+        this.cuentaUsuario = val[0];
+      },
+      (err) => {
+        this.loginService.logout();
+        this.redireccionar.landingPage();
+      },
+      () => {
+        this.obtenerDatosUsuario();
+      }
+    );
+
     this.fgroup = this.fb.group({
       Nombre: [
-        '',
+        this.nombreUsuario,
         [
           Validators.required,
           Validators.maxLength(55),
@@ -29,7 +57,7 @@ export class PantallaEdicionPerfilComponent implements OnInit {
         ],
       ],
       Apellido: [
-        '',
+        this.apellidoUsuario,
         [
           Validators.required,
           Validators.maxLength(55),
@@ -47,22 +75,20 @@ export class PantallaEdicionPerfilComponent implements OnInit {
 
   actualizar() {
     if (this.fgroup.valid) {
-      //Necesario crear el servicio para traer los datos actuales del usuario antes de continuar
+      //Necesario traer los datos actuales del usuario antes de usar el servicio EdicionPerfil
     }
   }
 
-  public obtenerDatosUsuario() {
-
+  obtenerDatosUsuario() {
     this.datosUsuarioService.obtenerDatosUsuario().subscribe(
-      user => {
+      (user) => {
         this.usuario = user;
-        this.cuentaUsuario.NombreUsuario = user.NombreDeUsuario
-        this.nombreUsuario = this.usuario.Nombre + " " + this.usuario.Apellido;
+        this.nombreUsuario = this.usuario.Nombre;
+        this.apellidoUsuario = this.usuario.Apellido;
       },
-      err => {
-        console.log("no se encontro el usuario (?");
+      (err) => {
+        console.log('no se encontro el usuario (?');
       }
     );
   }
-    console.log('Actualizando Usuario');
 }
