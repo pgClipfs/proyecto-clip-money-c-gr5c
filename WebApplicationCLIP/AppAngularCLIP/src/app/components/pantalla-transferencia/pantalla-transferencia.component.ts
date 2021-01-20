@@ -54,7 +54,7 @@ export class PantallaTransferenciaComponent implements OnInit {
 
     this.formGroupTransferencia = this.formConstructor.group({
 
-      CvuDestino: ['', [Validators.required, Validators.pattern("^[0-9]{1,22}$")]],
+      CvuDestino: ['', [Validators.required,  Validators.pattern("^[0-9]{12}$")]],
       Monto: ['', [Validators.required, Validators.pattern("^[0-9]{1,20}$")]],
       Referencia: ['', [Validators.required, Validators.maxLength(22)]],
       Categoria: [1, [Validators.required]]
@@ -83,9 +83,19 @@ export class PantallaTransferenciaComponent implements OnInit {
   emailCuentaDestino: string;
   cvuCuentaDestino: string;
 
-  public buscarCuenta() {
-    this.estadoActual=EstadoBusqueda.Buscando
 
+  public buscarCuenta() {
+
+    var cvu : string;
+    cvu = this.campoCvuDestino.value;
+
+    this.estadoActual=EstadoBusqueda.Nada;
+
+    if(cvu.length != 12){
+      return;
+    }
+
+    this.estadoActual=EstadoBusqueda.Buscando;
 
     this.cuentaService.obtenerCuentaOtroUsuario(this.campoCvuDestino.value).subscribe(
       cuenta => {

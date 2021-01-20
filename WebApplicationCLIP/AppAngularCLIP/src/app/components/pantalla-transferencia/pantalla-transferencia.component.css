@@ -85,6 +85,16 @@ th {
   background-color: var(--color2);
 }
 
-#cardDatosCuenta > .card {
-  background-color: rgb(224, 69, 69);
+.card-cuenta{
+  background-color: rgb(241, 241, 241);
+  border-radius: 15px;
+  color:  rgb(116, 116, 116);
+  border: 1px solid  rgb(116, 116, 116);
+}
+
+.card-cuenta-error{
+  background-color: rgb(248, 176, 176);
+  border-radius: 15px;
+  color:  rgb(228, 91, 91);
+  border: 2px solid  rgb(228, 91, 91);
 }
