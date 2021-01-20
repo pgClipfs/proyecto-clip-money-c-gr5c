@@ -9,9 +9,7 @@ import { Usuario } from 'src/app/modelos/usuario';
 import { EdicionPerfilService } from 'src/app/services/edicion-perfil.service';
 import { DatosUsuarioService } from 'src/app/services/datos-usuario.service';
 import { Cuenta } from 'src/app/clases';
-import { CuentaService } from 'src/app/services/cuenta.service';
-import { RedireccionService } from 'src/app/services/redireccion.service';
-import { LoginService } from 'src/app/services/login.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-pantalla-edicion-perfil',
@@ -21,35 +19,23 @@ import { LoginService } from 'src/app/services/login.service';
 export class PantallaEdicionPerfilComponent implements OnInit {
   usuario: Usuario;
   fgroup: FormGroup;
-  nombreUsuario: string = 'Usuario No Encontrado';
+  nombreUsuario: string = 'prueba';
   apellidoUsuario: string;
   cuentaUsuario: Cuenta;
 
   constructor(
     private fb: FormBuilder,
     private datosUsuarioService: DatosUsuarioService,
-    private cuentasService: CuentaService,
-    private redireccionar: RedireccionService,
-    private loginService: LoginService
+    private edicionPerfilService: EdicionPerfilService,
+    private route: ActivatedRoute,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
-    this.cuentasService.obtenerCuentasUsuario().subscribe(
-      (val) => {
-        this.cuentaUsuario = val[0];
-      },
-      (err) => {
-        this.loginService.logout();
-        this.redireccionar.landingPage();
-      },
-      () => {
-        this.obtenerDatosUsuario();
-      }
-    );
-
+    this.obtenerDatosUsuario();
     this.fgroup = this.fb.group({
       Nombre: [
-        this.nombreUsuario,
+        '',
         [
           Validators.required,
           Validators.maxLength(55),
@@ -57,7 +43,7 @@ export class PantallaEdicionPerfilComponent implements OnInit {
         ],
       ],
       Apellido: [
-        this.apellidoUsuario,
+        '',
         [
           Validators.required,
           Validators.maxLength(55),
@@ -73,22 +59,71 @@ export class PantallaEdicionPerfilComponent implements OnInit {
     });
   }
 
+  errorRegistro = false;
+  mensajeError = 'error';
+
   actualizar() {
-    if (this.fgroup.valid) {
-      //Necesario traer los datos actuales del usuario antes de usar el servicio EdicionPerfil
-    }
+    let usuario = new Usuario();
+
+    usuario.Apellido = this.fgroup.value.Apellido;
+    usuario.Nombre = this.fgroup.value.Nombre;
+    usuario.Email = this.fgroup.value.Email;
+    usuario.Domicilio = this.fgroup.value.Direccion;
+    usuario.Telefono = this.fgroup.value.Telefono;
+    this.errorRegistro = false;
+
+    this.edicionPerfilService.updateUser(usuario).subscribe(
+      () => {
+        console.log('Registro Exitoso');
+        var returnUrl =
+          this.route.snapshot.queryParams.returnUrl || '/registroExitoso';
+        this.router.navigate([returnUrl]);
+      },
+      (err) => {
+        this.errorRegistro = true;
+        this.mensajeError = err;
+        console.log('error en el registro');
+        console.log(err);
+      }
+    );
   }
 
   obtenerDatosUsuario() {
     this.datosUsuarioService.obtenerDatosUsuario().subscribe(
       (user) => {
         this.usuario = user;
+
         this.nombreUsuario = this.usuario.Nombre;
         this.apellidoUsuario = this.usuario.Apellido;
+        this.campoNombreUsuario.setValue(this.usuario.Nombre);
+        this.campoApellido.setValue(this.usuario.Apellido);
+        this.campoDomicilio.setValue(this.usuario.Domicilio);
+        this.campoEmail.setValue(this.usuario.Email);
+        this.campoTelefono.setValue(this.usuario.Telefono);
       },
       (err) => {
         console.log('no se encontro el usuario (?');
       }
     );
+  }
+
+  get campoNombreUsuario() {
+    return this.fgroup.get('Nombre');
+  }
+
+  get campoApellido() {
+    return this.fgroup.get('Apellido');
+  }
+
+  get campoDomicilio() {
+    return this.fgroup.get('Domicilio');
+  }
+
+  get campoTelefono() {
+    return this.fgroup.get('Telefono');
+  }
+
+  get campoEmail() {
+    return this.fgroup.get('Email');
   }
 }
