@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
 import { CuentaService } from 'src/app/services/cuenta.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { SpinnerService } from 'src/app/services/spinner.service';
 
 @Component({
   selector: 'app-pantalla-transferencia',
@@ -20,7 +21,7 @@ export class PantallaTransferenciaComponent implements OnInit {
   estadoActual: EstadoBusqueda = EstadoBusqueda.Nada
   estadoBusqueda=EstadoBusqueda
 
-  constructor(private formConstructor: FormBuilder, private modalService: NgbModal, private cuentaService: CuentaService, private transferenciaService: TransferenciasService, private ToastService: ToastrService) {
+  constructor(private spinnerServicio: SpinnerService ,private formConstructor: FormBuilder, private modalService: NgbModal, private cuentaService: CuentaService, private transferenciaService: TransferenciasService, private ToastService: ToastrService) {
 
   }
 

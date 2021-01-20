@@ -12,7 +12,7 @@ import { HomePageComponent } from './components/home-page/home-page.component';
 
 import { RouterModule } from '@angular/router';
 
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { SignupPageComponent } from './components/signup-page/signup-page.component';
 import { PaginaPrincipalComponent } from './components/pagina-principal/pagina-principal.component';
 import { RegistroExitosoComponent } from './components/registro-exitoso/registro-exitoso.component';
@@ -25,10 +25,14 @@ import { PantallaExitoComponent } from './components/pantalla-exito/pantalla-exi
 import { PantallaFalloComponent } from './components/pantalla-fallo/pantalla-fallo.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 
+import {NgxSpinnerModule} from 'ngx-spinner';
+
 //Importo el modulo para los alerts de error y exito
 
 import {BrowserAnimationsModule} from  '@angular/platform-browser/animations';
 import {ToastrModule} from 'ngx-toastr';
+import { InterceptorService } from './services/interceptor.service';
+import { SpinnerComponent } from './components/spinner/spinner.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +48,8 @@ import {ToastrModule} from 'ngx-toastr';
     OperacionesComponent,
     PantallaExitoComponent,
     PantallaFalloComponent,
-    SidebarComponent
+    SidebarComponent,
+    SpinnerComponent
   ],
   imports: [
     BrowserModule,
@@ -64,9 +69,10 @@ import {ToastrModule} from 'ngx-toastr';
       { path: 'home', component: SidebarComponent},
 
     ]),
-    NgbModule
+    NgbModule,
+    NgxSpinnerModule
   ],
-  providers: [[LoginService],[SignupService]],
+  providers: [[LoginService],[SignupService],{provide: HTTP_INTERCEPTORS, useClass: InterceptorService,multi:true}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
