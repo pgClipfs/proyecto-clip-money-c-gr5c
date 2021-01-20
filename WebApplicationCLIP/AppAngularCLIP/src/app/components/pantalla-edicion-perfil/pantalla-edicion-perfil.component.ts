@@ -68,9 +68,16 @@ export class PantallaEdicionPerfilComponent implements OnInit {
     usuario.Apellido = this.fgroup.value.Apellido;
     usuario.Nombre = this.fgroup.value.Nombre;
     usuario.Email = this.fgroup.value.Email;
-    usuario.Domicilio = this.fgroup.value.Direccion;
+    usuario.Domicilio = this.fgroup.value.Domicilio;
     usuario.Telefono = this.fgroup.value.Telefono;
     this.errorRegistro = false;
+
+    // console.log(usuario.Nombre);
+    // console.log(usuario.Nombre);
+    // console.log(usuario.Apellido);
+    // console.log(usuario.Domicilio);
+    // console.log(usuario.Email);
+    // console.log(usuario.Telefono);
 
     this.edicionPerfilService.updateUser(usuario).subscribe(
       () => {
