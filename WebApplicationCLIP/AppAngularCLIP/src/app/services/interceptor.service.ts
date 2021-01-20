@@ -2,14 +2,19 @@ import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/c
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { finalize } from 'rxjs/operators';
+import { SpinnerService } from './spinner.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class InterceptorService implements HttpInterceptor {
 
-  constructor() { }
+  constructor(private spinnerService : SpinnerService) { }
+
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    throw new Error('Method not implemented.');
+    this.spinnerService.startSpinner();
+    return next.handle(req).pipe(
+      finalize ( () => this.spinnerService.stopSpinner())
+    );
   }
 }

@@ -72,7 +72,7 @@ import { SpinnerComponent } from './components/spinner/spinner.component';
     NgbModule,
     NgxSpinnerModule
   ],
-  providers: [[LoginService],[SignupService],{provide: HTTP_INTERCEPTORS, useClass: InterceptorService,multi:true}],
+  providers: [[{provide: HTTP_INTERCEPTORS, useClass: InterceptorService,multi:true}],[LoginService],[SignupService]],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
