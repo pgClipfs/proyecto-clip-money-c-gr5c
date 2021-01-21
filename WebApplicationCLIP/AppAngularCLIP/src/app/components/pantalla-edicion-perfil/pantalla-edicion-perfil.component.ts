@@ -81,9 +81,8 @@ export class PantallaEdicionPerfilComponent implements OnInit {
 
     this.edicionPerfilService.updateUser(usuario).subscribe(
       () => {
-        console.log('Registro Exitoso');
-        var returnUrl =
-          this.route.snapshot.queryParams.returnUrl || '/registroExitoso';
+        console.log('Update Exitoso');
+        var returnUrl = this.route.snapshot.queryParams.returnUrl || '/exito';
         this.router.navigate([returnUrl]);
       },
       (err) => {

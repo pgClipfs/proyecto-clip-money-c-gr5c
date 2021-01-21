@@ -8,7 +8,7 @@
 
   <form
     action=""
-    class="container-fluid col-sm-11 col-md-8 col-lg-5 p-4 h-80 mb-5"
+    class="container-fluid col-sm-11 col-md-8 col-lg-5 p-4 h-80 mb-5 justify-content-center"
     [formGroup]="fgroup"
   >
     <div class="d-flex justify-content-center">
@@ -18,6 +18,15 @@
         alt="foto de perfil"
       />
     </div>
+    <!-- Mensaje de error -->
+    <div
+      *ngIf="errorRegistro"
+      class="alert alert-danger alert-dismissible fade show text-center p-2 mt-3"
+      role="alert"
+    >
+      {{ mensajeError }}
+    </div>
+
     <div>
       <!-- Nombre -->
       <label for="nombre" class="mt-2 form-label">Nombre:</label>
@@ -68,16 +77,11 @@
     </div>
     <div class="row justify-content-around">
       <button
-        class="btn btn-success rounded-pill col-lg-5 col-md-12 mt-5"
+        class="btn btn-success rounded-pill col-lg-9 col-md-11 mt-5"
         type="submit"
         (click)="actualizar()"
       >
-        Guardar Cambios</button
-      ><button
-        class="btn btn-secondary rounded-pill col-lg-5 col-md-12 mt-5"
-        type=""
-      >
-        Cancelar
+        Guardar Cambios
       </button>
     </div>
   </form>
