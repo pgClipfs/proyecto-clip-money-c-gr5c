@@ -12,7 +12,7 @@ import { HomePageComponent } from './components/home-page/home-page.component';
 
 import { RouterModule } from '@angular/router';
 
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { SignupPageComponent } from './components/signup-page/signup-page.component';
 import { PaginaPrincipalComponent } from './components/pagina-principal/pagina-principal.component';
 import { RegistroExitosoComponent } from './components/registro-exitoso/registro-exitoso.component';
@@ -26,10 +26,14 @@ import { PantallaFalloComponent } from './components/pantalla-fallo/pantalla-fal
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { PantallaEdicionPerfilComponent } from './components/pantalla-edicion-perfil/pantalla-edicion-perfil.component';
 
+import {NgxSpinnerModule} from 'ngx-spinner';
+
 //Importo el modulo para los alerts de error y exito
 
 import {BrowserAnimationsModule} from  '@angular/platform-browser/animations';
 import {ToastrModule} from 'ngx-toastr';
+import { InterceptorService } from './services/interceptor.service';
+import { SpinnerComponent } from './components/spinner/spinner.component';
 
 @NgModule({
   declarations: [
@@ -47,6 +51,7 @@ import {ToastrModule} from 'ngx-toastr';
     PantallaFalloComponent,
     SidebarComponent,
     PantallaEdicionPerfilComponent,
+    SpinnerComponent
   ],
   imports: [
     BrowserModule,
@@ -67,8 +72,9 @@ import {ToastrModule} from 'ngx-toastr';
       { path: 'transferencia', component: PantallaTransferenciaComponent},
     ]),
     NgbModule,
+    NgxSpinnerModule
   ],
-  providers: [[LoginService], [SignupService]],
-  bootstrap: [AppComponent],
+  providers: [[{provide: HTTP_INTERCEPTORS, useClass: InterceptorService,multi:true}],[LoginService],[SignupService]],
+  bootstrap: [AppComponent]
 })
 export class AppModule {}

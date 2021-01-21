@@ -26,6 +26,7 @@ export class LoginBox {
 
     login_click() {
 
+
         this.loginService.login(this.value_user, this.value_pasw)
             .subscribe(
                 user => {
