@@ -10,13 +10,20 @@ import { LoginService } from 'src/app/services/login.service';
 })
 export class EdicionPerfilService {
   private urlApi = 'http://localhost:59642/api/';
+
   public updateUser(usuario: Usuario): Observable<any> {
     let SesionDeUsuario = this.loginService.obtenerSesionActual;
     console.log(usuario);
-    console.log(SesionDeUsuario);
+
+    var Domicilio = usuario.Domicilio
+    var Email = usuario.Email
+    var Telefono = usuario.Telefono
+
     return this.http
       .post<any>(this.urlApi + 'post/modificardatosusuario', {
-        usuario,
+        Domicilio,
+        Email,
+        Telefono,
         SesionDeUsuario,
       })
       .pipe(
@@ -29,5 +36,5 @@ export class EdicionPerfilService {
       );
   }
 
-  constructor(private http: HttpClient, private loginService: LoginService) {}
+  constructor(private http: HttpClient, private loginService: LoginService) { }
 }
