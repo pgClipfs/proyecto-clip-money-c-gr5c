@@ -1,78 +1,104 @@
-<form [formGroup]="formDinero">
-  <div class="container">
+<div class="container">
+  <div class="row">
+    <p class="mt-4 mb-4">
+      Su saldo actual es <span class="decoration-saldo">{{ cuentaOrigen.Saldo | currency }}</span>
+    </p>
+  </div>
+  <form [formGroup]="formDinero">
     <!-- Campo del monto -->
 
-   <div class="row justify-content-center">
-<div class="col-11 col-lg-7 align-self-center ">
+    <div class="row justify-content-center mt-3">
+      <div class="col-12 col-sm-6 align-self-center">
+        <div class="card rounded shadow">
+          <div class="card-body text-center">
+            <h5 class="card-title text-left">INGRESE UN MONTO</h5>
+            <label for="inputMonto" class="simboloPesos">$</label>
+            <input
+              autocomplete="off"
+              type="text"
+              formControlName="Monto"
+              class="form-control-monto text-center"
+              id="inputMonto"
+              placeholder="0"
+            />
 
-    <div class="card rounded shadow">
-      <div class="card-body text-center">
-        <h5 class="card-title text-left">INGRESE UN MONTO</h5>
-        <label for="inputMonto" class="simboloPesos">$</label>
-        <input
-        autocomplete="off"
-        type="text"
-        formControlName="Monto"
-        class="form-control-monto text-center"
-        id="inputMonto"
-        placeholder="0"
-        />
-        
-        <span
-        class="text-danger text-subtitle"
-        *ngIf="
-        formDinero.controls.Monto.errors?.required &&
-        formDinero.controls.Monto.touched
-        "
-        >
-        Dato requerido.</span
-        >
-      </div>
-    </div>
-
-        
-      </div>
-    </div>
-
-    <div class="container"  id="cardDatosOperacion">
-      <div class="card mt-4 shadow">
-        <div class="card-body">
-          <h5 class="card-title text-left">Datos de la operacion</h5>
-          <div class="row">
-            <!-- Campo del CVU -->
-            <!-- Combobox del tipo de operacion -->
-            <div class="col-sm align-self-center">
-              <div class="input-group mb-3">
-                <select
-                  formControlName="selectorTipoOperacion"
-                  class="form-select  rounded"
-                >
-                  <option value="">Seleccione la operacion</option>
-                  <option
-                    *ngFor="let item of tiposOperaciones"
-                    [ngValue]="item"
-                    (change)="changeCuenta($event)"
-                  >
-                    {{ item }}
-                  </option>
-                </select>
-              </div>
-            </div>
+            <span
+              class="text-danger text-subtitle"
+              *ngIf="
+                formDinero.controls.Monto.errors?.required &&
+                formDinero.controls.Monto.touched
+              "
+            >
+              Dato requerido.</span
+            >
           </div>
-          <!-- Datos de la cuenta en la que se va a hacer la operacion -->
-          <div class="row" id="cardDatosCuenta">
-            <div class="container" *ngIf="verDatosCuenta">
-              <div class="card mt-3">
-                <div calss="container">
-                  <div class="row">
-                    <div class="card-body col-md-6">
-                      <h4 class="card-title">Saldo de la cuenta</h4>
-                      <p class="card-text">{{ cuentaOrigen.Saldo| currency }}</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="row justify-content-center" id="cardDatosOperacion">
+      <div class="col-sm-8">
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="card mt-4 shadow">
+              <div class="card-body">
+                <h5 class="card-title text-left">Datos de la operacion</h5>
+                <div class="row">
+                  <!-- Campo del CVU -->
+                  <!-- Combobox del tipo de operacion -->
+                  <div class="col-sm-12 align-self-center">
+                    <div class="input-group mb-3">
+                      <select
+                        formControlName="selectorTipoOperacion"
+                        class="form-select rounded"
+                      >
+                        <option value="">Seleccione la operacion</option>
+                        <option
+                          *ngFor="let item of tiposOperaciones"
+                          [ngValue]="item"
+                          (change)="changeCuenta($event)"
+                        >
+                          {{ item }}
+                        </option>
+                      </select>
                     </div>
-                    <div class="card-body col-md-6" >
-                        <h5>CVU de la cuenta</h5>
-                        <p class="card-text" id="inputCVU" >{{ cuentaOrigen.Cvu }}</p>
+                  </div>
+                </div>
+                <!-- Datos de la cuenta en la que se va a hacer la operacion -->
+                <div class="row" id="cardDatosCuenta" *ngIf="verDatosCuenta">
+                  <div class="col-sm-12">
+                    <div class="card mt-3">
+                      <div class="card-body">
+                        <div class="row justify-content-center">
+                          <div class="col-md-6 align-self-center">
+                            <h4 class="card-title">Saldo actual:</h4>
+                            <p class="card-text">
+                              {{ cuentaOrigen.Saldo | currency }}
+                            </p>
+                          </div>
+                          <div class="col-md-6 align-self-center">
+                            <h5>CVU:</h5>
+                            <p class="card-text" id="inputCVU">
+                              CA $ {{ cuentaOrigen.Cvu }}
+                            </p>
+                          </div>
+                        </div>
+                      </div>
                     </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-sm-12 col ">
+                    <button
+                      (click)="realizarOperacion()"
+                      type="button"
+                      name=""
+                      id="botonConfirmar"
+                      class=" btn btn-operacion rounded-pill mt-3 btn-block"
+                    >
+                      Realizar operacion
+                    </button>
                   </div>
                 </div>
               </div>
@@ -80,23 +106,8 @@
           </div>
         </div>
       </div>
+
+      <!-- Boton para confirmar la operacion -->
     </div>
-
-    <!-- Boton para confirmar la operacion -->
-
-    <div class="row">
-      <div class="col">
-        <button
-        (click)="realizarOperacion()"
-          type="button"
-          name=""
-          id="botonConfirmar"
-
-          class="mt-3 btn btn-operacion btn-block"
-        >
-          Realizar operacion
-        </button>
-      </div>
-    </div>
-  </div>
-</form>
+  </form>
+</div>
