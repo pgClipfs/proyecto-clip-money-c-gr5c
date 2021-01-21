@@ -9,7 +9,9 @@
         <div></div>
       </div>
     </div>
-    <a class="navbar-brand" (click)="routeEdicionPerfil()"> {{ nombreUsuario }}</a>
+    <a class="navbar-brand" (click)="routeEdicionPerfil()">
+      {{ nombreUsuario }}</a
+    >
   </div>
 </nav>
 <ng-sidebar-container>
@@ -38,7 +40,11 @@
           Giro al descubierto
         </button>
       </li>
-      <li class="nav-item"><button class="btn-item btn">Mis datos</button></li>
+      <li class="nav-item">
+        <button class="btn-item btn" (click)="routeEdicionPerfil()">
+          Mis datos
+        </button>
+      </li>
     </ul>
     <button class="btn btn-cerrarsesion m-3" (click)="cerrar_sesion()">
       Cerrar sesion
