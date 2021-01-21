@@ -54,13 +54,16 @@ namespace WebApplicationCLIP.Controllers
         public IHttpActionResult ModificarDatos(JObject obj)
         //public IHttpActionResult DepositarMonto(float monto, string cvu, [FromBody] SesionDeUsuario login)
         {
-            string domi = (string)obj["Domicilio"];
-            string email = (string)obj["Email"];
-            string tel = (string)obj["Telefono"];
+            Usuario usu = new Usuario(obj["usuario"].ToObject<JObject>());
             SesionDeUsuario login = obj["SesionDeUsuario"].ToObject<SesionDeUsuario>();
             try
             {
                 LoginController.ValidarSesion(login);
+
+                if (login.NombreDeUsuario!=usu.NombreDeUsuario)
+                {
+                    throw new UnauthorizedAccessException();
+                }
             }
             catch (UnauthorizedAccessException e)
             {
@@ -69,7 +72,7 @@ namespace WebApplicationCLIP.Controllers
             try
             {
                 UsuarioDAO usuarioDAO = new UsuarioDAO();
-                usuarioDAO.modificarDatosUsuario(domi, email, tel, login);
+                usuarioDAO.modificar(usu);
                 return Ok("Sus datos han sido modificados correctamente.");
             }
             catch (HttpRequestException e)

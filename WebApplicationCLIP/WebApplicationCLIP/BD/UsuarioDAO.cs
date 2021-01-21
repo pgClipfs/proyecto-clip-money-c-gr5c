@@ -244,107 +244,41 @@ namespace WebApplicationCLIP.BD
 
         public void modificar(Usuario t)
         {
-            throw new NotImplementedException();
-        }
-
-        public void modificarDatosUsuario(string domi, string email, string tel, SesionDeUsuario login)
-        {
             //se guardan los datos actuales en caso de no llegar a cambiar alguno
-            string scriptDatos = "SELECT DOMICILIO, EMAIL, TELEFONO FROM USUARIOS WHERE NOMBRE_USUARIO = '" + login.NombreDeUsuario + "' ";
-            string domicilioActual = "";
-            string emailActual = "";
-            string telActual = "";
+
+            Usuario datosAnteriores = consultar(t);
+            
             try
             {
-                ConexionBD conexionBD = new ConexionBD();
-                conexionBD.abrir();
-
-                SqlCommand comando= new SqlCommand(scriptDatos, conexionBD.conexionBD);
-                SqlDataReader lectorDatos = comando.ExecuteReader();
-
-                while (lectorDatos.Read())
-                {
-                    domicilioActual = lectorDatos.GetValue(0).ToString();
-                    emailActual = lectorDatos.GetValue(1).ToString();
-                    telActual = lectorDatos.GetValue(2).ToString();
-                }
-                lectorDatos.Close();
-                conexionBD.cerrar();
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }
-
-            string selectEmails = "SELECT EMAIL FROM USUARIOS";
-            string selectTel = "SELECT TELEFONO FROM USUARIOS";
-
-            List<string> emails;
-            List<string> telefonos;
-
-            try
-            {
-                ConexionBD conexionBD = new ConexionBD();
-                conexionBD.abrir();
-
-                emails = conexionBD.selectUnico(selectEmails);
-                telefonos = conexionBD.selectUnico(selectTel);
-
-                //Se comprueba que el email o telefono a modificar no exista en la BD, caso contrario se lanza excepción
-                if (emails.Contains(email))
-                {
-                    throw new ErrorEmailRepetido("Este email ya está registrado.");
-                }
-                if (telefonos.Contains(tel))
-                {
-                    throw new ErrorTelefonoRepetido("Este teléfono ya está registrado.");
-                }
-
-                if (domi.Trim() == "")
-                {
-                    domi = domicilioActual;
-                }
-                if (email.Trim() == "")
-                {
-                    email = emailActual;
-                }
-                if (tel.Trim() == "")
-                {
-                    tel = telActual;
-                }
-                conexionBD.cerrar();
+                comprobarRepeticion(t);
             }
             catch (ErrorEmailRepetido e)
             {
-                throw e;
+                if (datosAnteriores.Email!=t.Email)
+                {
+                    throw e;
+                }
             }
-            catch (ErrorTelefonoRepetido e)
-            {
-                throw e;
-            }
-            //En caso de no atraparse ninguna de las anteriores excepciones, que se atrape una generica y nos diga que pasó
-            catch (Exception e)
-            {
-                throw e;
-            }
-
-            //Recién acá se empezaría a efectuar la parte donde se actualizan los datos del usuario
-            string actualizar = "UPDATE USUARIOS SET DOMICILIO = '" + domi + "', EMAIL = '" + email + "', TELEFONO = " +
-                "'" + tel + "' WHERE NOMBRE_USUARIO = '" + login.NombreDeUsuario + "'";
-
-            ConexionBD conexion = new ConexionBD();
-            conexion.abrir();
+            catch (ErrorNombreUsuarioRepetido) { }
 
             try
             {
-                SqlCommand comando = new SqlCommand(actualizar, conexion.conexionBD);
-                SqlDataReader lector = comando.ExecuteReader();
+                comprobarRepeticion(t);
             }
-            catch (Exception e)
+            catch (ErrorTelefonoRepetido e)
             {
-                throw new Exception("Se produjo un error al modificar los datos --> " + e.Message);
+                if (datosAnteriores.Telefono != t.Telefono)
+                {
+                    throw e;
+                }
             }
-            conexion.cerrar();
+            catch (ErrorNombreUsuarioRepetido) { }
+
+            string scriptActualizacion = "UPDATE USUARIOS SET DOMICILIO = '" + t.Domicilio + "', EMAIL = '" + t.Email + "', TELEFONO = " +    "'" + t.Telefono + "' WHERE NOMBRE_USUARIO = '" + t.NombreDeUsuario + "'";
+
+            ConexionBD conexion = new ConexionBD();
+            conexion.nonQuery(scriptActualizacion);
+                        
         }
 
         public void eliminar(Usuario t)
