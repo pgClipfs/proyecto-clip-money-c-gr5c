@@ -26,6 +26,7 @@ export enum Ventana {
   Transferencia,
   Giro,
   PagarServicios,
+  EdicionPerfil,
 }
 
 export enum EstadoBusqueda {

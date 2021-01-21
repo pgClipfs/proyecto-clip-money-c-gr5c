@@ -99,7 +99,7 @@ namespace WebApplicationCLIP.Models
                 this.SitCrediticia = (string)usuarioJSON["SitCrediticia"];
                 this.Telefono = (string)usuarioJSON["Telefono"];
                 this.Contraseña = (string)usuarioJSON["Contraseña"];
-                comprobarIntegridadDeParametros(this);
+                //comprobarIntegridadDeParametros(this);
             }
             catch (Exception e)
             {

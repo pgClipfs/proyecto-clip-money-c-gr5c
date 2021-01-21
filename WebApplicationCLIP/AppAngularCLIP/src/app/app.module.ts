@@ -6,7 +6,7 @@ import { LoginBox } from './components/login-box/login.component';
 import { LoginService } from './services/login.service';
 import { SignupService } from './services/signup.service';
 
-import { FormsModule , ReactiveFormsModule} from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 import { HomePageComponent } from './components/home-page/home-page.component';
 
@@ -24,6 +24,7 @@ import { OperacionesComponent } from './components/operaciones/operaciones.compo
 import { PantallaExitoComponent } from './components/pantalla-exito/pantalla-exito.component';
 import { PantallaFalloComponent } from './components/pantalla-fallo/pantalla-fallo.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
+import { PantallaEdicionPerfilComponent } from './components/pantalla-edicion-perfil/pantalla-edicion-perfil.component';
 
 //Importo el modulo para los alerts de error y exito
 
@@ -44,7 +45,8 @@ import {ToastrModule} from 'ngx-toastr';
     OperacionesComponent,
     PantallaExitoComponent,
     PantallaFalloComponent,
-    SidebarComponent
+    SidebarComponent,
+    PantallaEdicionPerfilComponent,
   ],
   imports: [
     BrowserModule,
@@ -60,13 +62,13 @@ import {ToastrModule} from 'ngx-toastr';
       { path: '', component: HomePageComponent },
       { path: 'login', component: LoginBox },
       { path: 'exito', component: PantallaExitoComponent },
+      { path: 'fallo', component: PantallaFalloComponent },
+      { path: 'home', component: SidebarComponent },
       { path: 'transferencia', component: PantallaTransferenciaComponent},
-      { path: 'home', component: SidebarComponent},
-
     ]),
-    NgbModule
+    NgbModule,
   ],
-  providers: [[LoginService],[SignupService]],
-  bootstrap: [AppComponent]
+  providers: [[LoginService], [SignupService]],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

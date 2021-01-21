@@ -83,5 +83,10 @@ export class SidebarComponent implements OnInit {
     this.ventanaActual=Ventana.Giro
     this.opened = false;
   }
+
+  routeEdicionPerfil(){
+    this.ventanaActual=Ventana.EdicionPerfil;
+    this.opened = false;
+  }
 }
 

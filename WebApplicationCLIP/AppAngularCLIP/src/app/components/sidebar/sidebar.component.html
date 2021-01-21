@@ -6,8 +6,9 @@
         <div></div>
       </div>
     </div>
-    <a class="navbar-brand" href="#">
-      {{ nombreUsuario }}</a>
+    <a class="navbar-brand" (click)="routeEdicionPerfil()">
+      {{ nombreUsuario }}</a
+    >
   </div>
 </nav>
 <ng-sidebar-container>
@@ -18,19 +19,39 @@
       <li class="nav-item"><button class="btn-item btn" (click)="routeDashboard()">Inicio</button></li>
        <li class="nav-item"> <button class="btn-item btn" (click)="routeIngresoEgreso()">Depositos y Extracciones</button> </li>
 
-      <li class="nav-item"><button class="btn-item btn" (click)="routeTransferencia()">Transferencias</button></li>
-      <li class="nav-item"><button class="btn-item btn" (click)="routeGiroAlDescubierto()">Giro al descubierto</button></li>
-      <li class="nav-item"><button class="btn-item btn" >Mis datos</button></li>
+      <li class="nav-item">
+        <button class="btn-item btn" (click)="routeTransferencia()">
+          Transferencias
+        </button>
+      </li>
+      <li class="nav-item">
+        <button class="btn-item btn" (click)="routeGiroAlDescubierto()">
+          Giro al descubierto
+        </button>
+      </li>
+      <li class="nav-item">
+        <button class="btn-item btn" (click)="routeEdicionPerfil()">
+          Mis datos
+        </button>
+      </li>
     </ul>
     <button class="btn btn-cerrarsesion m-3" (click)="cerrar_sesion()">Cerrar sesion</button>
   </ng-sidebar>
   <div ng-sidebar-content>
 
-    <app-pagina-principal (ventanaEmitida)="routeTo($event)" *ngIf="ventanaActual===ventana.Dashboard"></app-pagina-principal>
-    <app-pantalla-ingreso-egreso-dinero *ngIf="ventanaActual===ventana.IngresosEgresos"></app-pantalla-ingreso-egreso-dinero>
-    <app-pantalla-transferencia *ngIf="ventanaActual===ventana.Transferencia"></app-pantalla-transferencia>
-
-
+    <app-pagina-principal
+      (ventanaEmitida)="routeTo($event)"
+      *ngIf="ventanaActual === ventana.Dashboard"
+    ></app-pagina-principal>
+    <app-pantalla-ingreso-egreso-dinero
+      *ngIf="ventanaActual === ventana.IngresosEgresos"
+    ></app-pantalla-ingreso-egreso-dinero>
+    <app-pantalla-transferencia
+      *ngIf="ventanaActual === ventana.Transferencia"
+    ></app-pantalla-transferencia>
+    <app-pantalla-edicion-perfil
+      *ngIf="ventanaActual === ventana.EdicionPerfil"
+    ></app-pantalla-edicion-perfil>
   </div>
 
 </ng-sidebar-container>

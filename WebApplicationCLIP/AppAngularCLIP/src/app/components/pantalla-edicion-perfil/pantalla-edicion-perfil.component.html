@@ -1,0 +1,88 @@
+<div
+  class="row container-fluid justify-content-center d-flex flex-column"
+  id="wrapper"
+>
+  <div class="row justify-content-center text-center mt-5">
+    <h2 class="col-sm-11 col-md-8 col-lg-5 p-0">Editar datos del perfil</h2>
+  </div>
+
+  <form
+    action=""
+    class="container-fluid col-sm-11 col-md-8 col-lg-5 p-4 h-80 mb-5 justify-content-center"
+    [formGroup]="fgroup"
+  >
+    <div class="d-flex justify-content-center">
+      <img
+        src="../../../assets/img/usr-img.png"
+        class="img-fluid col-6"
+        alt="foto de perfil"
+      />
+    </div>
+    <!-- Mensaje de error -->
+    <div
+      *ngIf="errorRegistro"
+      class="alert alert-danger alert-dismissible fade show text-center p-2 mt-3"
+      role="alert"
+    >
+      {{ mensajeError }}
+    </div>
+
+    <div>
+      <!-- Nombre -->
+      <label for="nombre" class="mt-2 form-label">Nombre:</label>
+      <input
+        type="text"
+        formControlName="Nombre"
+        class="form-control rounded-pill"
+        id="nombre"
+        disabled
+      />
+
+      <!-- Apellido -->
+      <label for="apellido" class="mt-2 form-label">Apellido:</label>
+      <input
+        type="text"
+        formControlName="Apellido"
+        class="form-control rounded-pill"
+        id="apellido"
+        disabled
+      />
+
+      <!-- Domicilio -->
+      <label for="domicilio" class="mt-2 form-label">Domicilio:</label>
+      <input
+        type="text"
+        formControlName="Domicilio"
+        class="form-control rounded-pill"
+        id="domicilio"
+      />
+
+      <!-- E-mail -->
+      <label for="email" class="mt-2 form-label">E-mail:</label>
+      <input
+        type="email"
+        formControlName="Email"
+        class="form-control rounded-pill"
+        id="email"
+      />
+
+      <!-- Teléfono  -->
+      <label for="telefono" class="mt-2 form-label">Teléfono:</label>
+      <input
+        type="text"
+        formControlName="Telefono"
+        class="form-control rounded-pill"
+        id="telefono"
+      />
+    </div>
+    <div class="row justify-content-around">
+      <button
+        class="btn btn-success rounded-pill col-lg-9 col-md-11 mt-5"
+        type="submit"
+        (click)="actualizar()"
+      >
+        Guardar Cambios
+      </button>
+    </div>
+  </form>
+</div>
