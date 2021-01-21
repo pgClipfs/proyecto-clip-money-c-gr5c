@@ -12,15 +12,13 @@ export class EdicionPerfilService {
   private urlApi = 'http://localhost:59642/api/';
 
   public updateUser(usuario: Usuario): Observable<any> {
-    let SesionDeUsuario = this.loginService.obtenerSesionActual;    
-    usuario.NombreDeUsuario=SesionDeUsuario.NombreDeUsuario
+    let SesionDeUsuario = this.loginService.obtenerSesionActual;
+    usuario.NombreDeUsuario = SesionDeUsuario.NombreDeUsuario
 
     return this.http
       .post<any>(this.urlApi + 'post/modificardatosusuario', {
-        Domicilio,
-        Email,
-        Telefono,
-        SesionDeUsuario,
+        usuario,
+        SesionDeUsuario
       })
       .pipe(
         catchError((err) => {
