@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { Cuenta } from '../clases';
+import { Cuenta, Transferencia } from '../clases';
 import { HttpClient, HttpParams } from "@angular/common/http";
 import { HttpClientModule } from '@angular/common/http';
 import { Usuario } from '../modelos/usuario';
@@ -47,7 +47,72 @@ export class TransferenciasService {
       }),
       map(
         data => {
-          return data;
+
+          var lista: Transferencia[]=[]
+
+          data.forEach(e => {
+            var t = new Transferencia;
+            t.Fecha = e.Fecha;
+            t.Monto=e.Monto;
+            t.IdOperacion=e.IdOperacion;
+            
+            t.CvuDestino=e.CuentaDestino.Cvu;
+            t.CvuOrigen=e.Cuenta.Cvu;
+            t.Destinatario=e.CuentaDestino.Usuario;
+            t.Remitente=e.Cuenta.Usuario;
+            
+            t.NumeroTransferencia = e.NumeroTransferencia;
+            t.Referencia=e.ReferenciaDestino 
+
+            switch (e.Categoria) {
+              case 0: {
+                t.Categoria="Varios"
+                break;
+              }
+              case 1: {
+                t.Categoria="Alquiler"
+                break;
+              }
+              case 2: {
+                t.Categoria="Aportes De Capital"
+                break;
+              }
+              case 3: {
+                t.Categoria="Expensas"
+                break;
+              }
+              case 4: {
+                t.Categoria="Factura"
+                break;
+              }
+              case 5: {
+                t.Categoria="Haberes"
+                break;
+              }
+              case 6: {
+                t.Categoria="Honorarios"
+                break;
+              }
+              case 7: {
+                t.Categoria="Prestamo"
+                break;
+              }
+              case 8: {
+                t.Categoria="Seguro"
+                break;
+              }
+              case 9: {
+                t.Categoria="Cuota"
+                break;
+              }      
+
+            }
+            //console.log(e);
+            //console.log(t);
+            lista.push(t);
+          });
+
+          return lista;
         }
       )
     )

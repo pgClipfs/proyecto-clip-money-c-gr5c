@@ -11,8 +11,9 @@ namespace WebApplicationCLIP.BD
     {
         //aca pone el nombre de tu base de datos: 
         //Data Source= "nombre de tu conexion"
-        //Initial Catalog= "nombre de tu base de datos"
+        //Initial Catalog= "nombre de tu base de datos"     
         String cadena = "Data Source=localhost\\sqlexpress;Initial Catalog=ClipBank;Integrated Security=True;";
+        //String cadena = "Data Source=localhost;Initial Catalog=ClipBank;Integrated Security=True;";
 
 
         public SqlConnection conexionBD = new SqlConnection();
@@ -20,6 +21,26 @@ namespace WebApplicationCLIP.BD
         public ConexionBD()
         {
             conexionBD.ConnectionString = cadena;
+        }
+
+        public void nonQuery(string scriptSQL)
+        {
+            ConexionBD conexion = new ConexionBD();
+            SqlCommand comando = new SqlCommand(scriptSQL, conexion.conexionBD);
+
+            try
+            {
+                conexion.abrir();
+                comando.ExecuteNonQuery();
+            }
+
+            catch (Exception e)
+            {
+                conexion.cerrar();
+                throw e;
+            }
+
+            conexion.cerrar();
         }
 
         public List<List<string>> selectMultiple(string scriptSQL)

@@ -20,12 +20,16 @@ namespace WebApplicationCLIP.Models
         public string Email { get; private set; }
         public string Telefono { get; private set; }
         public string Contraseña { get; private set; }
-        public static Usuario prueba()
+  
+
+        public void BorrarDatosEscenciales()
         {
-            return new Usuario()
-            {
-                Dni = "12345678"
-            };
+            Contraseña = "";
+            Dni = "";
+            SitCrediticia = "";
+            NombreDeUsuario = "";
+            Domicilio = "";
+            Telefono = "";
         }
 
         public void CrearNuevaCuenta()
@@ -99,7 +103,7 @@ namespace WebApplicationCLIP.Models
                 this.SitCrediticia = (string)usuarioJSON["SitCrediticia"];
                 this.Telefono = (string)usuarioJSON["Telefono"];
                 this.Contraseña = (string)usuarioJSON["Contraseña"];
-                comprobarIntegridadDeParametros(this);
+                //comprobarIntegridadDeParametros(this);
             }
             catch (Exception e)
             {

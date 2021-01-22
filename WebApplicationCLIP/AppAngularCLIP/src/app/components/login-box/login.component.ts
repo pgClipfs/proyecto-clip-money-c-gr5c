@@ -26,6 +26,7 @@ export class LoginBox {
 
     login_click() {
 
+
         this.loginService.login(this.value_user, this.value_pasw)
             .subscribe(
                 user => {
@@ -35,7 +36,7 @@ export class LoginBox {
                 err => {
                     this.error = true;
 
-                    this.msg_error=err.error;
+                    this.msg_error=err;
 
                     this.value_user = "";
                     this.value_pasw = "";

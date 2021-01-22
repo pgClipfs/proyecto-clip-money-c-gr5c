@@ -9,11 +9,18 @@ namespace WebApplicationCLIP.Gestores
 {
     public class GestorTransferencia
     {
-        public List<Operacion> ObtenerTransferenciasPorCVU(string cvu, string tipoTransferencia)
+        public List<Transferencia> ObtenerTransferenciasPorCVU(string cvu, string tipoTransferencia)
         {
             /*OperacionDAO operacionDAO = new OperacionDAO();
             return operacionDAO.consultarTransferenciasPorCVU(cvu, tipoTransferencia);*/
-            return null;
+            TransferenciaDAO transferenciaDAO = new TransferenciaDAO();
+            List<Transferencia> transferencias=transferenciaDAO.consultarTransferencias(cvu);
+            foreach (var transferencia in transferencias)
+            {
+                transferencia.BorrarDatosEscenciales();
+            }
+
+            return transferencias;
         }
 
     }

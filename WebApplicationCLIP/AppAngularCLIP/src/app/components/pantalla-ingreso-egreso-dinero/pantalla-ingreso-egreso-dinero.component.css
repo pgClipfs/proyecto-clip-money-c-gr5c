@@ -6,16 +6,28 @@
   --color10:#80FFDB;
 }
 
+*{
+  font-family: 'Poppins', sans-serif;
+}
+
+.card{
+  border-radius: 15px;
+}
+
 .form-control-monto{
   border:0;
   border-bottom: 3px solid var(--color8);
   font-family: 'Poppins', sans-serif;
-  font-weight: 200;
+  font-weight: 400;
   font-size: 1.5rem;
-
+  color: white;
+  background-color: #ffffff;
 
   outline: none;
-  background-color: #ffffff;
+}
+
+input :placeholder-shown{
+  color: white;
 }
 
 .align-self-center .card .form-control-monto{
@@ -67,7 +79,6 @@ input[type=text]:active{
   left:12rem;*/
   background-image: linear-gradient(to right,#6830c3be, #5e60ceb4 );
   border: 0;
-  background-color: rgba(255, 255, 255, 0.123);
 }
 
 select{
@@ -86,27 +97,28 @@ select{
 }
 
 #cardDatosCuenta .card{
-  background-color: #42424267;
+  background-color: #d1d1d1;
   font-family: 'Poppins',sans-serif;
+  color: #7e7e7e;
 }
 
-#cardDatosCuenta .card .card-title{
+#cardDatosCuenta .card .card-text{
 font-weight: 600;
+
 
 }
 .btn-operacion{
   background-color: var(--color8);
   font-family: 'Poppins',sans-serif;
-  font-weight: 400;
+  font-weight: 600;
+  transition: 0.2s;
+  color: white;
 }
 
-@media (max-width:  576px) {
-  .align-self-center{
-    position: relative;
-    left:0px;
-  }
+.btn-operacion:hover{
+  background-color: var(--color7);
+}
 
-  .simboloPesos{
-    font-size: 30px;
-  }
+.decoration-saldo{
+  text-decoration: 3px underline var(--color9);
 }

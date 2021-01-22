@@ -10,7 +10,7 @@ namespace WebApplicationCLIP.Models
     {
         public void BorrarDatosEscenciales()
         {
-            this.Cuenta = null;            
+            this.Cuenta.BorrarDatosEscenciales(); 
         }
 
         public static List<Operacion> ObtenerOperacionesDePrueba()

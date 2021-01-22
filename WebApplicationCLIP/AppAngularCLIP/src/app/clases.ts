@@ -7,6 +7,21 @@ export class Operacion {
   Tipo: string;
 }
 
+export class Transferencia {
+  CvuOrigen: string;
+  CvuDestino: string;
+  Destinatario: Usuario;
+  Remitente : Usuario;
+
+  Fecha: Date;
+  Monto: number;
+  IdOperacion: string;
+  
+  NumeroTransferencia: string;
+  Categoria: string;
+  Referencia: string;
+}
+
 export class Sesion {
   NombreDeUsuario: string;
   Token: string;
@@ -26,6 +41,14 @@ export enum Ventana {
   Transferencia,
   Giro,
   PagarServicios,
+  EdicionPerfil,
+}
+
+export enum EstadoBusqueda {
+  ResultadoExitoso,
+  Error,
+  Buscando,
+  Nada,
 }
 
 export enum CategoriaTransferencia {

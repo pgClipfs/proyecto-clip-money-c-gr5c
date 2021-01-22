@@ -1,12 +1,13 @@
 import { Component, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { TransferenciasService } from '../../services/transferencias.service';
-import { CategoriaTransferencia, Operacion, Cuenta } from '../../clases'
+import { CategoriaTransferencia, Operacion, Cuenta, EstadoBusqueda, Transferencia } from '../../clases'
 import { Observable } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
 import { CuentaService } from 'src/app/services/cuenta.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-
+import { SpinnerService } from 'src/app/services/spinner.service';
+import { TemplateRef, ViewChild } from '@angular/core';
 @Component({
   selector: 'app-pantalla-transferencia',
   templateUrl: './pantalla-transferencia.component.html',
@@ -17,10 +18,17 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 export class PantallaTransferenciaComponent implements OnInit {
 
-  verDatosCuenta: boolean = false;
-  mostrarError: boolean = false;
+  estadoActual: EstadoBusqueda = EstadoBusqueda.Nada
+  estadoBusqueda=EstadoBusqueda
 
-  constructor(private formConstructor: FormBuilder, private modalService: NgbModal, private cuentaService: CuentaService, private transferenciaService: TransferenciasService, private ToastService: ToastrService) { }
+  @ViewChild('detalle')
+  private detalle: TemplateRef<any>;
+
+  constructor(private spinnerServicio: SpinnerService ,private formConstructor: FormBuilder, private modalService: NgbModal, private cuentaService: CuentaService, private transferenciaService: TransferenciasService, private ToastService: ToastrService) {
+
+  }
+
+  currentDate = new Date();
 
   textobotonTransferencia: string = 'Ver ultimas transferencias';
   utimasTransferencia: boolean = false;
@@ -32,6 +40,8 @@ export class PantallaTransferenciaComponent implements OnInit {
   Referencia: string = '';
   Categoria: string = '';
 
+  saldoSuficiente:boolean
+
   saldoTransferencia: number = 0;
   transferencias: Array<Operacion> = [];
   montoMayorASaldo: boolean = false;
@@ -42,11 +52,15 @@ export class PantallaTransferenciaComponent implements OnInit {
 
   formGroupTransferencia: FormGroup;
 
+  verificarSaldoDisponible(){
+    this.saldoSuficiente = (this.campoMonto.value <= this.cuentaOrigen.Saldo && this.campoMonto.value > 0)
+  }
+
   ngOnInit(): void {
 
     this.formGroupTransferencia = this.formConstructor.group({
 
-      CvuDestino: ['', [Validators.required, Validators.pattern("^[0-9]{1,22}$")]],
+      CvuDestino: ['', [Validators.required,  Validators.pattern("^[0-9]{12}$")]],
       Monto: ['', [Validators.required, Validators.pattern("^[0-9]{1,20}$")]],
       Referencia: ['', [Validators.required, Validators.maxLength(22)]],
       Categoria: [1, [Validators.required]]
@@ -69,30 +83,34 @@ export class PantallaTransferenciaComponent implements OnInit {
     )
   }
 
-  public mostrarErrorBusqueda() {
-    this.verDatosCuenta = false
-    this.mostrarError = true
-    this.mensajeError="No se encontro una cuenta con ese CVU"
-  }
+
 
   titularCuentaDestino: string;
   emailCuentaDestino: string;
   cvuCuentaDestino: string;
-  mensajeError:string="No se encontro una cuenta con ese CVU"
+
 
   public buscarCuenta() {
-    this.verDatosCuenta = false
-    this.mensajeError="Buscando"
+
+    var cvu : string;
+    cvu = this.campoCvuDestino.value;
+
+    this.estadoActual=EstadoBusqueda.Nada;
+
+    if(cvu.length != 12){
+      return;
+    }
+
+    this.estadoActual=EstadoBusqueda.Buscando;
 
     this.cuentaService.obtenerCuentaOtroUsuario(this.campoCvuDestino.value).subscribe(
       cuenta => {
-        this.mostrarError = false    
-        this.verDatosCuenta = true
+        this.estadoActual=EstadoBusqueda.ResultadoExitoso
         this.titularCuentaDestino = cuenta.datosUsuario.Nombre + " " + cuenta.datosUsuario.Apellido
         this.emailCuentaDestino = cuenta.datosUsuario.Email
         this.cvuCuentaDestino= cuenta.Cvu
       }, err => {
-        this.mostrarErrorBusqueda()
+        this.estadoActual=EstadoBusqueda.Error
 
       }, () => {
       }
@@ -108,6 +126,7 @@ export class PantallaTransferenciaComponent implements OnInit {
           this.showToastrSucces('Operacion realizada con exito', 'Nueva Transferencia');
           this.sumbitted = false;
           this.limpiarForm();
+          this.estadoActual = this.estadoBusqueda.Nada;
 
         },
         err => {
@@ -119,6 +138,17 @@ export class PantallaTransferenciaComponent implements OnInit {
       )
 
     this.modalService.dismissAll()
+  }
+
+  transferenciaEnDetalle:Transferencia;
+   
+
+  public verDetalleTransferencia(tr){
+    console.log(tr)
+    this.transferenciaEnDetalle=tr;
+
+   // this.openVerticallyCentered(this.detalle);
+   this.modalService.open(this.detalle);
   }
 
   public getTransferencias() {
@@ -159,7 +189,7 @@ export class PantallaTransferenciaComponent implements OnInit {
     //cambiamos la variable de sumbitted a true
     this.sumbitted = true;
     //Verifica los validadores
-    if (this.formGroupTransferencia.invalid) {
+    if (this.formGroupTransferencia.invalid || this.estadoActual == this.estadoBusqueda.Error || !this.saldoSuficiente) {
       return;
     }
 

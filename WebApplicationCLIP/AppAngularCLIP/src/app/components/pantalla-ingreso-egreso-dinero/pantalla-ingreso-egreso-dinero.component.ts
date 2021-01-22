@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, Validators, FormGroup, FormsModule } from '@angular/forms'
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ToastrService } from 'ngx-toastr';
 import { Cuenta } from 'src/app/clases';
 import { OperacionService } from 'src/app/services/operacion.service';
 import { RedireccionService } from 'src/app/services/redireccion.service';
@@ -14,12 +15,14 @@ import { CuentaService } from '../../services/cuenta.service'
 })
 export class PantallaIngresoEgresoDineroComponent implements OnInit {
 
-  constructor(private modalService: NgbModal, private redireccionar: RedireccionService, private operacionService: OperacionService, private fb: FormBuilder, private cuentaService: CuentaService) { }
+  constructor(private ToastService: ToastrService, private redireccionar: RedireccionService, private operacionService: OperacionService, private fb: FormBuilder, private cuentaService: CuentaService) { }
 
   //esta cuenta, se carga automaticamente cuando se abre la ventana
   //@Input()
   cuentaOrigen: Cuenta
   cvuIngresado: string;
+
+
 
   public buscarCuenta() {
 
@@ -43,7 +46,7 @@ export class PantallaIngresoEgresoDineroComponent implements OnInit {
     boton.disabled = true;
 
     if (this.inputMonto.value <= 0 || this.inputMonto == null) {
-      alert("error: ingrese un monto valido")
+      this.showToastrError('error: ingrese un monto valido','Operacion fallida')
       boton.disabled = false;
       return;
     }
@@ -51,8 +54,7 @@ export class PantallaIngresoEgresoDineroComponent implements OnInit {
     if (this.selectorTipoOperacion.value == "Deposito") {
       this.operacionService.realizarDeposito(this.cuentaOrigen.Cvu, this.inputMonto.value).subscribe(
         x => {
-          this.redireccionar.exito();
-          this.modalService.dismissAll();
+          this.showToastrSucces('Deposito realizado con exito', 'Deposito')
           boton.disabled = false;
         },
         err => {
@@ -70,20 +72,22 @@ export class PantallaIngresoEgresoDineroComponent implements OnInit {
       this.operacionService.realizarExtraccion(this.cuentaOrigen.Cvu, this.inputMonto.value).subscribe(
         x => {
           console.log("Extraccion realizado exitosamente");
-          this.redireccionar.exito();
-          this.modalService.dismissAll()
+          this.showToastrSucces('Extraccion realizado exitosamente', 'Extraccion')
           boton.disabled = false;
         },
         err => {
-          alert(err.error);
+
+          this.showToastrError(err.error,'Operacion fallida')
           boton.disabled = false;
+
           //this.redireccionar.fallo();
           //this.modalService.dismissAll()
         }
       );
       return;
     }
-    alert("error: seleccione un tipo de operacion")
+    this.showToastrError('error: seleccione un tipo de operacion','Operacion fallida')
+    boton.disabled = false;
   }
 
   ngOnInit(): void {
@@ -104,7 +108,7 @@ export class PantallaIngresoEgresoDineroComponent implements OnInit {
       }
     )
 
-    //#region 
+    //#region
     this.formDinero = this.fb.group({
       inputCVU: ['', [Validators.required], [Validators.maxLength(22)], [Validators.minLength(22)]],
       selectorTipoOperacion: ['', [Validators.required]],
@@ -160,4 +164,13 @@ export class PantallaIngresoEgresoDineroComponent implements OnInit {
 
   }
   //#endregion
+
+  //Alerts
+  public showToastrSucces(mensajeAlert: string, tituloAlert: string) {
+    this.ToastService.success(mensajeAlert, tituloAlert)
+  }
+
+  public showToastrError(mensajeAlert: string, tituloAlert: string) {
+    this.ToastService.error(mensajeAlert, tituloAlert)
+  }
 }
