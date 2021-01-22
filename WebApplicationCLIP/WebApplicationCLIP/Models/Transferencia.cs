@@ -14,7 +14,7 @@ namespace WebApplicationCLIP.Models
         {
             //this.CuentaDestino = null;
             CuentaDestino.BorrarDatosEscenciales();
-            base.BorrarDatosEscenciales();
+            Cuenta.BorrarDatosEscenciales();
         }
 
         public enum CategoriaTransferencia { Varios, Alquiler, AportesDeCapital, Expensas, Factura, Haberes, Honorarios, Prestamo, Seguro, Cuota };
@@ -72,24 +72,10 @@ namespace WebApplicationCLIP.Models
             t.TipoOperacion = Operacion.TipoDeOperacion.Transferencia;
             t.Monto = float.Parse(ensamblador[1]);
             t.Fecha = DateTime.Parse(ensamblador[2]);
+            t.IdOperacion = ensamblador[5];
 
             return t;
         }
-
-
-
-        /*    public static Transferencia generarTransferencia(string cvuOrigen , string cvuDestino , string monto, string referencia, CategoriaTransferencia concepto)
-            {
-                CuentaDAO cuentaDAO = new CuentaDAO();
-                Cuenta cuentaOrigen = Cuenta.crearCuentaConCVU(cvuOrigen);
-                Cuenta cuentaDestino = Cuenta.crearCuentaConCVU(cvuDestino);
-                cuentaOrigen = cuentaDAO.consultar(cuentaOrigen);
-                cuentaDestino = cuentaDAO.consultar(cuentaDestino);
-
-                Transferencia t = new Transferencia(cuentaDestino, cuentaOrigen, float.Parse(monto), referencia, concepto);
-
-                return t;
-
-            }*/
+                     
     }
 }

@@ -328,18 +328,28 @@
         <table class="table">
           <thead>
             <tr>
-              <th>Id Operacion</th>
-              <th>Fecha</th>
+              <th>N° Transferencia</th>
+              <th>Fecha</th>              
+              <th>Cuenta Origen</th>
+              <th>Cuenta Destino</th>
+              
               <th>Monto</th>
-              <th>Tipo</th>
+              <th>Categoria</th>
+              <th>Referencia</th>
+  
             </tr>
           </thead>
           <tbody *ngFor="let transf of transferencias">
             <tr>
-              <td>{{ transf.IdOperacion }}</td>
+              <td>{{ transf.NumeroTransferencia }}</td>
               <td>{{ transf.Fecha | date: "dd/MM/yyyy" }}</td>
+              <td>{{ transf.CvuOrigen }}</td>
+              <td>{{ transf.CvuDestino }}</td>
+
               <td>{{ transf.Monto | currency }}</td>
-              <td>transferencia</td>
+              <td>{{ transf.Categoria}}</td>
+              <td>{{ transf.Referencia}}</td>
+              
             </tr>
           </tbody>
         </table>
