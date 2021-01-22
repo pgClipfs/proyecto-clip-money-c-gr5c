@@ -88,5 +88,34 @@ namespace WebApplicationCLIP.BD
                 throw new Exception("Error al realizar INSERT --> " + e.Message);
             }
         }
+
+        public List<Transferencia> consultarTransferencias(string cvu)
+        {
+            string script = "SELECT * FROM OPERACIONES O JOIN TRANSFERENCIAS T ON  (O.ID_OPERACION = T.DATOS_OPERACION) WHERE CVU =  "+ cvu;
+
+            List<Transferencia> transferencias = null;
+            List<List<string>> ensamblador = new List<List<string>>();
+
+            try
+            {
+                ConexionBD conexionBD = new ConexionBD();
+                ensamblador = conexionBD.selectMultiple(script);
+            }
+            catch (ConsultaSinResultado e)
+            {
+                throw new Exception("El usuario no tiene transferencias");
+            }
+
+            transferencias = new List<Transferencia>();
+            for (int i = 0; i < ensamblador.Count; i++)
+            {
+                transferencias.Add(Transferencia.ensamblarTransferencia(ensamblador[i]));
+            }
+
+            return transferencias;
+
+
+
+        }
     }
 }

@@ -10,5 +10,13 @@ namespace WebApplicationCLIP.Gestores
     public class GestorTransferencia
     {
       
+        public List<Transferencia> consultarTransferencia(string cvu) 
+        {
+
+            TransferenciaDAO dao = new TransferenciaDAO();
+            List<Transferencia> transferencias = dao.consultarTransferencias(cvu);
+            return transferencias;
+
+        }
     }
 }
