@@ -9,15 +9,12 @@
             Su saldo actual es
             <span class="decoration-saldo">{{
               cuentaOrigen.Saldo | currency
-            }}</span>
+              }}</span>
           </p>
         </div>
       </div>
       <div class="row justify-content-center">
-        <div
-          class="col-4 col rounded-pill text-center align-self-center shadow-sm"
-          id="tituloTransferencia"
-        >
+        <div class="col-4 col rounded-pill text-center align-self-center shadow-sm" id="tituloTransferencia">
           <h3>Nueva transferencia</h3>
         </div>
       </div>
@@ -29,18 +26,9 @@
                 <div class="col-md-4 col-12">
                   <!-- Campo CVU destino-->
                   <label for="cvuDestino">CVU Destino</label>
-                  <input
-                    maxlength="12"
-                    autocomplete="off"
-                    type="text"
-                    (input)="buscarCuenta()"
-                    name="cvuDestino"
-                    id="cvuDestino"
-                    class="form-control rounded-pill"
-                    placeholder="Ingrese CVU destino"
-                    aria-describedby="helpId"
-                    formControlName="CvuDestino"
-                    [ngClass]="{
+                  <input maxlength="12" autocomplete="off" type="text" (input)="buscarCuenta()" name="cvuDestino"
+                    id="cvuDestino" class="form-control rounded-pill" placeholder="Ingrese CVU destino"
+                    aria-describedby="helpId" formControlName="CvuDestino" [ngClass]="{
                       'is-invalid':
                         (formGroupTransferencia.controls.CvuDestino.touched ||
                           sumbitted) &&
@@ -49,54 +37,32 @@
                       'is-valid':
                         !formGroupTransferencia.controls.CvuDestino.errors &&
                         estadoActual == estadoBusqueda.ResultadoExitoso
-                    }"
-                  />
-                  <span
-                    class="text-danger"
-                    *ngIf="
+                    }" />
+                  <span class="text-danger" *ngIf="
                       formGroupTransferencia.controls.CvuDestino.errors
                         ?.required &&
                       (formGroupTransferencia.controls.CvuDestino.touched ||
                         sumbitted)
-                    "
-                  >
-                    Dato requerido.</span
-                  >
-                  <span
-                    class="text-danger"
-                    *ngIf="estadoActual == estadoBusqueda.Error"
-                  >
-                    Cuenta no encontrada.</span
-                  >
-                  <span
-                    class="text-danger"
-                    *ngIf="
+                    ">
+                    Dato requerido.</span>
+                  <span class="text-danger" *ngIf="estadoActual == estadoBusqueda.Error">
+                    Cuenta no encontrada.</span>
+                  <span class="text-danger" *ngIf="
                       formGroupTransferencia.controls.CvuDestino.errors
                         ?.pattern &&
                       formGroupTransferencia.controls.CvuDestino.touched
-                    "
-                  >
-                    Dato numerico, de 12 digitos.</span
-                  >
+                    ">
+                    Dato numerico, de 12 digitos.</span>
 
-                  <small id="helpId" class="text-muted"
-                    >Debe ingresar un CVU del destinatario de 12 digitos.
+                  <small id="helpId" class="text-muted">Debe ingresar un CVU del destinatario de 12 digitos.
                   </small>
                 </div>
                 <div class="col-md-4 col-12">
                   <!-- Campo monto-->
                   <label for="montoTransferencia">Monto</label>
-                  <input
-                    (input)="verificarSaldoDisponible()"
-                    autocomplete="off"
-                    type="text"
-                    name="montoTransferencia"
-                    id="montoTransferencia"
-                    class="form-control rounded-pill"
-                    placeholder="Ingrese un monto"
-                    aria-describedby="helpId"
-                    formControlName="Monto"
-                    [ngClass]="{
+                  <input (input)="verificarSaldoDisponible()" autocomplete="off" type="text" name="montoTransferencia"
+                    id="montoTransferencia" class="form-control rounded-pill" placeholder="Ingrese un monto"
+                    aria-describedby="helpId" formControlName="Monto" [ngClass]="{
                       'is-invalid':
                         (formGroupTransferencia.controls.Monto.touched ||
                           sumbitted) &&
@@ -105,57 +71,40 @@
                       'is-valid':
                         !formGroupTransferencia.controls.Monto.errors &&
                         saldoSuficiente
-                    }"
-                  />
-                  <span
-                    class="text-danger"
-                    *ngIf="
+                    }" />
+                  <span class="text-danger" *ngIf="
                       formGroupTransferencia.controls.Monto.errors?.required &&
                       (formGroupTransferencia.controls.Monto.touched ||
                         sumbitted)
-                    "
-                  >
+                    ">
                     Dato requerido.
                   </span>
-                  <span
-                    class="text-danger"
-                    *ngIf="
+                  <span class="text-danger" *ngIf="
                       formGroupTransferencia.controls.Monto.errors?.pattern &&
                       formGroupTransferencia.controls.Monto.touched
-                    "
-                  >
+                    ">
                     Dato numerico requerido.
                   </span>
-                  <span
-                    class="text-danger"
-                    *ngIf="
+                  <span class="text-danger" *ngIf="
                       formGroupTransferencia.controls.Monto.dirty &&
                       !saldoSuficiente
-                    "
-                  >
+                    ">
                     Monto mayor al saldo actual o monto cero.
                   </span>
 
-                  <small id="helpId" class="text-muted"
-                    >Debe ingresar un monto menor o igual al saldo.</small
-                  >
+                  <small id="helpId" class="text-muted">Debe ingresar un monto menor o igual al saldo.</small>
                 </div>
                 <div class="col-md-4 col-12">
                   <!-- comboBox Tipo-->
                   <label for="comboCategoria">Categoria</label>
-                  <select
-                    name="comboCategoria"
-                    id="comboCategoria"
-                    class="form-control rounded-pill"
-                    formControlName="Categoria"
-                    [ngClass]="{
+                  <select name="comboCategoria" id="comboCategoria" class="form-control rounded-pill"
+                    formControlName="Categoria" [ngClass]="{
                       'is-invalid':
                         (formGroupTransferencia.controls.Categoria.touched ||
                           sumbitted) &&
                         formGroupTransferencia.controls.Categoria.errors,
                       'is-valid': !formGroupTransferencia.controls.Monto.errors
-                    }"
-                  >
+                    }">
                     <option value="{{ categorias.Alquiler }}">Alquiler</option>
                     <option value="{{ categorias.AportesDeCapital }}">
                       Aportes de Capital
@@ -171,27 +120,19 @@
                     <option value="{{ categorias.Seguro }}">Seguro</option>
                     <option value="{{ categorias.Varios }}">Varios</option>
                   </select>
-                  <span
-                    class="text-danger"
-                    *ngIf="
+                  <span class="text-danger" *ngIf="
                       formGroupTransferencia.controls.Categoria.errors
                         ?.required &&
                       (formGroupTransferencia.controls.Categoria.touched ||
                         sumbitted)
-                    "
-                  >
+                    ">
                     Dato requerido.
                   </span>
-                  <small id="helpId" class="text-muted"
-                    >Debe seleccionar una categoria</small
-                  >
+                  <small id="helpId" class="text-muted">Debe seleccionar una categoria</small>
                 </div>
               </div>
               <div class="row" id="cardDatosCuenta">
-                <div
-                  class="container"
-                  *ngIf="estadoActual == estadoBusqueda.ResultadoExitoso"
-                >
+                <div class="container" *ngIf="estadoActual == estadoBusqueda.ResultadoExitoso">
                   <div class="card mt-3">
                     <div calss="container justify-content-center">
                       <!-- datos cuenta de destino -->
@@ -216,10 +157,7 @@
                     </div>
                   </div>
                 </div>
-                <div
-                  class="container"
-                  *ngIf="estadoActual == estadoBusqueda.Error"
-                >
+                <div class="container" *ngIf="estadoActual == estadoBusqueda.Error">
                   <div class="card mt-3 card-cuenta-error">
                     <div class="card-body text-center col-md-12">
                       <h4 class="card-title">
@@ -228,10 +166,7 @@
                     </div>
                   </div>
                 </div>
-                <div
-                  class="container"
-                  *ngIf="estadoActual == estadoBusqueda.Buscando"
-                >
+                <div class="container" *ngIf="estadoActual == estadoBusqueda.Buscando">
                   <div class="card mt-3">
                     <div class="card-body text-center col-md-12">
                       <h4 class="card-title">Buscando</h4>
@@ -243,57 +178,39 @@
                 <div class="col-md-6 col-12">
                   <div class="form-group">
                     <label for="referenciaCampo">Referencia</label>
-                    <input
-                      autocomplete="off"
-                      type="text"
-                      class="form-control rounded-pill"
-                      name="referenciaCampo"
-                      id="referenciaCampo"
-                      aria-describedby="helpId"
-                      placeholder="Ingrese una referencia"
-                      formControlName="Referencia"
-                      [ngClass]="{
+                    <input autocomplete="off" type="text" class="form-control rounded-pill" name="referenciaCampo"
+                      id="referenciaCampo" aria-describedby="helpId" placeholder="Ingrese una referencia"
+                      formControlName="Referencia" [ngClass]="{
                         'is-invalid':
                           (formGroupTransferencia.controls.Referencia.touched ||
                             sumbitted) &&
                           formGroupTransferencia.controls.Referencia.errors,
                         'is-valid': !formGroupTransferencia.controls.Referencia
                           .errors
-                      }"
-                    />
-                    <span
-                      class="text-danger"
-                      *ngIf="
+                      }" />
+                    <span class="text-danger" *ngIf="
                         formGroupTransferencia.controls.Referencia.errors
                           ?.required &&
                         (formGroupTransferencia.controls.Referencia.touched ||
                           sumbitted)
-                      "
-                    >
+                      ">
                       Dato requerido.
                     </span>
-                    <span
-                      class="text-danger"
-                      *ngIf="
+                    <span class="text-danger" *ngIf="
                         formGroupTransferencia.controls.Referencia.errors
                           ?.maxlength &&
                         (formGroupTransferencia.controls.Referencia.touched ||
                           sumbitted)
-                      "
-                    >
+                      ">
                       Dato de 1 a 22 digitos.
                     </span>
-                    <small id="helpId" class="form-text text-muted"
-                      >Debe ingresar una referencia para que esta transferencia
-                      sea identificada por su destinatario</small
-                    >
+                    <small id="helpId" class="form-text text-muted">Debe ingresar una referencia para que esta
+                      transferencia
+                      sea identificada por su destinatario</small>
                   </div>
                 </div>
                 <div class="col-md-6 col-12 mt-4">
-                  <button
-                    class="btn btn-outline-primary rounded-pill mt-2"
-                    (click)="openVerticallyCentered(content)"
-                  >
+                  <button class="btn btn-outline-primary rounded-pill mt-2" (click)="openVerticallyCentered(content)">
                     Transferir
                   </button>
                 </div>
@@ -306,21 +223,14 @@
   </div>
 
 
-  <button
-    type="button"
-    class="btn btn-transferencias rounded-pill"
-    (click)="AbrirCerrarNuevaTransferencia()"
-  >
+  <button type="button" class="btn btn-transferencias rounded-pill" (click)="AbrirCerrarNuevaTransferencia()">
     {{ textobotonTransferencia }}
   </button>
   <div class="row mt-3 mb-3" *ngIf="utimasTransferencia">
     <!-- Seccion de historico de transferencias  -->
     <div class="col-md-12 col-12">
       <div class="row justify-content-center">
-        <div
-          class="col-4 col rounded-pill text-center align-self-center shadow-sm"
-          id="tituloTransferencia"
-        >
+        <div class="col-4 col rounded-pill text-center align-self-center shadow-sm" id="tituloTransferencia">
           <h3>Historico de Transferencias</h3>
         </div>
       </div>
@@ -328,28 +238,32 @@
         <table class="table">
           <thead>
             <tr>
-              <th>N° Transferencia</th>
-              <th>Fecha</th>              
-              <th>Cuenta Origen</th>
-              <th>Cuenta Destino</th>
-              
+              <th>Numero</th>
+              <th>Fecha</th>
               <th>Monto</th>
-              <th>Categoria</th>
-              <th>Referencia</th>
-  
+
+              <th class="hide1">Referencia</th>
+              <th class="hide1">Categoria</th>
+              <th class="hide2">CVU Origen</th>
+              <th class="hide2">CVU Destino</th>
+
+              <th></th>
+
             </tr>
           </thead>
           <tbody *ngFor="let transf of transferencias">
             <tr>
               <td>{{ transf.NumeroTransferencia }}</td>
               <td>{{ transf.Fecha | date: "dd/MM/yyyy" }}</td>
-              <td>{{ transf.CvuOrigen }}</td>
-              <td>{{ transf.CvuDestino }}</td>
-
               <td>{{ transf.Monto | currency }}</td>
-              <td>{{ transf.Categoria}}</td>
-              <td>{{ transf.Referencia}}</td>
-              
+
+              <td class="hide1">{{ transf.Referencia}}</td>
+              <td class="hide1">{{ transf.Categoria}}</td>
+              <td class="hide2">{{ transf.CvuOrigen }}</td>
+              <td class="hide2">{{ transf.CvuDestino }}</td>
+
+              <td> <button (click)="verDetalleTransferencia(transf)" class="btn btn-light"> ver detalle </button>
+              </td>
             </tr>
           </tbody>
         </table>
@@ -364,12 +278,7 @@
 <ng-template #content let-modal>
   <div class="modal-header">
     <h4 class="modal-title">Nueva transferencia</h4>
-    <button
-      type="button"
-      class="close"
-      aria-label="Close"
-      (click)="modal.dismiss('Cross click')"
-    >
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
@@ -377,16 +286,11 @@
     <p>
       El dia <b>18/01/2021</b> se solicita transferir $<b>{{ Monto }}</b> de la
       cuenta CA $ <b>{{ CvuOrigen }}</b> y acreditar $<b>{{ Monto }}</b> en la
-      cuenta CA $ <b>{{ CvuDestino }}</b
-      >.
+      cuenta CA $ <b>{{ CvuDestino }}</b>.
     </p>
   </div>
   <div class="modal-footer">
-    <button
-      type="button"
-      class="btn btn-danger rounded-pill"
-      (click)="modal.close('Close click')"
-    >
+    <button type="button" class="btn btn-danger rounded-pill" (click)="modal.close('Close click')">
       Cancelar
     </button>
 

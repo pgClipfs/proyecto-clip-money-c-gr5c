@@ -135,6 +135,10 @@ export class PantallaTransferenciaComponent implements OnInit {
     this.modalService.dismissAll()
   }
 
+  public verDetalleTransferencia(tr){
+    console.log(tr)
+  }
+
   public getTransferencias() {
     this.transferenciaService.obtenerTransferencias(this.CvuOrigen)
       .subscribe(

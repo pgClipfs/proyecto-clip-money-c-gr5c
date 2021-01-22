@@ -65,7 +65,7 @@ namespace WebApplicationCLIP.BD
 
         public List<Transferencia> consultarTransferencias(string cvu)
         {
-            string script = "SELECT * FROM OPERACIONES O JOIN TRANSFERENCIAS T ON  (O.ID_OPERACION = T.DATOS_OPERACION) WHERE CVU =  "+ cvu;
+            string script = "SELECT * FROM OPERACIONES O JOIN TRANSFERENCIAS T ON  (O.ID_OPERACION = T.DATOS_OPERACION) WHERE ( O.CVU =  '"+ cvu + "' or T.CVU_Cuenta_DESTINO =  '" + cvu + "'  ) order by O.ID_OPERACION desc";
 
             List<Transferencia> transferencias = null;
             List<List<string>> ensamblador = new List<List<string>>();
