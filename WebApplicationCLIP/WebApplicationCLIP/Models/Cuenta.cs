@@ -20,6 +20,13 @@ namespace WebApplicationCLIP.Models
 
         private Cuenta() { }
 
+        public void BorrarDatosEscenciales()
+        {
+            Usuario.BorrarDatosEscenciales();
+            Operaciones = null;
+            Saldo = 0;
+        }
+
         private string GenerarCVU(Usuario usuario)
         {
             Random random = new Random();

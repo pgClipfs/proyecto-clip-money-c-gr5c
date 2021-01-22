@@ -20,12 +20,16 @@ namespace WebApplicationCLIP.Models
         public string Email { get; private set; }
         public string Telefono { get; private set; }
         public string Contraseña { get; private set; }
-        public static Usuario prueba()
+  
+
+        public void BorrarDatosEscenciales()
         {
-            return new Usuario()
-            {
-                Dni = "12345678"
-            };
+            Contraseña = "";
+            Dni = "";
+            SitCrediticia = "";
+            NombreDeUsuario = "";
+            Domicilio = "";
+            Telefono = "";
         }
 
         public void CrearNuevaCuenta()
