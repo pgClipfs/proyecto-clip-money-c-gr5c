@@ -1,13 +1,13 @@
 import { Component, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { TransferenciasService } from '../../services/transferencias.service';
-import { CategoriaTransferencia, Operacion, Cuenta, EstadoBusqueda } from '../../clases'
+import { CategoriaTransferencia, Operacion, Cuenta, EstadoBusqueda, Transferencia } from '../../clases'
 import { Observable } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
 import { CuentaService } from 'src/app/services/cuenta.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { SpinnerService } from 'src/app/services/spinner.service';
-
+import { TemplateRef, ViewChild } from '@angular/core';
 @Component({
   selector: 'app-pantalla-transferencia',
   templateUrl: './pantalla-transferencia.component.html',
@@ -21,9 +21,14 @@ export class PantallaTransferenciaComponent implements OnInit {
   estadoActual: EstadoBusqueda = EstadoBusqueda.Nada
   estadoBusqueda=EstadoBusqueda
 
+  @ViewChild('detalle')
+  private detalle: TemplateRef<any>;
+
   constructor(private spinnerServicio: SpinnerService ,private formConstructor: FormBuilder, private modalService: NgbModal, private cuentaService: CuentaService, private transferenciaService: TransferenciasService, private ToastService: ToastrService) {
 
   }
+
+  currentDate = new Date();
 
   textobotonTransferencia: string = 'Ver ultimas transferencias';
   utimasTransferencia: boolean = false;
@@ -135,8 +140,15 @@ export class PantallaTransferenciaComponent implements OnInit {
     this.modalService.dismissAll()
   }
 
+  transferenciaEnDetalle:Transferencia;
+   
+
   public verDetalleTransferencia(tr){
     console.log(tr)
+    this.transferenciaEnDetalle=tr;
+
+   // this.openVerticallyCentered(this.detalle);
+   this.modalService.open(this.detalle);
   }
 
   public getTransferencias() {
