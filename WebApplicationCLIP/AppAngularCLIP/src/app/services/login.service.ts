@@ -45,7 +45,7 @@ export class LoginService {
     return this.http.post<any>(this.urlApi + 'login/authenticate',
       { contraseña, nombreDeUsuario })
       .pipe(
-     //   retry(2), //esto es para decirle cuantas veces lo tiene que intentar antes de tirar error :o
+        retry(5), //esto es para decirle cuantas veces lo tiene que intentar antes de tirar error :o
         catchError(err => {
 
           //detectar si esta caido el backend

@@ -40,6 +40,8 @@ export class PantallaIngresoEgresoDineroComponent implements OnInit {
     )
   }
 
+
+
   public realizarOperacion() {
 
     var boton = <HTMLInputElement>document.getElementById("botonConfirmar")
@@ -55,7 +57,7 @@ export class PantallaIngresoEgresoDineroComponent implements OnInit {
       this.operacionService.realizarDeposito(this.cuentaOrigen.Cvu, this.inputMonto.value).subscribe(
         x => {
           this.showToastrSucces('Deposito realizado con exito', 'Deposito')
-          boton.disabled = false;
+          //boton.disabled = false;
         },
         err => {
           console.log(err);
@@ -77,7 +79,7 @@ export class PantallaIngresoEgresoDineroComponent implements OnInit {
         x => {
           console.log("Extraccion realizado exitosamente");
           this.showToastrSucces('Extraccion realizado exitosamente', 'Extraccion')
-          boton.disabled = false;
+          //boton.disabled = false;
         },
         err => {
 

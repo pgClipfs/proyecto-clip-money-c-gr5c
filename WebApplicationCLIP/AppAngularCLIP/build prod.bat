@@ -1,0 +1,1 @@
+start /min cmd /c "echo compilando && ng build --prod"
