@@ -46,7 +46,7 @@ export class PantallaIngresoEgresoDineroComponent implements OnInit {
     boton.disabled = true;
 
     if (this.inputMonto.value <= 0 || this.inputMonto == null) {
-      this.showToastrError('error: ingrese un monto valido','Operacion fallida')
+      this.showToastrError('error: ingrese un monto valido', 'Operacion fallida')
       boton.disabled = false;
       return;
     }
@@ -63,7 +63,11 @@ export class PantallaIngresoEgresoDineroComponent implements OnInit {
           boton.disabled = false;
           //this.redireccionar.fallo();
           //this.modalService.dismissAll()
+        }, async () => {
+          await this.delay(600);
+          window.location.reload();
         }
+
       );
       return;
     }
@@ -77,17 +81,24 @@ export class PantallaIngresoEgresoDineroComponent implements OnInit {
         },
         err => {
 
-          this.showToastrError(err.error,'Operacion fallida')
+          this.showToastrError(err.error, 'Operacion fallida')
           boton.disabled = false;
 
-          //this.redireccionar.fallo();
           //this.modalService.dismissAll()
+        }, async () => {
+          await this.delay(600);
+          window.location.reload();
+
         }
       );
       return;
     }
-    this.showToastrError('error: seleccione un tipo de operacion','Operacion fallida')
+    this.showToastrError('error: seleccione un tipo de operacion', 'Operacion fallida')
     boton.disabled = false;
+  }
+
+  delay(ms: number) {
+    return new Promise(resolve => setTimeout(resolve, ms));
   }
 
   ngOnInit(): void {

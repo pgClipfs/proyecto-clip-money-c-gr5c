@@ -132,8 +132,8 @@ export class PantallaTransferenciaComponent implements OnInit {
         err => {
           console.log(err);
           this.showToastrError(err, 'Operacion Fallida')
-
-
+        },()=>{
+          this.getTransferencias();
         }
       )
 
@@ -156,6 +156,13 @@ export class PantallaTransferenciaComponent implements OnInit {
       .subscribe(
         data => {
           this.transferencias = data;
+
+          data.forEach(t => {
+            if( this.cuentaOrigen.Cvu == t.CvuOrigen){
+              t.Enviada=true
+            }
+          });
+
         },
         err => {
           console.log(err);

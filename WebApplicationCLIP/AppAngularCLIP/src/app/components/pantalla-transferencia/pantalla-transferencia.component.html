@@ -255,7 +255,9 @@
             <tr>
               <td>{{ transf.NumeroTransferencia }}</td>
               <td>{{ transf.Fecha | date: "dd/MM/yyyy" }}</td>
-              <td>{{ transf.Monto | currency }}</td>
+
+              <td class="text-danger" *ngIf="transf.Enviada"> {{ transf.Monto | currency }}</td>
+              <td class="text-success" *ngIf="!transf.Enviada"> {{ transf.Monto | currency }}</td>
 
               <td class="hide1">{{ transf.Referencia}}</td>
               <td class="hide1">{{ transf.Categoria}}</td>

@@ -20,6 +20,8 @@ export class Transferencia {
   NumeroTransferencia: string;
   Categoria: string;
   Referencia: string;
+
+  Enviada: boolean;
 }
 
 export class Sesion {

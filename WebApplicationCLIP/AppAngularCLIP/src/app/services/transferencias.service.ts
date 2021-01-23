@@ -64,6 +64,8 @@ export class TransferenciasService {
             t.NumeroTransferencia = e.NumeroTransferencia;
             t.Referencia=e.ReferenciaDestino 
 
+            t.Enviada=false;
+
             switch (e.Categoria) {
               case 0: {
                 t.Categoria="Varios"
