@@ -200,7 +200,7 @@ namespace WebApplicationCLIP.BD
                 throw new Exception("Faltan datos para poder registrar al usuario");
             }
 
-            string script = "INSERT INTO USUARIOS (DNI, NOMBRE, APELLIDO, NOMBRE_SITUACION_CREDITICIA, NOMBRE_USUARIO, DOMICILIO, EMAIL, TELEFONO, CONTRASEÑA)" +
+            string script = "INSERT INTO USUARIOS (DNI, NOMBRE, APELLIDO, NIVEL_SITUACION_CREDITICIA, NOMBRE_USUARIO, DOMICILIO, EMAIL, TELEFONO, CONTRASEÑA)" +
                 "VALUES (@dni , @nombre , @apellido , @nombre_situacion_crediticia , @nombre_usuario , @domicilio , @email , @telefono , @contraseña)";
 
             /* Valido que el Usuario no exista previamente */
@@ -219,7 +219,7 @@ namespace WebApplicationCLIP.BD
                 comando.Parameters.AddWithValue("@dni", t.Dni);
                 comando.Parameters.AddWithValue("@nombre", t.Nombre);
                 comando.Parameters.AddWithValue("@apellido", t.Apellido);
-                comando.Parameters.AddWithValue("@nombre_situacion_crediticia", t.SitCrediticia);
+                comando.Parameters.AddWithValue("@nombre_situacion_crediticia", 1);
                 comando.Parameters.AddWithValue("@nombre_usuario", t.NombreDeUsuario);
                 comando.Parameters.AddWithValue("@domicilio", t.Domicilio);
                 comando.Parameters.AddWithValue("@email", t.Email);
